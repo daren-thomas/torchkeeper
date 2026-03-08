@@ -41,9 +41,9 @@
 
 ### File Operations
 
-- [ ] **FILE-01**: User can import a Shadowdarklings.net JSON export to bootstrap a character
-- [ ] **FILE-02**: User can load a character from a native .sdchar file
-- [ ] **FILE-03**: User can save a character to a .sdchar file
+- [x] **FILE-01**: User can import a Shadowdarklings.net JSON export to bootstrap a character
+- [x] **FILE-02**: User can load a character from a native .sdchar file
+- [x] **FILE-03**: User can save a character to a .sdchar file
 
 ### Markdown Export
 
@@ -84,9 +84,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FILE-01 | Phase 1 | Pending |
-| FILE-02 | Phase 1 | Pending |
-| FILE-03 | Phase 1 | Pending |
+| FILE-01 | Phase 1 | Complete |
+| FILE-02 | Phase 1 | Complete |
+| FILE-03 | Phase 1 | Complete |
 | IDNT-01 | Phase 2 | Pending |
 | IDNT-02 | Phase 2 | Pending |
 | STAT-01 | Phase 2 | Pending |
