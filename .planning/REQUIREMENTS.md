@@ -24,8 +24,8 @@
 
 - [ ] **GEAR-01**: User can add, edit, and remove gear items (mundane and magic)
 - [ ] **GEAR-02**: Each gear item has name, slot count, type, and an optional free-text note; magic items can additionally store benefits, curses, and personality traits in their note
-- [ ] **GEAR-03**: App displays total gear slots used vs total available (slots = current STR score)
-- [ ] **GEAR-04**: App auto-calculates coin slots consumed by current GP/SP/CP totals (1 slot per 20 coins)
+- [ ] **GEAR-03**: App displays total gear slots used vs total available (slots = max(STR score, 10))
+- [ ] **GEAR-04**: App auto-calculates coin slots consumed by current GP/SP/CP totals (100 coins per slot per denomination; first 100 coins of any type are free)
 
 ### Currency
 
