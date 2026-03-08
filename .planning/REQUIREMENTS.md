@@ -22,15 +22,10 @@
 
 ### Gear / Inventory
 
-- [ ] **GEAR-01**: User can add, edit, and remove gear items (mundane)
-- [ ] **GEAR-02**: Each gear item has name, slot count, type, and an optional free-text note
+- [ ] **GEAR-01**: User can add, edit, and remove gear items (mundane and magic)
+- [ ] **GEAR-02**: Each gear item has name, slot count, type, and an optional free-text note; magic items can additionally store benefits, curses, and personality traits in their note
 - [ ] **GEAR-03**: App displays total gear slots used vs total available (slots = current STR score)
 - [ ] **GEAR-04**: App auto-calculates coin slots consumed by current GP/SP/CP totals (1 slot per 20 coins)
-
-### Magic Items
-
-- [ ] **MGIC-01**: User can add, edit, and remove magic items with full properties (name, benefits, curses, personality traits, notes)
-- [ ] **MGIC-02**: Magic items are displayed separately from mundane gear
 
 ### Currency
 
@@ -39,11 +34,6 @@
 ### Attacks
 
 - [ ] **ATCK-01**: User can maintain an editable list of free-form attack text entries (e.g. "DAGGER: +3 (N), 1d4 (FIN)")
-
-### Level History
-
-- [ ] **LEVL-01**: User can view per-level records showing HP roll and talent/bonus chosen at each level
-- [ ] **LEVL-02**: User can add and edit notes per level record
 
 ### Notes
 
@@ -107,18 +97,14 @@ Which phases cover which requirements. Updated during roadmap creation.
 | GEAR-02 | Phase 2 | Pending |
 | GEAR-03 | Phase 2 | Pending |
 | GEAR-04 | Phase 2 | Pending |
-| MGIC-01 | Phase 2 | Pending |
-| MGIC-02 | Phase 2 | Pending |
 | CURR-01 | Phase 2 | Pending |
 | ATCK-01 | Phase 2 | Pending |
-| LEVL-01 | Phase 2 | Pending |
-| LEVL-02 | Phase 2 | Pending |
 | NOTE-01 | Phase 2 | Pending |
 | MRKD-01 | Phase 3 | Pending |
 
 **Coverage:**
-- v1 requirements: 21 total
-- Mapped to phases: 21
+- v1 requirements: 17 total
+- Mapped to phases: 17
 - Unmapped: 0 ✓
 
 ---
