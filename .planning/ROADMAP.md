@@ -46,7 +46,15 @@ Plans:
   3. User can increment and decrement current HP and set maximum HP
   4. User can add, edit, and remove gear items; the slot counter updates live and reflects STR score as the slot total
   5. User can track GP, SP, and CP; coin slots are auto-calculated and included in the gear slot total
-**Plans**: TBD
+**Plans**: 6 plans
+
+Plans:
+- [ ] 02-00-PLAN.md — Test scaffolds: CharacterViewModel and GearItemViewModel test stubs, CommunityToolkit.Mvvm added to test project
+- [ ] 02-01-PLAN.md — CharacterViewModel full implementation: all observable properties, computed stats/slots/modifiers, StatRowViewModel, GearItemViewModel
+- [ ] 02-02-PLAN.md — SheetPage: identity fields, HP/XP tracker, expandable stat rows with bonus sources, attacks list
+- [ ] 02-03-PLAN.md — GearPage: slot header, unified gear list with add/edit/delete modal, currency section
+- [ ] 02-04-PLAN.md — NotesPage: full-height freeform Editor bound to Notes
+- [ ] 02-05-PLAN.md — AppShell TabBar wiring, DI page registration, end-to-end human verification
 
 ### Phase 3: Export
 **Goal**: A player can export their full character sheet as formatted Markdown for print or offline reference
