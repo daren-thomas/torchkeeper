@@ -1,5 +1,6 @@
 using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using SdCharacterSheet.Services;
 
 namespace SdCharacterSheet;
 
@@ -17,9 +18,9 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
-        // Services registered in later plans:
+        // Services
+        builder.Services.AddSingleton<CharacterFileService>();
         // builder.Services.AddSingleton<CharacterViewModel>();
-        // builder.Services.AddSingleton<CharacterFileService>();
         // builder.Services.AddSingleton<ShadowdarklingsImportService>();
 
 #if DEBUG
