@@ -1,6 +1,8 @@
 using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Storage;
 using Microsoft.Extensions.Logging;
 using SdCharacterSheet.Services;
+using SdCharacterSheet.ViewModels;
 
 namespace SdCharacterSheet;
 
@@ -19,8 +21,9 @@ public static class MauiProgram
             });
 
         // Services
+        builder.Services.AddSingleton<IFileSaver>(FileSaver.Default);
+        builder.Services.AddSingleton<CharacterViewModel>();
         builder.Services.AddSingleton<CharacterFileService>();
-        // builder.Services.AddSingleton<CharacterViewModel>();
         builder.Services.AddSingleton<ShadowdarklingsImportService>();
 
 #if DEBUG

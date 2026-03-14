@@ -1,6 +1,8 @@
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using CommunityToolkit.Maui.Storage;
+using Microsoft.Maui.Storage;
 using SdCharacterSheet.DTOs;
 using SdCharacterSheet.Models;
 
@@ -8,6 +10,13 @@ namespace SdCharacterSheet.Services;
 
 public class CharacterFileService
 {
+    private readonly IFileSaver _fileSaver;
+
+    public CharacterFileService(IFileSaver fileSaver)
+    {
+        _fileSaver = fileSaver;
+    }
+
     private static readonly JsonSerializerOptions SaveOptions = new()
     {
         WriteIndented = true,
@@ -19,6 +28,43 @@ public class CharacterFileService
         PropertyNameCaseInsensitive = true,
         AllowTrailingCommas = true
     };
+
+    private static readonly FilePickerFileType SdCharFileType = new(
+        new Dictionary<DevicePlatform, IEnumerable<string>>
+        {
+            { DevicePlatform.iOS,     new[] { "com.sdcharactersheet.sdchar" } },
+            { DevicePlatform.macOS,   new[] { "com.sdcharactersheet.sdchar" } },
+            { DevicePlatform.Android, new[] { "application/octet-stream" } },
+            { DevicePlatform.WinUI,   new[] { ".sdchar" } },
+        });
+
+    private static readonly PickOptions SdCharPickOptions = new()
+    {
+        PickerTitle = "Open character file",
+        FileTypes = SdCharFileType,
+    };
+
+    public async Task<Character?> OpenAsync(CancellationToken ct = default)
+    {
+        var fileResult = await FilePicker.Default.PickAsync(SdCharPickOptions);
+        if (fileResult is null) return null;   // user cancelled
+        using var stream = await fileResult.OpenReadAsync();  // NOT FullPath — cross-platform safe
+        var dto = await LoadFromStreamAsync(stream);
+        return dto is null ? null : MapFromDto(dto);
+    }
+
+    public async Task SaveAsync(Character character, CancellationToken ct = default)
+    {
+        await using var stream = new MemoryStream();
+        await SaveToStreamAsync(character, stream);
+        stream.Position = 0;
+        var suggestedName = string.IsNullOrWhiteSpace(character.Name)
+            ? "character.sdchar"
+            : $"{character.Name}.sdchar";
+        var result = await _fileSaver.SaveAsync(suggestedName, stream, ct);
+        if (!result.IsSuccessful)
+            throw new IOException($"Save failed: {result.Exception?.Message}", result.Exception);
+    }
 
     public CharacterSaveData MapToDto(Character character) => new()
     {
