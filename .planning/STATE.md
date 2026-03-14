@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 01-foundation-01-01-PLAN.md
-last_updated: "2026-03-08T18:12:02.757Z"
+stopped_at: Completed 01-03-PLAN.md
+last_updated: "2026-03-14T09:10:28.426Z"
 last_activity: 2026-03-08 — Roadmap created; phases derived from requirements
 progress:
   total_phases: 3
-  completed_phases: 1
-  total_plans: 1
-  completed_plans: 1
+  completed_phases: 0
+  total_plans: 4
+  completed_plans: 2
   percent: 0
 ---
 
@@ -51,6 +51,7 @@ Progress: [░░░░░░░░░░] 0%
 
 *Updated after each plan completion*
 | Phase 01-foundation P01 | 5 | 2 tasks | 35 files |
+| Phase 01-foundation P03 | 8 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -65,6 +66,8 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: DTO separation: CharacterSaveData is the versioned save format; CharacterViewModel is never serialized
 - [Phase 01-foundation]: Import uses RolledStats (not Stats) from Shadowdarklings JSON to avoid double-counting bonuses
 - [Phase 01-foundation]: Files created manually due to .NET 8-only execution environment; .NET 10 + MAUI workload required to build
+- [Phase 01-foundation]: SaveOptions uses DefaultIgnoreCondition.WhenWritingDefault (not deprecated IgnoreNullValues) for .NET 10 compatibility
+- [Phase 01-foundation]: LoadFromStreamAsync returns null on empty stream or JSON parse failure rather than throwing — callers decide error handling
 
 ### Pending Todos
 
@@ -78,6 +81,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-08T18:12:02.755Z
-Stopped at: Completed 01-foundation-01-01-PLAN.md
+Last session: 2026-03-14T09:10:28.424Z
+Stopped at: Completed 01-03-PLAN.md
 Resume file: None
