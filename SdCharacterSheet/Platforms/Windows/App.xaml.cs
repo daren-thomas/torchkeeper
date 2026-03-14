@@ -15,6 +15,9 @@ public partial class App : MauiWinUIApplication
     public App()
     {
         this.InitializeComponent();
+        // File type filter for .sdchar is declared at the FilePicker call site in CharacterFileService
+        // using FilePickerFileType with DevicePlatform.WinUI entry. No manifest changes needed for
+        // unpackaged Windows apps (WindowsPackageType=None).
     }
 
     protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
