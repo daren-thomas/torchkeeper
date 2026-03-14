@@ -1,0 +1,11 @@
+/Users/daren/projects/sd-character-sheet/SdCharacterSheet.Core/bin/Debug/net10.0/SdCharacterSheet.Core.deps.json
+/Users/daren/projects/sd-character-sheet/SdCharacterSheet.Core/bin/Debug/net10.0/SdCharacterSheet.Core.dll
+/Users/daren/projects/sd-character-sheet/SdCharacterSheet.Core/bin/Debug/net10.0/SdCharacterSheet.Core.pdb
+/Users/daren/projects/sd-character-sheet/SdCharacterSheet.Core/obj/Debug/net10.0/SdCharacterSheet.Core.GeneratedMSBuildEditorConfig.editorconfig
+/Users/daren/projects/sd-character-sheet/SdCharacterSheet.Core/obj/Debug/net10.0/SdCharacterSheet.Core.AssemblyInfoInputs.cache
+/Users/daren/projects/sd-character-sheet/SdCharacterSheet.Core/obj/Debug/net10.0/SdCharacterSheet.Core.AssemblyInfo.cs
+/Users/daren/projects/sd-character-sheet/SdCharacterSheet.Core/obj/Debug/net10.0/SdCharacterSheet.Core.csproj.CoreCompileInputs.cache
+/Users/daren/projects/sd-character-sheet/SdCharacterSheet.Core/obj/Debug/net10.0/SdCharacterSheet.Core.dll
+/Users/daren/projects/sd-character-sheet/SdCharacterSheet.Core/obj/Debug/net10.0/refint/SdCharacterSheet.Core.dll
+/Users/daren/projects/sd-character-sheet/SdCharacterSheet.Core/obj/Debug/net10.0/SdCharacterSheet.Core.pdb
+/Users/daren/projects/sd-character-sheet/SdCharacterSheet.Core/obj/Debug/net10.0/ref/SdCharacterSheet.Core.dll

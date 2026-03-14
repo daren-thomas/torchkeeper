@@ -2,7 +2,6 @@ using System.IO;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
-using CommunityToolkit.Maui.Storage;
 using SdCharacterSheet.DTOs;
 using SdCharacterSheet.Models;
 using SdCharacterSheet.Services;
@@ -15,11 +14,8 @@ public class CharacterFileServiceTests
 {
     private sealed class NullFileSaver : IFileSaver
     {
-        public Task<FileSaverResult> SaveAsync(string initialPath, string fileName, Stream stream, CancellationToken cancellationToken = default)
-            => throw new NotImplementedException();
-
-        public Task<FileSaverResult> SaveAsync(string fileName, Stream stream, CancellationToken cancellationToken = default)
-            => throw new NotImplementedException();
+        public Task SaveAsync(string fileName, Stream stream, CancellationToken ct = default)
+            => Task.CompletedTask;
     }
 
     private readonly CharacterFileService _service = new(new NullFileSaver());

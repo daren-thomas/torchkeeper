@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SdCharacterSheet\SdCharacterSheet.csproj" />
+    <ProjectReference Include="..\SdCharacterSheet.Core\SdCharacterSheet.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
