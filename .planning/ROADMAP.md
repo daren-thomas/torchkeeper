@@ -12,7 +12,7 @@ Three phases, bottom-up. Phase 1 lays the domain model, file format, and import 
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [x] **Phase 1: Foundation** - Data model, native file I/O, and Shadowdarklings import pipeline (completed 2026-03-08)
+- [ ] **Phase 1: Foundation** - Data model, native file I/O, and Shadowdarklings import pipeline
 - [ ] **Phase 2: Core Sheet** - All interactive character sheet tabs — stats, gear, identity, notes
 - [ ] **Phase 3: Export** - Markdown export and cross-platform verification
 
@@ -27,7 +27,13 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. A character can be saved to a .sdchar file and loaded back with no data loss
   3. The .sdchar format includes a version field and uses a separate DTO (not the ViewModel class) as the serialization target
   4. File picker works on all four platform targets (Windows, macOS, iOS, Android) using platform-appropriate file type declarations
-**Plans**: TBD
+**Plans**: 4 plans
+
+Plans:
+- [x] 01-01-PLAN.md — Scaffold MAUI solution, domain models, DTOs, ViewModel skeleton, xUnit test stubs
+- [ ] 01-02-PLAN.md — Implement ShadowdarklingsImportService with 7 passing tests (FILE-01)
+- [ ] 01-03-PLAN.md — Implement CharacterFileService save/load JSON layer with 2 passing tests (FILE-02, FILE-03)
+- [ ] 01-04-PLAN.md — Android/Windows platform declarations, FilePicker/FileSaver wiring, DI registration
 
 ### Phase 2: Core Sheet
 **Goal**: A player can open their character and manage everything needed at the table — stats with breakdowns, HP, gear slots, currency, attacks, and notes
@@ -57,6 +63,6 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 1/1 | Complete   | 2026-03-08 |
+| 1. Foundation | 1/4 | In progress | - |
 | 2. Core Sheet | 0/TBD | Not started | - |
 | 3. Export | 0/TBD | Not started | - |
