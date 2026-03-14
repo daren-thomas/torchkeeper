@@ -1,6 +1,8 @@
 using System.IO;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
+using CommunityToolkit.Maui.Storage;
 using SdCharacterSheet.DTOs;
 using SdCharacterSheet.Models;
 using SdCharacterSheet.Services;
@@ -11,7 +13,16 @@ namespace SdCharacterSheet.Tests.Services;
 [Trait("Category", "Unit")]
 public class CharacterFileServiceTests
 {
-    private readonly CharacterFileService _service = new();
+    private sealed class NullFileSaver : IFileSaver
+    {
+        public Task<FileSaverResult> SaveAsync(string initialPath, string fileName, Stream stream, CancellationToken cancellationToken = default)
+            => throw new NotImplementedException();
+
+        public Task<FileSaverResult> SaveAsync(string fileName, Stream stream, CancellationToken cancellationToken = default)
+            => throw new NotImplementedException();
+    }
+
+    private readonly CharacterFileService _service = new(new NullFileSaver());
 
     // FILE-02 + FILE-03: Round-trip save/load produces identical DTO
     [Fact]
