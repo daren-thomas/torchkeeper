@@ -21,7 +21,7 @@ public static class MauiProgram
         // Services
         builder.Services.AddSingleton<CharacterFileService>();
         // builder.Services.AddSingleton<CharacterViewModel>();
-        // builder.Services.AddSingleton<ShadowdarklingsImportService>();
+        builder.Services.AddSingleton<ShadowdarklingsImportService>();
 
 #if DEBUG
         builder.Logging.AddDebug();
