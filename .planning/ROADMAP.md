@@ -12,7 +12,7 @@ Three phases, bottom-up. Phase 1 lays the domain model, file format, and import 
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation** - Data model, native file I/O, and Shadowdarklings import pipeline
+- [x] **Phase 1: Foundation** - Data model, native file I/O, and Shadowdarklings import pipeline (completed 2026-03-14)
 - [ ] **Phase 2: Core Sheet** - All interactive character sheet tabs — stats, gear, identity, notes
 - [ ] **Phase 3: Export** - Markdown export and cross-platform verification
 
@@ -63,6 +63,6 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 3/4 | In Progress|  |
+| 1. Foundation | 4/4 | Complete   | 2026-03-14 |
 | 2. Core Sheet | 0/TBD | Not started | - |
 | 3. Export | 0/TBD | Not started | - |
