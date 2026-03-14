@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 01-03-PLAN.md
-last_updated: "2026-03-14T09:10:28.426Z"
+stopped_at: Completed 01-foundation-01-02-PLAN.md
+last_updated: "2026-03-14T09:11:56.410Z"
 last_activity: 2026-03-08 — Roadmap created; phases derived from requirements
 progress:
   total_phases: 3
   completed_phases: 0
   total_plans: 4
-  completed_plans: 2
+  completed_plans: 3
   percent: 0
 ---
 
@@ -52,6 +52,7 @@ Progress: [░░░░░░░░░░] 0%
 *Updated after each plan completion*
 | Phase 01-foundation P01 | 5 | 2 tasks | 35 files |
 | Phase 01-foundation P03 | 8 | 2 tasks | 3 files |
+| Phase 01-foundation P02 | 12 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -68,6 +69,9 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: Files created manually due to .NET 8-only execution environment; .NET 10 + MAUI workload required to build
 - [Phase 01-foundation]: SaveOptions uses DefaultIgnoreCondition.WhenWritingDefault (not deprecated IgnoreNullValues) for .NET 10 compatibility
 - [Phase 01-foundation]: LoadFromStreamAsync returns null on empty stream or JSON parse failure rather than throwing — callers decide error handling
+- [Phase 01-foundation]: Static readonly JsonSerializerOptions avoids per-call allocation in ShadowdarklingsImportService
+- [Phase 01-foundation]: All bonuses (stat and AC-prefixed) go to same Bonuses list; BonusTo prefix differentiation deferred to Phase 2 UI
+- [Phase 01-foundation]: Currency null-coalescing: top-level Gold/Silver/Copper win over ledger sum fallback in import
 
 ### Pending Todos
 
@@ -81,6 +85,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-14T09:10:28.424Z
-Stopped at: Completed 01-03-PLAN.md
+Last session: 2026-03-14T09:11:56.408Z
+Stopped at: Completed 01-foundation-01-02-PLAN.md
 Resume file: None
