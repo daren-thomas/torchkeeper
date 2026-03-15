@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SdCharacterSheet.Views.NotesPage"
+             Title="Notes">
+    <Grid Padding="16">
+        <Editor Text="{Binding Notes, Mode=TwoWay}"
+                Placeholder="Your notes here..."
+                VerticalOptions="Fill"
+                HorizontalOptions="Fill"
+                AutoSize="TextChanges" />
+    </Grid>
+</ContentPage>
