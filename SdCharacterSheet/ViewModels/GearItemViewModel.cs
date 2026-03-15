@@ -35,4 +35,14 @@ public partial class GearItemViewModel : ObservableObject
         note = m.Note;
         Source = GearItemSource.Magic;
     }
+
+    // Constructor for creating a new item from user input (not from a saved Character model)
+    public GearItemViewModel(string name, int slots, string itemType, string note)
+    {
+        this.name = name;
+        this.slots = slots;
+        this.itemType = itemType;
+        this.note = note;
+        Source = GearItemSource.Gear; // user-created items are mundane gear by default
+    }
 }
