@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 02-core-sheet-02-01-PLAN.md
-last_updated: "2026-03-15T10:21:48.494Z"
+stopped_at: Completed 02-core-sheet-02-02-PLAN.md
+last_updated: "2026-03-15T10:25:48.246Z"
 last_activity: 2026-03-08 — Roadmap created; phases derived from requirements
 progress:
   total_phases: 3
   completed_phases: 1
   total_plans: 11
-  completed_plans: 7
+  completed_plans: 8
   percent: 0
 ---
 
@@ -57,6 +57,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01-foundation P05 | 5 | 1 tasks | 1 files |
 | Phase 02-core-sheet P00 | 3 | 2 tasks | 3 files |
 | Phase 02-core-sheet P01 | 2 | 2 tasks | 3 files |
+| Phase 02-core-sheet P02 | 2 | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -85,6 +86,8 @@ Recent decisions affecting current work:
 - [Phase 02-core-sheet]: StatRowViewModel uses Action<int> callback constructor parameter for decoupled write-back to CharacterViewModel
 - [Phase 02-core-sheet]: LoadCharacter sets backing fields directly to bypass setter equality check, then calls OnPropertyChanged(string.Empty)
 - [Phase 02-core-sheet]: GearSlotsUsed reactivity: per-item PropertyChanged subscription managed via CollectionChanged handler
+- [Phase 02-core-sheet]: Stats section uses BindableLayout (not CollectionView+Expander) — iOS safe per CommunityToolkit.Maui issues #1557, #1670
+- [Phase 02-core-sheet]: MaxHP tap-to-edit implemented in code-behind using x:Name references — MaxHP visibility is transient UI state, not persisted ViewModel state
 
 ### Pending Todos
 
@@ -98,6 +101,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-15T10:21:48.491Z
-Stopped at: Completed 02-core-sheet-02-01-PLAN.md
+Last session: 2026-03-15T10:25:48.244Z
+Stopped at: Completed 02-core-sheet-02-02-PLAN.md
 Resume file: None
