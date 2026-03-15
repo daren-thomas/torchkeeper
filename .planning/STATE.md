@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 02-core-sheet-02-04-PLAN.md
-last_updated: "2026-03-15T10:30:35.476Z"
+stopped_at: "Checkpoint: 02-05 awaiting human verification of full app"
+last_updated: "2026-03-15T10:32:56.101Z"
 last_activity: 2026-03-08 — Roadmap created; phases derived from requirements
 progress:
   total_phases: 3
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 11
-  completed_plans: 10
+  completed_plans: 11
   percent: 0
 ---
 
@@ -60,6 +60,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 02-core-sheet P02 | 2 | 2 tasks | 5 files |
 | Phase 02-core-sheet P03 | 2 | 2 tasks | 5 files |
 | Phase 02-core-sheet P04 | 1 | 1 tasks | 2 files |
+| Phase 02-core-sheet P05 | 5 | 1 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -93,6 +94,8 @@ Recent decisions affecting current work:
 - [Phase 02-core-sheet]: GearItemPopup uses two constructor overloads (edit vs add) for cleaner call sites in GearPage.xaml.cs
 - [Phase 02-core-sheet]: CollectionView used for gear list (BindableLayout reserved for Stats page iOS workaround only)
 - [Phase 02-core-sheet]: Grid (not VerticalStackLayout) as NotesPage root so Editor fills full page height via VerticalOptions=Fill; no ScrollView wrapper needed
+- [Phase 02-core-sheet]: Tab pages registered as AddTransient — Shell creates one per tab, all share singleton CharacterViewModel via DI
+- [Phase 02-core-sheet]: AppShell uses DataTemplate binding pattern so Shell resolves pages from DI on demand
 
 ### Pending Todos
 
@@ -106,6 +109,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-15T10:30:35.474Z
-Stopped at: Completed 02-core-sheet-02-04-PLAN.md
+Last session: 2026-03-15T10:32:56.099Z
+Stopped at: Checkpoint: 02-05 awaiting human verification of full app
 Resume file: None
