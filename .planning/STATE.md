@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 02-core-sheet-02-03-PLAN.md
-last_updated: "2026-03-15T10:28:28.873Z"
+stopped_at: Completed 02-core-sheet-02-04-PLAN.md
+last_updated: "2026-03-15T10:30:35.476Z"
 last_activity: 2026-03-08 — Roadmap created; phases derived from requirements
 progress:
   total_phases: 3
   completed_phases: 1
   total_plans: 11
-  completed_plans: 9
+  completed_plans: 10
   percent: 0
 ---
 
@@ -59,6 +59,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 02-core-sheet P01 | 2 | 2 tasks | 3 files |
 | Phase 02-core-sheet P02 | 2 | 2 tasks | 5 files |
 | Phase 02-core-sheet P03 | 2 | 2 tasks | 5 files |
+| Phase 02-core-sheet P04 | 1 | 1 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -91,6 +92,7 @@ Recent decisions affecting current work:
 - [Phase 02-core-sheet]: MaxHP tap-to-edit implemented in code-behind using x:Name references — MaxHP visibility is transient UI state, not persisted ViewModel state
 - [Phase 02-core-sheet]: GearItemPopup uses two constructor overloads (edit vs add) for cleaner call sites in GearPage.xaml.cs
 - [Phase 02-core-sheet]: CollectionView used for gear list (BindableLayout reserved for Stats page iOS workaround only)
+- [Phase 02-core-sheet]: Grid (not VerticalStackLayout) as NotesPage root so Editor fills full page height via VerticalOptions=Fill; no ScrollView wrapper needed
 
 ### Pending Todos
 
@@ -104,6 +106,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-15T10:28:25.628Z
-Stopped at: Completed 02-core-sheet-02-03-PLAN.md
+Last session: 2026-03-15T10:30:35.474Z
+Stopped at: Completed 02-core-sheet-02-04-PLAN.md
 Resume file: None
