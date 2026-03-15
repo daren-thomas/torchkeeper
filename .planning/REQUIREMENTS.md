@@ -7,25 +7,25 @@
 
 ### Identity
 
-- [ ] **IDNT-01**: User can view and edit character identity fields (name, class, ancestry, level, title, alignment, background, deity, languages)
+- [x] **IDNT-01**: User can view and edit character identity fields (name, class, ancestry, level, title, alignment, background, deity, languages)
 - [ ] **IDNT-02**: User can track XP
 
 ### Stats
 
-- [ ] **STAT-01**: User can view and edit the 6 core stats (STR, DEX, CON, INT, WIS, CHA) with automatic modifier display
-- [ ] **STAT-02**: User can see a breakdown of all bonus sources contributing to each stat total (display only — no toggle in v1)
+- [x] **STAT-01**: User can view and edit the 6 core stats (STR, DEX, CON, INT, WIS, CHA) with automatic modifier display
+- [x] **STAT-02**: User can see a breakdown of all bonus sources contributing to each stat total (display only — no toggle in v1)
 
 ### Hit Points
 
-- [ ] **HITP-01**: User can track current HP with increment/decrement controls
+- [x] **HITP-01**: User can track current HP with increment/decrement controls
 - [ ] **HITP-02**: User can set maximum HP
 
 ### Gear / Inventory
 
-- [ ] **GEAR-01**: User can add, edit, and remove gear items (mundane and magic)
+- [x] **GEAR-01**: User can add, edit, and remove gear items (mundane and magic)
 - [ ] **GEAR-02**: Each gear item has name, slot count, type, and an optional free-text note; magic items can additionally store benefits, curses, and personality traits in their note
-- [ ] **GEAR-03**: App displays total gear slots used vs total available (slots = max(STR score, 10))
-- [ ] **GEAR-04**: App auto-calculates coin slots consumed by current GP/SP/CP totals (100 coins per slot per denomination; first 100 coins of any type are free)
+- [x] **GEAR-03**: App displays total gear slots used vs total available (slots = max(STR score, 10))
+- [x] **GEAR-04**: App auto-calculates coin slots consumed by current GP/SP/CP totals (100 coins per slot per denomination; first 100 coins of any type are free)
 
 ### Currency
 
@@ -87,16 +87,16 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FILE-01 | Phase 1 | Complete |
 | FILE-02 | Phase 1 | Complete |
 | FILE-03 | Phase 1 | Complete |
-| IDNT-01 | Phase 2 | Pending |
+| IDNT-01 | Phase 2 | Complete |
 | IDNT-02 | Phase 2 | Pending |
-| STAT-01 | Phase 2 | Pending |
-| STAT-02 | Phase 2 | Pending |
-| HITP-01 | Phase 2 | Pending |
+| STAT-01 | Phase 2 | Complete |
+| STAT-02 | Phase 2 | Complete |
+| HITP-01 | Phase 2 | Complete |
 | HITP-02 | Phase 2 | Pending |
-| GEAR-01 | Phase 2 | Pending |
+| GEAR-01 | Phase 2 | Complete |
 | GEAR-02 | Phase 2 | Pending |
-| GEAR-03 | Phase 2 | Pending |
-| GEAR-04 | Phase 2 | Pending |
+| GEAR-03 | Phase 2 | Complete |
+| GEAR-04 | Phase 2 | Complete |
 | CURR-01 | Phase 2 | Pending |
 | ATCK-01 | Phase 2 | Pending |
 | NOTE-01 | Phase 2 | Pending |
