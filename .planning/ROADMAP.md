@@ -73,5 +73,5 @@ Phases execute in numeric order: 1 → 2 → 3
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 5/5 | Complete   | 2026-03-14 |
-| 2. Core Sheet | 0/TBD | Not started | - |
+| 2. Core Sheet | 4/6 | In Progress|  |
 | 3. Export | 0/TBD | Not started | - |
