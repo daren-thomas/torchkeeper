@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="SdCharacterSheet.Views.SheetPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:SdCharacterSheet.ViewModels"
+    xmlns:models="clr-namespace:SdCharacterSheet.Models;assembly=SdCharacterSheet.Core"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Title="Sheet">
+
+    <ContentPage.Resources>
+        <toolkit:InvertedBoolConverter x:Key="InverseBoolConverter" />
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+
+            <!-- ===== IDENTITY SECTION ===== -->
+            <Frame Padding="12">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Character" FontAttributes="Bold" FontSize="16" />
+
+                    <Grid ColumnDefinitions="80,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="6" ColumnSpacing="8">
+                        <Label Grid.Row="0" Grid.Column="0" Text="Name" VerticalOptions="Center" />
+                        <Entry Grid.Row="0" Grid.Column="1" Text="{Binding Name, Mode=TwoWay}" Placeholder="Character name" />
+
+                        <Label Grid.Row="1" Grid.Column="0" Text="Class" VerticalOptions="Center" />
+                        <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Class, Mode=TwoWay}" Placeholder="e.g. Fighter" />
+
+                        <Label Grid.Row="2" Grid.Column="0" Text="Ancestry" VerticalOptions="Center" />
+                        <Entry Grid.Row="2" Grid.Column="1" Text="{Binding Ancestry, Mode=TwoWay}" Placeholder="e.g. Human" />
+
+                        <Label Grid.Row="3" Grid.Column="0" Text="Level" VerticalOptions="Center" />
+                        <Entry Grid.Row="3" Grid.Column="1" Text="{Binding Level, Mode=TwoWay}" Keyboard="Numeric" />
+
+                        <Label Grid.Row="4" Grid.Column="0" Text="Title" VerticalOptions="Center" />
+                        <Entry Grid.Row="4" Grid.Column="1" Text="{Binding Title, Mode=TwoWay}" Placeholder="e.g. Fighter" />
+
+                        <Label Grid.Row="5" Grid.Column="0" Text="Alignment" VerticalOptions="Center" />
+                        <Entry Grid.Row="5" Grid.Column="1" Text="{Binding Alignment, Mode=TwoWay}" Placeholder="e.g. Neutral" />
+
+                        <Label Grid.Row="6" Grid.Column="0" Text="Background" VerticalOptions="Center" />
+                        <Entry Grid.Row="6" Grid.Column="1" Text="{Binding Background, Mode=TwoWay}" Placeholder="e.g. Soldier" />
+
+                        <Label Grid.Row="7" Grid.Column="0" Text="Deity" VerticalOptions="Center" />
+                        <Entry Grid.Row="7" Grid.Column="1" Text="{Binding Deity, Mode=TwoWay}" Placeholder="e.g. Saint Terragnis" />
+
+                        <Label Grid.Row="8" Grid.Column="0" Text="Languages" VerticalOptions="Center" />
+                        <Entry Grid.Row="8" Grid.Column="1" Text="{Binding Languages, Mode=TwoWay}" Placeholder="e.g. Common, Elvish" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- ===== HP / XP SECTION ===== -->
+            <Frame Padding="12">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="HP / XP" FontAttributes="Bold" FontSize="16" />
+
+                    <!-- HP tracker: large +/- buttons flanking current/max display -->
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                        <Button Text="-" MinimumWidthRequest="60" FontSize="24" Clicked="OnDecrementHP" />
+
+                        <!-- Current HP: always visible, no tap needed — changes only via +/- buttons -->
+                        <Label Text="{Binding CurrentHP}" FontSize="28" VerticalOptions="Center" />
+                        <Label Text="/" FontSize="28" VerticalOptions="Center" />
+
+                        <!-- MaxHP: tap-to-edit toggle -->
+                        <Label x:Name="MaxHpLabel"
+                               Text="{Binding MaxHP}"
+                               FontSize="28"
+                               VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnMaxHpLabelTapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Entry x:Name="MaxHpEntry"
+                               Text="{Binding MaxHP, Mode=TwoWay}"
+                               Keyboard="Numeric"
+                               FontSize="24"
+                               WidthRequest="80"
+                               IsVisible="False"
+                               Completed="OnMaxHpEntryCompleted"
+                               Unfocused="OnMaxHpEntryUnfocused" />
+
+                        <Button Text="+" MinimumWidthRequest="60" FontSize="24" Clicked="OnIncrementHP" />
+                    </HorizontalStackLayout>
+
+                    <!-- XP entry -->
+                    <Grid ColumnDefinitions="60,*">
+                        <Label Grid.Column="0" Text="XP" VerticalOptions="Center" />
+                        <Entry Grid.Column="1" Text="{Binding XP, Mode=TwoWay}" Keyboard="Numeric" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- ===== STATS SECTION ===== -->
+            <!-- Uses BindableLayout (NOT CollectionView + Expander) to avoid iOS resize bug
+                 (CommunityToolkit.Maui issues #1557, #1670) -->
+            <Frame Padding="12">
+                <VerticalStackLayout Spacing="0">
+                    <Label Text="Stats" FontAttributes="Bold" FontSize="16" Margin="0,0,0,8" />
+
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding StatRows}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="vm:StatRowViewModel">
+                                <VerticalStackLayout>
+                                    <!-- Header row: stat name | score (tap-to-edit) | modifier -->
+                                    <!-- Row Grid tap toggles expand; score Label tap begins base-stat edit.
+                                         Both gestures may fire simultaneously when the score is tapped.
+                                         This is acceptable: expanding while editing is harmless. -->
+                                    <Grid ColumnDefinitions="*,60,60" Padding="0,6">
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding ToggleExpandCommand}" />
+                                        </Grid.GestureRecognizers>
+
+                                        <Label Grid.Column="0"
+                                               Text="{Binding StatName}"
+                                               FontAttributes="Bold"
+                                               VerticalOptions="Center" />
+
+                                        <!-- Score column: Label shown normally; Entry shown when IsEditingBase=true -->
+                                        <Label Grid.Column="1"
+                                               Text="{Binding TotalScore}"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"
+                                               IsVisible="{Binding IsEditingBase, Converter={StaticResource InverseBoolConverter}}">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding BeginEditBaseCommand}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Entry Grid.Column="1"
+                                               Text="{Binding BaseStat, Mode=TwoWay}"
+                                               Keyboard="Numeric"
+                                               HorizontalOptions="Center"
+                                               WidthRequest="50"
+                                               IsVisible="{Binding IsEditingBase}"
+                                               ReturnCommand="{Binding CommitBaseEditCommand}" />
+
+                                        <Label Grid.Column="2"
+                                               Text="{Binding ModifierDisplay}"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center" />
+                                    </Grid>
+
+                                    <!-- Bonus source sub-list — visible only when expanded -->
+                                    <VerticalStackLayout IsVisible="{Binding IsExpanded}"
+                                                         Padding="16,0,0,8"
+                                                         BindableLayout.ItemsSource="{Binding BonusSources}">
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate x:DataType="models:BonusSource">
+                                                <HorizontalStackLayout Spacing="8">
+                                                    <Label Text="{Binding Label}" />
+                                                    <Label Text="{Binding BonusTo}" TextColor="Gray" />
+                                                </HorizontalStackLayout>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </VerticalStackLayout>
+
+                                    <!-- Divider between stat rows -->
+                                    <BoxView HeightRequest="1" Color="LightGray" />
+                                </VerticalStackLayout>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- ===== ATTACKS SECTION ===== -->
+            <!-- CollectionView is safe here — no expand/collapse, no iOS resize issue -->
+            <Frame Padding="12">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Attacks" FontAttributes="Bold" FontSize="16" />
+
+                    <CollectionView ItemsSource="{Binding Attacks}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Label Text="{Binding .}" Padding="0,4">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnAttackTapped" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <Button Text="+ Add Attack" Clicked="OnAddAttackClicked" HorizontalOptions="Start" />
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

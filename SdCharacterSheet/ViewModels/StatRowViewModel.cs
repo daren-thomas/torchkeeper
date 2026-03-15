@@ -23,6 +23,25 @@ public partial class StatRowViewModel : ObservableObject
     [ObservableProperty]
     private bool isExpanded;
 
+    /// <summary>
+    /// True while the inline base-stat Entry is visible (tap-to-edit mode).
+    /// </summary>
+    [ObservableProperty]
+    private bool isEditingBase;
+
+    [RelayCommand]
+    private void BeginEditBase() => IsEditingBase = true;
+
+    /// <summary>
+    /// Called on Entry Completed or Unfocused — hides the Entry and restores the score Label.
+    /// TotalScore recalculates automatically because it depends on BaseStat.
+    /// Note: if the row Grid TapGestureRecognizer also fires when the score Label is tapped,
+    /// both ToggleExpand and BeginEditBase will run; this is acceptable because expanding
+    /// the row while editing is harmless.
+    /// </summary>
+    [RelayCommand]
+    private void CommitBaseEdit() => IsEditingBase = false;
+
     public ObservableCollection<BonusSource> BonusSources { get; }
 
     public int TotalScore => BaseStat + BonusSources.Sum(b => ParseBonusValue(b.BonusTo));
