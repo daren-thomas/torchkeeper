@@ -8,7 +8,7 @@
 ### Identity
 
 - [x] **IDNT-01**: User can view and edit character identity fields (name, class, ancestry, level, title, alignment, background, deity, languages)
-- [ ] **IDNT-02**: User can track XP
+- [x] **IDNT-02**: User can track XP
 
 ### Stats
 
@@ -18,26 +18,26 @@
 ### Hit Points
 
 - [x] **HITP-01**: User can track current HP with increment/decrement controls
-- [ ] **HITP-02**: User can set maximum HP
+- [x] **HITP-02**: User can set maximum HP
 
 ### Gear / Inventory
 
 - [x] **GEAR-01**: User can add, edit, and remove gear items (mundane and magic)
-- [ ] **GEAR-02**: Each gear item has name, slot count, type, and an optional free-text note; magic items can additionally store benefits, curses, and personality traits in their note
+- [x] **GEAR-02**: Each gear item has name, slot count, type, and an optional free-text note; magic items can additionally store benefits, curses, and personality traits in their note
 - [x] **GEAR-03**: App displays total gear slots used vs total available (slots = max(STR score, 10))
 - [x] **GEAR-04**: App auto-calculates coin slots consumed by current GP/SP/CP totals (100 coins per slot per denomination; first 100 coins of any type are free)
 
 ### Currency
 
-- [ ] **CURR-01**: User can track current GP, SP, and CP totals
+- [x] **CURR-01**: User can track current GP, SP, and CP totals
 
 ### Attacks
 
-- [ ] **ATCK-01**: User can maintain an editable list of free-form attack text entries (e.g. "DAGGER: +3 (N), 1d4 (FIN)")
+- [x] **ATCK-01**: User can maintain an editable list of free-form attack text entries (e.g. "DAGGER: +3 (N), 1d4 (FIN)")
 
 ### Notes
 
-- [ ] **NOTE-01**: User can write and edit freeform notes on the character
+- [x] **NOTE-01**: User can write and edit freeform notes on the character
 
 ### File Operations
 
@@ -88,18 +88,18 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FILE-02 | Phase 1 | Complete |
 | FILE-03 | Phase 1 | Complete |
 | IDNT-01 | Phase 2 | Complete |
-| IDNT-02 | Phase 2 | Pending |
+| IDNT-02 | Phase 2 | Complete |
 | STAT-01 | Phase 2 | Complete |
 | STAT-02 | Phase 2 | Complete |
 | HITP-01 | Phase 2 | Complete |
-| HITP-02 | Phase 2 | Pending |
+| HITP-02 | Phase 2 | Complete |
 | GEAR-01 | Phase 2 | Complete |
-| GEAR-02 | Phase 2 | Pending |
+| GEAR-02 | Phase 2 | Complete |
 | GEAR-03 | Phase 2 | Complete |
 | GEAR-04 | Phase 2 | Complete |
-| CURR-01 | Phase 2 | Pending |
-| ATCK-01 | Phase 2 | Pending |
-| NOTE-01 | Phase 2 | Pending |
+| CURR-01 | Phase 2 | Complete |
+| ATCK-01 | Phase 2 | Complete |
+| NOTE-01 | Phase 2 | Complete |
 | MRKD-01 | Phase 3 | Pending |
 
 **Coverage:**
