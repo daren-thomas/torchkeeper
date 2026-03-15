@@ -16,6 +16,8 @@
                         <Label Text="{Binding GearSlotTotal}" FontSize="24" />
                         <Label Text="slots" FontSize="16" VerticalOptions="End" Margin="0,0,0,4" />
                     </HorizontalStackLayout>
+                    <Label Text="slots = STR score (min 10)"
+                           FontSize="11" TextColor="Gray" HorizontalOptions="Center" />
                     <Label Text="{Binding CoinSlots, StringFormat='Coin slots: {0}'}"
                            FontSize="12" TextColor="Gray" HorizontalOptions="Center" />
                 </VerticalStackLayout>
@@ -23,10 +25,14 @@
 
             <!-- Section 2: Gear List -->
             <Frame>
-                <VerticalStackLayout>
-                    <Label Text="Gear" FontAttributes="Bold" FontSize="16" />
-                    <CollectionView ItemsSource="{Binding GearItems}">
-                        <CollectionView.ItemTemplate>
+                <VerticalStackLayout Spacing="8">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="Gear" FontAttributes="Bold" FontSize="16" VerticalOptions="Center" />
+                        <Button Grid.Column="1" Text="+ Add" Clicked="OnAddItemClicked" HorizontalOptions="End" />
+                    </Grid>
+
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding GearItems}">
+                        <BindableLayout.ItemTemplate>
                             <DataTemplate x:DataType="vm:GearItemViewModel">
                                 <Grid ColumnDefinitions="*,80" Padding="0,8">
                                     <Grid.GestureRecognizers>
@@ -40,10 +46,8 @@
                                            HorizontalOptions="End" VerticalOptions="Center" FontSize="12" />
                                 </Grid>
                             </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                    <Button Text="+ Add Item" Clicked="OnAddItemClicked"
-                            HorizontalOptions="Start" Margin="0,8,0,0" />
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
                 </VerticalStackLayout>
             </Frame>
 

@@ -1,3 +1,5 @@
+using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Extensions;
 using CommunityToolkit.Maui.Views;
 using SdCharacterSheet.ViewModels;
 using SdCharacterSheet.Views.Popups;
@@ -19,11 +21,11 @@ public partial class GearPage : ContentPage
     {
         var view = (View)sender;
         var item = (GearItemViewModel)view.BindingContext;
-        await this.ShowPopupAsync(new GearItemPopup(_vm, item));
+        await this.ShowPopupAsync(new GearItemPopup(_vm, item), new PopupOptions());
     }
 
     private async void OnAddItemClicked(object sender, EventArgs e)
     {
-        await this.ShowPopupAsync(new GearItemPopup(_vm));
+        await this.ShowPopupAsync(new GearItemPopup(_vm), new PopupOptions());
     }
 }

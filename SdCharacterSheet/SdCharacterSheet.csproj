@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
+    <TargetFrameworks>net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
     <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
     <!-- <TargetFrameworks>$(TargetFrameworks);net10.0-tizen</TargetFrameworks> -->
@@ -11,6 +11,7 @@
     Safari is supported for library/XCFramework-based apps only, and requires AppKit.
     Change the MacCatalyst target framework version or remove to default to the latest version.
     -->
+    <OutputType>Exe</OutputType>
     <SingleProject>true</SingleProject>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -42,6 +43,11 @@
   <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(RuntimeIdentifierOverride)' != ''">
     <RuntimeIdentifier>$(RuntimeIdentifierOverride)</RuntimeIdentifier>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <CodesignKey>-</CodesignKey>
+    <CodesignEntitlements></CodesignEntitlements>
+    <ValidateXcodeVersion>false</ValidateXcodeVersion>
+  </PropertyGroup>
 
   <ItemGroup>
     <!-- App Icon -->
@@ -68,8 +74,10 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Maui" Version="14.0.1" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" Condition="'$(MauiVersion)' != ''" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.41" Condition="'$(MauiVersion)' == ''" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" Condition="'$(MauiVersion)' != ''" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="10.0.41" Condition="'$(MauiVersion)' == ''" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
   </ItemGroup>
 

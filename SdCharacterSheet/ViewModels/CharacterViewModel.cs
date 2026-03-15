@@ -1,7 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using SdCharacterSheet.Models;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
 
 namespace SdCharacterSheet.ViewModels;
@@ -26,6 +25,7 @@ public partial class CharacterViewModel : ObservableObject
     [ObservableProperty] private string deity = "";
     [ObservableProperty] private string languages = "";
     [ObservableProperty] private int xP;   // XP — source generator: xP → XP
+    [ObservableProperty] private int maxXP = 10;
 
     // ===== HP =====
     [ObservableProperty] private int currentHP;
@@ -64,7 +64,6 @@ public partial class CharacterViewModel : ObservableObject
     private int baseCHA;
 
     // ===== COMPUTED STAT TOTALS =====
-    // Filter BonusTo by prefix e.g. "STR:" — parse the value after the colon
     public int TotalSTR => BaseSTR + SumBonusesFor("STR");
     public int TotalDEX => BaseDEX + SumBonusesFor("DEX");
     public int TotalCON => BaseCON + SumBonusesFor("CON");
@@ -115,8 +114,6 @@ public partial class CharacterViewModel : ObservableObject
     // ===== CONSTRUCTOR =====
     public CharacterViewModel()
     {
-        // Subscribe to GearItems collection changes so we can manage per-item
-        // PropertyChanged listeners. When Slots changes on any item, GearSlotsUsed must update.
         GearItems.CollectionChanged += (_, e) =>
         {
             if (e.NewItems != null)
@@ -127,6 +124,9 @@ public partial class CharacterViewModel : ObservableObject
                     g.PropertyChanged -= OnGearItemChanged;
             OnPropertyChanged(nameof(GearSlotsUsed));
         };
+
+        // Build StatRows from default (zeroed) character so the stats section is visible on startup
+        RebuildStatRows(Character);
     }
 
     // ===== LOAD =====
@@ -145,6 +145,7 @@ public partial class CharacterViewModel : ObservableObject
         deity = character.Deity;
         languages = character.Languages;
         xP = character.XP;
+        maxXP = character.MaxXP;
 
         // HP
         currentHP = character.CurrentHP;
@@ -178,7 +179,16 @@ public partial class CharacterViewModel : ObservableObject
         foreach (var a in character.Attacks)
             Attacks.Add(a);
 
-        // Rebuild StatRows — pass per-stat callback so base-stat edits write back here
+        // Rebuild StatRows
+        RebuildStatRows(character);
+
+        // Notify everything — full character replacement
+        OnPropertyChanged(string.Empty);
+    }
+
+    // ===== HELPERS =====
+    private void RebuildStatRows(Character character)
+    {
         StatRows.Clear();
         var statDefs = new (string name, int baseVal, Action<int> writeBack)[]
         {
@@ -191,12 +201,8 @@ public partial class CharacterViewModel : ObservableObject
         };
         foreach (var (statName, baseVal, writeBack) in statDefs)
             StatRows.Add(new StatRowViewModel(statName, baseVal, writeBack, character.Bonuses));
-
-        // Notify everything — full character replacement
-        OnPropertyChanged(string.Empty);
     }
 
-    // ===== HELPERS =====
     private void OnGearItemChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(GearItemViewModel.Slots))

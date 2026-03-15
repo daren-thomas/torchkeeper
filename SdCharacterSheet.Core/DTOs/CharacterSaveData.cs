@@ -15,6 +15,7 @@ public class CharacterSaveData
     public string Deity { get; init; } = "";
     public string Languages { get; init; } = "";
     public int XP { get; init; }
+    public int MaxXP { get; init; } = 10;
 
     // Stats
     public int BaseSTR { get; init; }

@@ -13,6 +13,7 @@ public class Character
     public string Deity { get; set; } = "";
     public string Languages { get; set; } = "";
     public int XP { get; set; }
+    public int MaxXP { get; set; } = 10;
 
     // Base stats (rolledStats from import — NOT the computed final values)
     public int BaseSTR { get; set; }
