@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SdCharacterSheet.ViewModels"
+             x:Class="SdCharacterSheet.Views.GearPage"
+             Title="Gear">
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+
+            <!-- Section 1: Slot Header -->
+            <Frame>
+                <VerticalStackLayout Spacing="4">
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                        <Label Text="{Binding GearSlotsUsed}" FontSize="24" FontAttributes="Bold" />
+                        <Label Text="/" FontSize="24" />
+                        <Label Text="{Binding GearSlotTotal}" FontSize="24" />
+                        <Label Text="slots" FontSize="16" VerticalOptions="End" Margin="0,0,0,4" />
+                    </HorizontalStackLayout>
+                    <Label Text="{Binding CoinSlots, StringFormat='Coin slots: {0}'}"
+                           FontSize="12" TextColor="Gray" HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Section 2: Gear List -->
+            <Frame>
+                <VerticalStackLayout>
+                    <Label Text="Gear" FontAttributes="Bold" FontSize="16" />
+                    <CollectionView ItemsSource="{Binding GearItems}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="vm:GearItemViewModel">
+                                <Grid ColumnDefinitions="*,80" Padding="0,8">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnItemTapped" />
+                                    </Grid.GestureRecognizers>
+                                    <VerticalStackLayout Grid.Column="0">
+                                        <Label Text="{Binding Name}" FontAttributes="Bold" />
+                                        <Label Text="{Binding ItemType}" FontSize="12" TextColor="Gray" />
+                                    </VerticalStackLayout>
+                                    <Label Grid.Column="1" Text="{Binding Slots, StringFormat='{0} slot(s)'}"
+                                           HorizontalOptions="End" VerticalOptions="Center" FontSize="12" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <Button Text="+ Add Item" Clicked="OnAddItemClicked"
+                            HorizontalOptions="Start" Margin="0,8,0,0" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Section 3: Currency -->
+            <Frame>
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Currency" FontAttributes="Bold" FontSize="16" />
+                    <Grid ColumnDefinitions="60,*" RowDefinitions="Auto,Auto,Auto" RowSpacing="8">
+                        <Label Grid.Row="0" Grid.Column="0" Text="GP" VerticalOptions="Center" />
+                        <Entry Grid.Row="0" Grid.Column="1" Text="{Binding GP, Mode=TwoWay}" Keyboard="Numeric" />
+                        <Label Grid.Row="1" Grid.Column="0" Text="SP" VerticalOptions="Center" />
+                        <Entry Grid.Row="1" Grid.Column="1" Text="{Binding SP, Mode=TwoWay}" Keyboard="Numeric" />
+                        <Label Grid.Row="2" Grid.Column="0" Text="CP" VerticalOptions="Center" />
+                        <Entry Grid.Row="2" Grid.Column="1" Text="{Binding CP, Mode=TwoWay}" Keyboard="Numeric" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

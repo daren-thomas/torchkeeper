@@ -1,0 +1,29 @@
+using CommunityToolkit.Maui.Views;
+using SdCharacterSheet.ViewModels;
+using SdCharacterSheet.Views.Popups;
+
+namespace SdCharacterSheet.Views;
+
+public partial class GearPage : ContentPage
+{
+    private readonly CharacterViewModel _vm;
+
+    public GearPage(CharacterViewModel vm)
+    {
+        InitializeComponent();
+        _vm = vm;
+        BindingContext = vm;
+    }
+
+    private async void OnItemTapped(object sender, TappedEventArgs e)
+    {
+        var view = (View)sender;
+        var item = (GearItemViewModel)view.BindingContext;
+        await this.ShowPopupAsync(new GearItemPopup(_vm, item));
+    }
+
+    private async void OnAddItemClicked(object sender, EventArgs e)
+    {
+        await this.ShowPopupAsync(new GearItemPopup(_vm));
+    }
+}
