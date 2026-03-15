@@ -27,6 +27,12 @@ public static class MauiProgram
         builder.Services.AddSingleton<ShadowdarklingsImportService>();
         builder.Services.AddSingleton<CharacterViewModel>();
 
+        // Tab pages — registered as Transient so Shell creates one per tab,
+        // but they all receive the singleton CharacterViewModel via DI
+        builder.Services.AddTransient<SdCharacterSheet.Views.SheetPage>();
+        builder.Services.AddTransient<SdCharacterSheet.Views.GearPage>();
+        builder.Services.AddTransient<SdCharacterSheet.Views.NotesPage>();
+
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
