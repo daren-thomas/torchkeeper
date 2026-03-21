@@ -63,7 +63,11 @@ Plans:
 **Success Criteria** (what must be TRUE):
   1. User can trigger a Markdown export that produces a complete, formatted character sheet including identity, stats with modifiers, gear list with slot counts, currency, attacks, and notes
   2. On mobile (iOS/Android) the export triggers the native share sheet; on desktop (Windows/macOS) a save-as dialog appears
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — TDD: CharacterExportData DTO, MarkdownBuilder pure static methods, unit tests for all formatting rules (MRKD-01)
+- [ ] 03-02-PLAN.md — MarkdownExportService with platform routing, SpellsKnown + ExportCommand on ViewModel, AppShell toolbar wiring, human verification (MRKD-01)
 
 ## Progress
 
@@ -74,4 +78,4 @@ Phases execute in numeric order: 1 → 2 → 3
 |-------|----------------|--------|-----------|
 | 1. Foundation | 5/5 | Complete   | 2026-03-14 |
 | 2. Core Sheet | 4/6 | In Progress|  |
-| 3. Export | 0/TBD | Not started | - |
+| 3. Export | 0/2 | Not started | - |
