@@ -106,7 +106,16 @@ public static class MarkdownBuilder
         }
         sb.AppendLine();
 
-        // 6. Spells section (D-21) — only when non-empty
+        // 6. Talents section — only when non-empty
+        if (!string.IsNullOrWhiteSpace(data.Talents))
+        {
+            sb.AppendLine("## Talents");
+            sb.AppendLine();
+            sb.AppendLine(data.Talents);
+            sb.AppendLine();
+        }
+
+        // 7. Spells section (D-21) — only when non-empty
         if (!string.IsNullOrWhiteSpace(data.SpellsKnown))
         {
             sb.AppendLine("## Spells");
@@ -115,7 +124,7 @@ public static class MarkdownBuilder
             sb.AppendLine();
         }
 
-        // 7. Notes section
+        // 8. Notes section
         sb.AppendLine("## Notes");
         sb.AppendLine();
         if (!string.IsNullOrWhiteSpace(data.Notes))

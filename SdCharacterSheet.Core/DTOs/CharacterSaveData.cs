@@ -41,8 +41,9 @@ public class CharacterSaveData
     public List<GearItemData> Gear { get; init; } = [];
     public List<MagicItemData> MagicItems { get; init; } = [];
 
-    // Attacks, spells, notes
+    // Attacks, talents, spells, notes
     public List<string> Attacks { get; init; } = [];
+    public string Talents { get; init; } = "";
     public string SpellsKnown { get; init; } = "";
     public string Notes { get; init; } = "";
 }

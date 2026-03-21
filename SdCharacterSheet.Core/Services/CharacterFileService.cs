@@ -89,6 +89,7 @@ public class CharacterFileService
             })
             .ToList(),
         Attacks = character.Attacks.ToList(),
+        Talents = character.Talents,
         SpellsKnown = character.SpellsKnown,
         Notes = character.Notes
     };
@@ -144,6 +145,7 @@ public class CharacterFileService
             })
             .ToList(),
         Attacks = dto.Attacks.ToList(),
+        Talents = dto.Talents,
         SpellsKnown = dto.SpellsKnown,
         Notes = dto.Notes
     };

@@ -116,7 +116,8 @@ public partial class CharacterViewModel : ObservableObject
     // ===== NOTES =====
     [ObservableProperty] private string notes = "";
 
-    // ===== SPELLS =====
+    // ===== TALENTS & SPELLS =====
+    [ObservableProperty] private string talents = "";
     [ObservableProperty] private string spellsKnown = "";
 
     // ===== FILE SERVICES =====
@@ -230,6 +231,7 @@ public partial class CharacterViewModel : ObservableObject
             .Select(g => new MagicItem { Name = g.Name, Slots = g.Slots, Note = g.Note })
             .ToList(),
         Attacks = Attacks.ToList(),
+        Talents = Talents,
         SpellsKnown = SpellsKnown,
         Notes = Notes,
     };
@@ -269,9 +271,10 @@ public partial class CharacterViewModel : ObservableObject
         sP = character.SP;
         cP = character.CP;
 
-        // Notes
-        notes = character.Notes;
+        // Talents, Spells, Notes
+        talents = character.Talents;
         spellsKnown = character.SpellsKnown;
+        notes = character.Notes;
 
         // Rebuild GearItems
         GearItems.Clear();

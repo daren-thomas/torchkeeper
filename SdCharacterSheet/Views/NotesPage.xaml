@@ -3,11 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SdCharacterSheet.Views.NotesPage"
              Title="Notes">
-    <Grid Padding="16">
-        <Editor Text="{Binding Notes, Mode=TwoWay}"
-                Placeholder="Your notes here..."
-                VerticalOptions="Fill"
-                HorizontalOptions="Fill"
-                AutoSize="TextChanges" />
-    </Grid>
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+
+            <Label Text="Talents" FontAttributes="Bold" FontSize="16" />
+            <Frame Padding="8">
+                <Editor Text="{Binding Talents, Mode=TwoWay}"
+                        Placeholder="Talents gained at each level..."
+                        MinimumHeightRequest="80"
+                        AutoSize="TextChanges" />
+            </Frame>
+
+            <Label Text="Spells" FontAttributes="Bold" FontSize="16" />
+            <Frame Padding="8">
+                <Editor Text="{Binding SpellsKnown, Mode=TwoWay}"
+                        Placeholder="Spells known..."
+                        MinimumHeightRequest="80"
+                        AutoSize="TextChanges" />
+            </Frame>
+
+            <Label Text="Notes" FontAttributes="Bold" FontSize="16" />
+            <Frame Padding="8">
+                <Editor Text="{Binding Notes, Mode=TwoWay}"
+                        Placeholder="Your notes here..."
+                        MinimumHeightRequest="120"
+                        AutoSize="TextChanges" />
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

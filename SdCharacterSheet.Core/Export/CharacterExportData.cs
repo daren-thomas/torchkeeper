@@ -40,7 +40,8 @@ public record CharacterExportData
     // Attacks
     public required IReadOnlyList<string> Attacks { get; init; }
 
-    // Spells
+    // Talents and Spells
+    public string Talents { get; init; } = "";
     public string SpellsKnown { get; init; } = "";
 
     // Notes

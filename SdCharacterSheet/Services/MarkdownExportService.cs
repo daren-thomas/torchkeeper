@@ -87,6 +87,7 @@ public class MarkdownExportService
             GearSlotsUsed = vm.GearSlotsUsed,
             CoinSlots = vm.CoinSlots,
             Attacks = vm.Attacks.ToList(),
+            Talents = vm.Talents,
             SpellsKnown = vm.SpellsKnown,
             Notes = vm.Notes,
         };

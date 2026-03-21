@@ -42,7 +42,8 @@ public class Character
     // Attacks (free-form text entries, e.g. "DAGGER: +3 (N), 1d4 (FIN)")
     public List<string> Attacks { get; set; } = [];
 
-    // Spells (plain string from Shadowdarklings; free text)
+    // Talents and Spells (free text)
+    public string Talents { get; set; } = "";
     public string SpellsKnown { get; set; } = "";
 
     // Notes (freeform player notes)
