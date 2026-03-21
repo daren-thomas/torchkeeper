@@ -25,8 +25,7 @@ public static class MarkdownBuilder
         AppendIfNotEmpty(sb, "**Background:**", data.Background);
         AppendIfNotEmpty(sb, "**Deity:**", data.Deity);
         AppendIfNotEmpty(sb, "**Languages:**", data.Languages);
-        AppendIfNotEmpty(sb, "**XP:**", $"{data.XP} / {data.MaxXP}");
-        // HP and XP (D-20) — always included
+        // HP and XP (D-20) — always included, plain format
         sb.AppendLine($"HP: {data.CurrentHP} / {data.MaxHP}");
         sb.AppendLine($"XP: {data.XP} / {data.MaxXP}");
         sb.AppendLine();
