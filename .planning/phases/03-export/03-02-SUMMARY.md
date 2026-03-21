@@ -2,10 +2,10 @@
 phase: 03-export
 plan: 02
 subsystem: export
-tags: [maui, export, markdown, share-sheet, toolbar]
+tags: [maui, export, markdown, share-sheet, toolbar, coin-encumbrance]
 dependency_graph:
   requires: [03-01]
-  provides: [export-feature-end-to-end]
+  provides: [export-feature-end-to-end, corrected-coin-encumbrance]
   affects: [AppShell, CharacterViewModel, MauiProgram]
 tech_stack:
   added: [Share.Default (MAUI), ShareFileRequest, FileSystem.CacheDirectory]
@@ -19,27 +19,30 @@ key_files:
     - SdCharacterSheet/AppShell.xaml.cs
     - SdCharacterSheet/MauiProgram.cs
     - SdCharacterSheet/App.xaml.cs
+    - SdCharacterSheet.Tests/ViewModels/CharacterViewModelTests.cs
 decisions:
   - "AppShell registered as singleton in DI; App.xaml.cs receives it via constructor injection"
   - "CharacterViewModel uses two-constructor pattern: parameterless for tests, with MarkdownExportService for DI"
   - "MarkdownExportService platform check: DevicePlatform.iOS and Android use Share.Default; all others use IFileSaver"
   - "SpellsKnown added as [ObservableProperty] with direct backing field assignment in LoadCharacter per existing pattern"
+  - "Coin encumbrance uses ceiling division: first 100 coins per denomination free, every additional 100 (or part thereof) costs 1 slot — formula: coins > 100 ? (coins - 1) / 100 : 0"
+requirements-completed: [MRKD-01]
 metrics:
-  duration_minutes: 18
+  duration_minutes: 45
   completed_date: 2026-03-21
-  tasks_completed: 1
+  tasks_completed: 2
   tasks_total: 2
   files_created: 1
-  files_modified: 5
+  files_modified: 6
 ---
 
 # Phase 3 Plan 2: MAUI Export Wiring Summary
 
-**One-liner:** MAUI export layer wired end-to-end: MarkdownExportService routes to share sheet (mobile) or save-as dialog (desktop), triggered by a Shell ToolbarItem bound to ExportCommand on CharacterViewModel.
+**MAUI export layer wired end-to-end: MarkdownExportService routes to share sheet (mobile) or save-as dialog (desktop), triggered by a Shell ToolbarItem; coin encumbrance bug fixed to ceiling division (101+ coins = 1 slot)**
 
 ## Status
 
-Paused at human verification checkpoint (Task 2). Task 1 completed and committed.
+COMPLETE. Human-verified. Bug fix applied and committed.
 
 ## What Was Built
 
@@ -73,6 +76,7 @@ Complete export feature integration:
 | Task | Description | Commit |
 |------|-------------|--------|
 | Task 1 | Wire Markdown export into MAUI app | 8d8359b |
+| Bug fix | Correct coin encumbrance formula (ceiling per denomination) | 1a1d250 |
 
 ## Deviations from Plan
 
@@ -84,18 +88,23 @@ Complete export feature integration:
 - **Files modified:** SdCharacterSheet/App.xaml.cs
 - **Commit:** 8d8359b (included in Task 1 commit)
 
+**2. [Rule 1 - Bug] Coin encumbrance used floor instead of ceiling division**
+
+- **Found during:** Task 2 (human verification)
+- **Issue:** Formula `Math.Max(GP - 100, 0) / 100` gives 0 slots for 101-199 coins (floor division), but the Shadowdark rule requires 1 slot for any coins over 100. Old code meant you needed 200 coins before the first slot was consumed.
+- **Fix:** Changed to `coins > 100 ? (coins - 1) / 100 : 0` (integer ceiling) for GP, SP, CP separately; updated `TestCharacterVM` stub to match; renamed `CoinSlots_201GP_Returns1` -> `CoinSlots_201GP_Returns2` with corrected assertion; added `CoinSlots_101GP_Returns1` boundary test.
+- **Files modified:** `SdCharacterSheet/ViewModels/CharacterViewModel.cs`, `SdCharacterSheet.Tests/ViewModels/CharacterViewModelTests.cs`
+- **Verification:** All 46 tests pass including all 7 CoinSlots tests
+- **Commit:** 1a1d250
+
+---
+
+**Total deviations:** 2 auto-fixed (1 blocking / DI wiring, 1 bug / coin formula)
+**Impact on plan:** Both fixes required for correct behavior. No scope creep.
+
 ## Build Notes
 
 The MAUI project build reports `Build FAILED` due to `MSB4216` — a pre-existing ILLink task host environment error unrelated to these changes. The C# compilation succeeds (DLL produced) and SdCharacterSheet.Core + SdCharacterSheet.Tests build cleanly with 0 errors. This ILLink error was present before these changes (verified via `git stash`).
-
-## Awaiting Human Verification
-
-Task 2 is a human verification checkpoint. The tester should:
-1. Launch the app
-2. Load a character
-3. Verify Export button appears in toolbar on all tabs
-4. Tap Export and confirm share sheet (mobile) or save-as dialog (desktop)
-5. Open the .md file and verify content structure
 
 ## Known Stubs
 
@@ -107,7 +116,12 @@ None — all data is wired from CharacterViewModel to CharacterExportData to Mar
 - [x] SdCharacterSheet/ViewModels/CharacterViewModel.cs contains `private string spellsKnown`
 - [x] SdCharacterSheet/ViewModels/CharacterViewModel.cs contains `spellsKnown = character.SpellsKnown`
 - [x] SdCharacterSheet/ViewModels/CharacterViewModel.cs contains `ExportAsync`
+- [x] SdCharacterSheet/ViewModels/CharacterViewModel.cs contains corrected CoinSlots formula
 - [x] SdCharacterSheet/AppShell.xaml contains `ToolbarItem` and `ExportCommand`
 - [x] SdCharacterSheet/AppShell.xaml.cs contains `BindingContext`
 - [x] SdCharacterSheet/MauiProgram.cs contains `MarkdownExportService`
 - [x] Commit 8d8359b verified in git log
+- [x] Commit 1a1d250 verified in git log
+- [x] All 46 tests pass
+
+## Self-Check: PASSED
