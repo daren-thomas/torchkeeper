@@ -34,10 +34,17 @@ public class MauiImportFileService
 
     public async Task<Character?> ImportAsync(CancellationToken ct = default)
     {
+#if MACCATALYST
+        var path = await MacFilePickerHelper.PickAsync(["json"]);
+        if (path is null) return null;
+        await using var stream = File.OpenRead(path);
+        return await _importService.ImportAsync(stream);
+#else
         var result = await MainThread.InvokeOnMainThreadAsync(
             () => FilePicker.Default.PickAsync(JsonPickOptions));
         if (result is null) return null;
         await using var stream = await result.OpenReadAsync();
         return await _importService.ImportAsync(stream);
+#endif
     }
 }

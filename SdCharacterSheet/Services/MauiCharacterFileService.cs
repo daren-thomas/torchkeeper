@@ -26,11 +26,19 @@ public class MauiCharacterFileService : CharacterFileService
 
     public async Task<Character?> OpenAsync(CancellationToken ct = default)
     {
+#if MACCATALYST
+        var path = await MacFilePickerHelper.PickAsync(["sdchar"]);
+        if (path is null) return null;
+        await using var stream = File.OpenRead(path);
+        var dto = await LoadFromStreamAsync(stream);
+        return dto is null ? null : MapFromDto(dto);
+#else
         var fileResult = await MainThread.InvokeOnMainThreadAsync(
             () => FilePicker.Default.PickAsync(SdCharPickOptions));
         if (fileResult is null) return null;
         using var stream = await fileResult.OpenReadAsync();
         var dto = await LoadFromStreamAsync(stream);
         return dto is null ? null : MapFromDto(dto);
+#endif
     }
 }
