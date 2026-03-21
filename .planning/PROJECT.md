@@ -32,10 +32,10 @@ A player can open their character, see all their stats with full bonus breakdown
 
 ### Active
 
-- [ ] User can toggle individual bonus sources on/off per stat (BNUS-01, BNUS-02)
-- [ ] User can view full GP/SP/CP transaction history (LEDG-01, LEDG-02)
-- [ ] Gear slot utilization shown as visual progress bar (PLSH-01)
-- [ ] Character sheet auto-saves on every change (PLSH-02)
+- [ ] User can save a character to a .sdchar file via the File menu (FILE-01)
+- [ ] User can load a character from a .sdchar file via the File menu (FILE-02)
+- [ ] User can import a Shadowdarklings.net JSON export via the File menu (FILE-03)
+- [ ] User can view and edit a Talents/Spells text area on the Notes tab (TLNT-01)
 
 ### Out of Scope
 
@@ -43,7 +43,7 @@ A player can open their character, see all their stats with full bonus breakdown
 - Online sync or cloud saves — file-based only
 - Multi-character roster UI — character switching handled via OS file management
 - Shadowdarklings-compatible JSON export — import only
-- Spell management beyond noting spells known as text
+- Spell management beyond free-text entry in Talents/Spells area
 - Dice roller — not a character sheet concern
 - Automatic attack derivation from weapon stats — attacks are free-form text
 
@@ -87,5 +87,32 @@ Known gaps (v1.0, human verification pending):
 | MarkdownBuilder as pure static methods | Enables unit testing without DI or platform dependencies | ✓ Good — 18 tests pass |
 | Coin encumbrance: ceiling(coins/100) with first 100 free | Matches Shadowdark rules; corrected during Phase 3 | ✓ Good — bug caught and fixed (coin bug: first impl used floor) |
 
+## Current Milestone: v1.1 File Management & Talents
+
+**Goal:** Wire the existing file services into the UI and add a Talents/Spells text area.
+
+**Target features:**
+- Save character to .sdchar via File menu
+- Load character from .sdchar via File menu
+- Import from Shadowdarklings JSON via File menu
+- Talents/Spells free-text area in the Notes tab (above Notes)
+
+## Evolution
+
+This document evolves at phase transitions and milestone boundaries.
+
+**After each phase transition** (via `/gsd:transition`):
+1. Requirements invalidated? → Move to Out of Scope with reason
+2. Requirements validated? → Move to Validated with phase reference
+3. New requirements emerged? → Add to Active
+4. Decisions to log? → Add to Key Decisions
+5. "What This Is" still accurate? → Update if drifted
+
+**After each milestone** (via `/gsd:complete-milestone`):
+1. Full review of all sections
+2. Core Value check — still the right priority?
+3. Audit Out of Scope — reasons still valid?
+4. Update Context with current state
+
 ---
-*Last updated: 2026-03-21 after v1.0 milestone*
+*Last updated: 2026-03-21 after v1.1 milestone start*
