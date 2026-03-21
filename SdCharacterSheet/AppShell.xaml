@@ -10,6 +10,12 @@
                      Order="Primary"
                      Command="{Binding ExportCommand}" />
     </Shell.ToolbarItems>
+    <Shell.MenuBarItems>
+        <MenuBarItem Text="File">
+            <MenuFlyoutItem Text="Export As..."
+                            Command="{Binding ExportCommand}" />
+        </MenuBarItem>
+    </Shell.MenuBarItems>
     <TabBar>
         <Tab Title="Sheet">
             <ShellContent ContentTemplate="{DataTemplate views:SheetPage}" />
