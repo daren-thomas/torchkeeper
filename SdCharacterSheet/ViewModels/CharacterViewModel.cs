@@ -1,5 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using SdCharacterSheet.Models;
+using SdCharacterSheet.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
@@ -111,6 +113,19 @@ public partial class CharacterViewModel : ObservableObject
     // ===== NOTES =====
     [ObservableProperty] private string notes = "";
 
+    // ===== SPELLS =====
+    [ObservableProperty] private string spellsKnown = "";
+
+    // ===== EXPORT =====
+    private readonly MarkdownExportService? _exportService;
+
+    [RelayCommand]
+    private async Task ExportAsync()
+    {
+        if (_exportService is null) return;
+        await _exportService.ExportAsync(this);
+    }
+
     // ===== CONSTRUCTOR =====
     public CharacterViewModel()
     {
@@ -127,6 +142,11 @@ public partial class CharacterViewModel : ObservableObject
 
         // Build StatRows from default (zeroed) character so the stats section is visible on startup
         RebuildStatRows(Character);
+    }
+
+    public CharacterViewModel(MarkdownExportService exportService) : this()
+    {
+        _exportService = exportService;
     }
 
     // ===== LOAD =====
@@ -166,6 +186,7 @@ public partial class CharacterViewModel : ObservableObject
 
         // Notes
         notes = character.Notes;
+        spellsKnown = character.SpellsKnown;
 
         // Rebuild GearItems
         GearItems.Clear();
