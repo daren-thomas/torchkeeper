@@ -33,19 +33,17 @@ Decisions are logged in PROJECT.md Key Decisions table.
 
 Key context for v1.1:
 
-- CharacterFileService (save/load) and ShadowdarklingsImportService (import) are fully implemented in SdCharacterSheet.Core — only UI wiring is needed
-- AppShell currently has only Export in toolbar and File menu — save/load/import commands need to be added there
-- CharacterViewModel has no SaveCommand/LoadCommand/ImportCommand — these need to be added
-- SpellsKnown field already exists in CharacterViewModel and is persisted in .sdchar — only a UI section is needed
-- The Notes tab (NotesPage) needs a Talents/Spells editor above the existing Notes editor
-- MauiCharacterFileService handles file picker for open; CharacterFileService handles serialization; IFileSaver via CommunityToolkitFileSaverAdapter handles save
 - [Phase 04-file-menu]: MauiCharacterFileService resolved via cast from CharacterFileService DI key — concrete type needed for OpenAsync
 - [Phase 04-file-menu]: BuildCharacterFromViewModel() builds from observable properties not backing field — backing field is stale after edits
 - [Phase 04-file-menu]: GearItemSource enum is canonical discriminator for gear vs magic item split on save
+- [Phase 04-file-menu]: MAUI FilePicker.Default.PickAsync() silently returns null on macOS 15 (Sequoia) — fixed by MacFilePickerHelper using ConnectedScenes + UIDocumentPickerViewController directly (commit b2d9977)
+- [Phase 04-file-menu]: MacCatalyst Info.plist added to register com.sdcharactersheet.sdchar UTType (commit 0fc857c)
+- [Phase 05-talents-editor]: Implemented inline (not via formal plan). Added Talents free-text field through full stack (Character model, CharacterSaveData DTO, CharacterFileService save/load, CharacterExportData, MarkdownBuilder, MarkdownExportService, CharacterViewModel). NotesPage now shows Talents → Spells → Notes labeled sections. Committed 4239483.
 
 ### Pending Todos
 
-None.
+- Phase 04 Plan 02 (human verification): needs re-test of Open and Import after MacFilePickerHelper fix. Rebuild with `dotnet build -t:Run -f net10.0-maccatalyst`.
+- Phase 05 (Talents Editor): done inline — ROADMAP.md shows it as not started; should be marked complete or the phase removed.
 
 ### Blockers/Concerns
 
