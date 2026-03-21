@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UTImportedTypeDeclarations</key>
+	<array>
+	  <dict>
+	    <key>UTTypeDescription</key>
+	    <string>Shadowdark Character File</string>
+	    <key>UTTypeIdentifier</key>
+	    <string>com.sdcharactersheet.sdchar</string>
+	    <key>UTTypeConformsTo</key>
+	    <array><string>public.data</string></array>
+	    <key>UTTypeTagSpecification</key>
+	    <dict>
+	      <key>public.filename-extension</key>
+	      <array><string>sdchar</string></array>
+	    </dict>
+	  </dict>
+	</array>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+	  <dict>
+	    <key>CFBundleTypeName</key>
+	    <string>Shadowdark Character File</string>
+	    <key>CFBundleTypeRole</key>
+	    <string>Editor</string>
+	    <key>LSItemContentTypes</key>
+	    <array><string>com.sdcharactersheet.sdchar</string></array>
+	    <key>LSHandlerRank</key>
+	    <string>Owner</string>
+	  </dict>
+	</array>
+</dict>
+</plist>

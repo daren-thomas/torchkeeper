@@ -26,7 +26,8 @@ public class MauiCharacterFileService : CharacterFileService
 
     public async Task<Character?> OpenAsync(CancellationToken ct = default)
     {
-        var fileResult = await FilePicker.Default.PickAsync(SdCharPickOptions);
+        var fileResult = await MainThread.InvokeOnMainThreadAsync(
+            () => FilePicker.Default.PickAsync(SdCharPickOptions));
         if (fileResult is null) return null;
         using var stream = await fileResult.OpenReadAsync();
         var dto = await LoadFromStreamAsync(stream);

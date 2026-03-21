@@ -34,7 +34,8 @@ public class MauiImportFileService
 
     public async Task<Character?> ImportAsync(CancellationToken ct = default)
     {
-        var result = await FilePicker.Default.PickAsync(JsonPickOptions);
+        var result = await MainThread.InvokeOnMainThreadAsync(
+            () => FilePicker.Default.PickAsync(JsonPickOptions));
         if (result is null) return null;
         await using var stream = await result.OpenReadAsync();
         return await _importService.ImportAsync(stream);
