@@ -119,9 +119,39 @@ public partial class CharacterViewModel : ObservableObject
     // ===== SPELLS =====
     [ObservableProperty] private string spellsKnown = "";
 
-    // ===== EXPORT =====
+    // ===== FILE SERVICES =====
     private readonly MarkdownExportService? _exportService;
+    private readonly MauiCharacterFileService? _fileService;
+    private readonly MauiImportFileService? _importFileService;
 
+    // ===== FILE COMMANDS =====
+    [RelayCommand]
+    private async Task SaveAsync()
+    {
+        if (_fileService is null) return;
+        var character = BuildCharacterFromViewModel();
+        await _fileService.SaveAsync(character);
+    }
+
+    [RelayCommand]
+    private async Task LoadAsync()
+    {
+        if (_fileService is null) return;
+        var character = await _fileService.OpenAsync();
+        if (character is null) return;
+        LoadCharacter(character);
+    }
+
+    [RelayCommand]
+    private async Task ImportAsync()
+    {
+        if (_importFileService is null) return;
+        var character = await _importFileService.ImportAsync();
+        if (character is null) return;
+        LoadCharacter(character);
+    }
+
+    // ===== EXPORT =====
     [RelayCommand]
     private async Task ExportAsync()
     {
@@ -151,6 +181,58 @@ public partial class CharacterViewModel : ObservableObject
     {
         _exportService = exportService;
     }
+
+    public CharacterViewModel(
+        MarkdownExportService exportService,
+        MauiCharacterFileService fileService,
+        MauiImportFileService importFileService) : this(exportService)
+    {
+        _fileService = fileService;
+        _importFileService = importFileService;
+    }
+
+    // ===== BUILD FROM VM STATE =====
+    /// <summary>
+    /// Builds a fresh Character from current VM state.
+    /// Do NOT use the Character backing field — it is stale after edits.
+    /// </summary>
+    private Character BuildCharacterFromViewModel() => new()
+    {
+        Name = Name,
+        Class = Class,
+        Ancestry = Ancestry,
+        Level = Level,
+        Title = Title,
+        Alignment = Alignment,
+        Background = Background,
+        Deity = Deity,
+        Languages = Languages,
+        XP = XP,
+        MaxXP = MaxXP,
+        BaseSTR = BaseSTR,
+        BaseDEX = BaseDEX,
+        BaseCON = BaseCON,
+        BaseINT = BaseINT,
+        BaseWIS = BaseWIS,
+        BaseCHA = BaseCHA,
+        MaxHP = MaxHP,
+        CurrentHP = CurrentHP,
+        GP = GP,
+        SP = SP,
+        CP = CP,
+        Bonuses = Character.Bonuses,
+        Gear = GearItems
+            .Where(g => g.Source == GearItemSource.Gear)
+            .Select(g => new GearItem { Name = g.Name, Slots = g.Slots, ItemType = g.ItemType, Note = g.Note })
+            .ToList(),
+        MagicItems = GearItems
+            .Where(g => g.Source == GearItemSource.Magic)
+            .Select(g => new MagicItem { Name = g.Name, Slots = g.Slots, Note = g.Note })
+            .ToList(),
+        Attacks = Attacks.ToList(),
+        SpellsKnown = SpellsKnown,
+        Notes = Notes,
+    };
 
     // ===== LOAD =====
     public void LoadCharacter(Character character)
