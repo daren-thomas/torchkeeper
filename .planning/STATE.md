@@ -4,7 +4,7 @@ milestone: v1.0
 milestone_name: milestone
 status: unknown
 stopped_at: Completed 03-02-PLAN.md — export feature verified, coin encumbrance bug fixed
-last_updated: "2026-03-21T10:45:11.645Z"
+last_updated: "2026-03-21T10:49:03.216Z"
 progress:
   total_phases: 3
   completed_phases: 3
