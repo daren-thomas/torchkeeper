@@ -12,7 +12,7 @@ A player can open their character, see all their stats with full bonus breakdown
 
 ### Validated
 
-(None yet — ship to validate)
+- [x] User can export the full character sheet as formatted Markdown for print/reference — Validated in Phase 03: Export
 
 ### Active
 
@@ -62,4 +62,4 @@ A player can open their character, see all their stats with full bonus breakdown
 | Native file format separate from Shadowdarklings JSON | Import-only; native format can be optimized for app needs | — Pending |
 
 ---
-*Last updated: 2026-03-08 after initialization*
+*Last updated: 2026-03-21 — Phase 03 (Export) complete*
