@@ -47,7 +47,7 @@
 
 ### Markdown Export
 
-- [ ] **MRKD-01**: User can export the full character sheet as formatted Markdown for print/reference
+- [x] **MRKD-01**: User can export the full character sheet as formatted Markdown for print/reference
 
 ## v2 Requirements
 
@@ -100,7 +100,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CURR-01 | Phase 2 | Complete |
 | ATCK-01 | Phase 2 | Complete |
 | NOTE-01 | Phase 2 | Complete |
-| MRKD-01 | Phase 3 | Pending |
+| MRKD-01 | Phase 3 | Complete |
 
 **Coverage:**
 - v1 requirements: 17 total

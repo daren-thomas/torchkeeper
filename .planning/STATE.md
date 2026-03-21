@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 03-export-01-PLAN.md
-last_updated: "2026-03-21T08:32:27.655Z"
+stopped_at: "Checkpoint: 03-02 Task 2 — awaiting human export verification"
+last_updated: "2026-03-21T08:57:03.396Z"
 progress:
   total_phases: 3
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 13
-  completed_plans: 12
+  completed_plans: 13
 ---
 
 # Project State
@@ -58,6 +58,7 @@ Plan: 2 of 2
 | Phase 02-core-sheet P04 | 1 | 1 tasks | 2 files |
 | Phase 02-core-sheet P05 | 5 | 1 tasks | 2 files |
 | Phase 03-export P01 | 2 | 1 tasks | 3 files |
+| Phase 03-export P02 | 18 | 1 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -96,6 +97,8 @@ Recent decisions affecting current work:
 - [Phase 03-export]: CharacterExportData is a plain CLR record in SdCharacterSheet.Core — zero MAUI dependencies, fully testable from net10.0 test project
 - [Phase 03-export]: BuildMarkdown and BuildFileName are pure static methods accepting CharacterExportData — no I/O, no state, deterministic output
 - [Phase 03-export]: Gear slot table built as List<string> of exactly GearSlotTotal entries before rendering to prevent row count drift
+- [Phase 03-export]: AppShell registered as DI singleton; App receives it via constructor injection so CharacterViewModel resolves through DI chain
+- [Phase 03-export]: MarkdownExportService platform routing: DevicePlatform.iOS/Android -> Share.Default.RequestAsync; all others -> IFileSaver.SaveAsync
 
 ### Pending Todos
 
@@ -109,6 +112,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-21T08:32:27.653Z
-Stopped at: Completed 03-export-01-PLAN.md
+Last session: 2026-03-21T08:56:47.929Z
+Stopped at: Checkpoint: 03-02 Task 2 — awaiting human export verification
 Resume file: None

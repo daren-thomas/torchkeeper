@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - Data model, native file I/O, and Shadowdarklings import pipeline (completed 2026-03-14)
 - [ ] **Phase 2: Core Sheet** - All interactive character sheet tabs — stats, gear, identity, notes
-- [ ] **Phase 3: Export** - Markdown export and cross-platform verification
+- [x] **Phase 3: Export** - Markdown export and cross-platform verification (completed 2026-03-21)
 
 ## Phase Details
 
@@ -67,7 +67,7 @@ Plans:
 
 Plans:
 - [x] 03-01-PLAN.md — TDD: CharacterExportData DTO, MarkdownBuilder pure static methods, unit tests for all formatting rules (MRKD-01)
-- [ ] 03-02-PLAN.md — MarkdownExportService with platform routing, SpellsKnown + ExportCommand on ViewModel, AppShell toolbar wiring, human verification (MRKD-01)
+- [x] 03-02-PLAN.md — MarkdownExportService with platform routing, SpellsKnown + ExportCommand on ViewModel, AppShell toolbar wiring, human verification (MRKD-01)
 
 ## Progress
 
@@ -78,4 +78,4 @@ Phases execute in numeric order: 1 → 2 → 3
 |-------|----------------|--------|-----------|
 | 1. Foundation | 5/5 | Complete   | 2026-03-14 |
 | 2. Core Sheet | 4/6 | In Progress|  |
-| 3. Export | 1/2 | In Progress|  |
+| 3. Export | 2/2 | Complete   | 2026-03-21 |
