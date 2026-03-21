@@ -2,11 +2,11 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: File Management & Talents
-status: defining_requirements
-stopped_at: Milestone v1.1 started
+status: ready_to_plan
+stopped_at: v1.1 roadmap created — Phase 4 ready to plan
 last_updated: "2026-03-21T00:00:00.000Z"
 progress:
-  total_phases: 0
+  total_phases: 2
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -19,14 +19,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-21)
 
 **Core value:** A player can open their character, see all their stats with full bonus breakdowns, and manage their inventory slot-by-slot — everything needed at the table that Shadowdarklings doesn't provide.
-**Current focus:** Not started (defining requirements)
+**Current focus:** Phase 4 — File Menu
 
 ## Current Position
 
-Phase: Not started (defining requirements)
-Plan: —
-Status: Defining requirements
-Last activity: 2026-03-21 — Milestone v1.1 started
+Phase: 4 of 5 (File Menu)
+Plan: 0 of ? in current phase
+Status: Ready to plan
+Last activity: 2026-03-21 — v1.1 roadmap created
+
+Progress: [██████████░░░░░░░░░░] 60% (v1.0 complete, v1.1 starting)
 
 ## Accumulated Context
 
@@ -48,4 +50,4 @@ None.
 
 ### Blockers/Concerns
 
-None.
+- Phase 3 VERIFICATION.md has 8 human_needed items (export E2E, test pass confirmation) — may need resolution before v1.1 ships
