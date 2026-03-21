@@ -83,10 +83,13 @@ public partial class CharacterViewModel : ObservableObject
 
     // ===== GEAR SLOTS =====
     public int GearSlotTotal => Math.Max(TotalSTR, 10);
+    // Rule: first 100 coins of each denomination are free; every additional 100 (or part thereof) costs 1 slot.
+    // Formula: ceiling division — coins > 100 ? ceil((coins - 100) / 100) : 0
+    // Integer equivalent: coins > 100 ? (coins - 1) / 100 : 0
     public int CoinSlots =>
-        Math.Max(GP - 100, 0) / 100 +
-        Math.Max(SP - 100, 0) / 100 +
-        Math.Max(CP - 100, 0) / 100;
+        (GP  > 100 ? (GP  - 1) / 100 : 0) +
+        (SP  > 100 ? (SP  - 1) / 100 : 0) +
+        (CP  > 100 ? (CP  - 1) / 100 : 0);
     public int GearSlotsUsed => GearItems.Sum(g => g.Slots) + CoinSlots;
 
     // ===== CURRENCY =====

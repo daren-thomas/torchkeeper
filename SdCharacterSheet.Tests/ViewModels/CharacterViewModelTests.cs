@@ -66,10 +66,11 @@ public class CharacterViewModelTests
         public int GearSlotTotal => Math.Max(TotalSTR, 10);
 
         // ── Computed: coin slots consumed ─────────────────────────────────
+        // Rule: first 100 coins are free; every additional 100 (or part thereof) costs 1 slot.
         public int CoinSlots =>
-            Math.Max(GP - 100, 0) / 100 +
-            Math.Max(SP - 100, 0) / 100 +
-            Math.Max(CP - 100, 0) / 100;
+            (GP  > 100 ? (GP  - 1) / 100 : 0) +
+            (SP  > 100 ? (SP  - 1) / 100 : 0) +
+            (CP  > 100 ? (CP  - 1) / 100 : 0);
 
         // ── Computed: total gear slots used (gear + coins) ─────────────────
         public int GearSlotsUsed => _gearItems.Sum(g => g.Slots) + CoinSlots;
@@ -267,7 +268,7 @@ public class CharacterViewModelTests
     [Trait("Category", "Unit")]
     public void CoinSlots_200GP_Returns1()
     {
-        // Integer floor: (200 - 100) / 100 = 100 / 100 = 1
+        // 200 coins: first 100 are free, 100 remaining → ceiling(100/100) = 1 slot
         var vm = new TestCharacterVM();
         vm.LoadCharacter(new Character { GP = 200, SP = 0, CP = 0 });
         Assert.Equal(1, vm.CoinSlots);
@@ -275,19 +276,29 @@ public class CharacterViewModelTests
 
     [Fact]
     [Trait("Category", "Unit")]
-    public void CoinSlots_201GP_Returns1()
+    public void CoinSlots_101GP_Returns1()
     {
-        // Integer floor: (201 - 100) / 100 = 101 / 100 = 1
+        // 101 coins: first 100 are free, 1 remaining → ceiling(1/100) = 1 slot
+        var vm = new TestCharacterVM();
+        vm.LoadCharacter(new Character { GP = 101, SP = 0, CP = 0 });
+        Assert.Equal(1, vm.CoinSlots);
+    }
+
+    [Fact]
+    [Trait("Category", "Unit")]
+    public void CoinSlots_201GP_Returns2()
+    {
+        // 201 coins: first 100 are free, 101 remaining → ceiling(101/100) = 2 slots
         var vm = new TestCharacterVM();
         vm.LoadCharacter(new Character { GP = 201, SP = 0, CP = 0 });
-        Assert.Equal(1, vm.CoinSlots);
+        Assert.Equal(2, vm.CoinSlots);
     }
 
     [Fact]
     [Trait("Category", "Unit")]
     public void CoinSlots_Mixed_Correct()
     {
-        // GP: (200-100)/100 = 1, SP: (300-100)/100 = 2, CP: 0 → total 3
+        // GP=200: ceil(100/100)=1, SP=300: ceil(200/100)=2, CP=0 → total 3
         var vm = new TestCharacterVM();
         vm.LoadCharacter(new Character { GP = 200, SP = 300, CP = 0 });
         Assert.Equal(3, vm.CoinSlots);
