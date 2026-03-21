@@ -25,9 +25,13 @@ public static class MauiProgram
         builder.Services.AddSingleton<SdCharacterSheet.Services.IFileSaver>(_ => new CommunityToolkitFileSaverAdapter(FileSaver.Default));
         builder.Services.AddSingleton<CharacterFileService, MauiCharacterFileService>();
         builder.Services.AddSingleton<ShadowdarklingsImportService>();
+        builder.Services.AddSingleton<MauiImportFileService>();
         builder.Services.AddSingleton<MarkdownExportService>();
         builder.Services.AddSingleton<CharacterViewModel>(sp =>
-            new CharacterViewModel(sp.GetRequiredService<MarkdownExportService>()));
+            new CharacterViewModel(
+                sp.GetRequiredService<MarkdownExportService>(),
+                (MauiCharacterFileService)sp.GetRequiredService<CharacterFileService>(),
+                sp.GetRequiredService<MauiImportFileService>()));
         builder.Services.AddSingleton<AppShell>();
 
         // Tab pages — registered as Transient so Shell creates one per tab,
