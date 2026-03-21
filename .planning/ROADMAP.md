@@ -36,7 +36,10 @@ Full details: `.planning/milestones/v1.0-ROADMAP.md`
   2. User taps/clicks Load and a native file picker opens, replacing the current character with the loaded one
   3. User taps/clicks Import and a native file picker opens, populating the sheet from a Shadowdarklings JSON export
   4. All three File menu items are visible and functional on all four target platforms (iOS, macOS, Android, Windows)
-**Plans**: TBD
+**Plans:** 2 plans
+Plans:
+- [ ] 04-01-PLAN.md — Wire SaveCommand, LoadCommand, ImportCommand into CharacterViewModel + AppShell
+- [ ] 04-02-PLAN.md — Human verification of file operations on device
 
 ### Phase 5: Talents Editor
 **Goal**: Users can record and edit their talents and spells directly on the Notes tab
@@ -55,5 +58,5 @@ Full details: `.planning/milestones/v1.0-ROADMAP.md`
 | 1. Foundation | v1.0 | 5/5 | Complete | 2026-03-14 |
 | 2. Core Sheet | v1.0 | 6/6 | Complete | 2026-03-21 |
 | 3. Export | v1.0 | 2/2 | Complete | 2026-03-21 |
-| 4. File Menu | v1.1 | 0/? | Not started | - |
+| 4. File Menu | v1.1 | 0/2 | Planning complete | - |
 | 5. Talents Editor | v1.1 | 0/? | Not started | - |
