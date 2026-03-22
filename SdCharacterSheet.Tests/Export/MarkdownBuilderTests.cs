@@ -21,6 +21,7 @@ public class MarkdownBuilderTests
         IReadOnlyList<BonusExportData>? acBonuses = null,
         IReadOnlyList<GearExportItem>? gear = null,
         IReadOnlyList<string>? attacks = null,
+        string talents = "",
         string spellsKnown = "",
         string notes = "",
         int gearSlotTotal = 10,
@@ -50,6 +51,7 @@ public class MarkdownBuilderTests
             GearSlotTotal = gearSlotTotal,
             GearSlotsUsed = gearSlotsUsed,
             CoinSlots = coinSlots,
+            Talents = talents,
             SpellsKnown = spellsKnown,
             Notes = notes,
             Stats = stats ?? DefaultStats(),
@@ -358,5 +360,30 @@ public class MarkdownBuilderTests
         var data = MinimalData(name: "Brim", className: "", level: 4);
         var fileName = MarkdownBuilder.BuildFileName(data);
         Assert.Equal("Brim.md", fileName);
+    }
+
+    // -----------------------------------------------------------------
+    // Test 19: Talents section appears when Talents non-empty
+    // -----------------------------------------------------------------
+    [Fact]
+    public void BuildMarkdown_TalentsSection_AppearsWhenTalentsNonEmpty()
+    {
+        var data = MinimalData(talents: "Backstab +1, Tough as Nails");
+        var md = MarkdownBuilder.BuildMarkdown(data);
+
+        Assert.Contains("## Talents", md);
+        Assert.Contains("Backstab +1", md);
+    }
+
+    // -----------------------------------------------------------------
+    // Test 20: Talents section omitted when Talents empty
+    // -----------------------------------------------------------------
+    [Fact]
+    public void BuildMarkdown_TalentsSection_OmittedWhenTalentsEmpty()
+    {
+        var data = MinimalData(talents: "");
+        var md = MarkdownBuilder.BuildMarkdown(data);
+
+        Assert.DoesNotContain("## Talents", md);
     }
 }
