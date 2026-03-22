@@ -30,15 +30,10 @@ A player can open their character, see all their stats with full bonus breakdown
 - ✓ User can write and edit freeform notes on the character — v1.0
 - ✓ User can export the full character sheet as formatted Markdown for print/reference — v1.0
 
-### Validated in Phase 05 (talents-editor)
-
-- ✓ User can view and edit a Talents/Spells text area on the Notes tab (TLNT-01) — Phase 05
-
-### Validated in Phase 04 (file-menu)
-
-- ✓ User can save a character to a .sdchar file via the File menu (FILE-01) — Phase 04
-- ✓ User can load a character from a .sdchar file via the File menu (FILE-02) — Phase 04
-- ✓ User can import a Shadowdarklings.net JSON export via the File menu (FILE-03) — Phase 04
+- ✓ User can save a character to a .sdchar file via the File menu (FILE-01) — v1.1
+- ✓ User can load a character from a .sdchar file via the File menu (FILE-02) — v1.1
+- ✓ User can import a Shadowdarklings.net JSON export via the File menu (FILE-03) — v1.1
+- ✓ User can view and edit a Talents/Spells text area on the Notes tab (TLNT-01) — v1.1
 
 ### Out of Scope
 
@@ -52,14 +47,14 @@ A player can open their character, see all their stats with full bonus breakdown
 
 ## Context
 
-**Shipped v1.0 with ~3,756 LOC (C# + XAML), 134 files, 69 commits over 13 days.**
+**Shipped v1.1 with ~3,426 LOC C# (+ XAML), 54 xUnit tests passing, 2 milestones over 15 days.**
 
 Tech stack: .NET 10 MAUI, CommunityToolkit.Mvvm, System.Text.Json, xUnit.
 
 Architecture:
 - `SdCharacterSheet.Core`: domain models, DTOs, services, MarkdownBuilder (pure/testable)
 - `SdCharacterSheet`: MAUI app — ViewModels, Views (3-tab: Sheet/Gear/Notes), platform wiring
-- `SdCharacterSheet.Tests`: xUnit test project (27+ tests passing)
+- `SdCharacterSheet.Tests`: xUnit test project (54 tests passing)
 
 Key facts:
 - Shadowdarklings.net JSON format understood (`examples/Brim.json`): stats have rolled + final values, bonuses are named with sourceType/sourceCategory/bonusTo
@@ -68,9 +63,14 @@ Key facts:
 - Shadowdark rulebook PDF at `~/Downloads/Shadowdark_RPG_-_V4-9.pdf` for mechanical reference
 - .sdchar format is JSON with version field, using CharacterSaveData DTO (not ViewModel)
 - Export: MarkdownExportService routes to share sheet (mobile) / save-as dialog (macOS/Windows)
+- File menu: Save/Load/Import in AppShell MenuBarItems (desktop) and ToolbarItems overflow (mobile)
+- MacFilePickerHelper (commit b2d9977): workaround for MAUI FilePicker null on macOS 15 Sequoia
+- Talents field: full-stack free-text area on Notes tab (above Spells, above Notes), exported as `## Talents` section in Markdown
 
-Known gaps (v1.0, human verification pending):
-- Phase 3 VERIFICATION.md has 8 human_needed items (export E2E, test pass confirmation)
+Known gaps (tech debt, not blocking):
+- VALIDATION.md Nyquist sign-off checklists not ticked for Phase 04 and 05
+- TestFileCommandVM stub omits Talents — FILE-01/02 + TLNT-01 cross-path not covered in unit tests
+- MacFilePickerHelper requires re-validation if targeting iOS natively or new macOS versions
 
 ## Constraints
 
@@ -89,16 +89,11 @@ Known gaps (v1.0, human verification pending):
 | CommunityToolkit.Mvvm for observable properties | Reduces boilerplate vs manual INotifyPropertyChanged | ✓ Good — clean ViewModel code |
 | MarkdownBuilder as pure static methods | Enables unit testing without DI or platform dependencies | ✓ Good — 18 tests pass |
 | Coin encumbrance: ceiling(coins/100) with first 100 free | Matches Shadowdark rules; corrected during Phase 3 | ✓ Good — bug caught and fixed (coin bug: first impl used floor) |
-
-## Current Milestone: v1.1 File Management & Talents
-
-**Goal:** Wire the existing file services into the UI and add a Talents/Spells text area.
-
-**Target features:**
-- Save character to .sdchar via File menu
-- Load character from .sdchar via File menu
-- Import from Shadowdarklings JSON via File menu
-- Talents/Spells free-text area in the Notes tab (above Notes)
+| MauiImportFileService pattern | MAUI file picker + Core service delegation, mirrors MauiCharacterFileService | ✓ Good — consistent platform service pattern |
+| MacFilePickerHelper (UIDocumentPickerViewController direct) | MAUI FilePicker.Default.PickAsync() returns null on macOS 15 Sequoia | ✓ Good — workaround works; needs re-check on iOS native |
+| BuildCharacterFromViewModel() on save | Backing field is stale after edits; observable properties are authoritative | ✓ Good — correct data saved |
+| GearItemSource enum as canonical discriminator | Type-safe split of GearItem vs MagicItem on save | ✓ Good — clean serialization |
+| Talents implemented inline (not via formal phase plan) | Feature was simple; plan overhead not warranted | ✓ Good — shipped faster; test coverage closed by Phase 05 |
 
 ## Evolution
 
@@ -118,4 +113,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-22 after Phase 05 (talents-editor) complete — TLNT-01 validated. Milestone v1.1 complete.*
+*Last updated: 2026-03-22 after v1.1 milestone complete*

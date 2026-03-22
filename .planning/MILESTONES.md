@@ -1,5 +1,19 @@
 # Milestones
 
+## v1.1 File Management & Talents (Shipped: 2026-03-22)
+
+**Phases completed:** 2 phases, 3 plans, 4 tasks
+
+**Key accomplishments:**
+
+- SaveCommand/LoadCommand/ImportCommand wired into CharacterViewModel with MAUI file pickers, menu items in AppShell, and 6 unit tests using Core-only test fakes
+- All three file operations (Save, Open, Import) verified working on macOS Catalyst — no crashes on cancellation, menu items correctly placed
+- MacFilePickerHelper workaround for MAUI FilePicker.Default.PickAsync() silently returning null on macOS 15 Sequoia (UIDocumentPickerViewController direct wiring)
+- Talents/Spells free-text field added through full stack (model, DTO, save/load, export, ViewModel, NotesPage) — TLNT-01 delivered via inline implementation
+- 54 xUnit tests passing — net +8 tests (6 file command, 2 Talents coverage) protecting all critical paths
+
+---
+
 ## v1.0 MVP (Shipped: 2026-03-21)
 
 **Phases completed:** 3 phases, 13 plans, 19 tasks
