@@ -32,10 +32,13 @@ A player can open their character, see all their stats with full bonus breakdown
 
 ### Active
 
-- [ ] User can save a character to a .sdchar file via the File menu (FILE-01)
-- [ ] User can load a character from a .sdchar file via the File menu (FILE-02)
-- [ ] User can import a Shadowdarklings.net JSON export via the File menu (FILE-03)
 - [ ] User can view and edit a Talents/Spells text area on the Notes tab (TLNT-01)
+
+### Validated in Phase 04 (file-menu)
+
+- ✓ User can save a character to a .sdchar file via the File menu (FILE-01) — Phase 04
+- ✓ User can load a character from a .sdchar file via the File menu (FILE-02) — Phase 04
+- ✓ User can import a Shadowdarklings.net JSON export via the File menu (FILE-03) — Phase 04
 
 ### Out of Scope
 
@@ -115,4 +118,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-21 after v1.1 milestone start*
+*Last updated: 2026-03-22 after Phase 04 (file-menu) complete — FILE-01/02/03 validated*
