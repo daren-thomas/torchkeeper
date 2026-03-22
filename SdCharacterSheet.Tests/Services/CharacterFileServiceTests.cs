@@ -52,6 +52,7 @@ public class CharacterFileServiceTests
             MagicItems = [new MagicItem { Name = "Ring of Protection", Slots = 0, Note = "AC+1" }],
             Attacks = ["DAGGER: +3 (N), 1d4 (FIN)"],
             SpellsKnown = "Magic Missile",
+            Talents = "Backstab +1",
             Notes = "Keep left flank"
         };
 
@@ -86,6 +87,7 @@ public class CharacterFileServiceTests
         Assert.Equal(50, loaded.SP);
         Assert.Equal(25, loaded.CP);
         Assert.Equal("Magic Missile", loaded.SpellsKnown);
+        Assert.Equal("Backstab +1", loaded.Talents);
         Assert.Equal("Keep left flank", loaded.Notes);
 
         Assert.Single(loaded.Bonuses);
