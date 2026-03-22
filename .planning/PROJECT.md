@@ -30,9 +30,9 @@ A player can open their character, see all their stats with full bonus breakdown
 - ✓ User can write and edit freeform notes on the character — v1.0
 - ✓ User can export the full character sheet as formatted Markdown for print/reference — v1.0
 
-### Active
+### Validated in Phase 05 (talents-editor)
 
-- [ ] User can view and edit a Talents/Spells text area on the Notes tab (TLNT-01)
+- ✓ User can view and edit a Talents/Spells text area on the Notes tab (TLNT-01) — Phase 05
 
 ### Validated in Phase 04 (file-menu)
 
@@ -118,4 +118,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-22 after Phase 04 (file-menu) complete — FILE-01/02/03 validated*
+*Last updated: 2026-03-22 after Phase 05 (talents-editor) complete — TLNT-01 validated. Milestone v1.1 complete.*
