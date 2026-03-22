@@ -4,6 +4,7 @@
 
 - ✅ **v1.0 MVP** — Phases 1–3 (shipped 2026-03-21)
 - 🚧 **v1.1 File Management & Talents** — Phases 4–5 (in progress)
+- 📋 **v1.2 Gear & Stats Polish** — Phase 6 (planned)
 
 ## Phases
 
@@ -53,6 +54,23 @@ Plans:
 Plans:
 - [ ] 05-01-PLAN.md — Add Talents test coverage to CharacterFileServiceTests and MarkdownBuilderTests
 
+### 📋 v1.2 Gear & Stats Polish (Planned)
+
+**Milestone Goal:** Gear slot counting is fully rules-accurate per Shadowdark RPG, export and display are in sync, and the stat drill-down shows the full picture including the raw base stat.
+
+- [ ] **Phase 6: Gear & Stats Polish** — Fix slot accuracy, verify export parity, and add base stat to drill-down
+
+### Phase 6: Gear & Stats Polish
+**Goal**: Gear slot calculation matches Shadowdark rules (backpack/free-carry items are slotless, coin weight is correct), the Markdown export reflects the same slot count as the UI, and the stat drill-down shows the base stat value alongside the modifier
+**Depends on**: Phase 5
+**Requirements**: GEAR-01, GEAR-02, STAT-01
+**Success Criteria** (what must be TRUE):
+  1. Items defined as free to carry (backpack, bag of coins, thieves tools) do not consume gear slots
+  2. Coin weight slot calculation matches the Shadowdark RPG rules
+  3. Exported Markdown gear section slot counts match what is shown in the character sheet UI
+  4. Tapping a stat shows the raw base stat value (e.g. STR 14) as well as the modifier and bonus sources
+**Plans**: TBD
+
 ## Progress
 
 | Phase | Milestone | Plans Complete | Status | Completed |
@@ -62,3 +80,4 @@ Plans:
 | 3. Export | v1.0 | 2/2 | Complete | 2026-03-21 |
 | 4. File Menu | v1.1 | 1/2 | In Progress|  |
 | 5. Talents Editor | v1.1 | 0/1 | Not started | - |
+| 6. Gear & Stats Polish | v1.2 | 0/? | Not started | - |

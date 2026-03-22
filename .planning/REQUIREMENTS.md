@@ -7,13 +7,24 @@
 
 ### File Management
 
-- [ ] **FILE-01**: User can save the current character to a .sdchar file via the File menu
-- [ ] **FILE-02**: User can load a character from a .sdchar file via the File menu
-- [ ] **FILE-03**: User can import a Shadowdarklings.net JSON export via the File menu
+- [x] **FILE-01**: User can save the current character to a .sdchar file via the File menu
+- [x] **FILE-02**: User can load a character from a .sdchar file via the File menu
+- [x] **FILE-03**: User can import a Shadowdarklings.net JSON export via the File menu
 
 ### Talents & Spells
 
 - [ ] **TLNT-01**: User can view and edit a Talents/Spells free-text area in the Notes tab, above the Notes editor
+
+## v1.2 Requirements
+
+### Gear Accuracy
+
+- [ ] **GEAR-01**: Gear slot count is rules-accurate — items that are free to carry (backpack, bag of coins, thieves tools) do not consume slots, and coin weight matches the Shadowdark RPG rules
+- [ ] **GEAR-02**: Exported Markdown gear section shows the same slot count as the character sheet display (no divergence between display and export logic)
+
+### Stats
+
+- [ ] **STAT-01**: Stat drill-down shows the raw base stat value (e.g. STR 14) alongside the derived modifier and any bonus sources
 
 ## Future Requirements
 
@@ -50,15 +61,17 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FILE-01 | Phase 4 | Pending |
-| FILE-02 | Phase 4 | Pending |
-| FILE-03 | Phase 4 | Pending |
+| FILE-01 | Phase 4 | Complete |
+| FILE-02 | Phase 4 | Complete |
+| FILE-03 | Phase 4 | Complete |
 | TLNT-01 | Phase 5 | Pending |
+| GEAR-01 | Phase 6 | Planned |
+| GEAR-02 | Phase 6 | Planned |
+| STAT-01 | Phase 6 | Planned |
 
 **Coverage:**
-- v1.1 requirements: 4 total
-- Mapped to phases: 4
-- Unmapped: 0 ✓
+- v1.1 requirements: 4 total — mapped to phases: 4 — unmapped: 0 ✓
+- v1.2 requirements: 3 total — mapped to phases: 3 — unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-03-21*
