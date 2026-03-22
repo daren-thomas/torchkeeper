@@ -42,14 +42,16 @@ Plans:
 - [ ] 04-02-PLAN.md — Human verification of file operations on device
 
 ### Phase 5: Talents Editor
-**Goal**: Users can record and edit their talents and spells directly on the Notes tab
+**Goal**: Close test coverage gaps for the Talents feature (implemented inline in commit 4239483) so the save/load and export paths are protected against regression
 **Depends on**: Phase 4
 **Requirements**: TLNT-01
 **Success Criteria** (what must be TRUE):
   1. Talents/Spells text area appears above the Notes editor on the Notes tab
   2. Text entered in the Talents/Spells area persists through save/load round-trips
   3. Both Talents/Spells and Notes areas are independently editable and scrollable
-**Plans**: TBD
+**Plans:** 1 plan
+Plans:
+- [ ] 05-01-PLAN.md — Add Talents test coverage to CharacterFileServiceTests and MarkdownBuilderTests
 
 ## Progress
 
@@ -59,4 +61,4 @@ Plans:
 | 2. Core Sheet | v1.0 | 6/6 | Complete | 2026-03-21 |
 | 3. Export | v1.0 | 2/2 | Complete | 2026-03-21 |
 | 4. File Menu | v1.1 | 1/2 | In Progress|  |
-| 5. Talents Editor | v1.1 | 0/? | Not started | - |
+| 5. Talents Editor | v1.1 | 0/1 | Not started | - |
