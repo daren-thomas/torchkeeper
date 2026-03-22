@@ -24,7 +24,7 @@ Full details: `.planning/milestones/v1.0-ROADMAP.md`
 **Milestone Goal:** Wire existing file services into the UI and add a Talents/Spells text area so the app is fully functional for session play without manual file-path workarounds.
 
 - [ ] **Phase 4: File Menu** — Save, load, and import via File menu items
-- [ ] **Phase 5: Talents Editor** — Talents/Spells free-text area above Notes
+- [x] **Phase 5: Talents Editor** — Talents/Spells free-text area above Notes (completed 2026-03-22)
 
 ## Phase Details
 
@@ -50,9 +50,9 @@ Plans:
   1. Talents/Spells text area appears above the Notes editor on the Notes tab
   2. Text entered in the Talents/Spells area persists through save/load round-trips
   3. Both Talents/Spells and Notes areas are independently editable and scrollable
-**Plans:** 1 plan
+**Plans:** 1/1 plans complete
 Plans:
-- [ ] 05-01-PLAN.md — Add Talents test coverage to CharacterFileServiceTests and MarkdownBuilderTests
+- [x] 05-01-PLAN.md — Add Talents test coverage to CharacterFileServiceTests and MarkdownBuilderTests
 
 ### 📋 v1.2 Gear & Stats Polish (Planned)
 
@@ -79,5 +79,5 @@ Plans:
 | 2. Core Sheet | v1.0 | 6/6 | Complete | 2026-03-21 |
 | 3. Export | v1.0 | 2/2 | Complete | 2026-03-21 |
 | 4. File Menu | v1.1 | 1/2 | In Progress|  |
-| 5. Talents Editor | v1.1 | 0/1 | Not started | - |
+| 5. Talents Editor | v1.1 | 1/1 | Complete   | 2026-03-22 |
 | 6. Gear & Stats Polish | v1.2 | 0/? | Not started | - |

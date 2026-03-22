@@ -13,7 +13,7 @@
 
 ### Talents & Spells
 
-- [ ] **TLNT-01**: User can view and edit a Talents/Spells free-text area in the Notes tab, above the Notes editor
+- [x] **TLNT-01**: User can view and edit a Talents/Spells free-text area in the Notes tab, above the Notes editor
 
 ## v1.2 Requirements
 
@@ -64,7 +64,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FILE-01 | Phase 4 | Complete |
 | FILE-02 | Phase 4 | Complete |
 | FILE-03 | Phase 4 | Complete |
-| TLNT-01 | Phase 5 | Pending |
+| TLNT-01 | Phase 5 | Complete |
 | GEAR-01 | Phase 6 | Planned |
 | GEAR-02 | Phase 6 | Planned |
 | STAT-01 | Phase 6 | Planned |

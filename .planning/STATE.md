@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: File Management & Talents
 status: unknown
-last_updated: "2026-03-22T14:14:25.983Z"
+last_updated: "2026-03-22T15:15:25.926Z"
 progress:
   total_phases: 2
-  completed_phases: 1
-  total_plans: 2
-  completed_plans: 2
+  completed_phases: 2
+  total_plans: 3
+  completed_plans: 3
 ---
 
 # Project State
@@ -18,12 +18,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-21)
 
 **Core value:** A player can open their character, see all their stats with full bonus breakdowns, and manage their inventory slot-by-slot — everything needed at the table that Shadowdarklings doesn't provide.
-**Current focus:** Phase 04 — file-menu
+**Current focus:** Phase 05 — talents-editor
 
 ## Current Position
 
-Phase: 5
-Plan: Not started
+Phase: 05 (talents-editor) — EXECUTING
+Plan: 1 of 1
 
 ## Accumulated Context
 
@@ -39,6 +39,7 @@ Key context for v1.1:
 - [Phase 04-file-menu]: MAUI FilePicker.Default.PickAsync() silently returns null on macOS 15 (Sequoia) — fixed by MacFilePickerHelper using ConnectedScenes + UIDocumentPickerViewController directly (commit b2d9977)
 - [Phase 04-file-menu]: MacCatalyst Info.plist added to register com.sdcharactersheet.sdchar UTType (commit 0fc857c)
 - [Phase 05-talents-editor]: Implemented inline (not via formal plan). Added Talents free-text field through full stack (Character model, CharacterSaveData DTO, CharacterFileService save/load, CharacterExportData, MarkdownBuilder, MarkdownExportService, CharacterViewModel). NotesPage now shows Talents → Spells → Notes labeled sections. Committed 4239483.
+- [Phase 05-talents-editor]: Talents test coverage added as GREEN-only TDD — implementation already existed in commit 4239483; MinimalData() helper extended with talents parameter following same pattern as spellsKnown
 
 ### Pending Todos
 
