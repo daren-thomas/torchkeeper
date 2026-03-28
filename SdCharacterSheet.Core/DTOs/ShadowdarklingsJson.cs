@@ -32,6 +32,7 @@ public class ShadowdarklingsJson
     public List<SdGearItem>? Gear { get; set; }
     public List<SdMagicItem>? MagicItems { get; set; }
     public List<string>? Attacks { get; set; }
+    public List<SdLevelEntry>? Levels { get; set; }
 }
 
 public class StatBlock
@@ -74,4 +75,13 @@ public class LedgerEntry
     public int GoldChange { get; set; }
     public int SilverChange { get; set; }
     public int CopperChange { get; set; }
+}
+
+public class SdLevelEntry
+{
+    public int Level { get; set; }
+    public string TalentRolledDesc { get; set; } = "";
+    public string Rolled12ChosenTalentDesc { get; set; } = "";
+    // Other fields (talentRolledName, Rolled12ChosenTalentName, HitPointRoll, etc.)
+    // are silently ignored by System.Text.Json — no action needed.
 }
