@@ -57,4 +57,4 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
 | 3. Export | v1.0 | 2/2 | Complete | 2026-03-21 |
 | 4. File Menu | v1.1 | 2/2 | Complete | 2026-03-22 |
 | 5. Talents Editor | v1.1 | 1/1 | Complete | 2026-03-22 |
-| 6. Gear & Stats Polish | v1.2 | 0/3 | Planned | - |
+| 6. Gear & Stats Polish | v1.2 | 1/3 | In Progress|  |

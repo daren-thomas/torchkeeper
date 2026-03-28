@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Gear & Stats Polish
 status: ready_to_execute
-last_updated: "2026-03-28T00:00:00.000Z"
+last_updated: "2026-03-28T14:39:56.793Z"
 progress:
   total_phases: 1
   completed_phases: 0
   total_plans: 3
-  completed_plans: 0
+  completed_plans: 1
 ---
 
 # Project State
@@ -37,6 +37,8 @@ Key context carried forward:
 - MacFilePickerHelper (commit b2d9977): workaround for MAUI FilePicker null on macOS 15 Sequoia — needs re-test for iOS native
 - BuildCharacterFromViewModel() is the canonical save snapshot builder — backing field is stale after edits
 - Gear slots = STR score total; coin encumbrance = ceiling(coins/100) with first 100 free per type
+- [Phase 06-gear-stats-polish]: Used Close() not CloseAsync() in GearItemPopup to match existing AttackPopup pattern
+- [Phase 06-gear-stats-polish]: Free Carry frame always visible — no converter needed, empty BindableLayout renders nothing
 
 ### Pending Todos
 
