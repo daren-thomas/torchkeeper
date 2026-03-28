@@ -46,7 +46,7 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
   2. Coin weight slot calculation matches the Shadowdark RPG rules
   3. Exported Markdown gear section slot counts match what is shown in the character sheet UI
   4. Tapping a stat shows the raw base stat value (e.g. STR 14) as well as the modifier and bonus sources
-**Plans**: TBD
+**Plans**: 06-01 (Free-Carry Gear Slots), 06-02 (Export Parity + Tests), 06-03 (Stat Drill-Down + Talents Import)
 
 ## Progress
 
@@ -57,4 +57,4 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
 | 3. Export | v1.0 | 2/2 | Complete | 2026-03-21 |
 | 4. File Menu | v1.1 | 2/2 | Complete | 2026-03-22 |
 | 5. Talents Editor | v1.1 | 1/1 | Complete | 2026-03-22 |
-| 6. Gear & Stats Polish | v1.2 | 0/? | Not started | - |
+| 6. Gear & Stats Polish | v1.2 | 0/3 | Planned | - |

@@ -2,12 +2,12 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Gear & Stats Polish
-status: planning
-last_updated: "2026-03-22T00:00:00.000Z"
+status: ready_to_execute
+last_updated: "2026-03-28T00:00:00.000Z"
 progress:
   total_phases: 1
   completed_phases: 0
-  total_plans: 0
+  total_plans: 3
   completed_plans: 0
 ---
 
