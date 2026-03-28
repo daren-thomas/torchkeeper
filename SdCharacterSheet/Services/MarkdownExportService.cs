@@ -56,9 +56,15 @@ public class MarkdownExportService
             return int.TryParse(val, out var n) ? n : 0;
         });
 
-        // Map GearItems
+        // Map GearItems — split into regular and free-carry (D-07, D-08)
         var gearItems = vm.GearItems
+            .Where(g => !g.IsFreeCarry)
             .Select(g => new GearExportItem(g.Name, g.Slots))
+            .ToList();
+
+        var freeCarryItems = vm.GearItems
+            .Where(g => g.IsFreeCarry)
+            .Select(g => new GearExportItem(g.Name, g.Slots, true))
             .ToList();
 
         return new CharacterExportData
@@ -83,6 +89,7 @@ public class MarkdownExportService
             SP = vm.SP,
             CP = vm.CP,
             GearItems = gearItems,
+            FreeCarryItems = freeCarryItems,
             GearSlotTotal = vm.GearSlotTotal,
             GearSlotsUsed = vm.GearSlotsUsed,
             CoinSlots = vm.CoinSlots,

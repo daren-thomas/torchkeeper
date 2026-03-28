@@ -8,7 +8,7 @@ progress:
   total_phases: 1
   completed_phases: 0
   total_plans: 3
-  completed_plans: 1
+  completed_plans: 2
 ---
 
 # Project State
@@ -23,8 +23,8 @@ See: .planning/PROJECT.md (updated 2026-03-22)
 ## Current Position
 
 Phase: 6 — Gear & Stats Polish
-Plan: 06-03 complete (stat drill-down base label + Shadowdarklings talents import)
-Last session stopped at: Completed 06-03-PLAN.md
+Plan: 06-02 complete (export parity + unit tests)
+Last session stopped at: Completed 06-02-PLAN.md
 
 ## Accumulated Context
 
@@ -47,7 +47,7 @@ Key context carried forward:
 
 ### Pending Todos
 
-- Plans 06-01 and 06-02 also running in parallel (gear slots free-carry, stat drill-down UI polish)
+- None — all 3 plans in phase 06 complete (06-01 free-carry slots, 06-02 export parity + tests, 06-03 stat drill-down + talents import)
 
 ### Blockers/Concerns
 

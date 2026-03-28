@@ -34,7 +34,8 @@ public class MarkdownBuilderTests
         int gp = 0,
         int sp = 0,
         int cp = 0,
-        int acTotal = 11) =>
+        int acTotal = 11,
+        IReadOnlyList<GearExportItem>? freeCarryItems = null) =>
         new CharacterExportData
         {
             Name = name,
@@ -57,6 +58,7 @@ public class MarkdownBuilderTests
             Stats = stats ?? DefaultStats(),
             ACBonuses = acBonuses ?? Array.Empty<BonusExportData>(),
             GearItems = gear ?? Array.Empty<GearExportItem>(),
+            FreeCarryItems = freeCarryItems ?? Array.Empty<GearExportItem>(),
             Attacks = attacks ?? Array.Empty<string>(),
         };
 
@@ -385,5 +387,76 @@ public class MarkdownBuilderTests
         var md = MarkdownBuilder.BuildMarkdown(data);
 
         Assert.DoesNotContain("## Talents", md);
+    }
+
+    // GEAR-02: Free Carry section appears when FreeCarryItems is non-empty
+    [Fact]
+    [Trait("Category", "Unit")]
+    public void BuildMarkdown_FreeCarrySection_AppearsWhenFreeCarryItemsPresent()
+    {
+        var data = MinimalData(freeCarryItems: [new GearExportItem("Backpack", 0, true)]);
+        var md = MarkdownBuilder.BuildMarkdown(data);
+
+        Assert.Contains("### Free Carry", md);
+        Assert.Contains("- Backpack", md);
+    }
+
+    // GEAR-02: Free Carry section is absent when FreeCarryItems is empty
+    [Fact]
+    [Trait("Category", "Unit")]
+    public void BuildMarkdown_FreeCarrySection_OmittedWhenEmpty()
+    {
+        var data = MinimalData(freeCarryItems: Array.Empty<GearExportItem>());
+        var md = MarkdownBuilder.BuildMarkdown(data);
+
+        Assert.DoesNotContain("### Free Carry", md);
+    }
+
+    // GEAR-02 / D-09: GearSlotsUsed in export header matches the value from CharacterExportData
+    // (which in turn comes from vm.GearSlotsUsed, now excluding free-carry items)
+    [Fact]
+    [Trait("Category", "Unit")]
+    public void BuildMarkdown_GearSlotCount_MatchesExportData()
+    {
+        // Arrange: 2 regular slots used, 1 coin slot, total = 3; free-carry item not counted
+        var gear = new[] { new GearExportItem("Sword", 1), new GearExportItem("Torch", 1) };
+        var freeCarry = new[] { new GearExportItem("Backpack", 0, true) };
+        var data = MinimalData(
+            gear: gear,
+            freeCarryItems: freeCarry,
+            gearSlotsUsed: 3,   // 2 gear + 1 coin slot — Backpack excluded
+            coinSlots: 1,
+            gearSlotTotal: 10);
+
+        var md = MarkdownBuilder.BuildMarkdown(data);
+
+        // The gear header must show exactly the GearSlotsUsed value, not re-count items
+        Assert.Contains("## Gear (3 / 10 slots)", md);
+    }
+
+    // GEAR-02: Regular gear table excludes free-carry items (they are only in the service mapping,
+    // but this test confirms GearItems in the export data does not include free-carry items)
+    [Fact]
+    [Trait("Category", "Unit")]
+    public void BuildMarkdown_RegularGear_ExcludesFreeCarryItems()
+    {
+        var regularGear = new[] { new GearExportItem("Sword", 1) };
+        var freeCarry = new[] { new GearExportItem("Backpack", 0, true) };
+        var data = MinimalData(
+            gear: regularGear,
+            freeCarryItems: freeCarry,
+            gearSlotsUsed: 1,
+            gearSlotTotal: 10);
+
+        var md = MarkdownBuilder.BuildMarkdown(data);
+
+        // Backpack appears only in Free Carry section, not in the main gear table rows
+        var gearSectionIdx = md.IndexOf("## Gear", StringComparison.Ordinal);
+        var freeCarrySectionIdx = md.IndexOf("### Free Carry", StringComparison.Ordinal);
+
+        // "Backpack" must appear only after the Free Carry header
+        var backpackIdx = md.IndexOf("Backpack", StringComparison.Ordinal);
+        Assert.True(backpackIdx > freeCarrySectionIdx,
+            "Backpack should appear in the Free Carry section, not in the regular gear table");
     }
 }

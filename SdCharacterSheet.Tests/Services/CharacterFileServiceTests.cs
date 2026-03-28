@@ -117,4 +117,29 @@ public class CharacterFileServiceTests
         Assert.Contains("Version", json, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("1", json);
     }
+
+    // GEAR-01: IsFreeCarry round-trips through save/load
+    [Fact]
+    public async Task RoundTrip_GearItem_IsFreeCarry_Persists()
+    {
+        var character = new Character
+        {
+            Gear = [new GearItem { Name = "Backpack", Slots = 0, IsFreeCarry = true }]
+        };
+
+        var dto = _service.MapToDto(character);
+        Assert.True(dto.Gear[0].IsFreeCarry, "IsFreeCarry should survive MapToDto");
+
+        // Simulate JSON round-trip to ensure it actually serializes/deserializes
+        await using var stream = new MemoryStream();
+        await _service.SaveToStreamAsync(character, stream);
+        stream.Position = 0;
+        var loadedDto = await _service.LoadFromStreamAsync(stream);
+
+        Assert.NotNull(loadedDto);
+        Assert.True(loadedDto!.Gear[0].IsFreeCarry, "IsFreeCarry should survive JSON round-trip");
+
+        var loaded = _service.MapFromDto(loadedDto);
+        Assert.True(loaded.Gear[0].IsFreeCarry, "IsFreeCarry should survive MapFromDto");
+    }
 }

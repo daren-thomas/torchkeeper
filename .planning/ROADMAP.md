@@ -33,7 +33,7 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
 
 **Milestone Goal:** Gear slot counting is fully rules-accurate per Shadowdark RPG, export and display are in sync, and the stat drill-down shows the full picture including the raw base stat.
 
-- [ ] **Phase 6: Gear & Stats Polish** — Fix slot accuracy, verify export parity, and add base stat to drill-down
+- [x] **Phase 6: Gear & Stats Polish** — Fix slot accuracy, verify export parity, and add base stat to drill-down (completed 2026-03-28)
 
 ## Phase Details
 
@@ -57,4 +57,4 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
 | 3. Export | v1.0 | 2/2 | Complete | 2026-03-21 |
 | 4. File Menu | v1.1 | 2/2 | Complete | 2026-03-22 |
 | 5. Talents Editor | v1.1 | 1/1 | Complete | 2026-03-22 |
-| 6. Gear & Stats Polish | v1.2 | 1/3 | In Progress|  |
+| 6. Gear & Stats Polish | v1.2 | 3/3 | Complete   | 2026-03-28 |
