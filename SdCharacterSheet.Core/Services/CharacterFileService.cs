@@ -77,7 +77,8 @@ public class CharacterFileService
                 Name = g.Name,
                 Slots = g.Slots,
                 ItemType = g.ItemType,
-                Note = g.Note
+                Note = g.Note,
+                IsFreeCarry = g.IsFreeCarry,   // added
             })
             .ToList(),
         MagicItems = character.MagicItems
@@ -85,7 +86,8 @@ public class CharacterFileService
             {
                 Name = m.Name,
                 Slots = m.Slots,
-                Note = m.Note
+                Note = m.Note,
+                IsFreeCarry = m.IsFreeCarry,   // added
             })
             .ToList(),
         Attacks = character.Attacks.ToList(),
@@ -133,7 +135,8 @@ public class CharacterFileService
                 Name = g.Name,
                 Slots = g.Slots,
                 ItemType = g.ItemType,
-                Note = g.Note
+                Note = g.Note,
+                IsFreeCarry = g.IsFreeCarry,   // added
             })
             .ToList(),
         MagicItems = dto.MagicItems
@@ -141,7 +144,8 @@ public class CharacterFileService
             {
                 Name = m.Name,
                 Slots = m.Slots,
-                Note = m.Note
+                Note = m.Note,
+                IsFreeCarry = m.IsFreeCarry,   // added
             })
             .ToList(),
         Attacks = dto.Attacks.ToList(),
