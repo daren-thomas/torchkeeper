@@ -73,7 +73,7 @@ public class CharacterViewModelTests
             (CP  > 100 ? (CP  - 1) / 100 : 0);
 
         // ── Computed: total gear slots used (gear + coins) ─────────────────
-        public int GearSlotsUsed => _gearItems.Sum(g => g.Slots) + CoinSlots;
+        public int GearSlotsUsed => _gearItems.Where(g => !g.IsFreeCarry).Sum(g => g.Slots) + CoinSlots;
 
         // ── Load character ─────────────────────────────────────────────────
         public void LoadCharacter(Character character)
@@ -127,6 +127,7 @@ public class CharacterViewModelTests
             public int Slots { get; }
             public string ItemType { get; }
             public string Note { get; }
+            public bool IsFreeCarry { get; }
 
             public GearItemVM(GearItem g)
             {
@@ -134,6 +135,7 @@ public class CharacterViewModelTests
                 Slots = g.Slots;
                 ItemType = g.ItemType;
                 Note = g.Note;
+                IsFreeCarry = g.IsFreeCarry;
             }
 
             public GearItemVM(MagicItem m)
@@ -142,6 +144,7 @@ public class CharacterViewModelTests
                 Slots = m.Slots;
                 ItemType = "";
                 Note = m.Note;
+                IsFreeCarry = m.IsFreeCarry;
             }
         }
     }
@@ -321,6 +324,41 @@ public class CharacterViewModelTests
     // ─────────────────────────────────────────────────────────────────────────
     // LoadCharacter population test
     // ─────────────────────────────────────────────────────────────────────────
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // Free-carry gear slot exclusion tests (GEAR-01)
+    // ─────────────────────────────────────────────────────────────────────────
+
+    // GEAR-01: Free-carry item is excluded from GearSlotsUsed
+    [Fact]
+    [Trait("Category", "Unit")]
+    public void GearSlotsUsed_FreeCarryItemExcluded()
+    {
+        var vm = new TestCharacterVM();
+        vm.LoadCharacter(new Character
+        {
+            Gear = [new GearItem { Name = "Backpack", Slots = 1, IsFreeCarry = true }]
+        });
+        Assert.Equal(0, vm.GearSlotsUsed);
+    }
+
+    // GEAR-01: Mixed items — only regular gear counted
+    [Fact]
+    [Trait("Category", "Unit")]
+    public void GearSlotsUsed_MixedItems_OnlyRegularCounted()
+    {
+        var vm = new TestCharacterVM();
+        vm.LoadCharacter(new Character
+        {
+            Gear =
+            [
+                new GearItem { Name = "Sword", Slots = 1, IsFreeCarry = false },
+                new GearItem { Name = "Backpack", Slots = 1, IsFreeCarry = true },
+            ]
+        });
+        // Only Sword counts
+        Assert.Equal(1, vm.GearSlotsUsed);
+    }
 
     [Fact]
     [Trait("Category", "Unit")]
