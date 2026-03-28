@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Gear & Stats Polish
-status: ready_to_execute
-last_updated: "2026-03-28T00:00:00.000Z"
+status: in_progress
+last_updated: "2026-03-28T14:37:00.000Z"
 progress:
   total_phases: 1
   completed_phases: 0
   total_plans: 3
-  completed_plans: 0
+  completed_plans: 1
 ---
 
 # Project State
@@ -22,8 +22,9 @@ See: .planning/PROJECT.md (updated 2026-03-22)
 
 ## Current Position
 
-Phase: 6 (not started)
-Plan: Not started
+Phase: 6 — Gear & Stats Polish
+Plan: 06-03 complete (stat drill-down base label + Shadowdarklings talents import)
+Last session stopped at: Completed 06-03-PLAN.md
 
 ## Accumulated Context
 
@@ -38,9 +39,13 @@ Key context carried forward:
 - BuildCharacterFromViewModel() is the canonical save snapshot builder — backing field is stale after edits
 - Gear slots = STR score total; coin encumbrance = ceiling(coins/100) with first 100 free per type
 
+### Decisions
+
+- Rolled12ChosenTalentDesc labeled with "(chosen)" suffix to disambiguate from rolled talents in Talents field
+
 ### Pending Todos
 
-- Run `/gsd:new-milestone` to define v1.2 requirements and roadmap
+- Plans 06-01 and 06-02 also running in parallel (gear slots free-carry, stat drill-down UI polish)
 
 ### Blockers/Concerns
 
