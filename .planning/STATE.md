@@ -2,7 +2,7 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Gear & Stats Polish
-status: ready_to_execute
+status: in_progress
 last_updated: "2026-03-28T14:39:56.793Z"
 progress:
   total_phases: 1
@@ -22,8 +22,9 @@ See: .planning/PROJECT.md (updated 2026-03-22)
 
 ## Current Position
 
-Phase: 6 (not started)
-Plan: Not started
+Phase: 6 — Gear & Stats Polish
+Plan: 06-03 complete (stat drill-down base label + Shadowdarklings talents import)
+Last session stopped at: Completed 06-03-PLAN.md
 
 ## Accumulated Context
 
@@ -40,9 +41,13 @@ Key context carried forward:
 - [Phase 06-gear-stats-polish]: Used Close() not CloseAsync() in GearItemPopup to match existing AttackPopup pattern
 - [Phase 06-gear-stats-polish]: Free Carry frame always visible — no converter needed, empty BindableLayout renders nothing
 
+### Decisions
+
+- Rolled12ChosenTalentDesc labeled with "(chosen)" suffix to disambiguate from rolled talents in Talents field
+
 ### Pending Todos
 
-- Run `/gsd:new-milestone` to define v1.2 requirements and roadmap
+- Plans 06-01 and 06-02 also running in parallel (gear slots free-carry, stat drill-down UI polish)
 
 ### Blockers/Concerns
 
