@@ -19,6 +19,7 @@ public partial class GearItemPopup : Popup
         SlotsEntry.Text = item.Slots.ToString();
         ItemTypeEntry.Text = item.ItemType;
         NoteEntry.Text = item.Note;
+        FreeCarryCheckBox.IsChecked = item.IsFreeCarry;   // pre-fill checkbox
     }
 
     // Add new item
@@ -35,7 +36,9 @@ public partial class GearItemPopup : Popup
         var name = NameEntry.Text?.Trim() ?? "";
         if (string.IsNullOrEmpty(name)) { Close(); return; }
         int.TryParse(SlotsEntry.Text, out var slots);
-        slots = Math.Max(1, slots); // minimum 1 slot
+        // Allow 0 slots — free-carry items may legitimately have 0 slots (D-05)
+        slots = Math.Max(0, slots);
+        var isFreeCarry = FreeCarryCheckBox.IsChecked;
 
         if (_existingItem != null)
         {
@@ -43,12 +46,14 @@ public partial class GearItemPopup : Popup
             _existingItem.Slots = slots;
             _existingItem.ItemType = ItemTypeEntry.Text?.Trim() ?? "";
             _existingItem.Note = NoteEntry.Text?.Trim() ?? "";
+            _existingItem.IsFreeCarry = isFreeCarry;
         }
         else
         {
             var newItem = new GearItemViewModel(name, slots,
                 ItemTypeEntry.Text?.Trim() ?? "",
-                NoteEntry.Text?.Trim() ?? "");
+                NoteEntry.Text?.Trim() ?? "",
+                isFreeCarry);
             _vm.GearItems.Add(newItem);
         }
         Close();
