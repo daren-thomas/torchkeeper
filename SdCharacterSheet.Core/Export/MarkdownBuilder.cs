@@ -106,6 +106,18 @@ public static class MarkdownBuilder
         }
         sb.AppendLine();
 
+        // 5b. Free Carry section (D-07) — only when free-carry items are present
+        if (data.FreeCarryItems.Count > 0)
+        {
+            sb.AppendLine("### Free Carry");
+            sb.AppendLine();
+            foreach (var item in data.FreeCarryItems)
+            {
+                sb.AppendLine($"- {item.Name}");
+            }
+            sb.AppendLine();
+        }
+
         // 6. Talents section — only when non-empty
         if (!string.IsNullOrWhiteSpace(data.Talents))
         {

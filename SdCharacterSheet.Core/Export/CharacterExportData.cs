@@ -33,6 +33,7 @@ public record CharacterExportData
 
     // Gear
     public required IReadOnlyList<GearExportItem> GearItems { get; init; }
+    public required IReadOnlyList<GearExportItem> FreeCarryItems { get; init; }
     public int GearSlotTotal { get; init; }
     public int GearSlotsUsed { get; init; }
     public int CoinSlots { get; init; }
@@ -52,4 +53,4 @@ public record StatExportData(string Name, int Total, string ModifierDisplay, IRe
 
 public record BonusExportData(string Label, string Value);  // Value = "+2", "-1", etc.
 
-public record GearExportItem(string Name, int Slots);
+public record GearExportItem(string Name, int Slots, bool IsFreeCarry = false);
