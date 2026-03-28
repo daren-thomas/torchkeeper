@@ -156,4 +156,71 @@ public class ShadowdarklingsImportServiceTests
         Assert.Equal(12, character.MaxHP);
         Assert.Equal(12, character.CurrentHP);
     }
+
+    // STAT-01 / D-13: Levels array populates Talents field with "Lv{N}: {desc}" format
+    [Fact]
+    public async Task Import_Levels_PopulatesTalentsField()
+    {
+        var json = """
+            {
+              "name": "Brim",
+              "levels": [
+                { "level": 1, "talentRolledDesc": "Your Backstab deals +1 dice of damage", "Rolled12ChosenTalentDesc": "" },
+                { "level": 2, "talentRolledDesc": "", "Rolled12ChosenTalentDesc": "" }
+              ]
+            }
+            """;
+        await using var stream = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var character = await _sut.ImportAsync(stream);
+
+        Assert.NotNull(character);
+        Assert.Contains("Lv1: Your Backstab deals +1 dice of damage", character.Talents);
+    }
+
+    // D-13: Empty talentRolledDesc entries are skipped
+    [Fact]
+    public async Task Import_Levels_SkipsEmptyTalentRolledDesc()
+    {
+        var json = """
+            {
+              "name": "Test",
+              "levels": [
+                { "level": 1, "talentRolledDesc": "Something", "Rolled12ChosenTalentDesc": "" },
+                { "level": 2, "talentRolledDesc": "",            "Rolled12ChosenTalentDesc": "" }
+              ]
+            }
+            """;
+        await using var stream = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var character = await _sut.ImportAsync(stream);
+
+        Assert.NotNull(character);
+        // "Lv2" should not appear anywhere in Talents (empty desc skipped)
+        Assert.DoesNotContain("Lv2:", character.Talents);
+    }
+
+    // Claude's discretion: Rolled12ChosenTalentDesc included when non-empty
+    [Fact]
+    public async Task Import_Levels_IncludesRolled12ChosenTalentDesc_WhenNonEmpty()
+    {
+        var json = """
+            {
+              "name": "Test",
+              "levels": [
+                {
+                  "level": 12,
+                  "talentRolledDesc": "",
+                  "Rolled12ChosenTalentDesc": "Gain an ability score increase"
+                }
+              ]
+            }
+            """;
+        await using var stream = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var character = await _sut.ImportAsync(stream);
+
+        Assert.NotNull(character);
+        Assert.Contains("Lv12 (chosen): Gain an ability score increase", character.Talents);
+    }
 }

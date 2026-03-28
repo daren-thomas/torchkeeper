@@ -59,6 +59,27 @@ public class ShadowdarklingsImportService
             Note = m.Note,
         }).ToList() ?? [];
 
+        // Build Talents string from levels[].talentRolledDesc (D-13)
+        // Format: one line per talent "Lv{N}: {desc}", ordered by level, empty entries skipped.
+        // Rolled12ChosenTalentDesc included when non-empty (Claude's discretion).
+        var talents = "";
+        if (sdJson.Levels is { Count: > 0 })
+        {
+            var lines = sdJson.Levels
+                .OrderBy(l => l.Level)
+                .SelectMany(l =>
+                {
+                    var entries = new List<string>();
+                    if (!string.IsNullOrWhiteSpace(l.TalentRolledDesc))
+                        entries.Add($"Lv{l.Level}: {l.TalentRolledDesc.Trim()}");
+                    if (!string.IsNullOrWhiteSpace(l.Rolled12ChosenTalentDesc))
+                        entries.Add($"Lv{l.Level} (chosen): {l.Rolled12ChosenTalentDesc.Trim()}");
+                    return entries;
+                })
+                .ToList();
+            talents = string.Join("\n", lines);
+        }
+
         return new Character
         {
             Name = sdJson.Name,
@@ -87,6 +108,7 @@ public class ShadowdarklingsImportService
             MagicItems = magicItems,
             Attacks = sdJson.Attacks ?? [],
             SpellsKnown = sdJson.SpellsKnown,
+            Talents = talents,
         };
     }
 }
