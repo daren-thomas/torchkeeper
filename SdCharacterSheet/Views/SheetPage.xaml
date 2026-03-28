@@ -188,17 +188,21 @@
                                                VerticalOptions="Center" />
                                     </Grid>
 
-                                    <VerticalStackLayout IsVisible="{Binding IsExpanded}"
-                                                         Padding="16,0,0,8"
-                                                         BindableLayout.ItemsSource="{Binding BonusSources}">
-                                        <BindableLayout.ItemTemplate>
-                                            <DataTemplate x:DataType="models:BonusSource">
-                                                <HorizontalStackLayout Spacing="8">
-                                                    <Label Text="{Binding Label}" />
-                                                    <Label Text="{Binding BonusTo}" TextColor="Gray" />
-                                                </HorizontalStackLayout>
-                                            </DataTemplate>
-                                        </BindableLayout.ItemTemplate>
+                                    <VerticalStackLayout IsVisible="{Binding IsExpanded}" Padding="16,0,0,8" Spacing="4">
+                                        <!-- Base stat value — always first in expanded panel (D-12) -->
+                                        <Label Text="{Binding BaseStat, StringFormat='Base: {0}'}"
+                                               FontSize="13" TextColor="Gray" />
+                                        <!-- Bonus sources below base row -->
+                                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding BonusSources}">
+                                            <BindableLayout.ItemTemplate>
+                                                <DataTemplate x:DataType="models:BonusSource">
+                                                    <HorizontalStackLayout Spacing="8">
+                                                        <Label Text="{Binding Label}" />
+                                                        <Label Text="{Binding BonusTo}" TextColor="Gray" />
+                                                    </HorizontalStackLayout>
+                                                </DataTemplate>
+                                            </BindableLayout.ItemTemplate>
+                                        </VerticalStackLayout>
                                     </VerticalStackLayout>
 
                                     <BoxView HeightRequest="1" Color="LightGray" />
