@@ -90,7 +90,7 @@ public partial class CharacterViewModel : ObservableObject
         (GP  > 100 ? (GP  - 1) / 100 : 0) +
         (SP  > 100 ? (SP  - 1) / 100 : 0) +
         (CP  > 100 ? (CP  - 1) / 100 : 0);
-    public int GearSlotsUsed => GearItems.Sum(g => g.Slots) + CoinSlots;
+    public int GearSlotsUsed => GearItems.Where(g => !g.IsFreeCarry).Sum(g => g.Slots) + CoinSlots;
 
     // ===== CURRENCY =====
     [ObservableProperty]
@@ -110,6 +110,8 @@ public partial class CharacterViewModel : ObservableObject
 
     // ===== COLLECTIONS =====
     public ObservableCollection<GearItemViewModel> GearItems { get; } = [];
+    public ObservableCollection<GearItemViewModel> RegularGearItems { get; } = [];
+    public ObservableCollection<GearItemViewModel> FreeCarryItems { get; } = [];
     public ObservableCollection<string> Attacks { get; } = [];
     public ObservableCollection<StatRowViewModel> StatRows { get; } = [];
 
@@ -172,6 +174,7 @@ public partial class CharacterViewModel : ObservableObject
                 foreach (GearItemViewModel g in e.OldItems)
                     g.PropertyChanged -= OnGearItemChanged;
             OnPropertyChanged(nameof(GearSlotsUsed));
+            RebuildGearSubCollections();   // added
         };
 
         // Build StatRows from default (zeroed) character so the stats section is visible on startup
@@ -224,11 +227,11 @@ public partial class CharacterViewModel : ObservableObject
         Bonuses = Character.Bonuses,
         Gear = GearItems
             .Where(g => g.Source == GearItemSource.Gear)
-            .Select(g => new GearItem { Name = g.Name, Slots = g.Slots, ItemType = g.ItemType, Note = g.Note })
+            .Select(g => new GearItem { Name = g.Name, Slots = g.Slots, ItemType = g.ItemType, Note = g.Note, IsFreeCarry = g.IsFreeCarry })
             .ToList(),
         MagicItems = GearItems
             .Where(g => g.Source == GearItemSource.Magic)
-            .Select(g => new MagicItem { Name = g.Name, Slots = g.Slots, Note = g.Note })
+            .Select(g => new MagicItem { Name = g.Name, Slots = g.Slots, Note = g.Note, IsFreeCarry = g.IsFreeCarry })
             .ToList(),
         Attacks = Attacks.ToList(),
         Talents = Talents,
@@ -293,6 +296,9 @@ public partial class CharacterViewModel : ObservableObject
 
         // Notify everything — full character replacement
         OnPropertyChanged(string.Empty);
+
+        // Sync sub-collections after full character load
+        RebuildGearSubCollections();
     }
 
     // ===== HELPERS =====
@@ -314,8 +320,24 @@ public partial class CharacterViewModel : ObservableObject
 
     private void OnGearItemChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(GearItemViewModel.Slots))
+        if (e.PropertyName is nameof(GearItemViewModel.Slots) or nameof(GearItemViewModel.IsFreeCarry))
+        {
             OnPropertyChanged(nameof(GearSlotsUsed));
+            RebuildGearSubCollections();
+        }
+    }
+
+    private void RebuildGearSubCollections()
+    {
+        RegularGearItems.Clear();
+        FreeCarryItems.Clear();
+        foreach (var item in GearItems)
+        {
+            if (item.IsFreeCarry)
+                FreeCarryItems.Add(item);
+            else
+                RegularGearItems.Add(item);
+        }
     }
 
     private int SumBonusesFor(string statPrefix) =>

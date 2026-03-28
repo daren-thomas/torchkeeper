@@ -23,7 +23,7 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- Section 2: Gear List -->
+            <!-- Section 2: Regular Gear List (D-06) -->
             <Frame>
                 <VerticalStackLayout Spacing="8">
                     <Grid ColumnDefinitions="*,Auto">
@@ -31,7 +31,7 @@
                         <Button Grid.Column="1" Text="+ Add" Clicked="OnAddItemClicked" HorizontalOptions="End" />
                     </Grid>
 
-                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding GearItems}">
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding RegularGearItems}">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate x:DataType="vm:GearItemViewModel">
                                 <Grid ColumnDefinitions="*,80" Padding="0,8">
@@ -44,6 +44,32 @@
                                     </VerticalStackLayout>
                                     <Label Grid.Column="1" Text="{Binding Slots, StringFormat='{0} slot(s)'}"
                                            HorizontalOptions="End" VerticalOptions="Center" FontSize="12" />
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Section 2b: Free Carry Items (D-03, D-06) -->
+            <Frame>
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Free Carry" FontAttributes="Bold" FontSize="16" />
+
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding FreeCarryItems}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="vm:GearItemViewModel">
+                                <Grid ColumnDefinitions="*,80" Padding="0,8">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnItemTapped" />
+                                    </Grid.GestureRecognizers>
+                                    <VerticalStackLayout Grid.Column="0">
+                                        <Label Text="{Binding Name}" FontAttributes="Bold" />
+                                        <Label Text="{Binding ItemType}" FontSize="12" TextColor="Gray" />
+                                    </VerticalStackLayout>
+                                    <Label Grid.Column="1" Text="free"
+                                           HorizontalOptions="End" VerticalOptions="Center"
+                                           FontSize="12" TextColor="Gray" />
                                 </Grid>
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>

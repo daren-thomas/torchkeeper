@@ -18,6 +18,12 @@
         <Label Text="Note" />
         <Entry x:Name="NoteEntry" Placeholder="Optional notes" />
 
+        <!-- Free Carry toggle (D-04) -->
+        <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+            <CheckBox x:Name="FreeCarryCheckBox" />
+            <Label Text="Free Carry" VerticalOptions="Center" />
+        </HorizontalStackLayout>
+
         <Button Text="Save" Clicked="OnSave" />
         <Button Text="Delete" Clicked="OnDelete" TextColor="Red" />
     </VerticalStackLayout>
