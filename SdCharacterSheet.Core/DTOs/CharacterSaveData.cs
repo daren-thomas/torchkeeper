@@ -62,6 +62,7 @@ public class GearItemData
     public int Slots { get; init; } = 1;
     public string ItemType { get; init; } = "";
     public string Note { get; init; } = "";
+    public bool IsFreeCarry { get; init; }        // added for GEAR-01 persistence
 }
 
 public class MagicItemData
@@ -69,4 +70,5 @@ public class MagicItemData
     public string Name { get; init; } = "";
     public int Slots { get; init; } = 1;
     public string Note { get; init; } = "";
+    public bool IsFreeCarry { get; init; }        // added for GEAR-01 persistence
 }
