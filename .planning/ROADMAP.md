@@ -34,6 +34,7 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
 **Milestone Goal:** Gear slot counting is fully rules-accurate per Shadowdark RPG, export and display are in sync, and the stat drill-down shows the full picture including the raw base stat.
 
 - [x] **Phase 6: Gear & Stats Polish** — Fix slot accuracy, verify export parity, and add base stat to drill-down (completed 2026-03-28)
+- [ ] **Phase 7: MAUI Layer IsFreeCarry Fix** — Propagate IsFreeCarry to MAUI-local models, DTOs, and service; close GEAR-01 save/load gap
 
 ## Phase Details
 
@@ -48,6 +49,18 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
   4. Tapping a stat shows the raw base stat value (e.g. STR 14) as well as the modifier and bonus sources
 **Plans**: 06-01 (Free-Carry Gear Slots), 06-02 (Export Parity + Tests), 06-03 (Stat Drill-Down + Talents Import)
 
+### Phase 7: MAUI Layer IsFreeCarry Fix
+**Goal:** Propagate `IsFreeCarry` to the MAUI-local model, DTO, and service layer so that free-carry status round-trips correctly through save/load in the running app. Closes the critical GEAR-01 gap where manually-flagged items silently lose their flag on reload.
+**Depends on:** Phase 6
+**Requirements:** GEAR-01
+**Gap Closure:** Closes gaps from v1.2 audit (MILESTONE-AUDIT.md)
+**Success Criteria:**
+  1. `SdCharacterSheet/Models/GearItem.cs` and `MagicItem.cs` have `IsFreeCarry` property
+  2. `SdCharacterSheet/DTOs/CharacterSaveData.cs` `GearItemData` and `MagicItemData` include `IsFreeCarry`
+  3. `SdCharacterSheet/Services/CharacterFileService.cs` `MapToDto`/`MapFromDto` project `IsFreeCarry` correctly
+  4. MAUI app compiles without CS0117 errors
+  5. A manually-flagged free-carry item retains its flag after save and reload
+
 ## Progress
 
 | Phase | Milestone | Plans Complete | Status | Completed |
@@ -58,3 +71,4 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
 | 4. File Menu | v1.1 | 2/2 | Complete | 2026-03-22 |
 | 5. Talents Editor | v1.1 | 1/1 | Complete | 2026-03-22 |
 | 6. Gear & Stats Polish | v1.2 | 3/3 | Complete   | 2026-03-28 |
+| 7. MAUI Layer IsFreeCarry Fix | v1.2 | 0/1 | Pending | — |
