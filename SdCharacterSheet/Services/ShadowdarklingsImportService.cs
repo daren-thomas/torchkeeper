@@ -44,13 +44,19 @@ public class ShadowdarklingsImportService
             GainedAtLevel = b.GainedAtLevel,
         }).ToList() ?? [];
 
-        var gear = sdJson.Gear?.Select(g => new GearItem
-        {
-            Name = g.Name,
-            Slots = g.Slots,
-            ItemType = g.Type,
-            Note = g.Note,
-        }).ToList() ?? [];
+        // Skip the "Coins" gear item (gearId="coins") — Shadowdarklings adds a phantom
+        // gear entry for coin weight, but we calculate CoinSlots from GP/SP/CP directly.
+        // Set IsFreeCarry when slots=0 (Shadowdarklings convention for free-carry items like Backpack).
+        var gear = sdJson.Gear?
+            .Where(g => !string.Equals(g.GearId, "coins", StringComparison.OrdinalIgnoreCase))
+            .Select(g => new GearItem
+            {
+                Name = g.Name,
+                Slots = g.Slots,
+                ItemType = g.Type,
+                Note = g.Note,
+                IsFreeCarry = g.Slots == 0,
+            }).ToList() ?? [];
 
         var magicItems = sdJson.MagicItems?.Select(m => new MagicItem
         {
@@ -58,6 +64,27 @@ public class ShadowdarklingsImportService
             Slots = m.Slots,
             Note = m.Note,
         }).ToList() ?? [];
+
+        // Build Talents string from levels[].talentRolledDesc (D-13)
+        // Format: one line per talent "Lv{N}: {desc}", ordered by level, empty entries skipped.
+        // Rolled12ChosenTalentDesc included when non-empty.
+        var talents = "";
+        if (sdJson.Levels is { Count: > 0 })
+        {
+            var lines = sdJson.Levels
+                .OrderBy(l => l.Level)
+                .SelectMany(l =>
+                {
+                    var entries = new List<string>();
+                    if (!string.IsNullOrWhiteSpace(l.TalentRolledDesc))
+                        entries.Add($"Lv{l.Level}: {l.TalentRolledDesc.Trim()}");
+                    if (!string.IsNullOrWhiteSpace(l.Rolled12ChosenTalentDesc))
+                        entries.Add($"Lv{l.Level} (chosen): {l.Rolled12ChosenTalentDesc.Trim()}");
+                    return entries;
+                })
+                .ToList();
+            talents = string.Join("\n", lines);
+        }
 
         return new Character
         {
@@ -87,6 +114,7 @@ public class ShadowdarklingsImportService
             MagicItems = magicItems,
             Attacks = sdJson.Attacks ?? [],
             SpellsKnown = sdJson.SpellsKnown,
+            Talents = talents,
         };
     }
 }

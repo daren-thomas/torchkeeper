@@ -61,6 +61,7 @@ public class SdGearItem
     public int Slots { get; set; } = 1;
     public string Type { get; set; } = "";
     public string Note { get; set; } = "";
+    public string GearId { get; set; } = "";
 }
 
 public class SdMagicItem

@@ -223,4 +223,53 @@ public class ShadowdarklingsImportServiceTests
         Assert.NotNull(character);
         Assert.Contains("Lv12 (chosen): Gain an ability score increase", character.Talents);
     }
+
+    // D-free-carry: Gear item with slots=0 maps to IsFreeCarry=true (Backpack convention)
+    [Fact]
+    public async Task Import_GearItemWithSlots0_SetsFreeCarry()
+    {
+        var json = """
+            {
+              "name": "Test",
+              "gear": [
+                { "name": "Backpack", "slots": 0, "type": "sundry", "gearId": "s2" },
+                { "name": "Sword", "slots": 1, "type": "weapon", "gearId": "w1" }
+              ]
+            }
+            """;
+        await using var stream = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var character = await _sut.ImportAsync(stream);
+
+        Assert.NotNull(character);
+        var backpack = character.Gear.Single(g => g.Name == "Backpack");
+        Assert.True(backpack.IsFreeCarry);
+        var sword = character.Gear.Single(g => g.Name == "Sword");
+        Assert.False(sword.IsFreeCarry);
+    }
+
+    // D-coins-skip: Gear item with gearId="coins" is excluded (coin weight handled via GP/SP/CP)
+    [Fact]
+    public async Task Import_CoinsGearItem_IsSkipped()
+    {
+        var json = """
+            {
+              "name": "Test",
+              "gold": 120,
+              "gear": [
+                { "name": "Coins", "slots": 1, "type": "sundry", "gearId": "coins" },
+                { "name": "Dagger", "slots": 1, "type": "weapon", "gearId": "w4" }
+              ]
+            }
+            """;
+        await using var stream = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+        var character = await _sut.ImportAsync(stream);
+
+        Assert.NotNull(character);
+        Assert.DoesNotContain(character.Gear, g => g.Name == "Coins");
+        Assert.Single(character.Gear, g => g.Name == "Dagger");
+        // Gold is still imported via the currency fields
+        Assert.Equal(120, character.GP);
+    }
 }

@@ -44,13 +44,19 @@ public class ShadowdarklingsImportService
             GainedAtLevel = b.GainedAtLevel,
         }).ToList() ?? [];
 
-        var gear = sdJson.Gear?.Select(g => new GearItem
-        {
-            Name = g.Name,
-            Slots = g.Slots,
-            ItemType = g.Type,
-            Note = g.Note,
-        }).ToList() ?? [];
+        // Skip the "Coins" gear item (gearId="coins") — Shadowdarklings adds a phantom
+        // gear entry for coin weight, but we calculate CoinSlots from GP/SP/CP directly.
+        // Set IsFreeCarry when slots=0 (Shadowdarklings convention for free-carry items like Backpack).
+        var gear = sdJson.Gear?
+            .Where(g => !string.Equals(g.GearId, "coins", StringComparison.OrdinalIgnoreCase))
+            .Select(g => new GearItem
+            {
+                Name = g.Name,
+                Slots = g.Slots,
+                ItemType = g.Type,
+                Note = g.Note,
+                IsFreeCarry = g.Slots == 0,
+            }).ToList() ?? [];
 
         var magicItems = sdJson.MagicItems?.Select(m => new MagicItem
         {

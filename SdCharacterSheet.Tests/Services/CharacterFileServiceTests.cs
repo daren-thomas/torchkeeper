@@ -2,6 +2,7 @@ using System.IO;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
+using SdCharacterSheet.Core.Export;
 using SdCharacterSheet.DTOs;
 using SdCharacterSheet.Models;
 using SdCharacterSheet.Services;
@@ -116,6 +117,69 @@ public class CharacterFileServiceTests
 
         Assert.Contains("Version", json, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("1", json);
+    }
+
+    // COIN-01: Coin slot count round-trips and matches export (todo-5)
+    // Verifies that GP/SP/CP survive save/load so CoinSlots formula produces the same result
+    // in the displayed sheet and in the exported Markdown.
+    [Fact]
+    public async Task RoundTrip_CoinSlots_MatchBetweenSheetAndExport()
+    {
+        // 120 GP: first 100 are free, 20 remaining → ceil(20/100) = 1 slot
+        var character = new Character
+        {
+            Gear = [new GearItem { Name = "Sword", Slots = 1 }],
+            GP = 120,
+            SP = 0,
+            CP = 0,
+        };
+
+        await using var stream = new MemoryStream();
+        await _service.SaveToStreamAsync(character, stream);
+        stream.Position = 0;
+        var loadedDto = await _service.LoadFromStreamAsync(stream);
+
+        Assert.NotNull(loadedDto);
+        var loaded = _service.MapFromDto(loadedDto);
+
+        // GP survived round-trip
+        Assert.Equal(120, loaded.GP);
+
+        // CoinSlots formula — same as CharacterViewModel.CoinSlots
+        static int CoinSlots(int gp, int sp, int cp) =>
+            (gp > 100 ? (gp - 1) / 100 : 0) +
+            (sp > 100 ? (sp - 1) / 100 : 0) +
+            (cp > 100 ? (cp - 1) / 100 : 0);
+
+        var coinSlotsForSheet = CoinSlots(loaded.GP, loaded.SP, loaded.CP);
+        Assert.Equal(1, coinSlotsForSheet);
+
+        // The export uses the same CoinSlots value — verify the Markdown shows it
+        var exportData = new CharacterExportData
+        {
+            Name = loaded.Name,
+            Level = loaded.Level,
+            CurrentHP = loaded.CurrentHP,
+            MaxHP = loaded.MaxHP,
+            XP = loaded.XP,
+            MaxXP = loaded.MaxXP,
+            GP = loaded.GP,
+            SP = loaded.SP,
+            CP = loaded.CP,
+            Stats = Array.Empty<StatExportData>(),
+            ACBonuses = Array.Empty<BonusExportData>(),
+            GearItems = loaded.Gear.Select(g => new GearExportItem(g.Name, g.Slots)).ToArray(),
+            FreeCarryItems = Array.Empty<GearExportItem>(),
+            GearSlotTotal = 10,
+            GearSlotsUsed = loaded.Gear.Sum(g => g.Slots) + coinSlotsForSheet,  // 1 + 1 = 2
+            CoinSlots = coinSlotsForSheet,
+            Attacks = Array.Empty<string>(),
+        };
+
+        var md = MarkdownBuilder.BuildMarkdown(exportData);
+
+        // The gear section header must show 2 slots used (1 sword + 1 coin slot)
+        Assert.Contains("## Gear (2 / 10 slots)", md);
     }
 
     // GEAR-01: IsFreeCarry round-trips through save/load
