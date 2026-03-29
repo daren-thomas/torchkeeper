@@ -2,8 +2,8 @@
 phase: 7
 slug: maui-isfreecarry-fix
 status: draft
-nyquist_compliant: false
-wave_0_complete: false
+nyquist_compliant: true
+wave_0_complete: true
 created: 2026-03-29
 ---
 
@@ -40,8 +40,6 @@ created: 2026-03-29
 |---------|------|------|-------------|-----------|-------------------|-------------|--------|
 | 7-01-01 | 01 | 1 | GEAR-01 | build | `dotnet build SdCharacterSheet -f net10.0-maccatalyst` | ✅ | ⬜ pending |
 | 7-01-02 | 01 | 1 | GEAR-01 | build | `dotnet build SdCharacterSheet -f net10.0-maccatalyst` | ✅ | ⬜ pending |
-| 7-01-03 | 01 | 2 | GEAR-01 | build | `dotnet build SdCharacterSheet -f net10.0-maccatalyst` | ✅ | ⬜ pending |
-| 7-01-04 | 01 | 3 | GEAR-01 | unit | `dotnet test SdCharacterSheet.Tests --filter "IsFreeCarry"` | ❌ W0 | ⬜ pending |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
@@ -49,10 +47,7 @@ created: 2026-03-29
 
 ## Wave 0 Requirements
 
-- [ ] No new test infrastructure needed for model/DTO changes (build verification is primary gate)
-- [ ] Optional: `SdCharacterSheet.Tests/` round-trip test for `IsFreeCarry` save/load via Core layer
-
-*Note: MAUI platform targets (`net10.0-maccatalyst`, `net10.0-ios`) are not testable from the xUnit project. Build verification (`dotnet build -f net10.0-maccatalyst` exits 0, zero CS0117 errors) is the authoritative gate.*
+None required. Both tasks use build verification as the primary automated gate. Existing Core-layer round-trip tests (`RoundTrip_GearItem_IsFreeCarry_Persists`) already cover serialization correctness; this phase only adds the MAUI-local property/mapping parity needed for compilation.
 
 ---
 
@@ -66,11 +61,11 @@ created: 2026-03-29
 
 ## Validation Sign-Off
 
-- [ ] All tasks have `<automated>` verify or Wave 0 dependencies
-- [ ] Sampling continuity: no 3 consecutive tasks without automated verify
-- [ ] Wave 0 covers all MISSING references
-- [ ] No watch-mode flags
-- [ ] Feedback latency < 15s
-- [ ] `nyquist_compliant: true` set in frontmatter
+- [x] All tasks have `<automated>` verify or Wave 0 dependencies
+- [x] Sampling continuity: no 3 consecutive tasks without automated verify
+- [x] Wave 0 covers all MISSING references
+- [x] No watch-mode flags
+- [x] Feedback latency < 15s
+- [x] `nyquist_compliant: true` set in frontmatter
 
 **Approval:** pending
