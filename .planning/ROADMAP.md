@@ -34,7 +34,7 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
 **Milestone Goal:** Gear slot counting is fully rules-accurate per Shadowdark RPG, export and display are in sync, and the stat drill-down shows the full picture including the raw base stat.
 
 - [x] **Phase 6: Gear & Stats Polish** — Fix slot accuracy, verify export parity, and add base stat to drill-down (completed 2026-03-28)
-- [ ] **Phase 7: MAUI Layer IsFreeCarry Fix** — Propagate IsFreeCarry to MAUI-local models, DTOs, and service; close GEAR-01 save/load gap
+- [x] **Phase 7: MAUI Layer IsFreeCarry Fix** — Propagate IsFreeCarry to MAUI-local models, DTOs, and service; close GEAR-01 save/load gap (completed 2026-03-29)
 
 ## Phase Details
 
@@ -60,9 +60,9 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
   3. `SdCharacterSheet/Services/CharacterFileService.cs` `MapToDto`/`MapFromDto` project `IsFreeCarry` correctly
   4. MAUI app compiles without CS0117 errors
   5. A manually-flagged free-carry item retains its flag after save and reload
-**Plans:** 1 plan
+**Plans:** 1/1 plans complete
 Plans:
-- [ ] 07-01-PLAN.md — MAUI-local IsFreeCarry property sync + service mapping
+- [x] 07-01-PLAN.md — MAUI-local IsFreeCarry property sync + service mapping
 
 ## Progress
 
@@ -74,4 +74,4 @@ Plans:
 | 4. File Menu | v1.1 | 2/2 | Complete | 2026-03-22 |
 | 5. Talents Editor | v1.1 | 1/1 | Complete | 2026-03-22 |
 | 6. Gear & Stats Polish | v1.2 | 3/3 | Complete   | 2026-03-28 |
-| 7. MAUI Layer IsFreeCarry Fix | v1.2 | 0/1 | Pending | — |
+| 7. MAUI Layer IsFreeCarry Fix | v1.2 | 1/1 | Complete   | 2026-03-29 |

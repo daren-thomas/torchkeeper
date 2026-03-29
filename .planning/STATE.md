@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Gear & Stats Polish
 status: Milestone complete
-last_updated: "2026-03-28T14:57:33.458Z"
+last_updated: "2026-03-29T15:03:34.400Z"
 progress:
-  total_phases: 1
-  completed_phases: 1
-  total_plans: 3
-  completed_plans: 3
+  total_phases: 2
+  completed_phases: 2
+  total_plans: 4
+  completed_plans: 4
 ---
 
 # Project State
@@ -22,9 +22,9 @@ See: .planning/PROJECT.md (updated 2026-03-22)
 
 ## Current Position
 
-Phase: 06
-Plan: Not started
-Last session stopped at: Completed 06-02-PLAN.md
+Phase: 07
+Plan: 01 (complete)
+Last session stopped at: Completed 07-01-PLAN.md
 
 ## Accumulated Context
 
@@ -40,6 +40,7 @@ Key context carried forward:
 - Gear slots = STR score total; coin encumbrance = ceiling(coins/100) with first 100 free per type
 - [Phase 06-gear-stats-polish]: Used Close() not CloseAsync() in GearItemPopup to match existing AttackPopup pattern
 - [Phase 06-gear-stats-polish]: Free Carry frame always visible — no converter needed, empty BindableLayout renders nothing
+- [Phase 07-maui-isfreecarry-fix]: MAUI-local shadow types (CS0436): Core changes must be manually propagated to MAUI-local equivalents
 
 ### Decisions
 
@@ -47,7 +48,7 @@ Key context carried forward:
 
 ### Pending Todos
 
-- None — all 3 plans in phase 06 complete (06-01 free-carry slots, 06-02 export parity + tests, 06-03 stat drill-down + talents import)
+- None — phase 07 complete (07-01 MAUI IsFreeCarry fix). All plans in all phases complete.
 
 ### Blockers/Concerns
 
