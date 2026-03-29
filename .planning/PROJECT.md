@@ -34,7 +34,7 @@ A player can open their character, see all their stats with full bonus breakdown
 - ✓ User can load a character from a .sdchar file via the File menu (FILE-02) — v1.1
 - ✓ User can import a Shadowdarklings.net JSON export via the File menu (FILE-03) — v1.1
 - ✓ User can view and edit a Talents/Spells text area on the Notes tab (TLNT-01) — v1.1
-- ✓ Free-carry items (Backpack, Bag of Coins, Thieves Tools) excluded from GearSlotsUsed; shown in separate "Free Carry" section (GEAR-01) — v1.2
+- ✓ Free-carry items (Backpack, Bag of Coins, Thieves Tools) excluded from GearSlotsUsed; shown in separate "Free Carry" section (GEAR-01) — v1.2; MAUI IsFreeCarry round-trip fixed (Validated in Phase 7: maui-isfreecarry-fix)
 - ✓ Markdown export mirrors UI gear layout: regular gear table + "### Free Carry" section (GEAR-02) — v1.2
 - ✓ Expanded stat drill-down panel shows "Base: N" as first row above bonus sources (STAT-01) — v1.2
 - ✓ Shadowdarklings import populates Talents field from levels[].talentRolledDesc (STAT-01) — v1.2
@@ -117,4 +117,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-28 after Phase 6 (v1.2 Gear & Stats Polish) complete*
+*Last updated: 2026-03-29 after Phase 7 (MAUI IsFreeCarry Fix) complete — all v1.2 phases done*
