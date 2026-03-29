@@ -60,6 +60,9 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
   3. `SdCharacterSheet/Services/CharacterFileService.cs` `MapToDto`/`MapFromDto` project `IsFreeCarry` correctly
   4. MAUI app compiles without CS0117 errors
   5. A manually-flagged free-carry item retains its flag after save and reload
+**Plans:** 1 plan
+Plans:
+- [ ] 07-01-PLAN.md — MAUI-local IsFreeCarry property sync + service mapping
 
 ## Progress
 
