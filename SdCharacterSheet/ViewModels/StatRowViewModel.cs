@@ -18,8 +18,6 @@ public partial class StatRowViewModel : ObservableObject
     public string StatName { get; }
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(TotalScore))]
-    [NotifyPropertyChangedFor(nameof(ModifierDisplay))]
     private int baseStat;
 
     [ObservableProperty]
@@ -42,7 +40,9 @@ public partial class StatRowViewModel : ObservableObject
 
     public ObservableCollection<BonusSourceViewModel> BonusSources { get; }
 
-    public int TotalScore => BaseStat + BonusSources.Where(b => b.IsActive).Sum(b => b.BonusValue);
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ModifierDisplay))]
+    private int totalScore;
 
     public string ModifierDisplay
     {
@@ -71,12 +71,15 @@ public partial class StatRowViewModel : ObservableObject
             .ToList();
         BonusSources = new ObservableCollection<BonusSourceViewModel>(viewModels);
 
+        // Set backing fields directly — no notifications during construction
         baseStat = baseValue;
+        totalScore = ComputeTotalScore();
     }
 
     partial void OnBaseStatChanged(int value)
     {
         _onBaseStatChanged(value);
+        TotalScore = ComputeTotalScore();
     }
 
     [RelayCommand]
@@ -108,8 +111,10 @@ public partial class StatRowViewModel : ObservableObject
 
     private void OnBonusChanged()
     {
-        OnPropertyChanged(nameof(TotalScore));
-        OnPropertyChanged(nameof(ModifierDisplay));
+        TotalScore = ComputeTotalScore();
         _onBonusesChanged();
     }
+
+    private int ComputeTotalScore() =>
+        BaseStat + BonusSources.Where(b => b.IsActive).Sum(b => b.BonusValue);
 }
