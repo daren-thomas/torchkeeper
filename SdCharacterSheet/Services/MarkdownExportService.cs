@@ -36,7 +36,7 @@ public class MarkdownExportService
                 row.BonusSources
                     .Select(b => new BonusExportData(
                         b.Label,
-                        ExtractBonusValue(b.BonusTo)))
+                        ExtractBonusValue(b.Source.BonusTo)))
                     .ToList()))
             .ToList();
 

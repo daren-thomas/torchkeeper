@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace SdCharacterSheet.DTOs;
 
 public class CharacterSaveData
@@ -15,6 +17,7 @@ public class CharacterSaveData
     public string Deity { get; init; } = "";
     public string Languages { get; init; } = "";
     public int XP { get; init; }
+    public int MaxXP { get; init; } = 10;
 
     // Stats
     public int BaseSTR { get; init; }
@@ -42,6 +45,7 @@ public class CharacterSaveData
 
     // Attacks, spells, notes
     public List<string> Attacks { get; init; } = [];
+    public string Talents { get; init; } = "";
     public string SpellsKnown { get; init; } = "";
     public string Notes { get; init; } = "";
 }
@@ -52,6 +56,8 @@ public class BonusSourceData
     public string BonusTo { get; init; } = "";
     public string SourceType { get; init; } = "";
     public int GainedAtLevel { get; init; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.Never)]  // always write — overrides global WhenWritingDefault; old saves without this field load as true (init default)
+    public bool IsActive { get; init; } = true;
 }
 
 public class GearItemData

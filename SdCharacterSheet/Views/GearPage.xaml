@@ -48,6 +48,14 @@
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
                     </VerticalStackLayout>
+
+                    <!-- Coins row — only shown when coins occupy at least one slot -->
+                    <Grid ColumnDefinitions="*,80" Padding="0,8"
+                          IsVisible="{Binding HasCoinSlots}">
+                        <Label Grid.Column="0" Text="Coins" FontAttributes="Bold" VerticalOptions="Center" />
+                        <Label Grid.Column="1" Text="{Binding CoinSlots, StringFormat='{0} slot(s)'}"
+                               HorizontalOptions="End" VerticalOptions="Center" FontSize="12" />
+                    </Grid>
                 </VerticalStackLayout>
             </Frame>
 

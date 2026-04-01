@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace SdCharacterSheet.DTOs;
 
 public class CharacterSaveData
@@ -54,6 +56,8 @@ public class BonusSourceData
     public string BonusTo { get; init; } = "";
     public string SourceType { get; init; } = "";
     public int GainedAtLevel { get; init; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
+    public bool IsActive { get; init; } = true;
 }
 
 public class GearItemData

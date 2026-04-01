@@ -83,28 +83,35 @@ public partial class CharacterViewModel : ObservableObject
 
     // ===== GEAR SLOTS =====
     public int GearSlotTotal => Math.Max(TotalSTR, 10);
-    // Rule: first 100 coins of each denomination are free; every additional 100 (or part thereof) costs 1 slot.
-    // Formula: ceiling division — coins > 100 ? ceil((coins - 100) / 100) : 0
-    // Integer equivalent: coins > 100 ? (coins - 1) / 100 : 0
-    public int CoinSlots =>
-        (GP  > 100 ? (GP  - 1) / 100 : 0) +
-        (SP  > 100 ? (SP  - 1) / 100 : 0) +
-        (CP  > 100 ? (CP  - 1) / 100 : 0);
+    // Rule: first 100 coins (any mix of denominations) are free; every additional 100 costs 1 slot.
+    // All denominations weigh the same — pool them before applying the threshold.
+    public int CoinSlots
+    {
+        get
+        {
+            var total = GP + SP + CP;
+            return total > 100 ? (total - 1) / 100 : 0;
+        }
+    }
+    public bool HasCoinSlots => CoinSlots > 0;
     public int GearSlotsUsed => GearItems.Where(g => !g.IsFreeCarry).Sum(g => g.Slots) + CoinSlots;
 
     // ===== CURRENCY =====
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CoinSlots))]
+    [NotifyPropertyChangedFor(nameof(HasCoinSlots))]
     [NotifyPropertyChangedFor(nameof(GearSlotsUsed))]
     private int gP;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CoinSlots))]
+    [NotifyPropertyChangedFor(nameof(HasCoinSlots))]
     [NotifyPropertyChangedFor(nameof(GearSlotsUsed))]
     private int sP;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CoinSlots))]
+    [NotifyPropertyChangedFor(nameof(HasCoinSlots))]
     [NotifyPropertyChangedFor(nameof(GearSlotsUsed))]
     private int cP;
 
@@ -315,7 +322,25 @@ public partial class CharacterViewModel : ObservableObject
             ("CHA", character.BaseCHA, v => { BaseCHA = v; }),
         };
         foreach (var (statName, baseVal, writeBack) in statDefs)
-            StatRows.Add(new StatRowViewModel(statName, baseVal, writeBack, character.Bonuses));
+            StatRows.Add(new StatRowViewModel(statName, baseVal, writeBack, character.Bonuses, NotifyStatTotals));
+    }
+
+    private void NotifyStatTotals()
+    {
+        OnPropertyChanged(nameof(TotalSTR));
+        OnPropertyChanged(nameof(TotalDEX));
+        OnPropertyChanged(nameof(TotalCON));
+        OnPropertyChanged(nameof(TotalINT));
+        OnPropertyChanged(nameof(TotalWIS));
+        OnPropertyChanged(nameof(TotalCHA));
+        OnPropertyChanged(nameof(ModSTR));
+        OnPropertyChanged(nameof(ModDEX));
+        OnPropertyChanged(nameof(ModCON));
+        OnPropertyChanged(nameof(ModINT));
+        OnPropertyChanged(nameof(ModWIS));
+        OnPropertyChanged(nameof(ModCHA));
+        OnPropertyChanged(nameof(GearSlotTotal));
+        OnPropertyChanged(nameof(GearSlotsUsed));
     }
 
     private void OnGearItemChanged(object? sender, PropertyChangedEventArgs e)
@@ -342,7 +367,7 @@ public partial class CharacterViewModel : ObservableObject
 
     private int SumBonusesFor(string statPrefix) =>
         Character.Bonuses
-            .Where(b => b.BonusTo.StartsWith(statPrefix + ":"))
+            .Where(b => b.IsActive && b.BonusTo.StartsWith(statPrefix + ":"))
             .Sum(b =>
             {
                 var valuePart = b.BonusTo.Split(':')[1];

@@ -68,7 +68,8 @@ public class CharacterFileService
                 Label = b.Label,
                 BonusTo = b.BonusTo,
                 SourceType = b.SourceType,
-                GainedAtLevel = b.GainedAtLevel
+                GainedAtLevel = b.GainedAtLevel,
+                IsActive = b.IsActive,
             })
             .ToList(),
         Gear = character.Gear
@@ -126,7 +127,8 @@ public class CharacterFileService
                 Label = b.Label,
                 BonusTo = b.BonusTo,
                 SourceType = b.SourceType,
-                GainedAtLevel = b.GainedAtLevel
+                GainedAtLevel = b.GainedAtLevel,
+                IsActive = b.IsActive,
             })
             .ToList(),
         Gear = dto.Gear

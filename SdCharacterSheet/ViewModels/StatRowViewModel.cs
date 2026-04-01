@@ -7,11 +7,13 @@ namespace SdCharacterSheet.ViewModels;
 
 /// <summary>
 /// Per-stat row ViewModel with expand/collapse and bonus source sub-list.
-/// Holds the editable base stat and notifies CharacterViewModel of changes via callback delegate.
+/// Holds the editable base stat and notifies CharacterViewModel of changes via callback delegates.
 /// </summary>
 public partial class StatRowViewModel : ObservableObject
 {
     private readonly Action<int> _onBaseStatChanged;
+    private readonly Action _onBonusesChanged;
+    private readonly List<BonusSource> _masterBonusList;  // shared reference to Character.Bonuses
 
     public string StatName { get; }
 
@@ -34,17 +36,13 @@ public partial class StatRowViewModel : ObservableObject
 
     /// <summary>
     /// Called on Entry Completed or Unfocused — hides the Entry and restores the score Label.
-    /// TotalScore recalculates automatically because it depends on BaseStat.
-    /// Note: if the row Grid TapGestureRecognizer also fires when the score Label is tapped,
-    /// both ToggleExpand and BeginEditBase will run; this is acceptable because expanding
-    /// the row while editing is harmless.
     /// </summary>
     [RelayCommand]
     private void CommitBaseEdit() => IsEditingBase = false;
 
-    public ObservableCollection<BonusSource> BonusSources { get; }
+    public ObservableCollection<BonusSourceViewModel> BonusSources { get; }
 
-    public int TotalScore => BaseStat + BonusSources.Sum(b => ParseBonusValue(b.BonusTo));
+    public int TotalScore => BaseStat + BonusSources.Where(b => b.IsActive).Sum(b => b.BonusValue);
 
     public string ModifierDisplay
     {
@@ -55,34 +53,63 @@ public partial class StatRowViewModel : ObservableObject
         }
     }
 
-    public StatRowViewModel(string statName, int baseValue, Action<int> onBaseStatChanged, IEnumerable<BonusSource> allBonuses)
+    public StatRowViewModel(
+        string statName,
+        int baseValue,
+        Action<int> onBaseStatChanged,
+        List<BonusSource> masterBonusList,
+        Action onBonusesChanged)
     {
         StatName = statName;
         _onBaseStatChanged = onBaseStatChanged;
+        _onBonusesChanged = onBonusesChanged;
+        _masterBonusList = masterBonusList;
 
-        var filtered = allBonuses
+        var viewModels = masterBonusList
             .Where(b => b.BonusTo.StartsWith(statName + ":"))
+            .Select(b => new BonusSourceViewModel(b, OnBonusChanged, RemoveBonusSource))
             .ToList();
-        BonusSources = new ObservableCollection<BonusSource>(filtered);
+        BonusSources = new ObservableCollection<BonusSourceViewModel>(viewModels);
 
-        // Set backing field directly to avoid triggering callback during construction
         baseStat = baseValue;
     }
 
     partial void OnBaseStatChanged(int value)
     {
-        // Write back to CharacterViewModel so BaseSTR etc. stay in sync
         _onBaseStatChanged(value);
     }
 
     [RelayCommand]
     private void ToggleExpand() => IsExpanded = !IsExpanded;
 
-    private static int ParseBonusValue(string bonusTo)
+    /// <summary>
+    /// Adds a user-defined bonus source to both the master list and the local view.
+    /// </summary>
+    public void AddBonus(string label, int value, bool isActive)
     {
-        var parts = bonusTo.Split(':');
-        if (parts.Length >= 2 && int.TryParse(parts[1], out var value))
-            return value;
-        return 0;
+        var source = new BonusSource
+        {
+            Label = label,
+            BonusTo = $"{StatName}:{value}",
+            SourceType = "manual",
+            IsActive = isActive,
+        };
+        _masterBonusList.Add(source);
+        BonusSources.Add(new BonusSourceViewModel(source, OnBonusChanged, RemoveBonusSource));
+        OnBonusChanged();
+    }
+
+    private void RemoveBonusSource(BonusSourceViewModel bvm)
+    {
+        _masterBonusList.Remove(bvm.Source);
+        BonusSources.Remove(bvm);
+        OnBonusChanged();
+    }
+
+    private void OnBonusChanged()
+    {
+        OnPropertyChanged(nameof(TotalScore));
+        OnPropertyChanged(nameof(ModifierDisplay));
+        _onBonusesChanged();
     }
 }

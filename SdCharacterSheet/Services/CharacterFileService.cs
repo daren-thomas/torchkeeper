@@ -61,9 +61,7 @@ public class CharacterFileService
         var suggestedName = string.IsNullOrWhiteSpace(character.Name)
             ? "character.sdchar"
             : $"{character.Name}.sdchar";
-        var result = await _fileSaver.SaveAsync(suggestedName, stream, ct);
-        if (!result.IsSuccessful)
-            throw new IOException($"Save failed: {result.Exception?.Message}", result.Exception);
+        await _fileSaver.SaveAsync(suggestedName, stream, ct);
     }
 
     public CharacterSaveData MapToDto(Character character) => new()
@@ -79,6 +77,7 @@ public class CharacterFileService
         Deity = character.Deity,
         Languages = character.Languages,
         XP = character.XP,
+        MaxXP = character.MaxXP,
         BaseSTR = character.BaseSTR,
         BaseDEX = character.BaseDEX,
         BaseCON = character.BaseCON,
@@ -96,7 +95,8 @@ public class CharacterFileService
                 Label = b.Label,
                 BonusTo = b.BonusTo,
                 SourceType = b.SourceType,
-                GainedAtLevel = b.GainedAtLevel
+                GainedAtLevel = b.GainedAtLevel,
+                IsActive = b.IsActive,
             })
             .ToList(),
         Gear = character.Gear
@@ -119,6 +119,7 @@ public class CharacterFileService
             })
             .ToList(),
         Attacks = character.Attacks.ToList(),
+        Talents = character.Talents,
         SpellsKnown = character.SpellsKnown,
         Notes = character.Notes
     };
@@ -135,6 +136,7 @@ public class CharacterFileService
         Deity = dto.Deity,
         Languages = dto.Languages,
         XP = dto.XP,
+        MaxXP = dto.MaxXP,
         BaseSTR = dto.BaseSTR,
         BaseDEX = dto.BaseDEX,
         BaseCON = dto.BaseCON,
@@ -152,7 +154,8 @@ public class CharacterFileService
                 Label = b.Label,
                 BonusTo = b.BonusTo,
                 SourceType = b.SourceType,
-                GainedAtLevel = b.GainedAtLevel
+                GainedAtLevel = b.GainedAtLevel,
+                IsActive = b.IsActive,
             })
             .ToList(),
         Gear = dto.Gear
@@ -175,6 +178,7 @@ public class CharacterFileService
             })
             .ToList(),
         Attacks = dto.Attacks.ToList(),
+        Talents = dto.Talents,
         SpellsKnown = dto.SpellsKnown,
         Notes = dto.Notes
     };

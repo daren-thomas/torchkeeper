@@ -115,4 +115,11 @@ public partial class SheetPage : ContentPage
     {
         await this.ShowPopupAsync(new AttackPopup(_vm), new PopupOptions());
     }
+
+    private async void OnAddBonusClicked(object sender, EventArgs e)
+    {
+        var button = (Button)sender;
+        var statRow = (StatRowViewModel)button.BindingContext;
+        await this.ShowPopupAsync(new BonusSourcePopup(statRow), new PopupOptions());
+    }
 }
