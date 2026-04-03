@@ -97,6 +97,54 @@
 
 ---
 
+## Milestone: v1.2 — Gear & Stats Polish
+
+**Shipped:** 2026-04-03
+**Phases:** 2 | **Plans:** 4 | **Timeline:** 2 days (2026-03-28 → 2026-03-29)
+
+### What Was Built
+
+- IsFreeCarry flag through full Core layer with auto-detect (Backpack, Bag of Coins, Thieves Tools) and manual checkbox in GearItemPopup
+- GearPage split into "Regular Gear" + "Free Carry" sections with live slot exclusion (free-carry items don't count toward gear slots)
+- Markdown export mirrors UI layout: separate `### Free Carry` section; 5 new unit tests verify GEAR-01/GEAR-02 parity (67 tests total)
+- Stat drill-down expanded panel now shows "Base: N" as first row above bonus sources
+- Shadowdarklings import now populates Talents field from `levels[].talentRolledDesc` (Phase 6)
+- MAUI-local shadow types (GearItem, MagicItem, GearItemData, MagicItemData, CharacterFileService) patched to propagate IsFreeCarry — closes GEAR-01 save/load data loss (Phase 7)
+
+### What Worked
+
+- **Milestone audit as gap detector** — `gsd:audit-milestone` identified the MAUI-local shadow type gap before shipping. Without the audit, Phase 6 would have shipped with a silent data-loss bug (manually-flagged free-carry items lose their flag on save/load).
+- **Phase 7 as a targeted gap-closure plan** — the fix was 3 minutes of execution: 4 files, 8 property additions. Having a dedicated phase with clear success criteria made the fix clean and verifiable.
+- **CS0436 shadow type pattern documented** — the audit forced documentation of the architectural fact that Core changes must be manually propagated to MAUI-local copies. This is now in PROJECT.md and STATE.md context.
+- **Export parity unit tests** — 06-02 added explicit GEAR-01/GEAR-02 unit tests. These provide regression protection if the export pipeline changes.
+
+### What Was Inefficient
+
+- **Phase 6 scope missed MAUI-local types** — the plan executor applied IsFreeCarry to Core correctly but didn't check whether MAUI-local shadow files also needed updates. The CS0436 architectural pattern was not visible in the plan context. The audit caught it, but a better plan would have included a `grep -r IsFreeCarry SdCharacterSheet/` check step.
+- **Xcode toolchain noise** — MAUI `dotnet build` fails on this machine due to unrelated Xcode plugin/actool errors. This masked whether C# compilation succeeded or failed during Phase 6 plan execution. The workaround (check for `error CS` lines separately) is effective but adds friction to every build verification.
+- **06-02 and 06-03 SUMMARY.md frontmatter missing `requirements-completed`** — GEAR-02 and STAT-01 weren't declared in plan frontmatter, only GEAR-01 was. The `gsd-tools summary-extract` then couldn't find one-liners for those plans. Minor paperwork gap, but it broke the automated MILESTONES.md generation.
+
+### Patterns Established
+
+- **Audit-then-gap-phase pattern** — run `gsd:audit-milestone`, let it find gaps, add a targeted gap-closure phase, ship. Fast and clean.
+- **MAUI-local shadow propagation checklist** — whenever a Core model/DTO changes, check `SdCharacterSheet/Models/`, `SdCharacterSheet/DTOs/`, `SdCharacterSheet/Services/` for shadow copies that need the same change.
+- **Free Carry frame always visible** — empty `BindableLayout` renders nothing; no need for a visibility converter on sections that may be empty.
+
+### Key Lessons
+
+1. **Audit before archive, not after** — the audit is most valuable when there's still time to fix gaps. Running it as a hard pre-requisite to milestone completion is the right workflow.
+2. **Shadow types need explicit plan steps** — for any architecture with CS0436 shadow copies, include a "propagate to MAUI-local" step explicitly in the plan. Don't rely on the executor to know about the duplication.
+3. **Always declare `requirements-completed` in SUMMARY.md frontmatter** — even for "obvious" requirements. The automation depends on it.
+4. **3-minute gap closures are worth a full phase** — Phase 7 was tiny, but having a proper PLAN.md + SUMMARY.md means the fix is traceable, the gap is formally closed, and the audit trail is clean.
+
+### Cost Observations
+
+- Model mix: balanced profile (sonnet executor, opus planner)
+- Sessions: ~2 estimated
+- Notable: Entire milestone executed in 2 days; Phase 7 gap-closure was 3 minutes of actual execution time
+
+---
+
 ## Cross-Milestone Trends
 
 ### Process Evolution
@@ -105,6 +153,7 @@
 |-----------|--------|-------|------------|
 | v1.0 | 3 | 13 | First milestone — baseline established |
 | v1.1 | 2 | 3 | Inline implementation + test-gap closure pattern; human verification as first-class plan |
+| v1.2 | 2 | 4 | Audit-then-gap-phase pattern; shadow type propagation discipline established |
 
 ### Cumulative Quality
 
@@ -112,6 +161,7 @@
 |-----------|-------|-------|
 | v1.0 | 27+ | Core domain + ViewModel contracts + MarkdownBuilder covered |
 | v1.1 | 54 | +8 tests: file commands (unit), Talents save/load + export (integration) |
+| v1.2 | 67 | +13 tests: GEAR-01/GEAR-02 slot exclusion and export parity |
 
 ### Top Lessons (Verified Across Milestones)
 
@@ -119,3 +169,5 @@
 2. TDD for pure/stateless logic pays off immediately at integration time
 3. Human verification must be a first-class plan step, not deferred — made explicit in v1.1
 4. Close test gaps on inline implementations in the very next plan, not next milestone
+5. Run `gsd:audit-milestone` before archiving — it catches cross-layer gaps the executor can miss (confirmed v1.2: MAUI shadow type data loss caught and fixed)
+6. Architecture with duplicate shadow types requires explicit propagation steps in every plan that changes a model

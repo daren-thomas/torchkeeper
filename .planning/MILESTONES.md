@@ -1,5 +1,18 @@
 # Milestones
 
+## v1.2 Gear & Stats Polish (Shipped: 2026-04-03)
+
+**Phases completed:** 2 phases, 4 plans, 11 tasks
+
+**Key accomplishments:**
+
+- IsFreeCarry flag added through Core + MAUI layers with auto-detect for Backpack/Bag of Coins/Thieves Tools; GearPage split into regular gear + "Free Carry" sections with live slot exclusion
+- Markdown export mirrors UI gear layout: separate "### Free Carry" section added to MarkdownBuilder; 5 unit tests verify GEAR-01/GEAR-02 parity (67 tests total)
+- Stat drill-down expanded panel now shows "Base: N" as first row above bonus sources; Shadowdarklings import populates Talents field from levels[].talentRolledDesc
+- IsFreeCarry propagated to all four MAUI-local shadow types (GearItem, MagicItem, GearItemData, MagicItemData) and both mapping directions in CharacterFileService, closing GEAR-01 save/load data loss
+
+---
+
 ## v1.1 File Management & Talents (Shipped: 2026-03-22)
 
 **Phases completed:** 2 phases, 3 plans, 4 tasks

@@ -51,14 +51,14 @@ A player can open their character, see all their stats with full bonus breakdown
 
 ## Context
 
-**Phase 6 complete (v1.2 Gear & Stats Polish) — 67 xUnit tests passing.**
+**v1.2 shipped — 67 xUnit tests passing.**
 
 Tech stack: .NET 10 MAUI, CommunityToolkit.Mvvm, System.Text.Json, xUnit.
 
 Architecture:
 - `SdCharacterSheet.Core`: domain models, DTOs, services, MarkdownBuilder (pure/testable)
 - `SdCharacterSheet`: MAUI app — ViewModels, Views (3-tab: Sheet/Gear/Notes), platform wiring
-- `SdCharacterSheet.Tests`: xUnit test project (54 tests passing)
+- `SdCharacterSheet.Tests`: xUnit test project (67 tests passing)
 
 Key facts:
 - Shadowdarklings.net JSON format understood (`examples/Brim.json`): stats have rolled + final values, bonuses are named with sourceType/sourceCategory/bonusTo
@@ -70,9 +70,11 @@ Key facts:
 - File menu: Save/Load/Import in AppShell MenuBarItems (desktop) and ToolbarItems overflow (mobile)
 - MacFilePickerHelper (commit b2d9977): workaround for MAUI FilePicker null on macOS 15 Sequoia
 - Talents field: full-stack free-text area on Notes tab (above Spells, above Notes), exported as `## Talents` section in Markdown
+- Free-carry items: Backpack, Bag of Coins, Thieves Tools auto-detected; any item can be manually flagged IsFreeCarry — persists across save/load via MAUI-local shadow types
+- MAUI-local shadow types pattern (CS0436): SdCharacterSheet/Models/ and SdCharacterSheet/DTOs/ shadow Core types under the same namespace — Core changes must be manually propagated
 
-Known gaps (tech debt, not blocking):
-- VALIDATION.md Nyquist sign-off checklists not ticked for Phase 04 and 05
+Known tech debt (non-blocking):
+- VALIDATION.md Nyquist sign-off checklists not ticked for Phases 04, 05, 06, 07
 - TestFileCommandVM stub omits Talents — FILE-01/02 + TLNT-01 cross-path not covered in unit tests
 - MacFilePickerHelper requires re-validation if targeting iOS natively or new macOS versions
 
@@ -98,6 +100,8 @@ Known gaps (tech debt, not blocking):
 | BuildCharacterFromViewModel() on save | Backing field is stale after edits; observable properties are authoritative | ✓ Good — correct data saved |
 | GearItemSource enum as canonical discriminator | Type-safe split of GearItem vs MagicItem on save | ✓ Good — clean serialization |
 | Talents implemented inline (not via formal phase plan) | Feature was simple; plan overhead not warranted | ✓ Good — shipped faster; test coverage closed by Phase 05 |
+| IsFreeCarry added in Phase 6 Core-only scope, then Phase 7 for MAUI-local shadow types | Audit caught the gap; Phase 7 was a targeted 3-minute fix | ✓ Good — gap-closure workflow worked; CS0436 shadow type pattern now documented |
+| Free Carry frame always visible (no visibility converter) | Empty BindableLayout renders nothing; avoids converter complexity | ✓ Good — clean XAML, no behavioral issues |
 
 ## Evolution
 
@@ -117,4 +121,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-29 after Phase 7 (MAUI IsFreeCarry Fix) complete — all v1.2 phases done*
+*Last updated: 2026-04-03 after v1.2 milestone archived*
