@@ -28,23 +28,23 @@ public partial class AttackPopup : Popup
         _editIndex = -1;
     }
 
-    private void OnSave(object sender, EventArgs e)
+    private async void OnSave(object sender, EventArgs e)
     {
         var text = AttackEntry.Text?.Trim() ?? "";
-        if (string.IsNullOrEmpty(text)) { Close(); return; }
+        if (string.IsNullOrEmpty(text)) { await CloseAsync(); return; }
 
         if (_editIndex >= 0 && _editIndex < _vm.Attacks.Count)
             _vm.Attacks[_editIndex] = text;
         else
             _vm.Attacks.Add(text);
 
-        Close();
+        await CloseAsync();
     }
 
-    private void OnDelete(object sender, EventArgs e)
+    private async void OnDelete(object sender, EventArgs e)
     {
         if (_editIndex >= 0 && _editIndex < _vm.Attacks.Count)
             _vm.Attacks.RemoveAt(_editIndex);
-        Close();
+        await CloseAsync();
     }
 }

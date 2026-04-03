@@ -47,6 +47,8 @@
     <CodesignKey>-</CodesignKey>
     <CodesignEntitlements></CodesignEntitlements>
     <ValidateXcodeVersion>false</ValidateXcodeVersion>
+    <MtouchLink>None</MtouchLink>
+    <RunILLink>false</RunILLink>
   </PropertyGroup>
 
   <ItemGroup>

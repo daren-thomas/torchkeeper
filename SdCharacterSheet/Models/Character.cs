@@ -13,6 +13,7 @@ public class Character
     public string Deity { get; set; } = "";
     public string Languages { get; set; } = "";
     public int XP { get; set; }
+    public int MaxXP { get; set; } = 10;
 
     // Base stats (rolledStats from import — NOT the computed final values)
     public int BaseSTR { get; set; }
@@ -41,7 +42,8 @@ public class Character
     // Attacks (free-form text entries, e.g. "DAGGER: +3 (N), 1d4 (FIN)")
     public List<string> Attacks { get; set; } = [];
 
-    // Spells (plain string from Shadowdarklings; free text)
+    // Talents and Spells (free text)
+    public string Talents { get; set; } = "";
     public string SpellsKnown { get; set; } = "";
 
     // Notes (freeform player notes)

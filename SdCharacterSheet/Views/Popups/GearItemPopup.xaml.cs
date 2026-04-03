@@ -31,10 +31,10 @@ public partial class GearItemPopup : Popup
         SlotsEntry.Text = "1"; // default 1 slot
     }
 
-    private void OnSave(object sender, EventArgs e)
+    private async void OnSave(object sender, EventArgs e)
     {
         var name = NameEntry.Text?.Trim() ?? "";
-        if (string.IsNullOrEmpty(name)) { Close(); return; }
+        if (string.IsNullOrEmpty(name)) { await CloseAsync(); return; }
         int.TryParse(SlotsEntry.Text, out var slots);
         // Allow 0 slots — free-carry items may legitimately have 0 slots (D-05)
         slots = Math.Max(0, slots);
@@ -56,13 +56,13 @@ public partial class GearItemPopup : Popup
                 isFreeCarry);
             _vm.GearItems.Add(newItem);
         }
-        Close();
+        await CloseAsync();
     }
 
-    private void OnDelete(object sender, EventArgs e)
+    private async void OnDelete(object sender, EventArgs e)
     {
         if (_existingItem != null)
             _vm.GearItems.Remove(_existingItem);
-        Close();
+        await CloseAsync();
     }
 }
