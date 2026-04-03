@@ -1,0 +1,297 @@
+{
+  "name": "Tham",
+  "stats": {
+    "STR": 14,
+    "DEX": 14,
+    "CON": 9,
+    "INT": 12,
+    "WIS": 14,
+    "CHA": 13
+  },
+  "rolledStats": {
+    "STR": 14,
+    "DEX": 12,
+    "CON": 9,
+    "INT": 12,
+    "WIS": 14,
+    "CHA": 13
+  },
+  "ancestry": "Tiefling",
+  "class": "Warlock",
+  "level": 1,
+  "levels": [
+    {
+      "level": 1,
+      "talentRolledDesc": "+1 to melee or ranged attacks",
+      "talentRolledName": "Plus1ToHit",
+      "Rolled12TalentOrTwoStatPoints": "",
+      "Rolled12ChosenTalentDesc": "",
+      "Rolled12ChosenTalentName": "",
+      "HitPointRoll": 3,
+      "stoutHitPointRoll": 0
+    }
+  ],
+  "XP": 0,
+  "ambitionTalentLevel": {
+    "level": 1,
+    "talentRolledDesc": "",
+    "talentRolledName": "",
+    "Rolled12TalentOrTwoStatPoints": "",
+    "Rolled12ChosenTalentDesc": "",
+    "Rolled12ChosenTalentName": "",
+    "HitPointRoll": 0,
+    "stoutHitPointRoll": 0
+  },
+  "title": "Favored",
+  "alignment": "Lawful",
+  "background": "Enforcer",
+  "deity": "All Nord Gods",
+  "maxHitPoints": 2,
+  "armorClass": 12,
+  "gearSlotsTotal": 14,
+  "gearSlotsUsed": 9,
+  "bonuses": [
+    {
+      "sourceType": "Class",
+      "sourceName": "Warlock",
+      "sourceCategory": "Patron",
+      "gainedAtLevel": 1,
+      "name": "Patron",
+      "bonusTo": "Titania",
+      "bonusName": "Patron"
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Warlock",
+      "sourceCategory": "Boon",
+      "gainedAtLevel": 1,
+      "name": "StatBonus",
+      "bonusName": "StatBonus",
+      "boonPatron": "Titania",
+      "boonSource": "InitialPatronBoon",
+      "bonusTo": "DEX:+2"
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Warlock",
+      "sourceCategory": "Ability",
+      "gainedAtLevel": 1,
+      "name": "ExtraLanguage: Warlock 1",
+      "bonusTo": "Languages",
+      "bonusName": "Celestial"
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Warlock",
+      "sourceCategory": "TalentOrBoon",
+      "name": "ChooseWarlockTalentOrPatronBoon",
+      "bonusName": "",
+      "bonusTo": "WarlockTalent",
+      "gainedAtLevel": 1
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Warlock",
+      "sourceCategory": "Talent",
+      "gainedAtLevel": 1,
+      "name": "Plus1ToHit",
+      "bonusTo": "Melee attacks",
+      "bonusName": "Plus1ToHit"
+    }
+  ],
+  "goldRolled": 25,
+  "gold": 2,
+  "silver": 2,
+  "copper": 0,
+  "gear": [
+    {
+      "instanceId": "mnadldvq",
+      "gearId": "w9",
+      "name": "Longsword",
+      "type": "weapon",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 1,
+      "cost": 9,
+      "currency": "gp"
+    },
+    {
+      "instanceId": "mnadldvr",
+      "gearId": "w3",
+      "name": "Crossbow",
+      "type": "weapon",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 1,
+      "cost": 8,
+      "currency": "gp"
+    },
+    {
+      "instanceId": "mnadldvs",
+      "gearId": "s5",
+      "name": "Crossbow bolts",
+      "type": "sundry",
+      "quantity": 1,
+      "totalUnits": 20,
+      "slots": 1,
+      "cost": 1,
+      "currency": "gp"
+    },
+    {
+      "instanceId": "mnadldvt",
+      "gearId": "s2",
+      "name": "Backpack",
+      "type": "sundry",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 0,
+      "cost": 2,
+      "currency": "gp"
+    },
+    {
+      "instanceId": "mnadldvu",
+      "gearId": "s8",
+      "name": "Flint and steel",
+      "type": "sundry",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 1,
+      "cost": 5,
+      "currency": "sp"
+    },
+    {
+      "instanceId": "mnadldvv",
+      "gearId": "s13",
+      "name": "Oil, flask",
+      "type": "sundry",
+      "quantity": 2,
+      "totalUnits": 2,
+      "slots": 2,
+      "cost": 10,
+      "currency": "sp"
+    },
+    {
+      "instanceId": "mnadldvx",
+      "gearId": "s15",
+      "name": "Rations",
+      "type": "sundry",
+      "quantity": 2,
+      "totalUnits": 2,
+      "slots": 2,
+      "cost": 10,
+      "currency": "sp"
+    },
+    {
+      "instanceId": "mnadldvz",
+      "gearId": "s7",
+      "name": "Flask or bottle",
+      "type": "sundry",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 1,
+      "cost": 3,
+      "currency": "sp"
+    }
+  ],
+  "treasures": [],
+  "magicItems": [],
+  "attacks": [
+    "CROSSBOW: +2 (F), 1d6 (skip move to reload, 2H)",
+    "LONGSWORD: +3, 1d8"
+  ],
+  "ledger": [
+    {
+      "goldChange": 25,
+      "silverChange": 0,
+      "copperChange": 0,
+      "desc": "Starting gold",
+      "notes": ""
+    },
+    {
+      "goldChange": -9,
+      "silverChange": 0,
+      "copperChange": 0,
+      "desc": "Buy Longsword",
+      "notes": ""
+    },
+    {
+      "goldChange": -8,
+      "silverChange": 0,
+      "copperChange": 0,
+      "desc": "Buy Crossbow",
+      "notes": ""
+    },
+    {
+      "goldChange": -1,
+      "silverChange": 0,
+      "copperChange": 0,
+      "desc": "Buy Crossbow bolts",
+      "notes": ""
+    },
+    {
+      "goldChange": -2,
+      "silverChange": 0,
+      "copperChange": 0,
+      "desc": "Buy Backpack",
+      "notes": ""
+    },
+    {
+      "goldChange": 0,
+      "silverChange": -5,
+      "copperChange": 0,
+      "desc": "Buy Flint and steel",
+      "notes": ""
+    },
+    {
+      "goldChange": 0,
+      "silverChange": -5,
+      "copperChange": 0,
+      "desc": "Buy Oil, flask",
+      "notes": ""
+    },
+    {
+      "goldChange": 0,
+      "silverChange": -5,
+      "copperChange": 0,
+      "desc": "Buy Oil, flask",
+      "notes": ""
+    },
+    {
+      "goldChange": 0,
+      "silverChange": -5,
+      "copperChange": 0,
+      "desc": "Buy Rations",
+      "notes": ""
+    },
+    {
+      "goldChange": 0,
+      "silverChange": -5,
+      "copperChange": 0,
+      "desc": "Buy Rations",
+      "notes": ""
+    },
+    {
+      "goldChange": 0,
+      "silverChange": -3,
+      "copperChange": 0,
+      "desc": "Buy Flask or bottle",
+      "notes": ""
+    }
+  ],
+  "spellsKnown": "None",
+  "languages": "Celestial, Common, Diabolic",
+  "creationMethod": "Random 1",
+  "coreRulesOnly": true,
+  "activeSources": [
+    "CS1",
+    "CS2",
+    "CS3",
+    "CS4",
+    "DP",
+    "RB",
+    "SD",
+    "SG",
+    "US"
+  ],
+  "edits": []
+}

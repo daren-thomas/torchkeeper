@@ -1,0 +1,340 @@
+{
+  "name": "Zaraevra",
+  "stats": {
+    "STR": 10,
+    "DEX": 8,
+    "CON": 14,
+    "INT": 17,
+    "WIS": 10,
+    "CHA": 10
+  },
+  "rolledStats": {
+    "STR": 10,
+    "DEX": 8,
+    "CON": 14,
+    "INT": 15,
+    "WIS": 10,
+    "CHA": 10
+  },
+  "ancestry": "Dragonborn",
+  "class": "Wizard",
+  "level": 2,
+  "levels": [
+    {
+      "level": 1,
+      "talentRolledDesc": "+2 to Intelligence stat or +1 to wizard spellcasting checks",
+      "talentRolledName": "Plus2INTOrPlus1Casting",
+      "Rolled12TalentOrTwoStatPoints": "",
+      "Rolled12ChosenTalentDesc": "",
+      "Rolled12ChosenTalentName": "",
+      "HitPointRoll": 3,
+      "stoutHitPointRoll": 0
+    },
+    {
+      "level": 2,
+      "talentRolledDesc": "",
+      "talentRolledName": "",
+      "Rolled12TalentOrTwoStatPoints": "",
+      "Rolled12ChosenTalentDesc": "",
+      "Rolled12ChosenTalentName": "",
+      "HitPointRoll": 2,
+      "stoutHitPointRoll": 0
+    }
+  ],
+  "XP": 0,
+  "ambitionTalentLevel": {
+    "level": 1,
+    "talentRolledDesc": "",
+    "talentRolledName": "",
+    "Rolled12TalentOrTwoStatPoints": "",
+    "Rolled12ChosenTalentDesc": "",
+    "Rolled12ChosenTalentName": "",
+    "HitPointRoll": 0,
+    "stoutHitPointRoll": 0
+  },
+  "title": "Apprentice",
+  "alignment": "Lawful",
+  "background": "Ranger",
+  "deity": "Madeera the Covenant",
+  "maxHitPoints": 7,
+  "armorClass": 9,
+  "gearSlotsTotal": 10,
+  "gearSlotsUsed": 8,
+  "bonuses": [
+    {
+      "sourceType": "Class",
+      "sourceName": "Wizard",
+      "sourceCategory": "Ability",
+      "gainedAtLevel": 1,
+      "name": "ExtraLanguage: Wizard 1",
+      "bonusTo": "Languages",
+      "bonusName": "Dwarvish"
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Wizard",
+      "sourceCategory": "Ability",
+      "gainedAtLevel": 1,
+      "name": "ExtraLanguage: Wizard 2",
+      "bonusTo": "Languages",
+      "bonusName": "Skurrid"
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Wizard",
+      "sourceCategory": "Ability",
+      "gainedAtLevel": 1,
+      "name": "ExtraLanguage: Wizard 3",
+      "bonusTo": "Languages",
+      "bonusName": "Diabolic"
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Wizard",
+      "sourceCategory": "Ability",
+      "gainedAtLevel": 1,
+      "name": "ExtraLanguage: Wizard 4",
+      "bonusTo": "Languages",
+      "bonusName": "Celestial"
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Wizard",
+      "sourceCategory": "Ability",
+      "gainedAtLevel": 1,
+      "name": "Spell: Wizard, Tier 1, Spell 1",
+      "bonusTo": "Tier:1, Spell:1",
+      "bonusName": "Magic Missile"
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Wizard",
+      "sourceCategory": "Ability",
+      "gainedAtLevel": 1,
+      "name": "Spell: Wizard, Tier 1, Spell 2",
+      "bonusTo": "Tier:1, Spell:2",
+      "bonusName": "Light"
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Wizard",
+      "sourceCategory": "Ability",
+      "gainedAtLevel": 1,
+      "name": "Spell: Wizard, Tier 1, Spell 3",
+      "bonusTo": "Tier:1, Spell:3",
+      "bonusName": "Protection from Evil"
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Wizard",
+      "sourceCategory": "Talent",
+      "gainedAtLevel": 1,
+      "name": "Plus2INTOrPlus1Casting",
+      "bonusTo": "",
+      "bonusName": "Plus2INTOrPlus1Casting"
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Wizard",
+      "sourceCategory": "Talent",
+      "gainedAtLevel": 1,
+      "name": "PlusTwoIntOrPlusOneWizCasting",
+      "bonusName": "StatBonus",
+      "bonusTo": "INT:+2"
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Wizard",
+      "sourceCategory": "Ability",
+      "name": "Spell: Wizard, Tier 1, Spell 4",
+      "bonusName": "Burning Hands",
+      "bonusTo": "Tier:1, Spell:4",
+      "gainedAtLevel": 2
+    }
+  ],
+  "goldRolled": 15,
+  "gold": 5,
+  "silver": 5,
+  "copper": 0,
+  "gear": [
+    {
+      "instanceId": "mnadmcwr",
+      "gearId": "s2",
+      "name": "Backpack",
+      "type": "sundry",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 0,
+      "cost": 2,
+      "currency": "gp"
+    },
+    {
+      "instanceId": "mnadmcwv",
+      "gearId": "s8",
+      "name": "Flint and steel",
+      "type": "sundry",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 1,
+      "cost": 5,
+      "currency": "sp"
+    },
+    {
+      "instanceId": "mnadmcww",
+      "gearId": "s11",
+      "name": "Lantern",
+      "type": "sundry",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 1,
+      "cost": 5,
+      "currency": "gp"
+    },
+    {
+      "instanceId": "mnadmcwx",
+      "gearId": "s13",
+      "name": "Oil, flask",
+      "type": "sundry",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 1,
+      "cost": 5,
+      "currency": "sp"
+    },
+    {
+      "instanceId": "mnadmcwy",
+      "gearId": "s15",
+      "name": "Rations",
+      "type": "sundry",
+      "quantity": 2,
+      "totalUnits": 2,
+      "slots": 2,
+      "cost": 10,
+      "currency": "sp"
+    }
+  ],
+  "treasures": [],
+  "magicItems": [
+    {
+      "id": "mnadmcws",
+      "itemType": "weapon",
+      "itemTypeId": "w14",
+      "magicItemType": "magicWeapon",
+      "name": "Staff+1",
+      "bonus": 1,
+      "bonusNote": "",
+      "attackNote": "",
+      "features": "",
+      "benefits": "",
+      "curses": "",
+      "hasPersonality": false,
+      "properties": [],
+      "slots": 1
+    },
+    {
+      "id": "mnadmcwt",
+      "itemType": "sundry",
+      "itemTypeId": "",
+      "magicItemType": "magicMisc",
+      "name": "Scroll of Detect Magic",
+      "bonus": 0,
+      "bonusNote": "",
+      "attackNote": "",
+      "features": "This scroll allows a character to cast the Detect Magic spell if that spell is on their spell list (even if they don't know that spell). Failing to cast the spell from the scroll does not impact the ability to cast known spells. After a casting attempt with a scroll, the scroll ceases to work. On a critical failure, casters with mishap tables must roll a mishap. ",
+      "spellDesc": "DETECT MAGIC (Tier 1, Wizard), DC 10 to cast, Duration: Focus, Range: Near \n You can sense the presence of magic within near range for the spell's duration. If you focus for two rounds, you discern its general properties. Full barriers block this spell.",
+      "benefits": "",
+      "curses": "",
+      "hasPersonality": false,
+      "properties": [],
+      "slots": 1
+    },
+    {
+      "id": "mnadmcwu",
+      "itemType": "sundry",
+      "itemTypeId": "",
+      "magicItemType": "magicMisc",
+      "name": "Wand of Acid Arrow",
+      "bonus": 0,
+      "bonusNote": "",
+      "attackNote": "",
+      "features": "This wand allows a character to cast the Acid Arrow spell if that spell is on their spell list (even if they don't know that spell). Failing to cast the spell from the wand does not impact the ability to cast known spells. After a failed casting attempt with a wand, the wand stops working until you rest. On a critical failure, the wand permanently breaks and casters with mishap tables must roll a mishap. ",
+      "spellDesc": "ACID ARROW (Tier 2, Wizard), DC 10 to cast, Duration: Focus, Range: Far \n You conjure a corrosive bolt that hits one foe, dealing 1d6 damage a round. The bolt remains in the target for as long as you focus.",
+      "benefits": "",
+      "curses": "",
+      "hasPersonality": false,
+      "properties": [],
+      "slots": 1
+    }
+  ],
+  "attacks": [
+    "STAFF+1 (STAFF +1): +1, 1d4+1 (2H), Magic",
+    "SPELLS: To cast a Wizard spell, roll 1d20+3 vs a DC equal to 10 + the spell's tier."
+  ],
+  "ledger": [
+    {
+      "goldChange": 15,
+      "silverChange": 0,
+      "copperChange": 0,
+      "desc": "Starting gold",
+      "notes": ""
+    },
+    {
+      "goldChange": -2,
+      "silverChange": 0,
+      "copperChange": 0,
+      "desc": "Buy Backpack",
+      "notes": ""
+    },
+    {
+      "goldChange": 0,
+      "silverChange": -5,
+      "copperChange": 0,
+      "desc": "Buy Flint and steel",
+      "notes": ""
+    },
+    {
+      "goldChange": -5,
+      "silverChange": 0,
+      "copperChange": 0,
+      "desc": "Buy Lantern",
+      "notes": ""
+    },
+    {
+      "goldChange": 0,
+      "silverChange": -5,
+      "copperChange": 0,
+      "desc": "Buy Oil, flask",
+      "notes": ""
+    },
+    {
+      "goldChange": 0,
+      "silverChange": -5,
+      "copperChange": 0,
+      "desc": "Buy Rations",
+      "notes": ""
+    },
+    {
+      "goldChange": 0,
+      "silverChange": -5,
+      "copperChange": 0,
+      "desc": "Buy Rations",
+      "notes": ""
+    }
+  ],
+  "spellsKnown": "Burning Hands, Light, Magic Missile, Protection from Evil",
+  "languages": "Celestial, Common, Diabolic, Draconic, Dwarvish, Skurrid",
+  "creationMethod": "Random 1",
+  "coreRulesOnly": true,
+  "activeSources": [
+    "CS1",
+    "CS2",
+    "CS3",
+    "CS4",
+    "DP",
+    "RB",
+    "SD",
+    "SG",
+    "US"
+  ],
+  "edits": []
+}

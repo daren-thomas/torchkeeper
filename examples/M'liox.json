@@ -1,0 +1,261 @@
+{
+  "name": "M'liox",
+  "stats": {
+    "STR": 9,
+    "DEX": 15,
+    "CON": 9,
+    "INT": 17,
+    "WIS": 8,
+    "CHA": 9
+  },
+  "rolledStats": {
+    "STR": 9,
+    "DEX": 15,
+    "CON": 9,
+    "INT": 15,
+    "WIS": 8,
+    "CHA": 9
+  },
+  "ancestry": "Slimefolk",
+  "class": "Plague Doctor",
+  "level": 1,
+  "levels": [
+    {
+      "level": 1,
+      "talentRolledDesc": "+2 to intelligence or dexterity stat, or +1 to elixir checks",
+      "talentRolledName": "Plus2INTDEXOrPlus1Elixir",
+      "Rolled12TalentOrTwoStatPoints": "",
+      "Rolled12ChosenTalentDesc": "",
+      "Rolled12ChosenTalentName": "",
+      "HitPointRoll": 5,
+      "stoutHitPointRoll": 0
+    }
+  ],
+  "XP": 0,
+  "ambitionTalentLevel": {
+    "level": 1,
+    "talentRolledDesc": "",
+    "talentRolledName": "",
+    "Rolled12TalentOrTwoStatPoints": "",
+    "Rolled12ChosenTalentDesc": "",
+    "Rolled12ChosenTalentName": "",
+    "HitPointRoll": 0,
+    "stoutHitPointRoll": 0
+  },
+  "title": "Resident",
+  "alignment": "Lawful",
+  "background": "Nobleborn",
+  "deity": "Cerberpug",
+  "maxHitPoints": 4,
+  "armorClass": 12,
+  "gearSlotsTotal": 10,
+  "gearSlotsUsed": 7,
+  "bonuses": [
+    {
+      "sourceType": "Class",
+      "sourceName": "Plague Doctor",
+      "sourceCategory": "Ability",
+      "gainedAtLevel": 1,
+      "name": "ExtraLanguage: Plague Doctor 1",
+      "bonusTo": "Languages",
+      "bonusName": "Chelonian"
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Plague Doctor",
+      "sourceCategory": "Ability",
+      "gainedAtLevel": 1,
+      "name": "ExtraLanguage: Plague Doctor 2",
+      "bonusTo": "Languages",
+      "bonusName": "Dwarvish"
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Plague Doctor",
+      "sourceCategory": "Talent",
+      "gainedAtLevel": 1,
+      "name": "Plus2INTDEXOrPlus1Elixir",
+      "bonusTo": "",
+      "bonusName": "Plus2INTDEXOrPlus1Elixir"
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Plague Doctor",
+      "sourceCategory": "Talent",
+      "gainedAtLevel": 1,
+      "name": "PlusTwoINTDEXOrPlusOneElixirs",
+      "bonusName": "StatBonus",
+      "bonusTo": "INT:+2"
+    }
+  ],
+  "goldRolled": 25,
+  "gold": 0,
+  "silver": 1,
+  "copper": 9,
+  "gear": [
+    {
+      "instanceId": "mnadlyh9",
+      "gearId": "w31",
+      "name": "Censer Flail",
+      "type": "weapon",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 1,
+      "cost": 20,
+      "currency": "gp"
+    },
+    {
+      "instanceId": "mnadlyha",
+      "gearId": "w30",
+      "name": "Stiletto",
+      "type": "weapon",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 1,
+      "cost": 5,
+      "currency": "sp"
+    },
+    {
+      "instanceId": "mnadlyhb",
+      "gearId": "s2",
+      "name": "Backpack",
+      "type": "sundry",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 0,
+      "cost": 2,
+      "currency": "gp"
+    },
+    {
+      "instanceId": "mnadlyhc",
+      "gearId": "s8",
+      "name": "Flint and steel",
+      "type": "sundry",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 1,
+      "cost": 5,
+      "currency": "sp"
+    },
+    {
+      "instanceId": "mnadlyhd",
+      "gearId": "s17",
+      "name": "Torch",
+      "type": "sundry",
+      "quantity": 2,
+      "totalUnits": 2,
+      "slots": 2,
+      "cost": 10,
+      "currency": "sp"
+    },
+    {
+      "instanceId": "mnadlyhf",
+      "gearId": "s7",
+      "name": "Flask or bottle",
+      "type": "sundry",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 1,
+      "cost": 3,
+      "currency": "sp"
+    },
+    {
+      "instanceId": "mnadlyhg",
+      "gearId": "s6",
+      "name": "Crowbar",
+      "type": "sundry",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 1,
+      "cost": 5,
+      "currency": "sp"
+    }
+  ],
+  "treasures": [],
+  "magicItems": [],
+  "attacks": [
+    "CENSER FLAIL: +2 (N), 1d8 (FIN, GAS, LASH)",
+    "STILETTO: +2, 1d4 (FIN, INJ)"
+  ],
+  "ledger": [
+    {
+      "goldChange": 25,
+      "silverChange": 0,
+      "copperChange": 0,
+      "desc": "Starting gold",
+      "notes": ""
+    },
+    {
+      "goldChange": -20,
+      "silverChange": 0,
+      "copperChange": 0,
+      "desc": "Buy Censer Flail",
+      "notes": ""
+    },
+    {
+      "goldChange": 0,
+      "silverChange": -5,
+      "copperChange": 0,
+      "desc": "Buy Stiletto",
+      "notes": ""
+    },
+    {
+      "goldChange": -2,
+      "silverChange": 0,
+      "copperChange": 0,
+      "desc": "Buy Backpack",
+      "notes": ""
+    },
+    {
+      "goldChange": 0,
+      "silverChange": -5,
+      "copperChange": 0,
+      "desc": "Buy Flint and steel",
+      "notes": ""
+    },
+    {
+      "goldChange": 0,
+      "silverChange": -5,
+      "copperChange": 0,
+      "desc": "Buy Torch",
+      "notes": ""
+    },
+    {
+      "goldChange": 0,
+      "silverChange": -5,
+      "copperChange": 0,
+      "desc": "Buy Torch",
+      "notes": ""
+    },
+    {
+      "goldChange": 0,
+      "silverChange": -3,
+      "copperChange": 0,
+      "desc": "Buy Flask or bottle",
+      "notes": ""
+    },
+    {
+      "goldChange": 0,
+      "silverChange": -5,
+      "copperChange": 0,
+      "desc": "Buy Crowbar",
+      "notes": ""
+    }
+  ],
+  "spellsKnown": "None",
+  "languages": "Chelonian, Common, Dwarvish, Primordial",
+  "creationMethod": "Random 1",
+  "coreRulesOnly": true,
+  "activeSources": [
+    "CS1",
+    "CS2",
+    "CS3",
+    "CS4",
+    "DP",
+    "RB",
+    "SD",
+    "SG",
+    "US"
+  ],
+  "edits": []
+}

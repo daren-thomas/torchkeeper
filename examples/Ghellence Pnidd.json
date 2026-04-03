@@ -1,0 +1,453 @@
+{
+  "name": "Ghellence Pnidd",
+  "stats": {
+    "STR": 13,
+    "DEX": 10,
+    "CON": 13,
+    "INT": 14,
+    "WIS": 15,
+    "CHA": 8
+  },
+  "rolledStats": {
+    "STR": 13,
+    "DEX": 10,
+    "CON": 13,
+    "INT": 14,
+    "WIS": 15,
+    "CHA": 8
+  },
+  "ancestry": "Risen",
+  "class": "Wizard",
+  "level": 4,
+  "levels": [
+    {
+      "level": 1,
+      "talentRolledDesc": "Learn one additional wizard spell of any tier you know",
+      "talentRolledName": "LearnExtraSpell",
+      "Rolled12TalentOrTwoStatPoints": "",
+      "Rolled12ChosenTalentDesc": "",
+      "Rolled12ChosenTalentName": "",
+      "HitPointRoll": 4,
+      "stoutHitPointRoll": 0
+    },
+    {
+      "level": 2,
+      "talentRolledDesc": "",
+      "talentRolledName": "",
+      "Rolled12TalentOrTwoStatPoints": "",
+      "Rolled12ChosenTalentDesc": "",
+      "Rolled12ChosenTalentName": "",
+      "HitPointRoll": 1,
+      "stoutHitPointRoll": 0
+    },
+    {
+      "level": 3,
+      "talentRolledDesc": "Gain advantage on casting one spell you know",
+      "talentRolledName": "AdvOnCastOneSpell",
+      "Rolled12TalentOrTwoStatPoints": "",
+      "Rolled12ChosenTalentDesc": "",
+      "Rolled12ChosenTalentName": "",
+      "HitPointRoll": 2,
+      "stoutHitPointRoll": 0
+    },
+    {
+      "level": 4,
+      "talentRolledDesc": "",
+      "talentRolledName": "",
+      "Rolled12TalentOrTwoStatPoints": "",
+      "Rolled12ChosenTalentDesc": "",
+      "Rolled12ChosenTalentName": "",
+      "HitPointRoll": 4,
+      "stoutHitPointRoll": 0
+    }
+  ],
+  "XP": 0,
+  "ambitionTalentLevel": {
+    "level": 1,
+    "talentRolledDesc": "",
+    "talentRolledName": "",
+    "Rolled12TalentOrTwoStatPoints": "",
+    "Rolled12ChosenTalentDesc": "",
+    "Rolled12ChosenTalentName": "",
+    "HitPointRoll": 0,
+    "stoutHitPointRoll": 0
+  },
+  "title": "Channeler",
+  "alignment": "Chaotic",
+  "background": "Ranger",
+  "deity": "Dominus",
+  "maxHitPoints": 12,
+  "armorClass": 10,
+  "gearSlotsTotal": 13,
+  "gearSlotsUsed": 11,
+  "bonuses": [
+    {
+      "sourceType": "Ancestry",
+      "sourceName": "Risen",
+      "sourceCategory": "Ability",
+      "gainedAtLevel": 1,
+      "name": "ExtraLanguage: Risen undefined",
+      "bonusTo": "Languages",
+      "bonusName": "Diabolic"
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Wizard",
+      "sourceCategory": "Ability",
+      "gainedAtLevel": 1,
+      "name": "ExtraLanguage: Wizard 1",
+      "bonusTo": "Languages",
+      "bonusName": "Merran"
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Wizard",
+      "sourceCategory": "Ability",
+      "gainedAtLevel": 1,
+      "name": "ExtraLanguage: Wizard 2",
+      "bonusTo": "Languages",
+      "bonusName": "Drow"
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Wizard",
+      "sourceCategory": "Ability",
+      "gainedAtLevel": 1,
+      "name": "ExtraLanguage: Wizard 3",
+      "bonusTo": "Languages",
+      "bonusName": "Celestial"
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Wizard",
+      "sourceCategory": "Ability",
+      "gainedAtLevel": 1,
+      "name": "ExtraLanguage: Wizard 4",
+      "bonusTo": "Languages",
+      "bonusName": "Primordial"
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Wizard",
+      "sourceCategory": "Ability",
+      "gainedAtLevel": 1,
+      "name": "Spell: Wizard, Tier 1, Spell 1",
+      "bonusTo": "Tier:1, Spell:1",
+      "bonusName": "Sleep"
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Wizard",
+      "sourceCategory": "Ability",
+      "gainedAtLevel": 1,
+      "name": "Spell: Wizard, Tier 1, Spell 2",
+      "bonusTo": "Tier:1, Spell:2",
+      "bonusName": "Detect Magic"
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Wizard",
+      "sourceCategory": "Ability",
+      "gainedAtLevel": 1,
+      "name": "Spell: Wizard, Tier 1, Spell 3",
+      "bonusTo": "Tier:1, Spell:3",
+      "bonusName": "Magic Missile"
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Wizard",
+      "sourceCategory": "Talent",
+      "gainedAtLevel": 1,
+      "name": "LearnExtraSpell",
+      "bonusTo": "PickExtraSpell",
+      "bonusName": "Protection from Evil"
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Wizard",
+      "sourceCategory": "Ability",
+      "name": "Spell: Wizard, Tier 1, Spell 4",
+      "bonusName": "Charm Person",
+      "bonusTo": "Tier:1, Spell:4",
+      "gainedAtLevel": 2
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Wizard",
+      "sourceCategory": "Talent",
+      "gainedAtLevel": 3,
+      "name": "AdvOnCastOneSpell",
+      "bonusTo": "AdvOnCastOneSpell",
+      "bonusName": "Detect Magic"
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Wizard",
+      "sourceCategory": "Ability",
+      "name": "Spell: Wizard, Tier 2, Spell 1",
+      "bonusName": "Knock",
+      "bonusTo": "Tier:2, Spell:1",
+      "gainedAtLevel": 3
+    },
+    {
+      "sourceType": "Class",
+      "sourceName": "Wizard",
+      "sourceCategory": "Ability",
+      "name": "Spell: Wizard, Tier 2, Spell 2",
+      "bonusName": "Fixed Object",
+      "bonusTo": "Tier:2, Spell:2",
+      "gainedAtLevel": 4
+    }
+  ],
+  "goldRolled": 35,
+  "gold": 23,
+  "silver": 5,
+  "copper": 0,
+  "gear": [
+    {
+      "instanceId": "mnadn9rn",
+      "gearId": "w4",
+      "name": "Dagger",
+      "type": "weapon",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 1,
+      "cost": 1,
+      "currency": "gp"
+    },
+    {
+      "instanceId": "mnadn9ro",
+      "gearId": "s2",
+      "name": "Backpack",
+      "type": "sundry",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 0,
+      "cost": 2,
+      "currency": "gp"
+    },
+    {
+      "instanceId": "mnadn9rs",
+      "gearId": "s8",
+      "name": "Flint and steel",
+      "type": "sundry",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 1,
+      "cost": 5,
+      "currency": "sp"
+    },
+    {
+      "instanceId": "mnadn9rt",
+      "gearId": "s11",
+      "name": "Lantern",
+      "type": "sundry",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 1,
+      "cost": 5,
+      "currency": "gp"
+    },
+    {
+      "instanceId": "mnadn9ru",
+      "gearId": "s13",
+      "name": "Oil, flask",
+      "type": "sundry",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 1,
+      "cost": 5,
+      "currency": "sp"
+    },
+    {
+      "instanceId": "mnadn9rv",
+      "gearId": "s14",
+      "name": "Pole",
+      "type": "sundry",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 1,
+      "cost": 5,
+      "currency": "sp"
+    },
+    {
+      "instanceId": "mnadn9rw",
+      "gearId": "s17",
+      "name": "Torch",
+      "type": "sundry",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 1,
+      "cost": 5,
+      "currency": "sp"
+    },
+    {
+      "instanceId": "mnadn9rx",
+      "gearId": "s16",
+      "name": "Rope, 60'",
+      "type": "sundry",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 1,
+      "cost": 1,
+      "currency": "gp"
+    },
+    {
+      "instanceId": "mnadn9ry",
+      "gearId": "s6",
+      "name": "Crowbar",
+      "type": "sundry",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 1,
+      "cost": 5,
+      "currency": "sp"
+    }
+  ],
+  "treasures": [],
+  "magicItems": [
+    {
+      "id": "mnadn9rp",
+      "itemType": "sundry",
+      "itemTypeId": "",
+      "magicItemType": "magicMisc",
+      "name": "Scroll of Burning Hands",
+      "bonus": 0,
+      "bonusNote": "",
+      "attackNote": "",
+      "features": "This scroll allows a character to cast the Burning Hands spell if that spell is on their spell list (even if they don't know that spell). Failing to cast the spell from the scroll does not impact the ability to cast known spells. After a casting attempt with a scroll, the scroll ceases to work. On a critical failure, casters with mishap tables must roll a mishap. ",
+      "spellDesc": "BURNING HANDS (Tier 1, Wizard), DC 10 to cast, Duration: Instant, Range: Close \n You spread your fingers with thumbs touching, unleashing a circle of flame that fills a close area around where you stand. Creatures within the area of effect take 1d6 damage. Unattended flammable objects ignite.",
+      "benefits": "",
+      "curses": "",
+      "hasPersonality": false,
+      "properties": [],
+      "slots": 1
+    },
+    {
+      "id": "mnadn9rq",
+      "itemType": "sundry",
+      "itemTypeId": "",
+      "magicItemType": "magicMisc",
+      "name": "Wand of Knock",
+      "bonus": 0,
+      "bonusNote": "",
+      "attackNote": "",
+      "features": "This wand allows a character to cast the Knock spell if that spell is on their spell list (even if they don't know that spell). Failing to cast the spell from the wand does not impact the ability to cast known spells. After a failed casting attempt with a wand, the wand stops working until you rest. On a critical failure, the wand permanently breaks and casters with mishap tables must roll a mishap. ",
+      "spellDesc": "KNOCK (Tier 2, Wizard), DC 10 to cast, Duration: Instant, Range: Near \n A door, window, gate, chest, or portal you can see within range instantly opens, defeating all mundane locks and barriers. This spell creates a loud knock audible to all within earshot.",
+      "benefits": "",
+      "curses": "",
+      "hasPersonality": false,
+      "properties": [],
+      "slots": 1
+    },
+    {
+      "id": "mnadn9rr",
+      "itemType": "sundry",
+      "itemTypeId": "",
+      "magicItemType": "magicMisc",
+      "name": "Scroll of Detect Magic",
+      "bonus": 0,
+      "bonusNote": "",
+      "attackNote": "",
+      "features": "This scroll allows a character to cast the Detect Magic spell if that spell is on their spell list (even if they don't know that spell). Failing to cast the spell from the scroll does not impact the ability to cast known spells. After a casting attempt with a scroll, the scroll ceases to work. On a critical failure, casters with mishap tables must roll a mishap. ",
+      "spellDesc": "DETECT MAGIC (Tier 1, Wizard), DC 10 to cast, Duration: Focus, Range: Near \n You can sense the presence of magic within near range for the spell's duration. If you focus for two rounds, you discern its general properties. Full barriers block this spell.",
+      "benefits": "",
+      "curses": "",
+      "hasPersonality": false,
+      "properties": [],
+      "slots": 1
+    }
+  ],
+  "attacks": [
+    "DAGGER: +1 (N), 1d4 (FIN)",
+    "SPELLS: To cast a Wizard spell, roll 1d20+2 vs a DC equal to 10 + the spell's tier."
+  ],
+  "ledger": [
+    {
+      "goldChange": 35,
+      "silverChange": 0,
+      "copperChange": 0,
+      "desc": "Starting gold",
+      "notes": ""
+    },
+    {
+      "goldChange": -1,
+      "silverChange": 0,
+      "copperChange": 0,
+      "desc": "Buy Dagger",
+      "notes": ""
+    },
+    {
+      "goldChange": -2,
+      "silverChange": 0,
+      "copperChange": 0,
+      "desc": "Buy Backpack",
+      "notes": ""
+    },
+    {
+      "goldChange": 0,
+      "silverChange": -5,
+      "copperChange": 0,
+      "desc": "Buy Flint and steel",
+      "notes": ""
+    },
+    {
+      "goldChange": -5,
+      "silverChange": 0,
+      "copperChange": 0,
+      "desc": "Buy Lantern",
+      "notes": ""
+    },
+    {
+      "goldChange": 0,
+      "silverChange": -5,
+      "copperChange": 0,
+      "desc": "Buy Oil, flask",
+      "notes": ""
+    },
+    {
+      "goldChange": 0,
+      "silverChange": -5,
+      "copperChange": 0,
+      "desc": "Buy Pole",
+      "notes": ""
+    },
+    {
+      "goldChange": 0,
+      "silverChange": -5,
+      "copperChange": 0,
+      "desc": "Buy Torch",
+      "notes": ""
+    },
+    {
+      "goldChange": -1,
+      "silverChange": 0,
+      "copperChange": 0,
+      "desc": "Buy Rope, 60'",
+      "notes": ""
+    },
+    {
+      "goldChange": 0,
+      "silverChange": -5,
+      "copperChange": 0,
+      "desc": "Buy Crowbar",
+      "notes": ""
+    }
+  ],
+  "spellsKnown": "Charm Person, Detect Magic, Fixed Object, Knock, Magic Missile, Protection from Evil, Sleep",
+  "languages": "Celestial, Common, Diabolic, Drow, Merran, Primordial",
+  "creationMethod": "Random 1",
+  "coreRulesOnly": true,
+  "activeSources": [
+    "CS1",
+    "CS2",
+    "CS3",
+    "CS4",
+    "DP",
+    "RB",
+    "SD",
+    "SG",
+    "US"
+  ],
+  "edits": []
+}

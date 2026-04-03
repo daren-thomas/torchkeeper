@@ -1,0 +1,538 @@
+{
+  "name": "Brim Qu'arkh",
+  "stats": {
+    "STR": 9,
+    "DEX": 16,
+    "CON": 7,
+    "INT": 9,
+    "WIS": 6,
+    "CHA": 9
+  },
+  "rolledStats": {
+    "STR": 9,
+    "DEX": 14,
+    "CON": 7,
+    "INT": 9,
+    "WIS": 6,
+    "CHA": 9
+  },
+  "ancestry": "Dwarf",
+  "class": "Thief",
+  "level": 4,
+  "levels": [
+    {
+      "talentRolledDesc": "Your Backstab deals +1 dice of damage",
+      "stoutHitPointRoll": 1,
+      "Rolled12TalentOrTwoStatPoints": "",
+      "talentRolledName": "BackstabIncrease",
+      "HitPointRoll": 1,
+      "Rolled12ChosenTalentDesc": "",
+      "Rolled12ChosenTalentName": "",
+      "level": 1
+    },
+    {
+      "Rolled12ChosenTalentDesc": "",
+      "Rolled12ChosenTalentName": "",
+      "level": 2,
+      "talentRolledDesc": "",
+      "Rolled12TalentOrTwoStatPoints": "",
+      "stoutHitPointRoll": 1,
+      "talentRolledName": "",
+      "HitPointRoll": 3
+    },
+    {
+      "stoutHitPointRoll": 4,
+      "Rolled12TalentOrTwoStatPoints": "",
+      "talentRolledDesc": "+2 to Strength, Dexterity, or Charisma stat",
+      "HitPointRoll": 4,
+      "talentRolledName": "StatBonus",
+      "Rolled12ChosenTalentDesc": "",
+      "level": 3,
+      "Rolled12ChosenTalentName": ""
+    },
+    {
+      "level": 4,
+      "Rolled12ChosenTalentName": "",
+      "Rolled12ChosenTalentDesc": "",
+      "HitPointRoll": 4,
+      "talentRolledName": "",
+      "stoutHitPointRoll": 4,
+      "Rolled12TalentOrTwoStatPoints": "",
+      "talentRolledDesc": ""
+    }
+  ],
+  "XP": 4,
+  "ambitionTalentLevel": {
+    "talentRolledDesc": "",
+    "stoutHitPointRoll": 0,
+    "Rolled12TalentOrTwoStatPoints": "",
+    "talentRolledName": "",
+    "HitPointRoll": 0,
+    "Rolled12ChosenTalentDesc": "",
+    "Rolled12ChosenTalentName": "",
+    "level": 1
+  },
+  "title": "Cutthroat",
+  "alignment": "Chaotic",
+  "background": "Thieves' Guild",
+  "deity": "Memnon",
+  "maxHitPoints": 14,
+  "armorClass": 14,
+  "gearSlotsTotal": 10,
+  "gearSlotsUsed": 8,
+  "bonuses": [
+    {
+      "bonusName": "BackstabIncrease",
+      "bonusTo": "",
+      "sourceType": "Class",
+      "sourceCategory": "Talent",
+      "gainedAtLevel": 1,
+      "name": "BackstabIncrease",
+      "sourceName": "Thief"
+    },
+    {
+      "sourceName": "Thief",
+      "name": "StatBonus",
+      "gainedAtLevel": 3,
+      "sourceCategory": "Talent",
+      "sourceType": "Class",
+      "bonusTo": "DEX:+2",
+      "bonusName": "StatBonus"
+    }
+  ],
+  "goldRolled": 55,
+  "gold": 120,
+  "silver": 0,
+  "copper": 0,
+  "gear": [
+    {
+      "instanceId": "mhgjjidu",
+      "gearId": "w11",
+      "name": "Shortbow",
+      "type": "weapon",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 1,
+      "cost": 6,
+      "currency": "gp"
+    },
+    {
+      "instanceId": "mhgjjidx",
+      "gearId": "a1",
+      "name": "Leather armor",
+      "type": "armor",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 1,
+      "cost": 10,
+      "currency": "gp"
+    },
+    {
+      "instanceId": "mhgjjidz",
+      "gearId": "s2",
+      "name": "Backpack",
+      "type": "sundry",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 0,
+      "cost": 2,
+      "currency": "gp"
+    },
+    {
+      "instanceId": "mhgjwixg",
+      "gearId": "w4",
+      "name": "Dagger",
+      "type": "weapon",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 1,
+      "cost": 1,
+      "currency": "gp"
+    },
+    {
+      "instanceId": "mly1vshv",
+      "gearId": "s1",
+      "name": "Arrows",
+      "type": "sundry",
+      "quantity": 1,
+      "totalUnits": 20,
+      "slots": 1,
+      "cost": 1,
+      "currency": "gp"
+    },
+    {
+      "instanceId": "mly1z56u",
+      "gearId": "w12",
+      "name": "Shortsword",
+      "type": "weapon",
+      "quantity": 1,
+      "totalUnits": 1,
+      "slots": 1,
+      "cost": 7,
+      "currency": "gp"
+    },
+    {
+      "instanceId": "mmhr5ax8",
+      "gearId": "coins",
+      "name": "Coins",
+      "type": "sundry",
+      "totalUnits": 20,
+      "slots": 1,
+      "quantity": 1,
+      "cost": 0,
+      "currency": "gp"
+    }
+  ],
+  "treasures": [],
+  "magicItems": [
+    {
+      "slots": 1,
+      "itemType": "sundry",
+      "features": "",
+      "id": "mly1yj10",
+      "personalityFlaws": "Protests loudly while being used and never agrees that the target is the right choice for extirpation.",
+      "bonus": 0,
+      "name": "Potion of Mind ading",
+      "properties": [],
+      "bonusNote": "",
+      "personalityTraits": "",
+      "hasPersonality": false,
+      "spellDesc": "",
+      "magicItemType": "magicMisc",
+      "itemTypeId": "x",
+      "personalityVirtue": "Chaotic.",
+      "benefits": "Read minds of all creatures within near for 1hh",
+      "curses": "",
+      "attackNote": ""
+    },
+    {
+      "name": "Sesame Seeds",
+      "bonus": 0,
+      "bonusNote": "",
+      "properties": [],
+      "hasPersonality": false,
+      "spellDesc": "",
+      "magicItemType": "magicMisc",
+      "personalityTraits": "",
+      "benefits": "Opens a locked door or similar",
+      "personalityVirtue": "",
+      "itemTypeId": "",
+      "curses": "",
+      "attackNote": "",
+      "slots": 1,
+      "features": "",
+      "itemType": "sundry",
+      "id": "mkmleem2",
+      "personalityFlaws": ""
+    }
+  ],
+  "attacks": [
+    "DAGGER: +3 (N), 1d4 (FIN)",
+    "SHORTBOW: +3 (F), 1d4 (2H)",
+    "SHORTSWORD: -1, 1d6",
+    "Backstab: +4 weapon dice of damage with surprise attacks"
+  ],
+  "ledger": [
+    {
+      "goldChange": 55,
+      "notes": "",
+      "copperChange": 0,
+      "silverChange": 0,
+      "desc": "Starting gold"
+    },
+    {
+      "copperChange": 0,
+      "desc": "Buy Shortbow",
+      "silverChange": 0,
+      "notes": "",
+      "goldChange": -6
+    },
+    {
+      "desc": "Buy Arrows",
+      "copperChange": 0,
+      "silverChange": 0,
+      "notes": "",
+      "goldChange": -1
+    },
+    {
+      "notes": "",
+      "desc": "Buy Shortsword",
+      "copperChange": 0,
+      "silverChange": 0,
+      "goldChange": -7
+    },
+    {
+      "silverChange": 0,
+      "copperChange": 0,
+      "desc": "Buy Leather armor",
+      "notes": "",
+      "goldChange": -10
+    },
+    {
+      "goldChange": 0,
+      "notes": "",
+      "silverChange": 0,
+      "desc": "Buy Club",
+      "copperChange": -5
+    },
+    {
+      "goldChange": -2,
+      "silverChange": 0,
+      "copperChange": 0,
+      "desc": "Buy Backpack",
+      "notes": ""
+    },
+    {
+      "goldChange": 0,
+      "copperChange": 0,
+      "silverChange": -5,
+      "desc": "Buy Flint and steel",
+      "notes": ""
+    },
+    {
+      "desc": "Buy Torch",
+      "silverChange": -5,
+      "copperChange": 0,
+      "notes": "",
+      "goldChange": 0
+    },
+    {
+      "desc": "Buy Torch",
+      "silverChange": -5,
+      "copperChange": 0,
+      "notes": "",
+      "goldChange": 0
+    },
+    {
+      "goldChange": 0,
+      "desc": "Buy Rations",
+      "copperChange": 0,
+      "silverChange": -5,
+      "notes": ""
+    },
+    {
+      "notes": "",
+      "copperChange": 0,
+      "silverChange": -5,
+      "desc": "Buy Rations",
+      "goldChange": 0
+    },
+    {
+      "goldChange": 0,
+      "desc": "Sell Club",
+      "silverChange": 0,
+      "copperChange": 5,
+      "notes": ""
+    },
+    {
+      "notes": "",
+      "copperChange": 0,
+      "desc": "Sell Shortsword",
+      "silverChange": 0,
+      "goldChange": 7
+    },
+    {
+      "copperChange": 0,
+      "desc": "Buy Dagger",
+      "silverChange": 0,
+      "notes": "",
+      "goldChange": -1
+    },
+    {
+      "goldChange": -1,
+      "notes": "",
+      "copperChange": 0,
+      "silverChange": 0,
+      "desc": "Buy Dagger"
+    },
+    {
+      "desc": "Discard/Lose Dagger",
+      "silverChange": 0,
+      "copperChange": 0,
+      "notes": "",
+      "goldChange": 0
+    },
+    {
+      "notes": "",
+      "copperChange": 0,
+      "desc": "Discard/Lose Flint and steel",
+      "silverChange": 0,
+      "goldChange": 0
+    },
+    {
+      "silverChange": 0,
+      "desc": "Buy Grappling hook",
+      "copperChange": 0,
+      "notes": "",
+      "goldChange": -1
+    },
+    {
+      "goldChange": 0,
+      "silverChange": -5,
+      "desc": "Buy Oil, flask",
+      "copperChange": 0,
+      "notes": ""
+    },
+    {
+      "goldChange": 0,
+      "desc": "Discard/Lose Rations",
+      "copperChange": 0,
+      "silverChange": 0,
+      "notes": ""
+    },
+    {
+      "goldChange": 0,
+      "notes": "",
+      "silverChange": 0,
+      "copperChange": 0,
+      "desc": "Discard/Lose Rations"
+    },
+    {
+      "silverChange": 0,
+      "copperChange": 0,
+      "desc": "Gained coins",
+      "notes": "",
+      "goldChange": 101
+    },
+    {
+      "goldChange": 0,
+      "notes": "",
+      "silverChange": -5,
+      "copperChange": 0,
+      "desc": "Lost coins"
+    },
+    {
+      "notes": "",
+      "desc": "Lost coins",
+      "silverChange": 0,
+      "copperChange": 0,
+      "goldChange": -48
+    },
+    {
+      "goldChange": 0,
+      "notes": "",
+      "desc": "Discard/Lose Torch",
+      "silverChange": 0,
+      "copperChange": 0
+    },
+    {
+      "notes": "",
+      "copperChange": 0,
+      "desc": "Discard/Lose Arrows",
+      "silverChange": 0,
+      "goldChange": 0
+    },
+    {
+      "notes": "",
+      "silverChange": 0,
+      "copperChange": 0,
+      "desc": "Gain/Loot Arrows",
+      "goldChange": 0
+    },
+    {
+      "desc": "Gain/Loot Dagger",
+      "copperChange": 0,
+      "silverChange": 0,
+      "notes": "",
+      "goldChange": 0
+    },
+    {
+      "goldChange": 0,
+      "desc": "Lost coins",
+      "copperChange": -9,
+      "silverChange": -4,
+      "notes": ""
+    },
+    {
+      "goldChange": 18,
+      "copperChange": 0,
+      "desc": "Gained coins",
+      "silverChange": 0,
+      "notes": ""
+    },
+    {
+      "goldChange": 0,
+      "notes": "",
+      "silverChange": 0,
+      "desc": "Discard/Lose Dagger",
+      "copperChange": 0
+    },
+    {
+      "desc": "Discard/Lose Arrows",
+      "copperChange": 0,
+      "silverChange": 0,
+      "notes": "",
+      "goldChange": 0
+    },
+    {
+      "desc": "Gain/Loot Arrows",
+      "copperChange": 0,
+      "silverChange": 0,
+      "notes": "",
+      "goldChange": 0
+    },
+    {
+      "goldChange": 0,
+      "desc": "Discard/Lose Grappling hook",
+      "silverChange": 0,
+      "copperChange": 0,
+      "notes": ""
+    },
+    {
+      "desc": "Discard/Lose Oil, flask",
+      "silverChange": 0,
+      "copperChange": 0,
+      "notes": "",
+      "goldChange": 0
+    },
+    {
+      "notes": "",
+      "copperChange": 0,
+      "desc": "Discard/Lose Torch",
+      "silverChange": 0,
+      "goldChange": 0
+    },
+    {
+      "goldChange": 20,
+      "copperChange": 0,
+      "desc": "Gained coins",
+      "silverChange": 0,
+      "notes": ""
+    },
+    {
+      "silverChange": 0,
+      "copperChange": 0,
+      "desc": "Gain/Loot Shortsword",
+      "notes": "",
+      "goldChange": 0
+    }
+  ],
+  "spellsKnown": "None",
+  "languages": "Common, Dwarvish",
+  "creationMethod": "Design",
+  "coreRulesOnly": true,
+  "activeSources": [
+    "CS2",
+    "SD"
+  ],
+  "edits": [
+    {
+      "theField": "ClassTalent3",
+      "level": 3,
+      "desc": "Thief Talent for level 3 set to '+2 to Strength, Dexterity, or Charisma stat'",
+      "order": 4
+    },
+    {
+      "order": 5,
+      "level": 3,
+      "theField": "HitPointsLevel3",
+      "desc": "Hit Points rolled at level 3 set to 4"
+    },
+    {
+      "order": 5,
+      "theField": "HitPointsLevel4",
+      "level": 4,
+      "desc": "Hit Points rolled at level 4 set to 4"
+    }
+  ]
+}
