@@ -16,12 +16,11 @@ dotnet build TorchKeeper/TorchKeeper.csproj
 
 ## Run
 
-Use **Rider** or **Visual Studio** — both handle Mac Catalyst code signing automatically.
+```bash
+dotnet run --project TorchKeeper/TorchKeeper.csproj -f net10.0-maccatalyst
+```
 
-Select `net10.0-maccatalyst` as the target framework and hit Run.
-
-> `dotnet build -t:Run` does not work for Mac Catalyst from the command line because
-> the bundling step requires code signing, which only the IDE tooling sets up.
+Alternatively, use **Rider** or **Visual Studio** and select `net10.0-maccatalyst` as the target framework.
 
 ## Tests
 
