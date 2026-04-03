@@ -18,6 +18,10 @@
 	    </dict>
 	  </dict>
 	</array>
+	<key>CFBundleIconFile</key>
+	<string>appicon</string>
+	<key>CFBundleIconName</key>
+	<string>appicon</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 	  <dict>
