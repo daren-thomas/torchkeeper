@@ -21,7 +21,7 @@ tech-stack:
 key-files:
   created: []
   modified:
-    - SdCharacterSheet.Tests/Services/CharacterFileServiceTests.cs
+    - TorchKeeper.Tests/Services/CharacterFileServiceTests.cs
 
 key-decisions:
   - "NullFileSaver throws NotImplementedException rather than returning FileSaverResult — neither test calls SaveAsync so avoiding FileSaverResult constructor complexity is safe and correct"
@@ -63,7 +63,7 @@ Each task was committed atomically:
 **Plan metadata:** (final docs commit)
 
 ## Files Created/Modified
-- `SdCharacterSheet.Tests/Services/CharacterFileServiceTests.cs` - Added NullFileSaver nested class, updated service field init, added using statements
+- `TorchKeeper.Tests/Services/CharacterFileServiceTests.cs` - Added NullFileSaver nested class, updated service field init, added using statements
 
 ## Decisions Made
 - Used `throw new NotImplementedException()` in NullFileSaver.SaveAsync overloads rather than returning a `FileSaverResult` — neither test exercises the save path, and this avoids any uncertainty about FileSaverResult constructor arguments in CommunityToolkit.Maui 14.x

@@ -89,8 +89,8 @@ The real Shadowdarklings export example (`examples/Brim.json`) confirms the fiel
 
 ### Installation
 ```bash
-dotnet new maui -n SdCharacterSheet
-cd SdCharacterSheet
+dotnet new maui -n TorchKeeper
+cd TorchKeeper
 
 # MAUI Community Toolkit (FileSaver, etc.)
 dotnet add package CommunityToolkit.Maui --version 14.0.1
@@ -99,9 +99,9 @@ dotnet add package CommunityToolkit.Maui --version 14.0.1
 dotnet add package CommunityToolkit.Mvvm --version 8.4.0
 
 # Unit test project (separate, targets net10.0 not net10.0-platform)
-dotnet new xunit -n SdCharacterSheet.Tests
-cd SdCharacterSheet.Tests
-dotnet add reference ../SdCharacterSheet/SdCharacterSheet.csproj
+dotnet new xunit -n TorchKeeper.Tests
+cd TorchKeeper.Tests
+dotnet add reference ../TorchKeeper/TorchKeeper.csproj
 ```
 
 ---
@@ -110,7 +110,7 @@ dotnet add reference ../SdCharacterSheet/SdCharacterSheet.csproj
 
 ### Recommended Project Structure
 ```
-SdCharacterSheet/
+TorchKeeper/
 ├── Models/
 │   ├── Character.cs            # Domain entity (plain C#, no MAUI deps)
 │   ├── BonusSource.cs          # Stat bonus / AC contributor
@@ -132,7 +132,7 @@ SdCharacterSheet/
 │   │   └── Entitlements.plist  # File access sandbox entitlement
 │   └── Windows/
 └── MauiProgram.cs              # DI registration
-SdCharacterSheet.Tests/
+TorchKeeper.Tests/
 ├── Services/
 │   ├── CharacterFileServiceTests.cs
 │   └── ShadowdarklingsImportServiceTests.cs
@@ -562,9 +562,9 @@ public async Task<CharacterSaveData?> LoadCharacterAsync(CancellationToken ct)
 | Property | Value |
 |----------|-------|
 | Framework | xUnit 2.x |
-| Config file | `SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj` (net10.0, separate project) |
-| Quick run command | `dotnet test SdCharacterSheet.Tests/ --filter "Category=Unit" --no-build` |
-| Full suite command | `dotnet test SdCharacterSheet.Tests/` |
+| Config file | `TorchKeeper.Tests/TorchKeeper.Tests.csproj` (net10.0, separate project) |
+| Quick run command | `dotnet test TorchKeeper.Tests/ --filter "Category=Unit" --no-build` |
+| Full suite command | `dotnet test TorchKeeper.Tests/` |
 
 ### Phase Requirements → Test Map
 
@@ -584,16 +584,16 @@ public async Task<CharacterSaveData?> LoadCharacterAsync(CancellationToken ct)
 **Manual-only justification:** FilePicker and FileSaver both require native UI dialogs that cannot be invoked in a headless xUnit test runner. Test the JSON round-trip in unit tests; verify the dialog on each platform target manually.
 
 ### Sampling Rate
-- **Per task commit:** `dotnet test SdCharacterSheet.Tests/ --filter "Category=Unit" -x`
-- **Per wave merge:** `dotnet test SdCharacterSheet.Tests/`
+- **Per task commit:** `dotnet test TorchKeeper.Tests/ --filter "Category=Unit" -x`
+- **Per wave merge:** `dotnet test TorchKeeper.Tests/`
 - **Phase gate:** Full suite green before `/gsd:verify-work`
 
 ### Wave 0 Gaps
-- [ ] `SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj` — xUnit test project does not exist yet; create targeting `net10.0`
-- [ ] `SdCharacterSheet.Tests/Services/ShadowdarklingsImportServiceTests.cs` — covers FILE-01
-- [ ] `SdCharacterSheet.Tests/Services/CharacterFileServiceTests.cs` — covers FILE-02, FILE-03
-- [ ] `SdCharacterSheet.Tests/TestData/Brim.json` — copy of `examples/Brim.json` for test fixture (or reference via relative path)
-- [ ] Framework install: `dotnet add SdCharacterSheet.Tests package xunit && dotnet add SdCharacterSheet.Tests package Microsoft.NET.Test.Sdk && dotnet add SdCharacterSheet.Tests package xunit.runner.visualstudio`
+- [ ] `TorchKeeper.Tests/TorchKeeper.Tests.csproj` — xUnit test project does not exist yet; create targeting `net10.0`
+- [ ] `TorchKeeper.Tests/Services/ShadowdarklingsImportServiceTests.cs` — covers FILE-01
+- [ ] `TorchKeeper.Tests/Services/CharacterFileServiceTests.cs` — covers FILE-02, FILE-03
+- [ ] `TorchKeeper.Tests/TestData/Brim.json` — copy of `examples/Brim.json` for test fixture (or reference via relative path)
+- [ ] Framework install: `dotnet add TorchKeeper.Tests package xunit && dotnet add TorchKeeper.Tests package Microsoft.NET.Test.Sdk && dotnet add TorchKeeper.Tests package xunit.runner.visualstudio`
 
 ---
 

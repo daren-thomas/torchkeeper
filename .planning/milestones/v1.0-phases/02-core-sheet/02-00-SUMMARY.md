@@ -7,11 +7,11 @@ tags: [xunit, communityToolkit-mvvm, viewmodel, tdd, test-scaffold]
 # Dependency graph
 requires:
   - phase: 01-foundation
-    provides: SdCharacterSheet.Core models (Character, BonusSource, GearItem, MagicItem) and test project infrastructure
+    provides: TorchKeeper.Core models (Character, BonusSource, GearItem, MagicItem) and test project infrastructure
 provides:
   - Wave 0 test scaffold documenting CharacterViewModel computed property contracts
   - Wave 0 test scaffold documenting GearItemViewModel unified gear wrapping contracts
-  - CommunityToolkit.Mvvm NuGet reference in SdCharacterSheet.Tests
+  - CommunityToolkit.Mvvm NuGet reference in TorchKeeper.Tests
 affects: [02-01-character-viewmodel, future ViewModel implementations]
 
 # Tech tracking
@@ -21,10 +21,10 @@ tech-stack:
 
 key-files:
   created:
-    - SdCharacterSheet.Tests/ViewModels/CharacterViewModelTests.cs
-    - SdCharacterSheet.Tests/ViewModels/GearItemViewModelTests.cs
+    - TorchKeeper.Tests/ViewModels/CharacterViewModelTests.cs
+    - TorchKeeper.Tests/ViewModels/GearItemViewModelTests.cs
   modified:
-    - SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj
+    - TorchKeeper.Tests/TorchKeeper.Tests.csproj
 
 key-decisions:
   - "Test stubs defined inline in test files to avoid TFM mismatch between net10.0 test project and net10.0-windows/ios MAUI app project"
@@ -57,7 +57,7 @@ completed: 2026-03-15
 - **Files modified:** 3
 
 ## Accomplishments
-- Added CommunityToolkit.Mvvm 8.4.0 to SdCharacterSheet.Tests project
+- Added CommunityToolkit.Mvvm 8.4.0 to TorchKeeper.Tests project
 - Created CharacterViewModelTests.cs with 15 tests covering all pure-logic contracts (modifier floor math, STR/AC bonus filtering, gear slot capacity, coin slot integer division, negative HP allowance, LoadCharacter field propagation)
 - Created GearItemViewModelTests.cs with 3 tests covering unified GearItem/MagicItem wrapping (field mapping, empty ItemType for magic items, slot propagation)
 - All 27 tests pass (18 new + 9 existing Phase 1 tests)
@@ -70,12 +70,12 @@ Each task was committed atomically:
 2. **Task 2: Create test stubs for CharacterViewModel and GearItemViewModel** - `29d5932` (test)
 
 ## Files Created/Modified
-- `SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj` - Added CommunityToolkit.Mvvm 8.4.0 PackageReference
-- `SdCharacterSheet.Tests/ViewModels/CharacterViewModelTests.cs` - 15 tests with TestCharacterVM stub; living documentation of computed property contracts
-- `SdCharacterSheet.Tests/ViewModels/GearItemViewModelTests.cs` - 3 tests with TestGearItemVM stub; documents unified gear/magic item wrapping contract
+- `TorchKeeper.Tests/TorchKeeper.Tests.csproj` - Added CommunityToolkit.Mvvm 8.4.0 PackageReference
+- `TorchKeeper.Tests/ViewModels/CharacterViewModelTests.cs` - 15 tests with TestCharacterVM stub; living documentation of computed property contracts
+- `TorchKeeper.Tests/ViewModels/GearItemViewModelTests.cs` - 3 tests with TestGearItemVM stub; documents unified gear/magic item wrapping contract
 
 ## Decisions Made
-- No ProjectReference to SdCharacterSheet MAUI project to avoid TFM mismatch (net10.0 vs net10.0-windows/ios). Tests define inline stubs instead.
+- No ProjectReference to TorchKeeper MAUI project to avoid TFM mismatch (net10.0 vs net10.0-windows/ios). Tests define inline stubs instead.
 - CommunityToolkit.Mvvm added to test project so stubs can extend ObservableObject when plan 02-01 replaces them.
 
 ## Deviations from Plan
@@ -86,7 +86,7 @@ Each task was committed atomically:
 - **Found during:** Task 2 (test execution)
 - **Issue:** Plan specified `CoinSlots_101GP_Returns1` expecting 1, but the documented integer-floor formula `(GP-100)/100` yields `(101-100)/100 = 0` — inconsistent with the explicitly documented formula in the same plan
 - **Fix:** Changed test to use 200GP (`CoinSlots_200GP_Returns1`) which correctly returns 1 with integer division: `(200-100)/100 = 1`
-- **Files modified:** SdCharacterSheet.Tests/ViewModels/CharacterViewModelTests.cs
+- **Files modified:** TorchKeeper.Tests/ViewModels/CharacterViewModelTests.cs
 - **Verification:** All 18 new tests pass; formula is now consistent with the mixed-coin test documented in the plan
 - **Committed in:** 29d5932 (Task 2 commit)
 

@@ -12,12 +12,12 @@ tech_stack:
   patterns: [TDD RED-GREEN-REFACTOR, pure static builder, plain CLR record DTO]
 key_files:
   created:
-    - SdCharacterSheet.Core/Export/CharacterExportData.cs
-    - SdCharacterSheet.Core/Export/MarkdownBuilder.cs
-    - SdCharacterSheet.Tests/Export/MarkdownBuilderTests.cs
+    - TorchKeeper.Core/Export/CharacterExportData.cs
+    - TorchKeeper.Core/Export/MarkdownBuilder.cs
+    - TorchKeeper.Tests/Export/MarkdownBuilderTests.cs
   modified: []
 decisions:
-  - CharacterExportData is a plain CLR record in SdCharacterSheet.Core — zero MAUI dependencies, fully testable from net10.0 test project
+  - CharacterExportData is a plain CLR record in TorchKeeper.Core — zero MAUI dependencies, fully testable from net10.0 test project
   - BuildMarkdown and BuildFileName are pure static methods — no I/O, no state, deterministic output
   - Gear slot table built as a List<string> of exactly GearSlotTotal entries before rendering — prevents row count drift (per RESEARCH.md Pitfall 3)
   - HP and XP always appear in identity section in plain format (HP: n / n, XP: n / n) regardless of other optional fields
@@ -36,7 +36,7 @@ metrics:
 
 ## What Was Built
 
-A complete, unit-tested Markdown generation layer in `SdCharacterSheet.Core`:
+A complete, unit-tested Markdown generation layer in `TorchKeeper.Core`:
 
 - `CharacterExportData` — plain CLR record holding all data needed for Markdown export. Carries pre-computed stat totals and modifiers (avoiding ViewModel coupling), AC bonuses, gear slot counts, coin slots, and all character fields. Used as the single data boundary between ViewModel and builder.
 
@@ -66,7 +66,7 @@ A complete, unit-tested Markdown generation layer in `SdCharacterSheet.Core`:
 | MarkdownBuilder.cs contains `public static string BuildFileName(CharacterExportData` | PASS |
 | MarkdownBuilderTests.cs exists with at least 14 test methods | PASS (18 tests) |
 | All tests pass | PASS (18/18) |
-| `dotnet build SdCharacterSheet.Core` exits 0 | PASS |
+| `dotnet build TorchKeeper.Core` exits 0 | PASS |
 | MarkdownBuilder.cs has no `using Microsoft.Maui` | PASS |
 | MarkdownBuilder.cs output has no `---` horizontal rules | PASS |
 
@@ -81,9 +81,9 @@ None. All methods are fully implemented and tested.
 ## Self-Check: PASSED
 
 Files exist:
-- SdCharacterSheet.Core/Export/CharacterExportData.cs: FOUND
-- SdCharacterSheet.Core/Export/MarkdownBuilder.cs: FOUND
-- SdCharacterSheet.Tests/Export/MarkdownBuilderTests.cs: FOUND
+- TorchKeeper.Core/Export/CharacterExportData.cs: FOUND
+- TorchKeeper.Core/Export/MarkdownBuilder.cs: FOUND
+- TorchKeeper.Tests/Export/MarkdownBuilderTests.cs: FOUND
 
 Commits exist:
 - 9be7b78 (RED phase — tests + stubs): FOUND

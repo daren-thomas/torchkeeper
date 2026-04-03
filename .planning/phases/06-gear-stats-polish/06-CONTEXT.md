@@ -70,18 +70,18 @@ New capabilities (dice roller, multi-character roster, character builder) belong
 - `examples/M'liox.json` — Additional example.
 
 ### Codebase Files
-- `SdCharacterSheet.Core/Models/GearItem.cs` — Current GearItem model (no FreeCarry flag)
-- `SdCharacterSheet/ViewModels/CharacterViewModel.cs` — GearSlotTotal, GearSlotsUsed, CoinSlots calculations
-- `SdCharacterSheet/ViewModels/StatRowViewModel.cs` — BaseStat, TotalScore, ModifierDisplay, BonusSources
-- `SdCharacterSheet/ViewModels/GearItemViewModel.cs` — Per-item ViewModel
-- `SdCharacterSheet/Views/Popups/GearItemPopup.xaml` — Gear item edit popup (add Free Carry checkbox here)
-- `SdCharacterSheet/Views/GearPage.xaml` — Gear list view (add separate Free Carry section)
-- `SdCharacterSheet/Views/SheetPage.xaml` — Stat rows with expand/collapse (add Base row here)
-- `SdCharacterSheet.Core/Export/MarkdownBuilder.cs` — Gear section export (add Free Carry section)
-- `SdCharacterSheet.Core/Export/CharacterExportData.cs` — Export data record (may need FreeCarry items list)
-- `SdCharacterSheet/Services/MarkdownExportService.cs` — Builds CharacterExportData from ViewModel
-- `SdCharacterSheet.Core/DTOs/ShadowdarklingsJson.cs` — Import DTO (add Levels list + SdLevelEntry class)
-- `SdCharacterSheet.Core/Services/ShadowdarklingsImportService.cs` — Import logic (populate Talents)
+- `TorchKeeper.Core/Models/GearItem.cs` — Current GearItem model (no FreeCarry flag)
+- `TorchKeeper/ViewModels/CharacterViewModel.cs` — GearSlotTotal, GearSlotsUsed, CoinSlots calculations
+- `TorchKeeper/ViewModels/StatRowViewModel.cs` — BaseStat, TotalScore, ModifierDisplay, BonusSources
+- `TorchKeeper/ViewModels/GearItemViewModel.cs` — Per-item ViewModel
+- `TorchKeeper/Views/Popups/GearItemPopup.xaml` — Gear item edit popup (add Free Carry checkbox here)
+- `TorchKeeper/Views/GearPage.xaml` — Gear list view (add separate Free Carry section)
+- `TorchKeeper/Views/SheetPage.xaml` — Stat rows with expand/collapse (add Base row here)
+- `TorchKeeper.Core/Export/MarkdownBuilder.cs` — Gear section export (add Free Carry section)
+- `TorchKeeper.Core/Export/CharacterExportData.cs` — Export data record (may need FreeCarry items list)
+- `TorchKeeper/Services/MarkdownExportService.cs` — Builds CharacterExportData from ViewModel
+- `TorchKeeper.Core/DTOs/ShadowdarklingsJson.cs` — Import DTO (add Levels list + SdLevelEntry class)
+- `TorchKeeper.Core/Services/ShadowdarklingsImportService.cs` — Import logic (populate Talents)
 
 </canonical_refs>
 

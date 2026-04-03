@@ -112,7 +112,7 @@ No other items in the visible PDF pages are marked "free to carry." The PDF does
 
 ## Current Code State
 
-### `SdCharacterSheet.Core/Models/GearItem.cs` (lines 1-9)
+### `TorchKeeper.Core/Models/GearItem.cs` (lines 1-9)
 
 Current shape:
 ```csharp
@@ -127,7 +127,7 @@ public class GearItem
 
 **Needs:** Add `public bool IsFreeCarry { get; set; }`.
 
-### `SdCharacterSheet.Core/Models/MagicItem.cs` (lines 1-8)
+### `TorchKeeper.Core/Models/MagicItem.cs` (lines 1-8)
 
 Current shape:
 ```csharp
@@ -141,7 +141,7 @@ public class MagicItem
 
 **Needs:** Add `public bool IsFreeCarry { get; set; }` — magic items can also be free-carry by user choice. Without this, the checkbox in GearItemPopup cannot persist for magic items.
 
-### `SdCharacterSheet.Core/DTOs/CharacterSaveData.cs` (lines 59-73)
+### `TorchKeeper.Core/DTOs/CharacterSaveData.cs` (lines 59-73)
 
 Current `GearItemData`:
 ```csharp
@@ -168,16 +168,16 @@ public class MagicItemData
 
 **Needs:** Add `public bool IsFreeCarry { get; init; }` to `MagicItemData`.
 
-`CharacterSaveData` is in `SdCharacterSheet.Core/DTOs/CharacterSaveData.cs` (the path shown in git status deletion was the old MAUI-project copy — the canonical version is now in Core).
+`CharacterSaveData` is in `TorchKeeper.Core/DTOs/CharacterSaveData.cs` (the path shown in git status deletion was the old MAUI-project copy — the canonical version is now in Core).
 
-### `SdCharacterSheet.Core/Services/CharacterFileService.cs`
+### `TorchKeeper.Core/Services/CharacterFileService.cs`
 
 `MapToDto` (line 74): maps `character.Gear` to `GearItemData` — must add `IsFreeCarry = g.IsFreeCarry`.
 `MapToDto` (line 83): maps `character.MagicItems` to `MagicItemData` — must add `IsFreeCarry = m.IsFreeCarry`.
 `MapFromDto` (line 130): maps `GearItemData` to `GearItem` — must add `IsFreeCarry = g.IsFreeCarry`.
 `MapFromDto` (line 139): maps `MagicItemData` to `MagicItem` — must add `IsFreeCarry = m.IsFreeCarry`.
 
-### `SdCharacterSheet/ViewModels/GearItemViewModel.cs` (lines 1-48)
+### `TorchKeeper/ViewModels/GearItemViewModel.cs` (lines 1-48)
 
 Current: no `IsFreeCarry` property.
 
@@ -197,7 +197,7 @@ public static bool IsKnownFreeCarry(string name) => KnownFreeCarryNames.Contains
 
 The stored `IsFreeCarry` value wins over auto-detect (user can override). On fresh import from Shadowdarklings where `IsFreeCarry` has no stored value (defaults to `false`), auto-detect fires because the model value is `false` and the name matches. Implementation: set `isFreeCarry = g.IsFreeCarry || IsKnownFreeCarry(g.Name)`.
 
-### `SdCharacterSheet/ViewModels/CharacterViewModel.cs`
+### `TorchKeeper/ViewModels/CharacterViewModel.cs`
 
 **`GearSlotsUsed` (line 93):**
 ```csharp
@@ -219,7 +219,7 @@ if (e.PropertyName is nameof(GearItemViewModel.Slots) or nameof(GearItemViewMode
 
 **`LoadCharacter` (line 280):** `GearItems.Add(new GearItemViewModel(g))` — no change needed here as the GearItemViewModel constructor will handle IsFreeCarry from the model.
 
-### `SdCharacterSheet/Views/Popups/GearItemPopup.xaml` (lines 1-24)
+### `TorchKeeper/Views/Popups/GearItemPopup.xaml` (lines 1-24)
 
 Currently has: Name, Slots, Type, Note entries plus Save/Delete buttons.
 
@@ -233,13 +233,13 @@ XAML pattern to add:
 </HorizontalStackLayout>
 ```
 
-### `SdCharacterSheet/Views/Popups/GearItemPopup.xaml.cs` (lines 1-63)
+### `TorchKeeper/Views/Popups/GearItemPopup.xaml.cs` (lines 1-63)
 
 **Constructor (edit existing, line 17):** Pre-fill `FreeCarryCheckBox.IsChecked = item.IsFreeCarry`.
 **`OnSave` (line 38):** Read `FreeCarryCheckBox.IsChecked` and set `_existingItem.IsFreeCarry` or pass it to new `GearItemViewModel`.
 **Min slots enforcement (line 38):** Currently `slots = Math.Max(1, slots)`. When `IsFreeCarry` is true, 0 slots is valid — change to `slots = Math.Max(0, slots)` and let free-carry status drive the slot-exclusion logic in `GearSlotsUsed`, not the slot value itself. The item's `Slots` value remains user-editable for display purposes; GearSlotsUsed simply ignores free-carry items regardless of their Slots value.
 
-### `SdCharacterSheet/Views/GearPage.xaml` (lines 1-71)
+### `TorchKeeper/Views/GearPage.xaml` (lines 1-71)
 
 Currently has one `VerticalStackLayout` bound to `GearItems` (line 34).
 
@@ -257,7 +257,7 @@ However, since `GearItems` is an `ObservableCollection` and MAUI `BindableLayout
 
 **Simplest viable approach:** Add computed `IEnumerable<GearItemViewModel>` properties that filter `GearItems`, then rebind when `GearItems` changes. Since `BindableLayout.ItemsSource` does not support change notifications on computed `IEnumerable` unless wrapped in `ObservableCollection`, the planner should use two separate maintained `ObservableCollection` properties: `RegularGearItems` and `FreeCarryItems`, both updated whenever `GearItems` changes or an item's `IsFreeCarry` changes.
 
-### `SdCharacterSheet/Views/SheetPage.xaml` (lines 191-208)
+### `TorchKeeper/Views/SheetPage.xaml` (lines 191-208)
 
 Current expanded panel (lines 191-208):
 ```xml
@@ -288,7 +288,7 @@ Current expanded panel (lines 191-208):
 
 `StatRowViewModel.BaseStat` (line 22) is already an `[ObservableProperty]` — no VM change needed for STAT-01. The XAML binding `{Binding BaseStat}` works directly.
 
-### `SdCharacterSheet.Core/Export/CharacterExportData.cs` (lines 1-55)
+### `TorchKeeper.Core/Export/CharacterExportData.cs` (lines 1-55)
 
 Current `GearExportItem` (line 55): `public record GearExportItem(string Name, int Slots);`
 
@@ -297,7 +297,7 @@ Current `GearExportItem` (line 55): `public record GearExportItem(string Name, i
 - Add `FreeCarryItems` list to `CharacterExportData`: `public required IReadOnlyList<GearExportItem> FreeCarryItems { get; init; }`
 - The `GearItems` list should contain only regular (non-free-carry) gear for export parity with the UI.
 
-### `SdCharacterSheet/Services/MarkdownExportService.cs` (lines 59-62)
+### `TorchKeeper/Services/MarkdownExportService.cs` (lines 59-62)
 
 Current gear mapping (line 60):
 ```csharp
@@ -321,7 +321,7 @@ var freeCarryItems = vm.GearItems
 
 And pass `FreeCarryItems = freeCarryItems` to `CharacterExportData`.
 
-### `SdCharacterSheet.Core/Export/MarkdownBuilder.cs` (lines 70-107)
+### `TorchKeeper.Core/Export/MarkdownBuilder.cs` (lines 70-107)
 
 Current gear section starts at line 71:
 ```csharp
@@ -345,7 +345,7 @@ if (data.FreeCarryItems.Count > 0)
 
 The existing `GearItems` loop (line 80) already only iterates non-free-carry items after the service fix — the slot count in the header (`data.GearSlotsUsed`) will match because the VM already excludes free-carry items.
 
-### `SdCharacterSheet.Core/DTOs/ShadowdarklingsJson.cs` (lines 1-77)
+### `TorchKeeper.Core/DTOs/ShadowdarklingsJson.cs` (lines 1-77)
 
 **Needs:** Add `Levels` property and `SdLevelEntry` class (D-15):
 ```csharp
@@ -362,7 +362,7 @@ public class SdLevelEntry
 }
 ```
 
-### `SdCharacterSheet.Core/Services/ShadowdarklingsImportService.cs` (lines 1-92)
+### `TorchKeeper.Core/Services/ShadowdarklingsImportService.cs` (lines 1-92)
 
 **Needs:** After the `bonuses` mapping (line 45), build the Talents string from `sdJson.Levels` (D-13):
 ```csharp
@@ -509,9 +509,9 @@ Touch-point order:
 
 ### Existing Test Framework
 
-- **Framework:** xUnit (confirmed from `SdCharacterSheet.Tests.csproj` build artifacts — xunit.core.dll, xunit.assert.dll)
-- **Run command:** `dotnet test SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj`
-- **Test files:** All in `SdCharacterSheet.Tests/`
+- **Framework:** xUnit (confirmed from `TorchKeeper.Tests.csproj` build artifacts — xunit.core.dll, xunit.assert.dll)
+- **Run command:** `dotnet test TorchKeeper.Tests/TorchKeeper.Tests.csproj`
+- **Test files:** All in `TorchKeeper.Tests/`
 - **Pattern:** Pure unit tests using test-local stubs for MAUI-dependent types; real service classes tested directly; `[Fact]` and `[Trait("Category", "Unit")]`
 
 ### Existing Test Files

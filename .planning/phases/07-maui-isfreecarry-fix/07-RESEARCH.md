@@ -6,11 +6,11 @@
 
 ## Summary
 
-Phase 7 is a surgical four-file patch to the MAUI-local model layer. The gap was precisely documented by the v1.2 milestone audit (MILESTONE-AUDIT.md): the Core library (`SdCharacterSheet.Core`) was fully updated with `IsFreeCarry` during Phase 6, but the MAUI project (`SdCharacterSheet`) maintains parallel copies of four files under the same namespace (`SdCharacterSheet.Models`, `SdCharacterSheet.DTOs`, `SdCharacterSheet.Services`) that were never updated. Because the local definition wins the CS0436 ambiguity, MAUI compiles against the local `GearItem` which lacks `IsFreeCarry`, likely producing CS0117 compile errors on `GearItemViewModel`'s accesses. At runtime (if it even compiles), `MapToDto` and `MapFromDto` silently drop the property from JSON, destroying manually-flagged free-carry status on every save/load cycle.
+Phase 7 is a surgical four-file patch to the MAUI-local model layer. The gap was precisely documented by the v1.2 milestone audit (MILESTONE-AUDIT.md): the Core library (`TorchKeeper.Core`) was fully updated with `IsFreeCarry` during Phase 6, but the MAUI project (`TorchKeeper`) maintains parallel copies of four files under the same namespace (`TorchKeeper.Models`, `TorchKeeper.DTOs`, `TorchKeeper.Services`) that were never updated. Because the local definition wins the CS0436 ambiguity, MAUI compiles against the local `GearItem` which lacks `IsFreeCarry`, likely producing CS0117 compile errors on `GearItemViewModel`'s accesses. At runtime (if it even compiles), `MapToDto` and `MapFromDto` silently drop the property from JSON, destroying manually-flagged free-carry status on every save/load cycle.
 
 The fix is a direct port of the four lines added to Core in Phase 6: one property per model file, one property per DTO record, and two assignments per mapping direction in the service. The `GearItemViewModel` that accesses `g.IsFreeCarry` already has the correct logic and needs no changes — it just needs the local model to expose the property. `MauiCharacterFileService` inherits `MapToDto`/`MapFromDto` from the local `CharacterFileService` and needs no changes once the service is fixed.
 
-Because `SdCharacterSheet.Tests` references only `SdCharacterSheet.Core` (verified in the `.csproj`), there is no existing test that exercises the MAUI-local service path. The phase needs a new integration test that exercises the MAUI-local `CharacterFileService` (not the Core one) to verify the round-trip, or alternatively a build-verification step confirming the MAUI project compiles without CS0117 errors. The nyquist_validation config flag is `true`, so a VALIDATION.md is required.
+Because `TorchKeeper.Tests` references only `TorchKeeper.Core` (verified in the `.csproj`), there is no existing test that exercises the MAUI-local service path. The phase needs a new integration test that exercises the MAUI-local `CharacterFileService` (not the Core one) to verify the round-trip, or alternatively a build-verification step confirming the MAUI project compiles without CS0117 errors. The nyquist_validation config flag is `true`, so a VALIDATION.md is required.
 
 **Primary recommendation:** Four targeted property additions and two mapping assignments across four files. Add one new xUnit test exercising the MAUI-local round-trip. Verify build with `dotnet build` targeting net10.0-maccatalyst.
 
@@ -29,7 +29,7 @@ Because `SdCharacterSheet.Tests` references only `SdCharacterSheet.Core` (verifi
 |---------|---------|---------|--------------|
 | .NET MAUI | 10.0.41 | Cross-platform UI framework | Existing project framework |
 | CommunityToolkit.Mvvm | 8.4.0 | ObservableObject / source generators | Already used throughout ViewModels |
-| xUnit | 2.9.3 | Test framework | Already used in SdCharacterSheet.Tests |
+| xUnit | 2.9.3 | Test framework | Already used in TorchKeeper.Tests |
 | System.Text.Json | Built-in | JSON serialization for .sdchar files | Already in use via JsonSerializer |
 
 ### Supporting
@@ -42,10 +42,10 @@ Because `SdCharacterSheet.Tests` references only `SdCharacterSheet.Core` (verifi
 ### Build Commands
 ```bash
 # Build MAUI project (verifies no CS0117 errors)
-dotnet build SdCharacterSheet/SdCharacterSheet.csproj -f net10.0-maccatalyst
+dotnet build TorchKeeper/TorchKeeper.csproj -f net10.0-maccatalyst
 
 # Build and run tests (Core layer only — MAUI layer untestable without platform)
-dotnet test SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj
+dotnet test TorchKeeper.Tests/TorchKeeper.Tests.csproj
 ```
 
 **Version note:** All package versions verified from existing `.csproj` files in the project. No version changes required.
@@ -54,11 +54,11 @@ dotnet test SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj
 
 ### The Dual-Layer Architecture (Critical Context)
 
-This project has a structural pattern where the MAUI project (`SdCharacterSheet/`) contains parallel copies of models, DTOs, and services under the same C# namespaces as `SdCharacterSheet.Core/`. The MAUI project also has a `<ProjectReference>` to Core, but because both assemblies define types in the same namespace, the local definition wins via CS0436 warning (type from referenced assembly is shadowed by local definition).
+This project has a structural pattern where the MAUI project (`TorchKeeper/`) contains parallel copies of models, DTOs, and services under the same C# namespaces as `TorchKeeper.Core/`. The MAUI project also has a `<ProjectReference>` to Core, but because both assemblies define types in the same namespace, the local definition wins via CS0436 warning (type from referenced assembly is shadowed by local definition).
 
 This means:
-- `SdCharacterSheet/ViewModels/GearItemViewModel.cs` uses `using SdCharacterSheet.Models` — this resolves to the **MAUI-local** `GearItem`, not the Core one
-- `SdCharacterSheet/Services/CharacterFileService.cs` maps MAUI-local models to MAUI-local DTOs
+- `TorchKeeper/ViewModels/GearItemViewModel.cs` uses `using TorchKeeper.Models` — this resolves to the **MAUI-local** `GearItem`, not the Core one
+- `TorchKeeper/Services/CharacterFileService.cs` maps MAUI-local models to MAUI-local DTOs
 - `MauiCharacterFileService` inherits from MAUI-local `CharacterFileService`, not Core's
 
 **Consequence for this phase:** Updating Core alone (as Phase 6 did) is insufficient. The MAUI-local files must be updated independently.
@@ -66,7 +66,7 @@ This means:
 ### Recommended Project Structure (Scope)
 
 ```
-SdCharacterSheet/
+TorchKeeper/
 ├── Models/
 │   ├── GearItem.cs          ← ADD: public bool IsFreeCarry { get; set; }
 │   └── MagicItem.cs         ← ADD: public bool IsFreeCarry { get; set; }
@@ -75,7 +75,7 @@ SdCharacterSheet/
 └── Services/
     └── CharacterFileService.cs ← ADD: IsFreeCarry = g.IsFreeCarry in MapToDto + MapFromDto
 
-SdCharacterSheet.Tests/
+TorchKeeper.Tests/
 └── Services/
     └── CharacterFileServiceTests.cs ← ADD: GEAR-01 MAUI round-trip test (new test)
 ```
@@ -84,13 +84,13 @@ SdCharacterSheet.Tests/
 
 Each MAUI-local file should match the Core counterpart exactly for the added property. The exact patterns from Core:
 
-**GearItem / MagicItem (Source: SdCharacterSheet.Core/Models/)**
+**GearItem / MagicItem (Source: TorchKeeper.Core/Models/)**
 ```csharp
 // Core pattern — copy verbatim to MAUI-local files
 public bool IsFreeCarry { get; set; }         // true = excluded from GearSlotsUsed (D-05)
 ```
 
-**CharacterSaveData DTOs (Source: SdCharacterSheet.Core/DTOs/CharacterSaveData.cs line 65, 73)**
+**CharacterSaveData DTOs (Source: TorchKeeper.Core/DTOs/CharacterSaveData.cs line 65, 73)**
 ```csharp
 // In GearItemData:
 public bool IsFreeCarry { get; init; }        // added for GEAR-01 persistence
@@ -101,7 +101,7 @@ public bool IsFreeCarry { get; init; }        // added for GEAR-01 persistence
 
 Note: DTOs use `init` not `set` — consistent with all other DTO properties in the file.
 
-**CharacterFileService MapToDto (Source: SdCharacterSheet.Core/Services/CharacterFileService.cs lines 81, 90)**
+**CharacterFileService MapToDto (Source: TorchKeeper.Core/Services/CharacterFileService.cs lines 81, 90)**
 ```csharp
 // In Gear select:
 new GearItemData
@@ -123,7 +123,7 @@ new MagicItemData
 }
 ```
 
-**CharacterFileService MapFromDto (Source: SdCharacterSheet.Core/Services/CharacterFileService.cs lines 139, 148)**
+**CharacterFileService MapFromDto (Source: TorchKeeper.Core/Services/CharacterFileService.cs lines 139, 148)**
 ```csharp
 // In Gear select:
 new GearItem
@@ -155,12 +155,12 @@ On `LoadOptions`, `PropertyNameCaseInsensitive = true` handles deserialization. 
 
 ### Pattern 3: Test Pattern for MAUI-Local Service
 
-The existing test `RoundTrip_GearItem_IsFreeCarry_Persists` (CharacterFileServiceTests.cs line 122-144) tests the **Core** `CharacterFileService`. A new test should exercise the MAUI-local `CharacterFileService` using the same `NullFileSaver` stub pattern. However, since `SdCharacterSheet.Tests.csproj` only references `SdCharacterSheet.Core`, adding a test for the MAUI-local service requires either:
+The existing test `RoundTrip_GearItem_IsFreeCarry_Persists` (CharacterFileServiceTests.cs line 122-144) tests the **Core** `CharacterFileService`. A new test should exercise the MAUI-local `CharacterFileService` using the same `NullFileSaver` stub pattern. However, since `TorchKeeper.Tests.csproj` only references `TorchKeeper.Core`, adding a test for the MAUI-local service requires either:
 
-1. Adding a `<ProjectReference>` to `SdCharacterSheet` in `SdCharacterSheet.Tests.csproj` — **problematic** because MAUI project targets platform frameworks (net10.0-ios, net10.0-maccatalyst) which aren't compatible with the test project's `net10.0` target.
+1. Adding a `<ProjectReference>` to `TorchKeeper` in `TorchKeeper.Tests.csproj` — **problematic** because MAUI project targets platform frameworks (net10.0-ios, net10.0-maccatalyst) which aren't compatible with the test project's `net10.0` target.
 2. Verifying correctness through build verification (`dotnet build` the MAUI project, confirming no CS0117 or CS0200 errors) rather than a unit test.
 
-**Conclusion:** The MAUI-layer round-trip cannot be unit-tested from `SdCharacterSheet.Tests` because the MAUI project doesn't target `net10.0` (only platform targets). The phase success criteria are validated by (a) MAUI build with zero C# errors, and (b) manual smoke test or build-time verification. The Nyquist validation should document this constraint.
+**Conclusion:** The MAUI-layer round-trip cannot be unit-tested from `TorchKeeper.Tests` because the MAUI project doesn't target `net10.0` (only platform targets). The phase success criteria are validated by (a) MAUI build with zero C# errors, and (b) manual smoke test or build-time verification. The Nyquist validation should document this constraint.
 
 ### Anti-Patterns to Avoid
 
@@ -189,7 +189,7 @@ The existing test `RoundTrip_GearItem_IsFreeCarry_Persists` (CharacterFileServic
 | Live service config | None | None |
 | OS-registered state | None | None |
 | Secrets/env vars | None | None |
-| Build artifacts | `SdCharacterSheet/bin/` and `obj/` contain stale compiled output | `dotnet build` will update; no manual action |
+| Build artifacts | `TorchKeeper/bin/` and `obj/` contain stale compiled output | `dotnet build` will update; no manual action |
 
 **Old `.sdchar` files:** Backward compatible. Existing saves without `IsFreeCarry` in JSON load with `IsFreeCarry = false`, and `GearItemViewModel` auto-detects `KnownFreeCarryNames` (Backpack, Bag of Coins, Thieves Tools) via the constructor fallback. No migration needed.
 
@@ -197,13 +197,13 @@ The existing test `RoundTrip_GearItem_IsFreeCarry_Persists` (CharacterFileServic
 
 ### Pitfall 1: CS0436 Namespace Ambiguity Confusion
 
-**What goes wrong:** Developer assumes `using SdCharacterSheet.Models` in the MAUI project resolves to Core's `GearItem`. It does not. The local assembly's type wins. The compiler emits a CS0436 warning but uses the local definition.
+**What goes wrong:** Developer assumes `using TorchKeeper.Models` in the MAUI project resolves to Core's `GearItem`. It does not. The local assembly's type wins. The compiler emits a CS0436 warning but uses the local definition.
 
-**Why it happens:** Both Core and MAUI-local define `SdCharacterSheet.Models.GearItem`. The local project's definition always shadows the referenced assembly.
+**Why it happens:** Both Core and MAUI-local define `TorchKeeper.Models.GearItem`. The local project's definition always shadows the referenced assembly.
 
-**How to avoid:** Always check whether a file being edited is in `SdCharacterSheet/` (MAUI-local) or `SdCharacterSheet.Core/` (Core). They are separate files that must be kept in sync manually.
+**How to avoid:** Always check whether a file being edited is in `TorchKeeper/` (MAUI-local) or `TorchKeeper.Core/` (Core). They are separate files that must be kept in sync manually.
 
-**Warning signs:** CS0117 error ("SdCharacterSheet.Models.GearItem does not contain a definition for 'IsFreeCarry'") means the local model is outdated.
+**Warning signs:** CS0117 error ("TorchKeeper.Models.GearItem does not contain a definition for 'IsFreeCarry'") means the local model is outdated.
 
 ### Pitfall 2: `init` vs `set` on DTOs
 
@@ -221,7 +221,7 @@ The existing test `RoundTrip_GearItem_IsFreeCarry_Persists` (CharacterFileServic
 
 **Why it happens:** The MAUI build pipeline on macOS runs asset compilation (actool) before or alongside C# compilation. toolchain errors can mask downstream errors.
 
-**How to avoid:** Use `dotnet build SdCharacterSheet/SdCharacterSheet.csproj -f net10.0-maccatalyst 2>&1 | grep -E "error CS|warning CS"` to isolate C# errors from Xcode errors.
+**How to avoid:** Use `dotnet build TorchKeeper/TorchKeeper.csproj -f net10.0-maccatalyst 2>&1 | grep -E "error CS|warning CS"` to isolate C# errors from Xcode errors.
 
 **Warning signs:** Build output shows `actool` or `xcrun` errors but no C# error lines — does not mean C# is clean.
 
@@ -239,15 +239,15 @@ The existing test `RoundTrip_GearItem_IsFreeCarry_Persists` (CharacterFileServic
 
 ### Full Diff: MAUI-local GearItem.cs
 ```csharp
-// Source: SdCharacterSheet.Core/Models/GearItem.cs (line 9) — copy pattern
-// Add to SdCharacterSheet/Models/GearItem.cs after line 8 (Note property)
+// Source: TorchKeeper.Core/Models/GearItem.cs (line 9) — copy pattern
+// Add to TorchKeeper/Models/GearItem.cs after line 8 (Note property)
 public bool IsFreeCarry { get; set; }         // true = excluded from GearSlotsUsed (D-05)
 ```
 
 ### Full Diff: MAUI-local MagicItem.cs
 ```csharp
-// Source: SdCharacterSheet.Core/Models/MagicItem.cs (line 8) — copy pattern
-// Add to SdCharacterSheet/Models/MagicItem.cs after line 7 (Note property)
+// Source: TorchKeeper.Core/Models/MagicItem.cs (line 8) — copy pattern
+// Add to TorchKeeper/Models/MagicItem.cs after line 7 (Note property)
 public bool IsFreeCarry { get; set; }         // true = excluded from GearSlotsUsed (D-05)
 ```
 
@@ -262,7 +262,7 @@ public bool IsFreeCarry { get; init; }        // added for GEAR-01 persistence
 
 ### Build Verification Command
 ```bash
-dotnet build /Users/daren/projects/sd-character-sheet/SdCharacterSheet/SdCharacterSheet.csproj \
+dotnet build /Users/daren/projects/sd-character-sheet/TorchKeeper/TorchKeeper.csproj \
   -f net10.0-maccatalyst 2>&1 | grep -E "^.*error CS|^Build succeeded|^Build FAILED"
 ```
 
@@ -286,7 +286,7 @@ Expected success output: `Build succeeded.` with zero `error CS` lines.
    - Recommendation: Scope Phase 7 strictly to GEAR-01 (IsFreeCarry). Document the `Character.cs` divergence as a separate tech debt item. Do not expand scope without explicit decision.
 
 2. **Test coverage for MAUI-local service path**
-   - What we know: `SdCharacterSheet.Tests` targets `net10.0` and references only Core. MAUI targets are platform-specific (`net10.0-maccatalyst`, `net10.0-ios`) and cannot be referenced from a standard xUnit project.
+   - What we know: `TorchKeeper.Tests` targets `net10.0` and references only Core. MAUI targets are platform-specific (`net10.0-maccatalyst`, `net10.0-ios`) and cannot be referenced from a standard xUnit project.
    - What's unclear: Whether adding a `net10.0` fallback target to the MAUI project would allow importing without Xcode.
    - Recommendation: Accept build verification as the test signal for this phase. Document in VALIDATION.md that MAUI-layer round-trip is verified by build (CS0117 absence) and manual smoke test, not automated unit test.
 
@@ -309,20 +309,20 @@ Expected success output: `Build succeeded.` with zero `error CS` lines.
 | Property | Value |
 |----------|-------|
 | Framework | xUnit 2.9.3 |
-| Config file | `SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj` |
-| Quick run command | `dotnet test SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj` |
-| Full suite command | `dotnet test SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj` |
+| Config file | `TorchKeeper.Tests/TorchKeeper.Tests.csproj` |
+| Quick run command | `dotnet test TorchKeeper.Tests/TorchKeeper.Tests.csproj` |
+| Full suite command | `dotnet test TorchKeeper.Tests/TorchKeeper.Tests.csproj` |
 
 ### Phase Requirements → Test Map
 | Req ID | Behavior | Test Type | Automated Command | File Exists? |
 |--------|----------|-----------|-------------------|-------------|
-| GEAR-01 | IsFreeCarry persists through MAUI-local MapToDto/MapFromDto | build | `dotnet build SdCharacterSheet/SdCharacterSheet.csproj -f net10.0-maccatalyst` — CS0117 absence confirms property exists | ✅ (build, not unit test) |
-| GEAR-01 | IsFreeCarry round-trips through Core service JSON | unit | `dotnet test SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj` | ✅ `CharacterFileServiceTests.cs:122` |
-| GEAR-01 | MAUI-local build compiles without CS0117 | build | `dotnet build SdCharacterSheet/SdCharacterSheet.csproj -f net10.0-maccatalyst 2>&1 \| grep "error CS"` | ✅ (build gate) |
+| GEAR-01 | IsFreeCarry persists through MAUI-local MapToDto/MapFromDto | build | `dotnet build TorchKeeper/TorchKeeper.csproj -f net10.0-maccatalyst` — CS0117 absence confirms property exists | ✅ (build, not unit test) |
+| GEAR-01 | IsFreeCarry round-trips through Core service JSON | unit | `dotnet test TorchKeeper.Tests/TorchKeeper.Tests.csproj` | ✅ `CharacterFileServiceTests.cs:122` |
+| GEAR-01 | MAUI-local build compiles without CS0117 | build | `dotnet build TorchKeeper/TorchKeeper.csproj -f net10.0-maccatalyst 2>&1 \| grep "error CS"` | ✅ (build gate) |
 
 ### Sampling Rate
-- **Per task commit:** `dotnet build SdCharacterSheet/SdCharacterSheet.csproj -f net10.0-maccatalyst`
-- **Per wave merge:** `dotnet test SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj`
+- **Per task commit:** `dotnet build TorchKeeper/TorchKeeper.csproj -f net10.0-maccatalyst`
+- **Per wave merge:** `dotnet test TorchKeeper.Tests/TorchKeeper.Tests.csproj`
 - **Phase gate:** Both build (zero CS errors) and test suite green before `/gsd:verify-work`
 
 ### Wave 0 Gaps
@@ -331,17 +331,17 @@ Expected success output: `Build succeeded.` with zero `error CS` lines.
 ## Sources
 
 ### Primary (HIGH confidence)
-- Direct file inspection: `SdCharacterSheet/Models/GearItem.cs` — confirmed missing `IsFreeCarry`
-- Direct file inspection: `SdCharacterSheet/Models/MagicItem.cs` — confirmed missing `IsFreeCarry`
-- Direct file inspection: `SdCharacterSheet/DTOs/CharacterSaveData.cs` — confirmed `GearItemData` and `MagicItemData` missing `IsFreeCarry`
-- Direct file inspection: `SdCharacterSheet/Services/CharacterFileService.cs` — confirmed `MapToDto`/`MapFromDto` missing `IsFreeCarry` assignments
-- Direct file inspection: `SdCharacterSheet.Core/**` counterpart files — confirmed correct implementation pattern
-- Direct file inspection: `SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj` — confirmed Core-only reference
+- Direct file inspection: `TorchKeeper/Models/GearItem.cs` — confirmed missing `IsFreeCarry`
+- Direct file inspection: `TorchKeeper/Models/MagicItem.cs` — confirmed missing `IsFreeCarry`
+- Direct file inspection: `TorchKeeper/DTOs/CharacterSaveData.cs` — confirmed `GearItemData` and `MagicItemData` missing `IsFreeCarry`
+- Direct file inspection: `TorchKeeper/Services/CharacterFileService.cs` — confirmed `MapToDto`/`MapFromDto` missing `IsFreeCarry` assignments
+- Direct file inspection: `TorchKeeper.Core/**` counterpart files — confirmed correct implementation pattern
+- Direct file inspection: `TorchKeeper.Tests/TorchKeeper.Tests.csproj` — confirmed Core-only reference
 - `.planning/v1.2-MILESTONE-AUDIT.md` — authoritative gap documentation with exact file/line references
-- `SdCharacterSheet/SdCharacterSheet.csproj` — confirmed platform targets prevent net10.0 test inclusion
+- `TorchKeeper/TorchKeeper.csproj` — confirmed platform targets prevent net10.0 test inclusion
 
 ### Secondary (MEDIUM confidence)
-- `SdCharacterSheet/Services/MauiCharacterFileService.cs` — confirms inheritance chain; MauiCharacterFileService inherits from MAUI-local CharacterFileService and needs no changes after parent is fixed
+- `TorchKeeper/Services/MauiCharacterFileService.cs` — confirms inheritance chain; MauiCharacterFileService inherits from MAUI-local CharacterFileService and needs no changes after parent is fixed
 
 ## Metadata
 

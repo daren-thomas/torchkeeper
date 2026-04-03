@@ -11,11 +11,11 @@ re_verification: true
   gaps_remaining: []
   regressions: []
 human_verification:
-  - test: "Verify dotnet test SdCharacterSheet.Tests/ passes 9 tests on a machine with .NET 10 SDK"
+  - test: "Verify dotnet test TorchKeeper.Tests/ passes 9 tests on a machine with .NET 10 SDK"
     expected: "Output shows Passed! — Failed: 0, Passed: 9, Skipped: 0; RoundTrip_SaveLoad_NoDataLoss and Save_ContainsVersionField both listed as passed"
     why_human: "Local environment has only .NET 8 SDK; project targets net10.0. Static inspection confirms the fix is mechanically correct but runtime test execution cannot be confirmed without .NET 10."
   - test: "Verify iOS UTType declaration is picked up at runtime"
-    expected: "iOS Files app or share sheet shows .sdchar files as openable by SdCharacterSheet when the app is installed"
+    expected: "iOS Files app or share sheet shows .sdchar files as openable by TorchKeeper when the app is installed"
     why_human: "UTImportedTypeDeclarations requires device/simulator runtime to validate; static analysis of Info.plist confirms syntax but not runtime registration"
   - test: "Verify MacCatalyst entitlement grants file access"
     expected: "App can present a file open dialog and read files from user-selected directories on macOS"
@@ -74,17 +74,17 @@ Plan 05 made only the minimum necessary change: 12 lines added to the test file,
 
 | Artifact | Status | Notes |
 |---|---|---|
-| `SdCharacterSheet/Models/Character.cs` | VERIFIED | File present; unchanged |
-| `SdCharacterSheet/Models/BonusSource.cs` | VERIFIED | File present; unchanged |
-| `SdCharacterSheet/Models/GearItem.cs` | VERIFIED | File present; unchanged |
-| `SdCharacterSheet/Models/MagicItem.cs` | VERIFIED | File present; unchanged |
-| `SdCharacterSheet/DTOs/CharacterSaveData.cs` | VERIFIED | File present; unchanged |
-| `SdCharacterSheet/DTOs/ShadowdarklingsJson.cs` | VERIFIED | File present; unchanged |
-| `SdCharacterSheet/Services/ShadowdarklingsImportService.cs` | VERIFIED | File present; unchanged |
-| `SdCharacterSheet/Services/CharacterFileService.cs` | VERIFIED | File present; unchanged — no production code modifications in plan 05 |
-| `SdCharacterSheet/MauiProgram.cs` | VERIFIED | File present; all 4 services registered |
-| `SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj` | VERIFIED | ProjectReference to main project intact |
-| `SdCharacterSheet.Tests/TestData/Brim.json` | VERIFIED | File present; `CopyToOutputDirectory=PreserveNewest` |
+| `TorchKeeper/Models/Character.cs` | VERIFIED | File present; unchanged |
+| `TorchKeeper/Models/BonusSource.cs` | VERIFIED | File present; unchanged |
+| `TorchKeeper/Models/GearItem.cs` | VERIFIED | File present; unchanged |
+| `TorchKeeper/Models/MagicItem.cs` | VERIFIED | File present; unchanged |
+| `TorchKeeper/DTOs/CharacterSaveData.cs` | VERIFIED | File present; unchanged |
+| `TorchKeeper/DTOs/ShadowdarklingsJson.cs` | VERIFIED | File present; unchanged |
+| `TorchKeeper/Services/ShadowdarklingsImportService.cs` | VERIFIED | File present; unchanged |
+| `TorchKeeper/Services/CharacterFileService.cs` | VERIFIED | File present; unchanged — no production code modifications in plan 05 |
+| `TorchKeeper/MauiProgram.cs` | VERIFIED | File present; all 4 services registered |
+| `TorchKeeper.Tests/TorchKeeper.Tests.csproj` | VERIFIED | ProjectReference to main project intact |
+| `TorchKeeper.Tests/TestData/Brim.json` | VERIFIED | File present; `CopyToOutputDirectory=PreserveNewest` |
 
 ---
 
@@ -100,7 +100,7 @@ Plan 05 made only the minimum necessary change: 12 lines added to the test file,
 | `CharacterFileService.cs` | `IFileSaver` | Constructor injection; `_fileSaver.SaveAsync(...)` | VERIFIED | Unchanged |
 | `CharacterFileService.cs` | `FilePicker.Default` | `FilePicker.Default.PickAsync(SdCharPickOptions)` | VERIFIED | Unchanged |
 | `MauiProgram.cs` | `CharacterFileService.cs` | `builder.Services.AddSingleton<CharacterFileService>()` | VERIFIED | Unchanged |
-| `SdCharacterSheet.Tests.csproj` | `SdCharacterSheet.csproj` | `ProjectReference` | VERIFIED | Unchanged |
+| `TorchKeeper.Tests.csproj` | `TorchKeeper.csproj` | `ProjectReference` | VERIFIED | Unchanged |
 
 ---
 
@@ -126,14 +126,14 @@ None. The CS7036 blocker from the previous verification is resolved. No TODO/FIX
 
 ### 1. Full Test Suite Execution (.NET 10)
 
-**Test:** On a machine with .NET 10 SDK and MAUI workload installed, run `dotnet test SdCharacterSheet.Tests/` from the repo root.
+**Test:** On a machine with .NET 10 SDK and MAUI workload installed, run `dotnet test TorchKeeper.Tests/` from the repo root.
 **Expected:** Output shows `Passed! — Failed: 0, Passed: 9, Skipped: 0`. Both `RoundTrip_SaveLoad_NoDataLoss` and `Save_ContainsVersionField` listed as passed. No compilation errors.
 **Why human:** This machine has only .NET 8 SDK (NETSDK1045 error when attempting to build). Static inspection confirms the fix is mechanically correct (CS7036 is resolved by the `NullFileSaver` argument), but runtime test execution is the definitive confirmation for FILE-02 and FILE-03.
 
 ### 2. iOS File Association at Runtime
 
 **Test:** Install the app on an iOS simulator or device. Open the Files app and tap a .sdchar file.
-**Expected:** The system offers SdCharacterSheet as an app that can open the file, based on `UTImportedTypeDeclarations` in `Info.plist`.
+**Expected:** The system offers TorchKeeper as an app that can open the file, based on `UTImportedTypeDeclarations` in `Info.plist`.
 **Why human:** UTType declarations require runtime OS registration; static plist analysis confirms syntax but not runtime behavior.
 
 ### 3. MacCatalyst File Access Entitlement

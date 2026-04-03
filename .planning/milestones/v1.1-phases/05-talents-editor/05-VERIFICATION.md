@@ -40,8 +40,8 @@ human_verification:
 
 | Artifact | Expected | Status | Details |
 |----------|----------|--------|---------|
-| `SdCharacterSheet.Tests/Services/CharacterFileServiceTests.cs` | Round-trip assertion for Talents field | VERIFIED | Contains `Talents = "Backstab +1"` at line 55 and `Assert.Equal("Backstab +1", loaded.Talents)` at line 90 — exact strings required by must_haves. |
-| `SdCharacterSheet.Tests/Export/MarkdownBuilderTests.cs` | Talents section presence/absence tests | VERIFIED | Contains `BuildMarkdown_TalentsSection_AppearsWhenTalentsNonEmpty` (line 369) and `BuildMarkdown_TalentsSection_OmittedWhenTalentsEmpty` (line 382). `MinimalData()` helper has `string talents = ""` parameter (line 24) wired to `Talents = talents` (line 54). |
+| `TorchKeeper.Tests/Services/CharacterFileServiceTests.cs` | Round-trip assertion for Talents field | VERIFIED | Contains `Talents = "Backstab +1"` at line 55 and `Assert.Equal("Backstab +1", loaded.Talents)` at line 90 — exact strings required by must_haves. |
+| `TorchKeeper.Tests/Export/MarkdownBuilderTests.cs` | Talents section presence/absence tests | VERIFIED | Contains `BuildMarkdown_TalentsSection_AppearsWhenTalentsNonEmpty` (line 369) and `BuildMarkdown_TalentsSection_OmittedWhenTalentsEmpty` (line 382). `MinimalData()` helper has `string talents = ""` parameter (line 24) wired to `Talents = talents` (line 54). |
 
 ---
 
@@ -69,8 +69,8 @@ No orphaned requirements — REQUIREMENTS.md maps only TLNT-01 to Phase 5, and t
 No anti-patterns detected.
 
 Scanned files:
-- `SdCharacterSheet.Tests/Services/CharacterFileServiceTests.cs` — no TODO/FIXME/placeholder, no empty implementations, no stub indicators
-- `SdCharacterSheet.Tests/Export/MarkdownBuilderTests.cs` — no TODO/FIXME/placeholder, no empty implementations, no stub indicators
+- `TorchKeeper.Tests/Services/CharacterFileServiceTests.cs` — no TODO/FIXME/placeholder, no empty implementations, no stub indicators
+- `TorchKeeper.Tests/Export/MarkdownBuilderTests.cs` — no TODO/FIXME/placeholder, no empty implementations, no stub indicators
 
 ---
 

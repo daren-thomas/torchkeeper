@@ -22,8 +22,8 @@ tech-stack:
 key-files:
   created: []
   modified:
-    - SdCharacterSheet/AppShell.xaml
-    - SdCharacterSheet/MauiProgram.cs
+    - TorchKeeper/AppShell.xaml
+    - TorchKeeper/MauiProgram.cs
 
 key-decisions:
   - "Tab pages registered as AddTransient — Shell creates one per tab, but all share singleton CharacterViewModel via DI"
@@ -66,8 +66,8 @@ completed: 2026-03-15
 **Plan metadata:** (pending final commit)
 
 ## Files Created/Modified
-- `SdCharacterSheet/AppShell.xaml` - Replaced single ShellContent with TabBar containing Sheet, Gear, Notes tabs
-- `SdCharacterSheet/MauiProgram.cs` - Added AddTransient registrations for all three tab pages
+- `TorchKeeper/AppShell.xaml` - Replaced single ShellContent with TabBar containing Sheet, Gear, Notes tabs
+- `TorchKeeper/MauiProgram.cs` - Added AddTransient registrations for all three tab pages
 
 ## Decisions Made
 - Tab pages registered as `AddTransient` so Shell creates one per tab, but all receive the singleton `CharacterViewModel` via constructor injection — this is the correct pattern for shared state across tabs
@@ -78,7 +78,7 @@ completed: 2026-03-15
 
 None — plan executed exactly as written.
 
-Note: `dotnet build SdCharacterSheet/` fails with NU1015 (no version specified for Microsoft.Maui.Controls) — this is a pre-existing environment constraint documented in Phase 1 decisions: ".NET 10 + MAUI workload required to build." The Core and Tests projects build and pass. The XAML changes are syntactically correct.
+Note: `dotnet build TorchKeeper/` fails with NU1015 (no version specified for Microsoft.Maui.Controls) — this is a pre-existing environment constraint documented in Phase 1 decisions: ".NET 10 + MAUI workload required to build." The Core and Tests projects build and pass. The XAML changes are syntactically correct.
 
 ## Issues Encountered
 - MAUI project build fails in the sandbox environment (NU1015 pre-existing issue) — same constraint present for all prior plans; build verification passes for Core/Tests.

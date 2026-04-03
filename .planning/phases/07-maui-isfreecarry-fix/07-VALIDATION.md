@@ -17,18 +17,18 @@ created: 2026-03-29
 
 | Property | Value |
 |----------|-------|
-| **Framework** | xUnit (SdCharacterSheet.Tests) |
-| **Config file** | `SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj` |
-| **Quick run command** | `dotnet test SdCharacterSheet.Tests` |
-| **Full suite command** | `dotnet test SdCharacterSheet.Tests && dotnet build SdCharacterSheet -f net10.0-maccatalyst` |
+| **Framework** | xUnit (TorchKeeper.Tests) |
+| **Config file** | `TorchKeeper.Tests/TorchKeeper.Tests.csproj` |
+| **Quick run command** | `dotnet test TorchKeeper.Tests` |
+| **Full suite command** | `dotnet test TorchKeeper.Tests && dotnet build TorchKeeper -f net10.0-maccatalyst` |
 | **Estimated runtime** | ~15 seconds |
 
 ---
 
 ## Sampling Rate
 
-- **After every task commit:** Run `dotnet test SdCharacterSheet.Tests`
-- **After every plan wave:** Run `dotnet test SdCharacterSheet.Tests && dotnet build SdCharacterSheet -f net10.0-maccatalyst`
+- **After every task commit:** Run `dotnet test TorchKeeper.Tests`
+- **After every plan wave:** Run `dotnet test TorchKeeper.Tests && dotnet build TorchKeeper -f net10.0-maccatalyst`
 - **Before `/gsd:verify-work`:** Full suite must be green
 - **Max feedback latency:** 15 seconds
 
@@ -38,8 +38,8 @@ created: 2026-03-29
 
 | Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 7-01-01 | 01 | 1 | GEAR-01 | build | `dotnet build SdCharacterSheet -f net10.0-maccatalyst` | ✅ | ⬜ pending |
-| 7-01-02 | 01 | 1 | GEAR-01 | build | `dotnet build SdCharacterSheet -f net10.0-maccatalyst` | ✅ | ⬜ pending |
+| 7-01-01 | 01 | 1 | GEAR-01 | build | `dotnet build TorchKeeper -f net10.0-maccatalyst` | ✅ | ⬜ pending |
+| 7-01-02 | 01 | 1 | GEAR-01 | build | `dotnet build TorchKeeper -f net10.0-maccatalyst` | ✅ | ⬜ pending |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 

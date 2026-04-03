@@ -9,7 +9,7 @@ requires:
   - phase: 02-core-sheet
     provides: CharacterViewModel with all observable properties, StatRowViewModel with Action<int> callback, GearItemViewModel, ObservableCollections for StatRows/Attacks/GearItems
   - phase: 01-foundation
-    provides: SdCharacterSheet.Core models (BonusSource, Character, GearItem, MagicItem)
+    provides: TorchKeeper.Core models (BonusSource, Character, GearItem, MagicItem)
 provides:
   - SheetPage.xaml: 4-section ScrollView tab — Identity Grid, HP/XP tracker with MaxHP tap-to-edit, Stats BindableLayout with score tap-to-edit, Attacks CollectionView
   - AttackPopup.xaml: CommunityToolkit.Maui Popup for adding and editing attack strings
@@ -28,12 +28,12 @@ tech-stack:
 
 key-files:
   created:
-    - SdCharacterSheet/Views/SheetPage.xaml
-    - SdCharacterSheet/Views/SheetPage.xaml.cs
-    - SdCharacterSheet/Views/Popups/AttackPopup.xaml
-    - SdCharacterSheet/Views/Popups/AttackPopup.xaml.cs
+    - TorchKeeper/Views/SheetPage.xaml
+    - TorchKeeper/Views/SheetPage.xaml.cs
+    - TorchKeeper/Views/Popups/AttackPopup.xaml
+    - TorchKeeper/Views/Popups/AttackPopup.xaml.cs
   modified:
-    - SdCharacterSheet/ViewModels/StatRowViewModel.cs
+    - TorchKeeper/ViewModels/StatRowViewModel.cs
 
 key-decisions:
   - "Stats section uses BindableLayout (not CollectionView+Expander) — iOS safe per CommunityToolkit.Maui issues #1557 and #1670"
@@ -76,11 +76,11 @@ Each task was committed atomically:
 2. **Task 2: Add attacks section to SheetPage and create AttackPopup** - `175d171` (feat)
 
 ## Files Created/Modified
-- `SdCharacterSheet/Views/SheetPage.xaml` - 4-section sheet tab: Identity grid, HP/XP tracker with MaxHP tap-to-edit, Stats BindableLayout with tap-to-edit score and expandable bonus sources, Attacks CollectionView
-- `SdCharacterSheet/Views/SheetPage.xaml.cs` - Code-behind: CharacterViewModel injection, HP +/- handlers, MaxHP Label/Entry toggle, OnAttackTapped and OnAddAttackClicked popup wiring
-- `SdCharacterSheet/Views/Popups/AttackPopup.xaml` - CommunityToolkit.Maui Popup with Entry for attack text, Save and Delete buttons
-- `SdCharacterSheet/Views/Popups/AttackPopup.xaml.cs` - Dual constructors (new/edit), OnSave writes to Attacks collection, OnDelete removes by index
-- `SdCharacterSheet/ViewModels/StatRowViewModel.cs` - Added IsEditingBase observable property, BeginEditBaseCommand and CommitBaseEditCommand relay commands
+- `TorchKeeper/Views/SheetPage.xaml` - 4-section sheet tab: Identity grid, HP/XP tracker with MaxHP tap-to-edit, Stats BindableLayout with tap-to-edit score and expandable bonus sources, Attacks CollectionView
+- `TorchKeeper/Views/SheetPage.xaml.cs` - Code-behind: CharacterViewModel injection, HP +/- handlers, MaxHP Label/Entry toggle, OnAttackTapped and OnAddAttackClicked popup wiring
+- `TorchKeeper/Views/Popups/AttackPopup.xaml` - CommunityToolkit.Maui Popup with Entry for attack text, Save and Delete buttons
+- `TorchKeeper/Views/Popups/AttackPopup.xaml.cs` - Dual constructors (new/edit), OnSave writes to Attacks collection, OnDelete removes by index
+- `TorchKeeper/ViewModels/StatRowViewModel.cs` - Added IsEditingBase observable property, BeginEditBaseCommand and CommitBaseEditCommand relay commands
 
 ## Decisions Made
 - Stats section uses BindableLayout on VerticalStackLayout rather than CollectionView+Expander (plan requirement — avoids CommunityToolkit.Maui iOS resize bugs #1557, #1670)
@@ -92,7 +92,7 @@ Each task was committed atomically:
 None - plan executed exactly as written.
 
 ## Issues Encountered
-- MAUI project build (`dotnet build SdCharacterSheet/`) cannot run in this environment — MAUI workload and NuGet packages require network or local cache. Test project (net10.0 class library) builds with 0 errors, confirming shared C# code compiles correctly. XAML validation requires a MAUI build environment.
+- MAUI project build (`dotnet build TorchKeeper/`) cannot run in this environment — MAUI workload and NuGet packages require network or local cache. Test project (net10.0 class library) builds with 0 errors, confirming shared C# code compiles correctly. XAML validation requires a MAUI build environment.
 
 ## User Setup Required
 None - no external service configuration required.

@@ -6,15 +6,15 @@ tags: [tests, talents, round-trip, markdown-export, coverage]
 dependency_graph:
   requires: []
   provides: [TLNT-01 test coverage for save/load and export]
-  affects: [SdCharacterSheet.Tests]
+  affects: [TorchKeeper.Tests]
 tech_stack:
   added: []
   patterns: [xUnit Fact, TDD green-path, MinimalData helper extension]
 key_files:
   created: []
   modified:
-    - SdCharacterSheet.Tests/Services/CharacterFileServiceTests.cs
-    - SdCharacterSheet.Tests/Export/MarkdownBuilderTests.cs
+    - TorchKeeper.Tests/Services/CharacterFileServiceTests.cs
+    - TorchKeeper.Tests/Export/MarkdownBuilderTests.cs
 decisions:
   - "Talents test coverage added as GREEN-only TDD (implementation already existed in commit 4239483)"
   - "MinimalData() helper extended with talents parameter following exact same pattern as spellsKnown"
@@ -33,8 +33,8 @@ Targeted xUnit test assertions covering the Talents field's save/load round-trip
 
 | Task | Name | Commit | Files |
 |------|------|--------|-------|
-| 1 | Add Talents round-trip coverage to CharacterFileServiceTests | 2b00ffc | SdCharacterSheet.Tests/Services/CharacterFileServiceTests.cs |
-| 2 | Add Talents section tests to MarkdownBuilderTests | 4f9ad3a | SdCharacterSheet.Tests/Export/MarkdownBuilderTests.cs |
+| 1 | Add Talents round-trip coverage to CharacterFileServiceTests | 2b00ffc | TorchKeeper.Tests/Services/CharacterFileServiceTests.cs |
+| 2 | Add Talents section tests to MarkdownBuilderTests | 4f9ad3a | TorchKeeper.Tests/Export/MarkdownBuilderTests.cs |
 
 ## What Was Built
 

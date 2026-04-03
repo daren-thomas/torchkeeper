@@ -27,7 +27,7 @@ re_verification: false
 | 4  | MapToDto projects IsFreeCarry from model to DTO for both gear and magic items               | ✓ VERIFIED | CharacterFileService.cs line 109 (`g.IsFreeCarry`) and line 118 (`m.IsFreeCarry`) |
 | 5  | MapFromDto projects IsFreeCarry from DTO to model for both gear and magic items             | ✓ VERIFIED | CharacterFileService.cs line 165 (`g.IsFreeCarry`) and line 174 (`m.IsFreeCarry`) |
 | 6  | MAUI project compiles with zero CS0117 errors                                               | ✓ VERIFIED | `dotnet build` produces zero `error CS` lines; build failure is infrastructure-only (Xcode/actool plugin load failures — pre-existing, unrelated to these changes) |
-| 7  | Existing Core-layer tests still pass                                                        | ✓ VERIFIED | `dotnet test SdCharacterSheet.Tests` — Passed: 67, Failed: 0, Skipped: 0 |
+| 7  | Existing Core-layer tests still pass                                                        | ✓ VERIFIED | `dotnet test TorchKeeper.Tests` — Passed: 67, Failed: 0, Skipped: 0 |
 
 **Score:** 7/7 truths verified
 
@@ -37,10 +37,10 @@ re_verification: false
 
 | Artifact                                              | Expected                                              | Status     | Details                                                                    |
 |-------------------------------------------------------|-------------------------------------------------------|------------|----------------------------------------------------------------------------|
-| `SdCharacterSheet/Models/GearItem.cs`                 | `public bool IsFreeCarry { get; set; }`              | ✓ VERIFIED | Present at line 9; exact text matches                                      |
-| `SdCharacterSheet/Models/MagicItem.cs`                | `public bool IsFreeCarry { get; set; }`              | ✓ VERIFIED | Present at line 8; exact text matches                                      |
-| `SdCharacterSheet/DTOs/CharacterSaveData.cs`          | `public bool IsFreeCarry { get; init; }` x2          | ✓ VERIFIED | Present in GearItemData (line 63) and MagicItemData (line 71); init accessor confirmed |
-| `SdCharacterSheet/Services/CharacterFileService.cs`   | `IsFreeCarry = g.IsFreeCarry` and `IsFreeCarry = m.IsFreeCarry` | ✓ VERIFIED | 4 occurrences total: lines 109, 118 (MapToDto), 165, 174 (MapFromDto)     |
+| `TorchKeeper/Models/GearItem.cs`                 | `public bool IsFreeCarry { get; set; }`              | ✓ VERIFIED | Present at line 9; exact text matches                                      |
+| `TorchKeeper/Models/MagicItem.cs`                | `public bool IsFreeCarry { get; set; }`              | ✓ VERIFIED | Present at line 8; exact text matches                                      |
+| `TorchKeeper/DTOs/CharacterSaveData.cs`          | `public bool IsFreeCarry { get; init; }` x2          | ✓ VERIFIED | Present in GearItemData (line 63) and MagicItemData (line 71); init accessor confirmed |
+| `TorchKeeper/Services/CharacterFileService.cs`   | `IsFreeCarry = g.IsFreeCarry` and `IsFreeCarry = m.IsFreeCarry` | ✓ VERIFIED | 4 occurrences total: lines 109, 118 (MapToDto), 165, 174 (MapFromDto)     |
 
 Total IsFreeCarry references across the 4 files: **8** (plan required exactly 8 — 1+1+2+4).
 
@@ -50,8 +50,8 @@ Total IsFreeCarry references across the 4 files: **8** (plan required exactly 8 
 
 | From                                              | To                                                   | Via                                                      | Status     | Details                                                              |
 |---------------------------------------------------|------------------------------------------------------|----------------------------------------------------------|------------|----------------------------------------------------------------------|
-| `SdCharacterSheet/Services/CharacterFileService.cs` | `SdCharacterSheet/Models/GearItem.cs`              | MapToDto reads `g.IsFreeCarry`; MapFromDto writes `IsFreeCarry` | ✓ WIRED | Lines 109 and 165 confirmed                                          |
-| `SdCharacterSheet/Services/CharacterFileService.cs` | `SdCharacterSheet/DTOs/CharacterSaveData.cs`       | MapToDto writes `GearItemData.IsFreeCarry`; MapFromDto reads it | ✓ WIRED | Gear: lines 109/165; Magic: lines 118/174 confirmed                  |
+| `TorchKeeper/Services/CharacterFileService.cs` | `TorchKeeper/Models/GearItem.cs`              | MapToDto reads `g.IsFreeCarry`; MapFromDto writes `IsFreeCarry` | ✓ WIRED | Lines 109 and 165 confirmed                                          |
+| `TorchKeeper/Services/CharacterFileService.cs` | `TorchKeeper/DTOs/CharacterSaveData.cs`       | MapToDto writes `GearItemData.IsFreeCarry`; MapFromDto reads it | ✓ WIRED | Gear: lines 109/165; Magic: lines 118/174 confirmed                  |
 
 ---
 
@@ -65,7 +65,7 @@ Not applicable. This phase modifies persistence infrastructure (model properties
 
 `dotnet build` (C# compilation stage): Zero `error CS` lines confirmed. Xcode infrastructure errors are pre-existing environment issues (`xcrun`/`actool`/`ibtoold` plugin failures) that affect asset compilation, not C# code compilation. These errors were present before Phase 7 and are unrelated to `IsFreeCarry`.
 
-`dotnet test SdCharacterSheet.Tests`: 67 tests passed, 0 failed. Core-layer `RoundTrip_GearItem_IsFreeCarry_Persists` is included in this suite.
+`dotnet test TorchKeeper.Tests`: 67 tests passed, 0 failed. Core-layer `RoundTrip_GearItem_IsFreeCarry_Persists` is included in this suite.
 
 ---
 

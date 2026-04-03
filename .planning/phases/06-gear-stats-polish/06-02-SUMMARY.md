@@ -6,20 +6,20 @@ tags: [gear, free-carry, markdown-export, unit-tests, export-parity]
 dependency_graph:
   requires: [06-01]
   provides: [free-carry-export, gear-test-coverage]
-  affects: [SdCharacterSheet.Core/Export, SdCharacterSheet/Services, SdCharacterSheet.Tests]
+  affects: [TorchKeeper.Core/Export, TorchKeeper/Services, TorchKeeper.Tests]
 tech_stack:
   added: []
   patterns: [required-property-pattern, xunit-stub-pattern]
 key_files:
   created: []
   modified:
-    - SdCharacterSheet.Core/Export/CharacterExportData.cs
-    - SdCharacterSheet.Core/Export/MarkdownBuilder.cs
-    - SdCharacterSheet/Services/MarkdownExportService.cs
-    - SdCharacterSheet.Tests/Export/MarkdownBuilderTests.cs
-    - SdCharacterSheet.Tests/ViewModels/CharacterViewModelTests.cs
-    - SdCharacterSheet.Tests/ViewModels/GearItemViewModelTests.cs
-    - SdCharacterSheet.Tests/Services/CharacterFileServiceTests.cs
+    - TorchKeeper.Core/Export/CharacterExportData.cs
+    - TorchKeeper.Core/Export/MarkdownBuilder.cs
+    - TorchKeeper/Services/MarkdownExportService.cs
+    - TorchKeeper.Tests/Export/MarkdownBuilderTests.cs
+    - TorchKeeper.Tests/ViewModels/CharacterViewModelTests.cs
+    - TorchKeeper.Tests/ViewModels/GearItemViewModelTests.cs
+    - TorchKeeper.Tests/Services/CharacterFileServiceTests.cs
 decisions:
   - GearItemViewModel auto-detect tests use stub pattern (TestGearItemVM) since test project references Core only, not MAUI app
 metrics:
@@ -59,11 +59,11 @@ metrics:
 ## Verification
 
 ```
-dotnet build SdCharacterSheet.Core/SdCharacterSheet.Core.csproj  → succeeded, 0 errors
-dotnet test SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj → Passed: 67, Failed: 0
+dotnet build TorchKeeper.Core/TorchKeeper.Core.csproj  → succeeded, 0 errors
+dotnet test TorchKeeper.Tests/TorchKeeper.Tests.csproj → Passed: 67, Failed: 0
 ```
 
-The MAUI project (SdCharacterSheet.csproj) builds were attempted but run asynchronously in this environment — the export service change is a straightforward property addition with no MAUI-specific dependencies.
+The MAUI project (TorchKeeper.csproj) builds were attempted but run asynchronously in this environment — the export service change is a straightforward property addition with no MAUI-specific dependencies.
 
 ## Deviations from Plan
 
@@ -71,9 +71,9 @@ The MAUI project (SdCharacterSheet.csproj) builds were attempted but run asynchr
 
 **1. [Rule 4 avoided - Note] GearItemViewModel tests use stub pattern**
 - **Found during:** Task 3
-- **Issue:** Test project (`SdCharacterSheet.Tests`) only references `SdCharacterSheet.Core`, not the MAUI app (`SdCharacterSheet`). `GearItemViewModel` lives in the MAUI project and depends on `CommunityToolkit.Mvvm.ComponentModel.ObservableObject`.
+- **Issue:** Test project (`TorchKeeper.Tests`) only references `TorchKeeper.Core`, not the MAUI app (`TorchKeeper`). `GearItemViewModel` lives in the MAUI project and depends on `CommunityToolkit.Mvvm.ComponentModel.ObservableObject`.
 - **Fix:** Used the stub pattern as specified in the plan's fallback note — added auto-detect logic to `TestGearItemVM` matching the real VM's `KnownFreeCarryNames` set and case-insensitive lookup behavior. No architectural change needed.
-- **Files modified:** `SdCharacterSheet.Tests/ViewModels/GearItemViewModelTests.cs`
+- **Files modified:** `TorchKeeper.Tests/ViewModels/GearItemViewModelTests.cs`
 
 None of the deviations required architectural changes. Plan executed as written.
 

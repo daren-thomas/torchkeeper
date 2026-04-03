@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="TorchKeeper.Views.SheetPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:TorchKeeper.ViewModels"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Title="Sheet">
+
+    <ContentPage.Resources>
+        <toolkit:InvertedBoolConverter x:Key="InverseBoolConverter" />
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+
+            <!-- ===== IDENTITY SECTION ===== -->
+            <Frame Padding="12">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Character" FontAttributes="Bold" FontSize="16" />
+
+                    <Grid ColumnDefinitions="80,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="6" ColumnSpacing="8">
+                        <Label Grid.Row="0" Grid.Column="0" Text="Name" VerticalOptions="Center" />
+                        <Entry Grid.Row="0" Grid.Column="1" Text="{Binding Name, Mode=TwoWay}" Placeholder="Character name" />
+
+                        <Label Grid.Row="1" Grid.Column="0" Text="Class" VerticalOptions="Center" />
+                        <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Class, Mode=TwoWay}" Placeholder="e.g. Fighter" />
+
+                        <Label Grid.Row="2" Grid.Column="0" Text="Ancestry" VerticalOptions="Center" />
+                        <Entry Grid.Row="2" Grid.Column="1" Text="{Binding Ancestry, Mode=TwoWay}" Placeholder="e.g. Human" />
+
+                        <Label Grid.Row="3" Grid.Column="0" Text="Level" VerticalOptions="Center" />
+                        <Entry Grid.Row="3" Grid.Column="1" Text="{Binding Level, Mode=TwoWay}" Keyboard="Numeric" />
+
+                        <Label Grid.Row="4" Grid.Column="0" Text="Title" VerticalOptions="Center" />
+                        <Entry Grid.Row="4" Grid.Column="1" Text="{Binding Title, Mode=TwoWay}" Placeholder="e.g. Fighter" />
+
+                        <Label Grid.Row="5" Grid.Column="0" Text="Alignment" VerticalOptions="Center" />
+                        <Entry Grid.Row="5" Grid.Column="1" Text="{Binding Alignment, Mode=TwoWay}" Placeholder="e.g. Neutral" />
+
+                        <Label Grid.Row="6" Grid.Column="0" Text="Background" VerticalOptions="Center" />
+                        <Entry Grid.Row="6" Grid.Column="1" Text="{Binding Background, Mode=TwoWay}" Placeholder="e.g. Soldier" />
+
+                        <Label Grid.Row="7" Grid.Column="0" Text="Deity" VerticalOptions="Center" />
+                        <Entry Grid.Row="7" Grid.Column="1" Text="{Binding Deity, Mode=TwoWay}" Placeholder="e.g. Saint Terragnis" />
+
+                        <Label Grid.Row="8" Grid.Column="0" Text="Languages" VerticalOptions="Center" />
+                        <Entry Grid.Row="8" Grid.Column="1" Text="{Binding Languages, Mode=TwoWay}" Placeholder="e.g. Common, Elvish" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- ===== HP / XP SECTION ===== -->
+            <Frame Padding="12">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="HP / XP" FontAttributes="Bold" FontSize="16" />
+
+                    <!-- HP tracker: [−] current (tap-to-edit) / max (tap-to-edit) [+] -->
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                        <Button Text="-" MinimumWidthRequest="60" FontSize="24" Clicked="OnDecrementHP" />
+
+                        <Label x:Name="CurrentHpLabel"
+                               Text="{Binding CurrentHP}"
+                               FontSize="28"
+                               VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnCurrentHpLabelTapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Entry x:Name="CurrentHpEntry"
+                               Text="{Binding CurrentHP, Mode=TwoWay}"
+                               Keyboard="Numeric"
+                               FontSize="24"
+                               WidthRequest="80"
+                               IsVisible="False"
+                               Completed="OnCurrentHpEntryCompleted"
+                               Unfocused="OnCurrentHpEntryUnfocused" />
+
+                        <Label Text="/" FontSize="28" VerticalOptions="Center" />
+
+                        <Label x:Name="MaxHpLabel"
+                               Text="{Binding MaxHP}"
+                               FontSize="28"
+                               VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnMaxHpLabelTapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Entry x:Name="MaxHpEntry"
+                               Text="{Binding MaxHP, Mode=TwoWay}"
+                               Keyboard="Numeric"
+                               FontSize="24"
+                               WidthRequest="80"
+                               IsVisible="False"
+                               Completed="OnMaxHpEntryCompleted"
+                               Unfocused="OnMaxHpEntryUnfocused" />
+
+                        <Button Text="+" MinimumWidthRequest="60" FontSize="24" Clicked="OnIncrementHP" />
+                    </HorizontalStackLayout>
+
+                    <!-- XP tracker: [−] current (tap-to-edit) / max (tap-to-edit) [+] -->
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                        <Button Text="-" MinimumWidthRequest="60" FontSize="20" Clicked="OnDecrementXP" />
+
+                        <Label x:Name="CurrentXpLabel"
+                               Text="{Binding XP}"
+                               FontSize="22"
+                               VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnCurrentXpLabelTapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Entry x:Name="CurrentXpEntry"
+                               Text="{Binding XP, Mode=TwoWay}"
+                               Keyboard="Numeric"
+                               FontSize="20"
+                               WidthRequest="70"
+                               IsVisible="False"
+                               Completed="OnCurrentXpEntryCompleted"
+                               Unfocused="OnCurrentXpEntryUnfocused" />
+
+                        <Label Text="/ XP" FontSize="22" VerticalOptions="Center" />
+
+                        <Label x:Name="MaxXpLabel"
+                               Text="{Binding MaxXP}"
+                               FontSize="22"
+                               VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnMaxXpLabelTapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Entry x:Name="MaxXpEntry"
+                               Text="{Binding MaxXP, Mode=TwoWay}"
+                               Keyboard="Numeric"
+                               FontSize="20"
+                               WidthRequest="70"
+                               IsVisible="False"
+                               Completed="OnMaxXpEntryCompleted"
+                               Unfocused="OnMaxXpEntryUnfocused" />
+
+                        <Button Text="+" MinimumWidthRequest="60" FontSize="20" Clicked="OnIncrementXP" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- ===== STATS SECTION ===== -->
+            <!-- Uses BindableLayout (NOT CollectionView + Expander) to avoid iOS resize bug
+                 (CommunityToolkit.Maui issues #1557, #1670) -->
+            <Frame Padding="12">
+                <VerticalStackLayout Spacing="0">
+                    <Label Text="Stats" FontAttributes="Bold" FontSize="16" Margin="0,0,0,8" />
+
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding StatRows}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="vm:StatRowViewModel">
+                                <VerticalStackLayout>
+                                    <Grid ColumnDefinitions="*,60,60" Padding="0,6">
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding ToggleExpandCommand}" />
+                                        </Grid.GestureRecognizers>
+
+                                        <Label Grid.Column="0"
+                                               Text="{Binding StatName}"
+                                               FontAttributes="Bold"
+                                               VerticalOptions="Center" />
+
+                                        <Label Grid.Column="1"
+                                               Text="{Binding TotalScore}"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"
+                                               IsVisible="{Binding IsEditingBase, Converter={StaticResource InverseBoolConverter}}">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding BeginEditBaseCommand}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Entry Grid.Column="1"
+                                               Text="{Binding BaseStat, Mode=TwoWay}"
+                                               Keyboard="Numeric"
+                                               HorizontalOptions="Center"
+                                               WidthRequest="50"
+                                               IsVisible="{Binding IsEditingBase}"
+                                               ReturnCommand="{Binding CommitBaseEditCommand}" />
+
+                                        <Label Grid.Column="2"
+                                               Text="{Binding ModifierDisplay}"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center" />
+                                    </Grid>
+
+                                    <VerticalStackLayout IsVisible="{Binding IsExpanded}" Padding="16,0,0,8" Spacing="4">
+                                        <!-- Base stat value — always first in expanded panel (D-12) -->
+                                        <Label Text="{Binding BaseStat, StringFormat='Base: {0}'}"
+                                               FontSize="13" TextColor="Gray" />
+                                        <!-- Bonus sources below base row -->
+                                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding BonusSources}">
+                                            <BindableLayout.ItemTemplate>
+                                                <DataTemplate x:DataType="vm:BonusSourceViewModel">
+                                                    <Grid ColumnDefinitions="Auto,*,Auto,Auto" Padding="0,2" ColumnSpacing="8">
+                                                        <CheckBox Grid.Column="0" IsChecked="{Binding IsActive, Mode=TwoWay}"
+                                                                  VerticalOptions="Center" />
+                                                        <Label Grid.Column="1" Text="{Binding Label}"
+                                                               VerticalOptions="Center" FontSize="13" />
+                                                        <Label Grid.Column="2" Text="{Binding BonusDisplay}"
+                                                               VerticalOptions="Center" FontSize="13" TextColor="Gray" />
+                                                        <Button Grid.Column="3" Text="✕"
+                                                                Command="{Binding RemoveCommand}"
+                                                                FontSize="11" Padding="4,0"
+                                                                TextColor="Red" BackgroundColor="Transparent" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </BindableLayout.ItemTemplate>
+                                        </VerticalStackLayout>
+                                        <!-- Add bonus button -->
+                                        <Button Text="+ Add bonus" Clicked="OnAddBonusClicked"
+                                                HorizontalOptions="Start" FontSize="12"
+                                                Padding="6,2" Margin="0,4,0,0" />
+                                    </VerticalStackLayout>
+
+                                    <BoxView HeightRequest="1" Color="LightGray" />
+                                </VerticalStackLayout>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- ===== ATTACKS SECTION ===== -->
+            <Frame Padding="12">
+                <VerticalStackLayout Spacing="8">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="Attacks" FontAttributes="Bold" FontSize="16" VerticalOptions="Center" />
+                        <Button Grid.Column="1" Text="+ Add" Clicked="OnAddAttackClicked" HorizontalOptions="End" />
+                    </Grid>
+
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding Attacks}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Label Text="{Binding .}" Padding="0,4">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnAttackTapped" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

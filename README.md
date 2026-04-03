@@ -1,4 +1,4 @@
-# SD Character Sheet
+# TorchKeeper
 
 A .NET MAUI character sheet app for Shadowdark RPG.
 
@@ -11,7 +11,7 @@ A .NET MAUI character sheet app for Shadowdark RPG.
 ## Build
 
 ```bash
-dotnet build SdCharacterSheet/SdCharacterSheet.csproj
+dotnet build TorchKeeper/TorchKeeper.csproj
 ```
 
 ## Run
@@ -26,7 +26,7 @@ Select `net10.0-maccatalyst` as the target framework and hit Run.
 ## Tests
 
 ```bash
-dotnet test SdCharacterSheet.Tests/
+dotnet test TorchKeeper.Tests/
 ```
 
 ## Notes

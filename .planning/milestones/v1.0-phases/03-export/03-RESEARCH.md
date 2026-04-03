@@ -55,7 +55,7 @@
 
 ### Claude's Discretion
 - Exact MIME type for the `.md` file on each platform
-- Whether the export service lives in `SdCharacterSheet.Core` or the MAUI project
+- Whether the export service lives in `TorchKeeper.Core` or the MAUI project
 - Error handling if save/share fails
 - Exact Identity section layout (field labels, line breaks vs. table)
 - How to handle empty string fields in Identity (omit or include blank)
@@ -118,12 +118,12 @@ The one ViewModel gap is `SpellsKnown`: it exists on `Character` but has no `[Ob
 
 ### Recommended Project Structure
 ```
-SdCharacterSheet/
+TorchKeeper/
 ├── Services/
 │   └── MarkdownExportService.cs   # Markdown builder + platform routing
-SdCharacterSheet.Core/
+TorchKeeper.Core/
 │   (no changes — export is MAUI-layer concern)
-SdCharacterSheet.Tests/
+TorchKeeper.Tests/
 │   └── Services/
 │       └── MarkdownExportServiceTests.cs  # Pure Markdown builder tests
 ```
@@ -136,9 +136,9 @@ SdCharacterSheet.Tests/
 // Source: architecture decision — follows MauiCharacterFileService pattern
 public class MarkdownExportService
 {
-    private readonly SdCharacterSheet.Services.IFileSaver _fileSaver;
+    private readonly TorchKeeper.Services.IFileSaver _fileSaver;
 
-    public MarkdownExportService(SdCharacterSheet.Services.IFileSaver fileSaver)
+    public MarkdownExportService(TorchKeeper.Services.IFileSaver fileSaver)
         => _fileSaver = fileSaver;
 
     public string BuildMarkdown(CharacterViewModel vm) { /* pure */ }
@@ -397,14 +397,14 @@ foreach (var b in acBonuses)
 | Property | Value |
 |----------|-------|
 | Framework | xUnit 2.9.3 |
-| Config file | SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj |
-| Quick run command | `dotnet test SdCharacterSheet.Tests --filter "Category=Unit"` |
-| Full suite command | `dotnet test SdCharacterSheet.Tests` |
+| Config file | TorchKeeper.Tests/TorchKeeper.Tests.csproj |
+| Quick run command | `dotnet test TorchKeeper.Tests --filter "Category=Unit"` |
+| Full suite command | `dotnet test TorchKeeper.Tests` |
 
 ### Phase Requirements → Test Map
 | Req ID | Behavior | Test Type | Automated Command | File Exists? |
 |--------|----------|-----------|-------------------|-------------|
-| MRKD-01 | `BuildMarkdown` produces correct section order (Identity → Stats → Attacks → Currency → Gear → Notes) | unit | `dotnet test SdCharacterSheet.Tests --filter "FullyQualifiedName~MarkdownExportServiceTests"` | ❌ Wave 0 |
+| MRKD-01 | `BuildMarkdown` produces correct section order (Identity → Stats → Attacks → Currency → Gear → Notes) | unit | `dotnet test TorchKeeper.Tests --filter "FullyQualifiedName~MarkdownExportServiceTests"` | ❌ Wave 0 |
 | MRKD-01 | Stats section: each stat shows `**NAME** total (mod)` followed by bonus source bullets | unit | same | ❌ Wave 0 |
 | MRKD-01 | AC subsection rendered using `AC:` prefixed bonuses | unit | same | ❌ Wave 0 |
 | MRKD-01 | Gear table has exactly `GearSlotTotal` rows | unit | same | ❌ Wave 0 |
@@ -417,23 +417,23 @@ foreach (var b in acBonuses)
 **Note:** Platform share/save I/O (`ExportAsync`) is manual-only — requires a running MAUI app on device/simulator. All automated tests target the pure `BuildMarkdown` and `BuildFileName` methods.
 
 ### Sampling Rate
-- **Per task commit:** `dotnet test SdCharacterSheet.Tests --filter "Category=Unit"`
-- **Per wave merge:** `dotnet test SdCharacterSheet.Tests`
+- **Per task commit:** `dotnet test TorchKeeper.Tests --filter "Category=Unit"`
+- **Per wave merge:** `dotnet test TorchKeeper.Tests`
 - **Phase gate:** Full suite green before `/gsd:verify-work`
 
 ### Wave 0 Gaps
-- [ ] `SdCharacterSheet.Tests/Services/MarkdownExportServiceTests.cs` — covers MRKD-01 (all rows above)
+- [ ] `TorchKeeper.Tests/Services/MarkdownExportServiceTests.cs` — covers MRKD-01 (all rows above)
 
-Note: `MarkdownExportService` must be structured so `BuildMarkdown` and `BuildFileName` are callable from the `net10.0` test project without MAUI dependencies. Use the same inline-stub pattern established in Phase 2 — OR structure the service so the pure builder methods take only plain CLR types (or a thin interface) that the test project can satisfy directly. The simplest approach: accept `CharacterViewModel` directly — the test project already references `SdCharacterSheet.Core` and can define a test-local stub as in `CharacterViewModelTests.cs`. However, `CharacterViewModel` lives in the MAUI project (not Core), which creates a TFM dependency issue. Resolution: extract the data the builder needs into a plain DTO or use an interface — see "Open Questions" below.
+Note: `MarkdownExportService` must be structured so `BuildMarkdown` and `BuildFileName` are callable from the `net10.0` test project without MAUI dependencies. Use the same inline-stub pattern established in Phase 2 — OR structure the service so the pure builder methods take only plain CLR types (or a thin interface) that the test project can satisfy directly. The simplest approach: accept `CharacterViewModel` directly — the test project already references `TorchKeeper.Core` and can define a test-local stub as in `CharacterViewModelTests.cs`. However, `CharacterViewModel` lives in the MAUI project (not Core), which creates a TFM dependency issue. Resolution: extract the data the builder needs into a plain DTO or use an interface — see "Open Questions" below.
 
 ---
 
 ## Open Questions
 
 1. **Test access to `CharacterViewModel` from `net10.0` test project**
-   - What we know: `CharacterViewModel` is in the MAUI project (`net10.0-ios;net10.0-maccatalyst;net10.0-windows`). The test project targets `net10.0` and only references `SdCharacterSheet.Core`. Prior phases solved this with inline test stubs.
+   - What we know: `CharacterViewModel` is in the MAUI project (`net10.0-ios;net10.0-maccatalyst;net10.0-windows`). The test project targets `net10.0` and only references `TorchKeeper.Core`. Prior phases solved this with inline test stubs.
    - What's unclear: Should `MarkdownExportService.BuildMarkdown` accept `CharacterViewModel` directly (requiring a test stub), or should it accept a plain DTO / interface that the test can construct without MAUI?
-   - Recommendation: **Introduce a `CharacterExportData` record** (plain CLR, lives in `SdCharacterSheet.Core`) that `BuildMarkdown` accepts. `CharacterViewModel` maps to it before calling the service. This keeps `BuildMarkdown` in Core (testable), keeps platform I/O in the MAUI service, and avoids TFM issues entirely. Alternative: use the inline-stub pattern from `CharacterViewModelTests.cs` — simpler but creates a larger stub to maintain.
+   - Recommendation: **Introduce a `CharacterExportData` record** (plain CLR, lives in `TorchKeeper.Core`) that `BuildMarkdown` accepts. `CharacterViewModel` maps to it before calling the service. This keeps `BuildMarkdown` in Core (testable), keeps platform I/O in the MAUI service, and avoids TFM issues entirely. Alternative: use the inline-stub pattern from `CharacterViewModelTests.cs` — simpler but creates a larger stub to maintain.
 
 2. **AppShell BindingContext for ExportCommand**
    - What we know: `Shell.ToolbarItems` supports `Command="{Binding ExportCommand}"` but requires `BindingContext` to be set.

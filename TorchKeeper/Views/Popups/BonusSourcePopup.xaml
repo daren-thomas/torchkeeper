@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<toolkit:Popup
+    x:Class="TorchKeeper.Views.Popups.BonusSourcePopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+
+    <VerticalStackLayout Padding="20" Spacing="12" WidthRequest="300">
+        <Label x:Name="TitleLabel" FontAttributes="Bold" FontSize="16" HorizontalOptions="Center" />
+
+        <Grid ColumnDefinitions="80,*" RowSpacing="8">
+            <Label Grid.Column="0" Text="Modifier" VerticalOptions="Center" />
+            <Entry x:Name="ValueEntry" Grid.Column="1"
+                   Placeholder="+1 or -2"
+                   Keyboard="Numeric"
+                   ClearButtonVisibility="WhileEditing" />
+        </Grid>
+
+        <Grid ColumnDefinitions="80,*" RowSpacing="8">
+            <Label Grid.Column="0" Text="Label" VerticalOptions="Center" />
+            <Entry x:Name="LabelEntry" Grid.Column="1"
+                   Placeholder="e.g. Belt of Hill Giant Strength"
+                   ClearButtonVisibility="WhileEditing" />
+        </Grid>
+
+        <HorizontalStackLayout Spacing="12">
+            <CheckBox x:Name="ActiveCheckBox" IsChecked="True" />
+            <Label Text="Currently in effect" VerticalOptions="Center" />
+        </HorizontalStackLayout>
+
+        <Button Text="Save" Clicked="OnSave" />
+    </VerticalStackLayout>
+
+</toolkit:Popup>

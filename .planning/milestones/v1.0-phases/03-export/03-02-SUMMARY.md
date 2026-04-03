@@ -12,14 +12,14 @@ tech_stack:
   patterns: [platform-routing-service, relay-command-injection, shell-toolbar-binding]
 key_files:
   created:
-    - SdCharacterSheet/Services/MarkdownExportService.cs
+    - TorchKeeper/Services/MarkdownExportService.cs
   modified:
-    - SdCharacterSheet/ViewModels/CharacterViewModel.cs
-    - SdCharacterSheet/AppShell.xaml
-    - SdCharacterSheet/AppShell.xaml.cs
-    - SdCharacterSheet/MauiProgram.cs
-    - SdCharacterSheet/App.xaml.cs
-    - SdCharacterSheet.Tests/ViewModels/CharacterViewModelTests.cs
+    - TorchKeeper/ViewModels/CharacterViewModel.cs
+    - TorchKeeper/AppShell.xaml
+    - TorchKeeper/AppShell.xaml.cs
+    - TorchKeeper/MauiProgram.cs
+    - TorchKeeper/App.xaml.cs
+    - TorchKeeper.Tests/ViewModels/CharacterViewModelTests.cs
 decisions:
   - "AppShell registered as singleton in DI; App.xaml.cs receives it via constructor injection"
   - "CharacterViewModel uses two-constructor pattern: parameterless for tests, with MarkdownExportService for DI"
@@ -85,7 +85,7 @@ Complete export feature integration:
 - **Found during:** Task 1 (step 6)
 - **Issue:** The plan mentioned updating App.xaml.cs but the plan's action text focused on MauiProgram changes. App.xaml.cs originally called `new AppShell()` directly, which bypasses DI and means AppShell can't receive the CharacterViewModel constructor parameter.
 - **Fix:** Changed `App` constructor signature to `App(AppShell shell)` so MAUI's DI resolves AppShell (and its CharacterViewModel dependency) from the container.
-- **Files modified:** SdCharacterSheet/App.xaml.cs
+- **Files modified:** TorchKeeper/App.xaml.cs
 - **Commit:** 8d8359b (included in Task 1 commit)
 
 **2. [Rule 1 - Bug] Coin encumbrance used floor instead of ceiling division**
@@ -93,7 +93,7 @@ Complete export feature integration:
 - **Found during:** Task 2 (human verification)
 - **Issue:** Formula `Math.Max(GP - 100, 0) / 100` gives 0 slots for 101-199 coins (floor division), but the Shadowdark rule requires 1 slot for any coins over 100. Old code meant you needed 200 coins before the first slot was consumed.
 - **Fix:** Changed to `coins > 100 ? (coins - 1) / 100 : 0` (integer ceiling) for GP, SP, CP separately; updated `TestCharacterVM` stub to match; renamed `CoinSlots_201GP_Returns1` -> `CoinSlots_201GP_Returns2` with corrected assertion; added `CoinSlots_101GP_Returns1` boundary test.
-- **Files modified:** `SdCharacterSheet/ViewModels/CharacterViewModel.cs`, `SdCharacterSheet.Tests/ViewModels/CharacterViewModelTests.cs`
+- **Files modified:** `TorchKeeper/ViewModels/CharacterViewModel.cs`, `TorchKeeper.Tests/ViewModels/CharacterViewModelTests.cs`
 - **Verification:** All 46 tests pass including all 7 CoinSlots tests
 - **Commit:** 1a1d250
 
@@ -104,7 +104,7 @@ Complete export feature integration:
 
 ## Build Notes
 
-The MAUI project build reports `Build FAILED` due to `MSB4216` — a pre-existing ILLink task host environment error unrelated to these changes. The C# compilation succeeds (DLL produced) and SdCharacterSheet.Core + SdCharacterSheet.Tests build cleanly with 0 errors. This ILLink error was present before these changes (verified via `git stash`).
+The MAUI project build reports `Build FAILED` due to `MSB4216` — a pre-existing ILLink task host environment error unrelated to these changes. The C# compilation succeeds (DLL produced) and TorchKeeper.Core + TorchKeeper.Tests build cleanly with 0 errors. This ILLink error was present before these changes (verified via `git stash`).
 
 ## Known Stubs
 
@@ -112,14 +112,14 @@ None — all data is wired from CharacterViewModel to CharacterExportData to Mar
 
 ## Self-Check
 
-- [x] SdCharacterSheet/Services/MarkdownExportService.cs exists and contains `class MarkdownExportService`
-- [x] SdCharacterSheet/ViewModels/CharacterViewModel.cs contains `private string spellsKnown`
-- [x] SdCharacterSheet/ViewModels/CharacterViewModel.cs contains `spellsKnown = character.SpellsKnown`
-- [x] SdCharacterSheet/ViewModels/CharacterViewModel.cs contains `ExportAsync`
-- [x] SdCharacterSheet/ViewModels/CharacterViewModel.cs contains corrected CoinSlots formula
-- [x] SdCharacterSheet/AppShell.xaml contains `ToolbarItem` and `ExportCommand`
-- [x] SdCharacterSheet/AppShell.xaml.cs contains `BindingContext`
-- [x] SdCharacterSheet/MauiProgram.cs contains `MarkdownExportService`
+- [x] TorchKeeper/Services/MarkdownExportService.cs exists and contains `class MarkdownExportService`
+- [x] TorchKeeper/ViewModels/CharacterViewModel.cs contains `private string spellsKnown`
+- [x] TorchKeeper/ViewModels/CharacterViewModel.cs contains `spellsKnown = character.SpellsKnown`
+- [x] TorchKeeper/ViewModels/CharacterViewModel.cs contains `ExportAsync`
+- [x] TorchKeeper/ViewModels/CharacterViewModel.cs contains corrected CoinSlots formula
+- [x] TorchKeeper/AppShell.xaml contains `ToolbarItem` and `ExportCommand`
+- [x] TorchKeeper/AppShell.xaml.cs contains `BindingContext`
+- [x] TorchKeeper/MauiProgram.cs contains `MarkdownExportService`
 - [x] Commit 8d8359b verified in git log
 - [x] Commit 1a1d250 verified in git log
 - [x] All 46 tests pass

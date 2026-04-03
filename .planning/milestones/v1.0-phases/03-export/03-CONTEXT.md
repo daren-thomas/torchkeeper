@@ -74,7 +74,7 @@ A player can export their full character sheet as formatted Markdown for print o
 
 ### Claude's Discretion
 - Exact MIME type for the `.md` file on each platform
-- Whether the export service lives in `SdCharacterSheet.Core` or the MAUI project
+- Whether the export service lives in `TorchKeeper.Core` or the MAUI project
 - Error handling if save/share fails
 - Exact Identity section layout (field labels, line breaks vs. table)
 - How to handle empty string fields in Identity (omit or include blank)
@@ -105,13 +105,13 @@ No external specs — requirements are fully captured in decisions above.
 ## Existing Code Insights
 
 ### Reusable Assets
-- `IFileSaver` (`SdCharacterSheet.Core/Storage/IFileSaver.cs`): `SaveAsync(fileName, stream)` — already wired for desktop save-as
-- `CommunityToolkitFileSaverAdapter` (`SdCharacterSheet/Storage/CommunityToolkitFileSaverAdapter.cs`): wraps CommunityToolkit.Maui's IFileSaver — use this for desktop export
-- `CharacterViewModel` (`SdCharacterSheet/ViewModels/CharacterViewModel.cs`): all computed properties available (`TotalSTR`, `ModSTR`, `GearSlotsUsed`, `GearSlotTotal`, `CoinSlots`, `GearItems`, `Attacks`, `StatRows`) — export service reads from here directly
+- `IFileSaver` (`TorchKeeper.Core/Storage/IFileSaver.cs`): `SaveAsync(fileName, stream)` — already wired for desktop save-as
+- `CommunityToolkitFileSaverAdapter` (`TorchKeeper/Storage/CommunityToolkitFileSaverAdapter.cs`): wraps CommunityToolkit.Maui's IFileSaver — use this for desktop export
+- `CharacterViewModel` (`TorchKeeper/ViewModels/CharacterViewModel.cs`): all computed properties available (`TotalSTR`, `ModSTR`, `GearSlotsUsed`, `GearSlotTotal`, `CoinSlots`, `GearItems`, `Attacks`, `StatRows`) — export service reads from here directly
 - `CharacterViewModel.Character`: backing `Character` model accessible for fields not yet exposed as observable properties (e.g. `SpellsKnown`)
 
 ### Established Patterns
-- `MauiCharacterFileService` (`SdCharacterSheet/Services/MauiCharacterFileService.cs`): pattern for MAUI-layer services that wrap Core services with platform-specific behavior — export service should follow this pattern
+- `MauiCharacterFileService` (`TorchKeeper/Services/MauiCharacterFileService.cs`): pattern for MAUI-layer services that wrap Core services with platform-specific behavior — export service should follow this pattern
 - Stats bonus parsing: `BonusTo` field uses `"STAT:+N"` format (e.g. `"STR:+2"`); AC contributors use `"AC:+N"` prefix — same parsing logic applies to both
 
 ### Integration Points

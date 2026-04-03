@@ -68,8 +68,8 @@ A player can open their character and manage everything needed at the table: ide
 ## Existing Code Insights
 
 ### Reusable Assets
-- `CharacterViewModel` (SdCharacterSheet/ViewModels/CharacterViewModel.cs): ObservableObject singleton stub. Phase 2 adds all observable properties and computed properties (stat totals, slot counts). Already wired as singleton in DI.
-- `Character` model (SdCharacterSheet.Core/Models/Character.cs): All fields already defined — base stats, HP, currency, bonuses, gear, magic items, attacks, notes. No additions needed.
+- `CharacterViewModel` (TorchKeeper/ViewModels/CharacterViewModel.cs): ObservableObject singleton stub. Phase 2 adds all observable properties and computed properties (stat totals, slot counts). Already wired as singleton in DI.
+- `Character` model (TorchKeeper.Core/Models/Character.cs): All fields already defined — base stats, HP, currency, bonuses, gear, magic items, attacks, notes. No additions needed.
 - `BonusSource` model: has Label, BonusTo (e.g. "DEX:+2"), SourceType, GainedAtLevel — all data needed for breakdown display is present.
 - `GearItem` and `MagicItem`: separate types with identical field shape (name, slots, note). UI treats them as one list.
 

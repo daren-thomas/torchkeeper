@@ -23,8 +23,8 @@ tech-stack:
 
 key-files:
   created:
-    - SdCharacterSheet/Views/NotesPage.xaml
-    - SdCharacterSheet/Views/NotesPage.xaml.cs
+    - TorchKeeper/Views/NotesPage.xaml
+    - TorchKeeper/Views/NotesPage.xaml.cs
   modified: []
 
 key-decisions:
@@ -67,8 +67,8 @@ Each task was committed atomically:
 **Plan metadata:** (docs commit follows)
 
 ## Files Created/Modified
-- `SdCharacterSheet/Views/NotesPage.xaml` - ContentPage with Grid root and TwoWay-bound full-height Editor
-- `SdCharacterSheet/Views/NotesPage.xaml.cs` - Code-behind: CharacterViewModel injected via constructor, BindingContext set
+- `TorchKeeper/Views/NotesPage.xaml` - ContentPage with Grid root and TwoWay-bound full-height Editor
+- `TorchKeeper/Views/NotesPage.xaml.cs` - Code-behind: CharacterViewModel injected via constructor, BindingContext set
 
 ## Decisions Made
 - Grid as root container rather than VerticalStackLayout, so the Editor fills the full page height via `VerticalOptions="Fill"` — VerticalStackLayout would wrap to content height
@@ -79,7 +79,7 @@ Each task was committed atomically:
 None - plan executed exactly as written.
 
 ## Issues Encountered
-- MAUI project build (`dotnet build SdCharacterSheet/`) cannot be run in this environment — MAUI NuGet packages not cached locally and network access is restricted (same constraint as all prior Phase 2 plans). Test project (net10.0 class library) builds successfully, confirming no regressions in shared code. CharacterViewModel.Notes property existence verified directly in source.
+- MAUI project build (`dotnet build TorchKeeper/`) cannot be run in this environment — MAUI NuGet packages not cached locally and network access is restricted (same constraint as all prior Phase 2 plans). Test project (net10.0 class library) builds successfully, confirming no regressions in shared code. CharacterViewModel.Notes property existence verified directly in source.
 
 ## User Setup Required
 None - no external service configuration required.

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<toolkit:Popup
+    x:Class="TorchKeeper.Views.Popups.AttackPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+
+    <VerticalStackLayout Padding="20" Spacing="12" WidthRequest="300">
+        <Label Text="Attack Entry" FontAttributes="Bold" FontSize="16" HorizontalOptions="Center" />
+
+        <Entry x:Name="AttackEntry"
+               Placeholder="e.g. DAGGER: +3 (N), 1d4 (FIN)"
+               ClearButtonVisibility="WhileEditing" />
+
+        <Button Text="Save" Clicked="OnSave" />
+
+        <Button Text="Delete"
+                Clicked="OnDelete"
+                TextColor="Red" />
+    </VerticalStackLayout>
+
+</toolkit:Popup>

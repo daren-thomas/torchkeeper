@@ -17,18 +17,18 @@ created: 2026-03-14
 
 | Property | Value |
 |----------|-------|
-| **Framework** | xUnit 2.9.3 (already installed in SdCharacterSheet.Tests) |
-| **Config file** | SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj |
-| **Quick run command** | `dotnet test SdCharacterSheet.Tests/ --filter "Category=Unit" -x` |
-| **Full suite command** | `dotnet test SdCharacterSheet.Tests/` |
+| **Framework** | xUnit 2.9.3 (already installed in TorchKeeper.Tests) |
+| **Config file** | TorchKeeper.Tests/TorchKeeper.Tests.csproj |
+| **Quick run command** | `dotnet test TorchKeeper.Tests/ --filter "Category=Unit" -x` |
+| **Full suite command** | `dotnet test TorchKeeper.Tests/` |
 | **Estimated runtime** | ~10 seconds |
 
 ---
 
 ## Sampling Rate
 
-- **After every task commit:** Run `dotnet test SdCharacterSheet.Tests/ --filter "Category=Unit" -x`
-- **After every plan wave:** Run `dotnet test SdCharacterSheet.Tests/`
+- **After every task commit:** Run `dotnet test TorchKeeper.Tests/ --filter "Category=Unit" -x`
+- **After every plan wave:** Run `dotnet test TorchKeeper.Tests/`
 - **Before `/gsd:verify-work`:** Full suite must be green
 - **Max feedback latency:** 15 seconds
 
@@ -38,17 +38,17 @@ created: 2026-03-14
 
 | Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 2-W0-01 | W0 | 0 | STAT-01, STAT-02, GEAR-03, GEAR-04, HITP-01, IDNT-01 | unit | `dotnet test SdCharacterSheet.Tests/ --filter "FullyQualifiedName~CharacterViewModel" -x` | ❌ W0 | ⬜ pending |
-| 2-W0-02 | W0 | 0 | GEAR-01 | unit | `dotnet test SdCharacterSheet.Tests/ --filter "FullyQualifiedName~GearItemViewModel" -x` | ❌ W0 | ⬜ pending |
-| 2-01-01 | 01 | 1 | STAT-01 | unit | `dotnet test SdCharacterSheet.Tests/ --filter "FullyQualifiedName~StatModifier" -x` | ✅ W0 | ⬜ pending |
-| 2-01-02 | 01 | 1 | STAT-02 | unit | `dotnet test SdCharacterSheet.Tests/ --filter "FullyQualifiedName~BonusFilter" -x` | ✅ W0 | ⬜ pending |
-| 2-02-01 | 02 | 1 | HITP-01 | unit | `dotnet test SdCharacterSheet.Tests/ --filter "FullyQualifiedName~NegativeHP" -x` | ✅ W0 | ⬜ pending |
+| 2-W0-01 | W0 | 0 | STAT-01, STAT-02, GEAR-03, GEAR-04, HITP-01, IDNT-01 | unit | `dotnet test TorchKeeper.Tests/ --filter "FullyQualifiedName~CharacterViewModel" -x` | ❌ W0 | ⬜ pending |
+| 2-W0-02 | W0 | 0 | GEAR-01 | unit | `dotnet test TorchKeeper.Tests/ --filter "FullyQualifiedName~GearItemViewModel" -x` | ❌ W0 | ⬜ pending |
+| 2-01-01 | 01 | 1 | STAT-01 | unit | `dotnet test TorchKeeper.Tests/ --filter "FullyQualifiedName~StatModifier" -x` | ✅ W0 | ⬜ pending |
+| 2-01-02 | 01 | 1 | STAT-02 | unit | `dotnet test TorchKeeper.Tests/ --filter "FullyQualifiedName~BonusFilter" -x` | ✅ W0 | ⬜ pending |
+| 2-02-01 | 02 | 1 | HITP-01 | unit | `dotnet test TorchKeeper.Tests/ --filter "FullyQualifiedName~NegativeHP" -x` | ✅ W0 | ⬜ pending |
 | 2-02-02 | 02 | 1 | HITP-02 | manual | N/A — UI stepper verified by inspection | N/A | ⬜ pending |
-| 2-03-01 | 03 | 1 | GEAR-01 | unit | `dotnet test SdCharacterSheet.Tests/ --filter "FullyQualifiedName~GearItemViewModel" -x` | ✅ W0 | ⬜ pending |
-| 2-03-02 | 03 | 1 | GEAR-03 | unit | `dotnet test SdCharacterSheet.Tests/ --filter "FullyQualifiedName~GearSlotTotal" -x` | ✅ W0 | ⬜ pending |
-| 2-03-03 | 03 | 1 | GEAR-04 | unit | `dotnet test SdCharacterSheet.Tests/ --filter "FullyQualifiedName~CoinSlots" -x` | ✅ W0 | ⬜ pending |
+| 2-03-01 | 03 | 1 | GEAR-01 | unit | `dotnet test TorchKeeper.Tests/ --filter "FullyQualifiedName~GearItemViewModel" -x` | ✅ W0 | ⬜ pending |
+| 2-03-02 | 03 | 1 | GEAR-03 | unit | `dotnet test TorchKeeper.Tests/ --filter "FullyQualifiedName~GearSlotTotal" -x` | ✅ W0 | ⬜ pending |
+| 2-03-03 | 03 | 1 | GEAR-04 | unit | `dotnet test TorchKeeper.Tests/ --filter "FullyQualifiedName~CoinSlots" -x` | ✅ W0 | ⬜ pending |
 | 2-03-04 | 03 | 1 | GEAR-02 | manual | N/A — add/edit/remove gear verified by inspection | N/A | ⬜ pending |
-| 2-04-01 | 04 | 1 | IDNT-01 | unit | `dotnet test SdCharacterSheet.Tests/ --filter "FullyQualifiedName~LoadCharacter" -x` | ✅ W0 | ⬜ pending |
+| 2-04-01 | 04 | 1 | IDNT-01 | unit | `dotnet test TorchKeeper.Tests/ --filter "FullyQualifiedName~LoadCharacter" -x` | ✅ W0 | ⬜ pending |
 | 2-04-02 | 04 | 1 | IDNT-02 | manual | N/A — XP field binding verified by inspection | N/A | ⬜ pending |
 | 2-05-01 | 05 | 2 | CURR-01 | manual | N/A — coin tracking UI verified by inspection | N/A | ⬜ pending |
 | 2-06-01 | 06 | 2 | ATCK-01 | manual | N/A — attack list UI verified by inspection | N/A | ⬜ pending |
@@ -60,9 +60,9 @@ created: 2026-03-14
 
 ## Wave 0 Requirements
 
-- [ ] `SdCharacterSheet.Tests/ViewModels/CharacterViewModelTests.cs` — stubs for STAT-01 (modifier math), STAT-02 (bonus filter), GEAR-03 (slot total), GEAR-04 (coin slots), HITP-01 (negative HP), IDNT-01 (LoadCharacter population)
-- [ ] `SdCharacterSheet.Tests/ViewModels/GearItemViewModelTests.cs` — stubs for GEAR-01 (unified GearItem/MagicItem wrapper)
-- [ ] Add `CommunityToolkit.Mvvm` NuGet package reference to `SdCharacterSheet.Tests` project (needed for ViewModel unit tests)
+- [ ] `TorchKeeper.Tests/ViewModels/CharacterViewModelTests.cs` — stubs for STAT-01 (modifier math), STAT-02 (bonus filter), GEAR-03 (slot total), GEAR-04 (coin slots), HITP-01 (negative HP), IDNT-01 (LoadCharacter population)
+- [ ] `TorchKeeper.Tests/ViewModels/GearItemViewModelTests.cs` — stubs for GEAR-01 (unified GearItem/MagicItem wrapper)
+- [ ] Add `CommunityToolkit.Mvvm` NuGet package reference to `TorchKeeper.Tests` project (needed for ViewModel unit tests)
 
 ---
 

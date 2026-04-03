@@ -9,9 +9,9 @@ requires:
   - phase: 06-gear-stats-polish
     provides: IsFreeCarry on Core-layer GearItem, MagicItem, GearItemData, MagicItemData, and Core CharacterFileService mapping
 provides:
-  - IsFreeCarry property on MAUI-local GearItem model (SdCharacterSheet/Models/GearItem.cs)
-  - IsFreeCarry property on MAUI-local MagicItem model (SdCharacterSheet/Models/MagicItem.cs)
-  - IsFreeCarry on MAUI-local GearItemData and MagicItemData DTOs (SdCharacterSheet/DTOs/CharacterSaveData.cs)
+  - IsFreeCarry property on MAUI-local GearItem model (TorchKeeper/Models/GearItem.cs)
+  - IsFreeCarry property on MAUI-local MagicItem model (TorchKeeper/Models/MagicItem.cs)
+  - IsFreeCarry on MAUI-local GearItemData and MagicItemData DTOs (TorchKeeper/DTOs/CharacterSaveData.cs)
   - IsFreeCarry round-trip in MAUI-local CharacterFileService MapToDto and MapFromDto
 affects: [any future phase touching gear persistence, MAUI build, save/load round-trip]
 
@@ -25,10 +25,10 @@ tech-stack:
 key-files:
   created: []
   modified:
-    - SdCharacterSheet/Models/GearItem.cs
-    - SdCharacterSheet/Models/MagicItem.cs
-    - SdCharacterSheet/DTOs/CharacterSaveData.cs
-    - SdCharacterSheet/Services/CharacterFileService.cs
+    - TorchKeeper/Models/GearItem.cs
+    - TorchKeeper/Models/MagicItem.cs
+    - TorchKeeper/DTOs/CharacterSaveData.cs
+    - TorchKeeper/Services/CharacterFileService.cs
 
 key-decisions:
   - "MAUI-local files shadow Core types at compile time (CS0436); Core-layer changes do not flow to MAUI app automatically — manual propagation required"
@@ -72,10 +72,10 @@ Each task was committed atomically:
 **Plan metadata:** TBD (docs: complete plan)
 
 ## Files Created/Modified
-- `SdCharacterSheet/Models/GearItem.cs` - Added IsFreeCarry { get; set; } property (line 9)
-- `SdCharacterSheet/Models/MagicItem.cs` - Added IsFreeCarry { get; set; } property (line 8)
-- `SdCharacterSheet/DTOs/CharacterSaveData.cs` - Added IsFreeCarry { get; init; } to GearItemData (line 63) and MagicItemData (line 71)
-- `SdCharacterSheet/Services/CharacterFileService.cs` - Added IsFreeCarry mapping in all 4 select initializers (lines 109, 118, 165, 174)
+- `TorchKeeper/Models/GearItem.cs` - Added IsFreeCarry { get; set; } property (line 9)
+- `TorchKeeper/Models/MagicItem.cs` - Added IsFreeCarry { get; set; } property (line 8)
+- `TorchKeeper/DTOs/CharacterSaveData.cs` - Added IsFreeCarry { get; init; } to GearItemData (line 63) and MagicItemData (line 71)
+- `TorchKeeper/Services/CharacterFileService.cs` - Added IsFreeCarry mapping in all 4 select initializers (lines 109, 118, 165, 174)
 
 ## Decisions Made
 - No [JsonIgnore] attribute added — existing WhenWritingDefault serialization option already omits false values from JSON output

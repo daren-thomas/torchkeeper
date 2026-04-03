@@ -13,10 +13,10 @@ tech_stack:
 key_files:
   created: []
   modified:
-    - SdCharacterSheet/Views/SheetPage.xaml
-    - SdCharacterSheet.Core/DTOs/ShadowdarklingsJson.cs
-    - SdCharacterSheet.Core/Services/ShadowdarklingsImportService.cs
-    - SdCharacterSheet.Tests/Services/ShadowdarklingsImportServiceTests.cs
+    - TorchKeeper/Views/SheetPage.xaml
+    - TorchKeeper.Core/DTOs/ShadowdarklingsJson.cs
+    - TorchKeeper.Core/Services/ShadowdarklingsImportService.cs
+    - TorchKeeper.Tests/Services/ShadowdarklingsImportServiceTests.cs
 decisions:
   - Include Rolled12ChosenTalentDesc with "(chosen)" label when non-empty — label disambiguates from rolled talents
 metrics:
@@ -36,9 +36,9 @@ metrics:
 
 | Task | Name | Commit | Files |
 |------|------|--------|-------|
-| 1 | Add "Base: N" label to SheetPage.xaml expanded stat panel | b005be5 | SdCharacterSheet/Views/SheetPage.xaml |
-| 2 | Add Levels and SdLevelEntry to ShadowdarklingsJson | a49b709 | SdCharacterSheet.Core/DTOs/ShadowdarklingsJson.cs |
-| 3 | Populate Talents in ShadowdarklingsImportService + tests | 31fe0a2 | SdCharacterSheet.Core/Services/ShadowdarklingsImportService.cs, SdCharacterSheet.Tests/Services/ShadowdarklingsImportServiceTests.cs |
+| 1 | Add "Base: N" label to SheetPage.xaml expanded stat panel | b005be5 | TorchKeeper/Views/SheetPage.xaml |
+| 2 | Add Levels and SdLevelEntry to ShadowdarklingsJson | a49b709 | TorchKeeper.Core/DTOs/ShadowdarklingsJson.cs |
+| 3 | Populate Talents in ShadowdarklingsImportService + tests | 31fe0a2 | TorchKeeper.Core/Services/ShadowdarklingsImportService.cs, TorchKeeper.Tests/Services/ShadowdarklingsImportServiceTests.cs |
 
 ## What Was Built
 
@@ -70,8 +70,8 @@ Added talent-building logic to `ShadowdarklingsImportService.ImportAsync`:
 
 ## Validation
 
-- `SdCharacterSheet.Core` build: passed (0 errors, 0 warnings)
-- `SdCharacterSheet.Tests` full suite: 57/57 passed (3 new tests added)
+- `TorchKeeper.Core` build: passed (0 errors, 0 warnings)
+- `TorchKeeper.Tests` full suite: 57/57 passed (3 new tests added)
 - MAUI project build: platform toolchain (actool/xcrun Xcode plugin errors) prevents full compilation on this machine — pre-existing infrastructure issue unrelated to XAML changes
 
 ## Deviations from Plan
@@ -85,10 +85,10 @@ None — all fields are wired to real data sources.
 ## Self-Check: PASSED
 
 Files exist:
-- SdCharacterSheet/Views/SheetPage.xaml: modified (Base label added at line 193)
-- SdCharacterSheet.Core/DTOs/ShadowdarklingsJson.cs: modified (Levels + SdLevelEntry added)
-- SdCharacterSheet.Core/Services/ShadowdarklingsImportService.cs: modified (Talents assignment)
-- SdCharacterSheet.Tests/Services/ShadowdarklingsImportServiceTests.cs: modified (3 tests added)
+- TorchKeeper/Views/SheetPage.xaml: modified (Base label added at line 193)
+- TorchKeeper.Core/DTOs/ShadowdarklingsJson.cs: modified (Levels + SdLevelEntry added)
+- TorchKeeper.Core/Services/ShadowdarklingsImportService.cs: modified (Talents assignment)
+- TorchKeeper.Tests/Services/ShadowdarklingsImportServiceTests.cs: modified (3 tests added)
 
 Commits verified:
 - a49b709: feat(06-03): add SdLevelEntry and Levels property to ShadowdarklingsJson

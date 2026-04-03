@@ -21,11 +21,11 @@ tech-stack:
 
 key-files:
   created:
-    - SdCharacterSheet/Services/ShadowdarklingsImportService.cs
+    - TorchKeeper/Services/ShadowdarklingsImportService.cs
     - (tests already existed as stubs; now fully implemented)
   modified:
-    - SdCharacterSheet.Tests/Services/ShadowdarklingsImportServiceTests.cs
-    - SdCharacterSheet/MauiProgram.cs
+    - TorchKeeper.Tests/Services/ShadowdarklingsImportServiceTests.cs
+    - TorchKeeper/MauiProgram.cs
 
 key-decisions:
   - "Static readonly JsonSerializerOptions avoids per-call allocation; shared across all ImportAsync calls"
@@ -75,9 +75,9 @@ Each task was committed atomically:
 _Note: TDD tasks have two commits (test RED → feat GREEN)_
 
 ## Files Created/Modified
-- `SdCharacterSheet/Services/ShadowdarklingsImportService.cs` - Full ImportAsync implementation with static options
-- `SdCharacterSheet.Tests/Services/ShadowdarklingsImportServiceTests.cs` - 7 real test methods (no skips)
-- `SdCharacterSheet/MauiProgram.cs` - Uncommented ShadowdarklingsImportService DI registration
+- `TorchKeeper/Services/ShadowdarklingsImportService.cs` - Full ImportAsync implementation with static options
+- `TorchKeeper.Tests/Services/ShadowdarklingsImportServiceTests.cs` - 7 real test methods (no skips)
+- `TorchKeeper/MauiProgram.cs` - Uncommented ShadowdarklingsImportService DI registration
 
 ## Decisions Made
 - Static readonly `JsonSerializerOptions` on the class (not per-call) to avoid allocation in the hot path

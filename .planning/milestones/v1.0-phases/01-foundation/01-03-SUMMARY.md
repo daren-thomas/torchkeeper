@@ -28,9 +28,9 @@ tech-stack:
 key-files:
   created: []
   modified:
-    - SdCharacterSheet/Services/CharacterFileService.cs
-    - SdCharacterSheet.Tests/Services/CharacterFileServiceTests.cs
-    - SdCharacterSheet/MauiProgram.cs
+    - TorchKeeper/Services/CharacterFileService.cs
+    - TorchKeeper.Tests/Services/CharacterFileServiceTests.cs
+    - TorchKeeper/MauiProgram.cs
 
 key-decisions:
   - "SaveOptions uses DefaultIgnoreCondition.WhenWritingDefault (not deprecated IgnoreNullValues) as required for .NET 10 compatibility"
@@ -80,9 +80,9 @@ _Note: TDD plan — RED commit (test) then GREEN commit (feat). Build environmen
 
 ## Files Created/Modified
 
-- `SdCharacterSheet/Services/CharacterFileService.cs` - Full implementation: MapToDto, MapFromDto, SaveToStreamAsync, LoadFromStreamAsync with static SaveOptions/LoadOptions
-- `SdCharacterSheet.Tests/Services/CharacterFileServiceTests.cs` - 2 real xUnit tests replacing skip stubs: RoundTrip_SaveLoad_NoDataLoss and Save_ContainsVersionField
-- `SdCharacterSheet/MauiProgram.cs` - Uncommented CharacterFileService singleton registration
+- `TorchKeeper/Services/CharacterFileService.cs` - Full implementation: MapToDto, MapFromDto, SaveToStreamAsync, LoadFromStreamAsync with static SaveOptions/LoadOptions
+- `TorchKeeper.Tests/Services/CharacterFileServiceTests.cs` - 2 real xUnit tests replacing skip stubs: RoundTrip_SaveLoad_NoDataLoss and Save_ContainsVersionField
+- `TorchKeeper/MauiProgram.cs` - Uncommented CharacterFileService singleton registration
 
 ## Decisions Made
 
@@ -114,8 +114,8 @@ None - no external service configuration required.
 
 ## Self-Check: PASSED
 
-- FOUND: SdCharacterSheet/Services/CharacterFileService.cs
-- FOUND: SdCharacterSheet.Tests/Services/CharacterFileServiceTests.cs
+- FOUND: TorchKeeper/Services/CharacterFileService.cs
+- FOUND: TorchKeeper.Tests/Services/CharacterFileServiceTests.cs
 - FOUND: .planning/phases/01-foundation/01-03-SUMMARY.md
 - FOUND: commit a3adf92 (test RED phase)
 - FOUND: commit 0e30e9e (feat GREEN phase)

@@ -31,21 +31,21 @@ score: 4/4 must-haves verified
 
 | Artifact | Expected | Status | Details |
 |----------|----------|--------|---------|
-| `SdCharacterSheet.Core/Models/GearItem.cs` | `bool IsFreeCarry` property | VERIFIED | Line 9 — `public bool IsFreeCarry { get; set; }` |
-| `SdCharacterSheet.Core/Models/MagicItem.cs` | `bool IsFreeCarry` property | VERIFIED | Line 8 — `public bool IsFreeCarry { get; set; }` |
-| `SdCharacterSheet.Core/DTOs/CharacterSaveData.cs` | `IsFreeCarry` on `GearItemData` and `MagicItemData` | VERIFIED | Lines 65 and 73 |
-| `SdCharacterSheet.Core/Services/CharacterFileService.cs` | `IsFreeCarry` in all four LINQ projections | VERIFIED | Lines 81, 90, 139, 148 |
-| `SdCharacterSheet/ViewModels/GearItemViewModel.cs` | Observable `IsFreeCarry`, `KnownFreeCarryNames`, auto-detect in constructors | VERIFIED | Lines 20, 25-29, 38, 50, 61 — all three constructors wired |
-| `SdCharacterSheet/ViewModels/CharacterViewModel.cs` | `GearSlotsUsed` excludes free-carry; `RegularGearItems`/`FreeCarryItems`; `RebuildGearSubCollections` | VERIFIED | Lines 93, 113-114, 177, 301, 321-341 |
-| `SdCharacterSheet/Views/GearPage.xaml` | Two sections bound to `RegularGearItems` and `FreeCarryItems` | VERIFIED | Lines 34 and 59 — `BindableLayout.ItemsSource` bindings confirmed |
-| `SdCharacterSheet/Views/Popups/GearItemPopup.xaml` | `FreeCarryCheckBox` between Note and Save | VERIFIED | Lines 22-25 |
-| `SdCharacterSheet/Views/Popups/GearItemPopup.xaml.cs` | Checkbox pre-fill, write-back, `Math.Max(0, slots)` | VERIFIED | Lines 22, 41, 49 |
-| `SdCharacterSheet/Views/SheetPage.xaml` | `Base: {0}` label in expanded stat panel | VERIFIED | Lines 192-194 |
-| `SdCharacterSheet.Core/DTOs/ShadowdarklingsJson.cs` | `SdLevelEntry` class and `Levels` property | VERIFIED | Lines 35, 80-87 |
-| `SdCharacterSheet.Core/Services/ShadowdarklingsImportService.cs` | Talents populated from `levels[]` | VERIFIED | Lines 62-81, 111 |
-| `SdCharacterSheet.Core/Export/CharacterExportData.cs` | `FreeCarryItems` required property; `GearExportItem.IsFreeCarry` | VERIFIED | Lines 36, 56 |
-| `SdCharacterSheet.Core/Export/MarkdownBuilder.cs` | `### Free Carry` section conditional on `FreeCarryItems.Count > 0` | VERIFIED | Lines 109-119 |
-| `SdCharacterSheet/Services/MarkdownExportService.cs` | Splits `vm.GearItems` into regular and free-carry lists | VERIFIED | Lines 60-68, 92 |
+| `TorchKeeper.Core/Models/GearItem.cs` | `bool IsFreeCarry` property | VERIFIED | Line 9 — `public bool IsFreeCarry { get; set; }` |
+| `TorchKeeper.Core/Models/MagicItem.cs` | `bool IsFreeCarry` property | VERIFIED | Line 8 — `public bool IsFreeCarry { get; set; }` |
+| `TorchKeeper.Core/DTOs/CharacterSaveData.cs` | `IsFreeCarry` on `GearItemData` and `MagicItemData` | VERIFIED | Lines 65 and 73 |
+| `TorchKeeper.Core/Services/CharacterFileService.cs` | `IsFreeCarry` in all four LINQ projections | VERIFIED | Lines 81, 90, 139, 148 |
+| `TorchKeeper/ViewModels/GearItemViewModel.cs` | Observable `IsFreeCarry`, `KnownFreeCarryNames`, auto-detect in constructors | VERIFIED | Lines 20, 25-29, 38, 50, 61 — all three constructors wired |
+| `TorchKeeper/ViewModels/CharacterViewModel.cs` | `GearSlotsUsed` excludes free-carry; `RegularGearItems`/`FreeCarryItems`; `RebuildGearSubCollections` | VERIFIED | Lines 93, 113-114, 177, 301, 321-341 |
+| `TorchKeeper/Views/GearPage.xaml` | Two sections bound to `RegularGearItems` and `FreeCarryItems` | VERIFIED | Lines 34 and 59 — `BindableLayout.ItemsSource` bindings confirmed |
+| `TorchKeeper/Views/Popups/GearItemPopup.xaml` | `FreeCarryCheckBox` between Note and Save | VERIFIED | Lines 22-25 |
+| `TorchKeeper/Views/Popups/GearItemPopup.xaml.cs` | Checkbox pre-fill, write-back, `Math.Max(0, slots)` | VERIFIED | Lines 22, 41, 49 |
+| `TorchKeeper/Views/SheetPage.xaml` | `Base: {0}` label in expanded stat panel | VERIFIED | Lines 192-194 |
+| `TorchKeeper.Core/DTOs/ShadowdarklingsJson.cs` | `SdLevelEntry` class and `Levels` property | VERIFIED | Lines 35, 80-87 |
+| `TorchKeeper.Core/Services/ShadowdarklingsImportService.cs` | Talents populated from `levels[]` | VERIFIED | Lines 62-81, 111 |
+| `TorchKeeper.Core/Export/CharacterExportData.cs` | `FreeCarryItems` required property; `GearExportItem.IsFreeCarry` | VERIFIED | Lines 36, 56 |
+| `TorchKeeper.Core/Export/MarkdownBuilder.cs` | `### Free Carry` section conditional on `FreeCarryItems.Count > 0` | VERIFIED | Lines 109-119 |
+| `TorchKeeper/Services/MarkdownExportService.cs` | Splits `vm.GearItems` into regular and free-carry lists | VERIFIED | Lines 60-68, 92 |
 
 ---
 
@@ -80,7 +80,7 @@ score: 4/4 must-haves verified
 
 | Behavior | Command | Result | Status |
 |----------|---------|--------|--------|
-| 67 tests pass (all GEAR-01, GEAR-02, STAT-01 tests included) | `dotnet test SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj` | Failed: 0, Passed: 67, Skipped: 0 | PASS |
+| 67 tests pass (all GEAR-01, GEAR-02, STAT-01 tests included) | `dotnet test TorchKeeper.Tests/TorchKeeper.Tests.csproj` | Failed: 0, Passed: 67, Skipped: 0 | PASS |
 | `GearItemViewModel` constructor sets `IsFreeCarry = true` for "Backpack" | Covered by `GearItemViewModel_AutoDetectsBackpack` test | Test passes | PASS |
 | `IsFreeCarry` round-trips through JSON save/load | Covered by `RoundTrip_GearItem_IsFreeCarry_Persists` test | Test passes | PASS |
 | Talents populated from levels[] JSON | Covered by 3 `ShadowdarklingsImportServiceTests` talent tests | All 3 tests pass | PASS |

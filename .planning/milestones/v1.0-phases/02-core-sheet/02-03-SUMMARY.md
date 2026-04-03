@@ -21,12 +21,12 @@ tech-stack:
 
 key-files:
   created:
-    - SdCharacterSheet/Views/GearPage.xaml
-    - SdCharacterSheet/Views/GearPage.xaml.cs
-    - SdCharacterSheet/Views/Popups/GearItemPopup.xaml
-    - SdCharacterSheet/Views/Popups/GearItemPopup.xaml.cs
+    - TorchKeeper/Views/GearPage.xaml
+    - TorchKeeper/Views/GearPage.xaml.cs
+    - TorchKeeper/Views/Popups/GearItemPopup.xaml
+    - TorchKeeper/Views/Popups/GearItemPopup.xaml.cs
   modified:
-    - SdCharacterSheet/ViewModels/GearItemViewModel.cs
+    - TorchKeeper/ViewModels/GearItemViewModel.cs
 
 key-decisions:
   - "GearItemPopup uses two constructor overloads (edit vs add) rather than a single constructor with nullable parameter — cleaner call sites in GearPage.xaml.cs"
@@ -73,11 +73,11 @@ Each task was committed atomically:
 **Plan metadata:** (docs commit pending)
 
 ## Files Created/Modified
-- `SdCharacterSheet/ViewModels/GearItemViewModel.cs` - Added third plain-values constructor for user-created items
-- `SdCharacterSheet/Views/Popups/GearItemPopup.xaml` - Modal UI with Name, Slots, Type, Note fields and Save/Delete buttons
-- `SdCharacterSheet/Views/Popups/GearItemPopup.xaml.cs` - Two constructors (edit/add), OnSave updates existing or adds new, OnDelete removes from GearItems
-- `SdCharacterSheet/Views/GearPage.xaml` - Slot header Frame, CollectionView gear list, Currency Grid with GP/SP/CP entries
-- `SdCharacterSheet/Views/GearPage.xaml.cs` - CharacterViewModel injection, OnItemTapped and OnAddItemClicked handlers via ShowPopupAsync
+- `TorchKeeper/ViewModels/GearItemViewModel.cs` - Added third plain-values constructor for user-created items
+- `TorchKeeper/Views/Popups/GearItemPopup.xaml` - Modal UI with Name, Slots, Type, Note fields and Save/Delete buttons
+- `TorchKeeper/Views/Popups/GearItemPopup.xaml.cs` - Two constructors (edit/add), OnSave updates existing or adds new, OnDelete removes from GearItems
+- `TorchKeeper/Views/GearPage.xaml` - Slot header Frame, CollectionView gear list, Currency Grid with GP/SP/CP entries
+- `TorchKeeper/Views/GearPage.xaml.cs` - CharacterViewModel injection, OnItemTapped and OnAddItemClicked handlers via ShowPopupAsync
 
 ## Decisions Made
 - GearItemPopup uses two constructor overloads (edit vs add) rather than a nullable parameter — cleaner call sites
@@ -102,10 +102,10 @@ None - no external service configuration required.
 ## Self-Check: PASSED
 
 All files present and commits verified:
-- FOUND: SdCharacterSheet/Views/GearPage.xaml
-- FOUND: SdCharacterSheet/Views/GearPage.xaml.cs
-- FOUND: SdCharacterSheet/Views/Popups/GearItemPopup.xaml
-- FOUND: SdCharacterSheet/Views/Popups/GearItemPopup.xaml.cs
+- FOUND: TorchKeeper/Views/GearPage.xaml
+- FOUND: TorchKeeper/Views/GearPage.xaml.cs
+- FOUND: TorchKeeper/Views/Popups/GearItemPopup.xaml
+- FOUND: TorchKeeper/Views/Popups/GearItemPopup.xaml.cs
 - FOUND: 846be65 (Task 1 commit)
 - FOUND: 813c357 (Task 2 commit)
 - FOUND: c577c9b (docs/metadata commit)

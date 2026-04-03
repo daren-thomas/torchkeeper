@@ -28,12 +28,12 @@ tech-stack:
 
 key-files:
   created:
-    - SdCharacterSheet.Tests/ViewModels/CharacterViewModelFileCommandTests.cs
-    - SdCharacterSheet/Services/MauiImportFileService.cs
+    - TorchKeeper.Tests/ViewModels/CharacterViewModelFileCommandTests.cs
+    - TorchKeeper/Services/MauiImportFileService.cs
   modified:
-    - SdCharacterSheet/ViewModels/CharacterViewModel.cs
-    - SdCharacterSheet/MauiProgram.cs
-    - SdCharacterSheet/AppShell.xaml
+    - TorchKeeper/ViewModels/CharacterViewModel.cs
+    - TorchKeeper/MauiProgram.cs
+    - TorchKeeper/AppShell.xaml
 
 key-decisions:
   - "MauiCharacterFileService resolved via cast from CharacterFileService DI registration — DI key is base type, constructor needs concrete type for OpenAsync"
@@ -82,11 +82,11 @@ Each task was committed atomically:
 
 ## Files Created/Modified
 
-- `SdCharacterSheet.Tests/ViewModels/CharacterViewModelFileCommandTests.cs` - 6 tests with TestFileCommandVM stub and FakeFileSaver
-- `SdCharacterSheet/Services/MauiImportFileService.cs` - MAUI JSON file picker delegating to ShadowdarklingsImportService
-- `SdCharacterSheet/ViewModels/CharacterViewModel.cs` - Added SaveCommand, LoadCommand, ImportCommand, BuildCharacterFromViewModel, new constructor, file service fields
-- `SdCharacterSheet/MauiProgram.cs` - Registered MauiImportFileService, updated CharacterViewModel factory to pass all three services
-- `SdCharacterSheet/AppShell.xaml` - Added Save/Open/Import menu items and toolbar items
+- `TorchKeeper.Tests/ViewModels/CharacterViewModelFileCommandTests.cs` - 6 tests with TestFileCommandVM stub and FakeFileSaver
+- `TorchKeeper/Services/MauiImportFileService.cs` - MAUI JSON file picker delegating to ShadowdarklingsImportService
+- `TorchKeeper/ViewModels/CharacterViewModel.cs` - Added SaveCommand, LoadCommand, ImportCommand, BuildCharacterFromViewModel, new constructor, file service fields
+- `TorchKeeper/MauiProgram.cs` - Registered MauiImportFileService, updated CharacterViewModel factory to pass all three services
+- `TorchKeeper/AppShell.xaml` - Added Save/Open/Import menu items and toolbar items
 
 ## Decisions Made
 

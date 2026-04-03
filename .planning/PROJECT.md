@@ -56,9 +56,9 @@ A player can open their character, see all their stats with full bonus breakdown
 Tech stack: .NET 10 MAUI, CommunityToolkit.Mvvm, System.Text.Json, xUnit.
 
 Architecture:
-- `SdCharacterSheet.Core`: domain models, DTOs, services, MarkdownBuilder (pure/testable)
-- `SdCharacterSheet`: MAUI app — ViewModels, Views (3-tab: Sheet/Gear/Notes), platform wiring
-- `SdCharacterSheet.Tests`: xUnit test project (67 tests passing)
+- `TorchKeeper.Core`: domain models, DTOs, services, MarkdownBuilder (pure/testable)
+- `TorchKeeper`: MAUI app — ViewModels, Views (3-tab: Sheet/Gear/Notes), platform wiring
+- `TorchKeeper.Tests`: xUnit test project (67 tests passing)
 
 Key facts:
 - Shadowdarklings.net JSON format understood (`examples/Brim.json`): stats have rolled + final values, bonuses are named with sourceType/sourceCategory/bonusTo
@@ -71,7 +71,7 @@ Key facts:
 - MacFilePickerHelper (commit b2d9977): workaround for MAUI FilePicker null on macOS 15 Sequoia
 - Talents field: full-stack free-text area on Notes tab (above Spells, above Notes), exported as `## Talents` section in Markdown
 - Free-carry items: Backpack, Bag of Coins, Thieves Tools auto-detected; any item can be manually flagged IsFreeCarry — persists across save/load via MAUI-local shadow types
-- MAUI-local shadow types pattern (CS0436): SdCharacterSheet/Models/ and SdCharacterSheet/DTOs/ shadow Core types under the same namespace — Core changes must be manually propagated
+- MAUI-local shadow types pattern (CS0436): TorchKeeper/Models/ and TorchKeeper/DTOs/ shadow Core types under the same namespace — Core changes must be manually propagated
 
 Known tech debt (non-blocking):
 - VALIDATION.md Nyquist sign-off checklists not ticked for Phases 04, 05, 06, 07

@@ -18,17 +18,17 @@ created: 2026-03-22
 | Property | Value |
 |----------|-------|
 | **Framework** | xUnit |
-| **Config file** | SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj |
-| **Quick run command** | `dotnet test SdCharacterSheet.Tests` |
-| **Full suite command** | `dotnet test SdCharacterSheet.Tests` |
+| **Config file** | TorchKeeper.Tests/TorchKeeper.Tests.csproj |
+| **Quick run command** | `dotnet test TorchKeeper.Tests` |
+| **Full suite command** | `dotnet test TorchKeeper.Tests` |
 | **Estimated runtime** | ~5 seconds |
 
 ---
 
 ## Sampling Rate
 
-- **After every task commit:** Run `dotnet test SdCharacterSheet.Tests`
-- **After every plan wave:** Run `dotnet test SdCharacterSheet.Tests`
+- **After every task commit:** Run `dotnet test TorchKeeper.Tests`
+- **After every plan wave:** Run `dotnet test TorchKeeper.Tests`
 - **Before `/gsd:verify-work`:** Full suite must be green
 - **Max feedback latency:** 10 seconds
 
@@ -38,8 +38,8 @@ created: 2026-03-22
 
 | Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 5-01-01 | 01 | 1 | TLNT-01 | unit | `dotnet test SdCharacterSheet.Tests --filter "RoundTrip"` | ✅ | ⬜ pending |
-| 5-01-02 | 01 | 1 | TLNT-01 | unit | `dotnet test SdCharacterSheet.Tests --filter "MarkdownBuilder"` | ✅ | ⬜ pending |
+| 5-01-01 | 01 | 1 | TLNT-01 | unit | `dotnet test TorchKeeper.Tests --filter "RoundTrip"` | ✅ | ⬜ pending |
+| 5-01-02 | 01 | 1 | TLNT-01 | unit | `dotnet test TorchKeeper.Tests --filter "MarkdownBuilder"` | ✅ | ⬜ pending |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 

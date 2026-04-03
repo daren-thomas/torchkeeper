@@ -18,17 +18,17 @@ created: 2026-03-08
 | Property | Value |
 |----------|-------|
 | **Framework** | xUnit 2.x |
-| **Config file** | `SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj` (Wave 0 creates) |
-| **Quick run command** | `dotnet test SdCharacterSheet.Tests/ --filter "Category=Unit" --no-build` |
-| **Full suite command** | `dotnet test SdCharacterSheet.Tests/` |
+| **Config file** | `TorchKeeper.Tests/TorchKeeper.Tests.csproj` (Wave 0 creates) |
+| **Quick run command** | `dotnet test TorchKeeper.Tests/ --filter "Category=Unit" --no-build` |
+| **Full suite command** | `dotnet test TorchKeeper.Tests/` |
 | **Estimated runtime** | ~5 seconds |
 
 ---
 
 ## Sampling Rate
 
-- **After every task commit:** Run `dotnet test SdCharacterSheet.Tests/ --filter "Category=Unit" --no-build`
-- **After every plan wave:** Run `dotnet test SdCharacterSheet.Tests/`
+- **After every task commit:** Run `dotnet test TorchKeeper.Tests/ --filter "Category=Unit" --no-build`
+- **After every plan wave:** Run `dotnet test TorchKeeper.Tests/`
 - **Before `/gsd:verify-work`:** Full suite must be green
 - **Max feedback latency:** 10 seconds
 
@@ -38,7 +38,7 @@ created: 2026-03-08
 
 | Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 1-01-01 | 01 | 0 | FILE-01, FILE-02, FILE-03 | setup | `dotnet test SdCharacterSheet.Tests/` | ❌ W0 | ⬜ pending |
+| 1-01-01 | 01 | 0 | FILE-01, FILE-02, FILE-03 | setup | `dotnet test TorchKeeper.Tests/` | ❌ W0 | ⬜ pending |
 | 1-02-01 | 02 | 1 | FILE-01 | unit | `dotnet test --filter "FullyQualifiedName~ShadowdarklingsImportServiceTests"` | ❌ W0 | ⬜ pending |
 | 1-02-02 | 02 | 1 | FILE-01 | unit | `dotnet test --filter "FullyQualifiedName~ShadowdarklingsImportServiceTests.Import_UsesRolledStats"` | ❌ W0 | ⬜ pending |
 | 1-02-03 | 02 | 1 | FILE-01 | unit | `dotnet test --filter "FullyQualifiedName~ShadowdarklingsImportServiceTests.Import_Currency_TopLevelFields"` | ❌ W0 | ⬜ pending |
@@ -55,13 +55,13 @@ created: 2026-03-08
 
 ## Wave 0 Requirements
 
-- [ ] `SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj` — xUnit test project (targets `net10.0`, not a platform TFM)
-- [ ] `SdCharacterSheet.Tests/Services/ShadowdarklingsImportServiceTests.cs` — stubs for FILE-01
-- [ ] `SdCharacterSheet.Tests/Services/CharacterFileServiceTests.cs` — stubs for FILE-02, FILE-03
-- [ ] `SdCharacterSheet.Tests/TestData/Brim.json` — copy of `examples/Brim.json` for test fixture
-- [ ] `dotnet add SdCharacterSheet.Tests package xunit` — xUnit framework
-- [ ] `dotnet add SdCharacterSheet.Tests package Microsoft.NET.Test.Sdk` — test runner host
-- [ ] `dotnet add SdCharacterSheet.Tests package xunit.runner.visualstudio` — VS integration
+- [ ] `TorchKeeper.Tests/TorchKeeper.Tests.csproj` — xUnit test project (targets `net10.0`, not a platform TFM)
+- [ ] `TorchKeeper.Tests/Services/ShadowdarklingsImportServiceTests.cs` — stubs for FILE-01
+- [ ] `TorchKeeper.Tests/Services/CharacterFileServiceTests.cs` — stubs for FILE-02, FILE-03
+- [ ] `TorchKeeper.Tests/TestData/Brim.json` — copy of `examples/Brim.json` for test fixture
+- [ ] `dotnet add TorchKeeper.Tests package xunit` — xUnit framework
+- [ ] `dotnet add TorchKeeper.Tests package Microsoft.NET.Test.Sdk` — test runner host
+- [ ] `dotnet add TorchKeeper.Tests package xunit.runner.visualstudio` — VS integration
 
 ---
 

@@ -38,30 +38,30 @@ tech-stack:
 
 key-files:
   created:
-    - "SdCharacterSheet/Models/Character.cs"
-    - "SdCharacterSheet/Models/BonusSource.cs"
-    - "SdCharacterSheet/Models/GearItem.cs"
-    - "SdCharacterSheet/Models/MagicItem.cs"
-    - "SdCharacterSheet/DTOs/CharacterSaveData.cs"
-    - "SdCharacterSheet/DTOs/ShadowdarklingsJson.cs"
-    - "SdCharacterSheet/ViewModels/CharacterViewModel.cs"
-    - "SdCharacterSheet/Services/ShadowdarklingsImportService.cs"
-    - "SdCharacterSheet/Services/CharacterFileService.cs"
-    - "SdCharacterSheet/SdCharacterSheet.csproj"
-    - "SdCharacterSheet/MauiProgram.cs"
-    - "SdCharacterSheet/Platforms/iOS/Info.plist"
-    - "SdCharacterSheet/Platforms/MacCatalyst/Entitlements.plist"
-    - "SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj"
-    - "SdCharacterSheet.Tests/Services/ShadowdarklingsImportServiceTests.cs"
-    - "SdCharacterSheet.Tests/Services/CharacterFileServiceTests.cs"
-    - "SdCharacterSheet.Tests/TestData/Brim.json"
-    - "SdCharacterSheet.sln"
+    - "TorchKeeper/Models/Character.cs"
+    - "TorchKeeper/Models/BonusSource.cs"
+    - "TorchKeeper/Models/GearItem.cs"
+    - "TorchKeeper/Models/MagicItem.cs"
+    - "TorchKeeper/DTOs/CharacterSaveData.cs"
+    - "TorchKeeper/DTOs/ShadowdarklingsJson.cs"
+    - "TorchKeeper/ViewModels/CharacterViewModel.cs"
+    - "TorchKeeper/Services/ShadowdarklingsImportService.cs"
+    - "TorchKeeper/Services/CharacterFileService.cs"
+    - "TorchKeeper/TorchKeeper.csproj"
+    - "TorchKeeper/MauiProgram.cs"
+    - "TorchKeeper/Platforms/iOS/Info.plist"
+    - "TorchKeeper/Platforms/MacCatalyst/Entitlements.plist"
+    - "TorchKeeper.Tests/TorchKeeper.Tests.csproj"
+    - "TorchKeeper.Tests/Services/ShadowdarklingsImportServiceTests.cs"
+    - "TorchKeeper.Tests/Services/CharacterFileServiceTests.cs"
+    - "TorchKeeper.Tests/TestData/Brim.json"
+    - "TorchKeeper.sln"
   modified: []
 
 key-decisions:
   - "Files created manually (not via dotnet CLI) because only .NET 8 SDK was available in the execution environment; .NET 10 SDK + MAUI workload required to build"
   - "UTTypeIdentifier set to com.sdcharactersheet.sdchar (matches plan — uses app-specific reverse domain)"
-  - "Service stubs created in SdCharacterSheet/Services/ so test project compiles without implementations"
+  - "Service stubs created in TorchKeeper/Services/ so test project compiles without implementations"
   - "SdGearItem.Type field preserved from Brim.json (not renamed to ItemType) — import mapper in Plan 02 will handle the mapping to GearItem.ItemType"
 
 patterns-established:
@@ -105,24 +105,24 @@ Each task was committed atomically:
 
 ## Files Created/Modified
 
-- `SdCharacterSheet/Models/Character.cs` - Domain entity, all character state
-- `SdCharacterSheet/Models/BonusSource.cs` - Stat bonus / AC contributor record
-- `SdCharacterSheet/Models/GearItem.cs` - Mundane gear item with slots/type/note
-- `SdCharacterSheet/Models/MagicItem.cs` - Magic item with slots and free-text note
-- `SdCharacterSheet/DTOs/CharacterSaveData.cs` - Versioned save DTO with nested BonusSourceData, GearItemData, MagicItemData
-- `SdCharacterSheet/DTOs/ShadowdarklingsJson.cs` - Import DTO: RolledStats, nullable currency, LedgerEntry fallback, SdBonus/SdGearItem/SdMagicItem
-- `SdCharacterSheet/ViewModels/CharacterViewModel.cs` - ObservableObject singleton with LoadCharacter method
-- `SdCharacterSheet/Services/ShadowdarklingsImportService.cs` - Stub for Plan 02
-- `SdCharacterSheet/Services/CharacterFileService.cs` - Stub for Plan 03
-- `SdCharacterSheet/SdCharacterSheet.csproj` - LangVersion=preview, WindowsPackageType=None, #3337 workaround, all 4 platform TFMs
-- `SdCharacterSheet/MauiProgram.cs` - UseMauiCommunityToolkit() with service comments
-- `SdCharacterSheet/Platforms/iOS/Info.plist` - UTImportedTypeDeclarations + CFBundleDocumentTypes for .sdchar
-- `SdCharacterSheet/Platforms/MacCatalyst/Entitlements.plist` - user-selected.read-write entitlement
-- `SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj` - net10.0 xUnit project referencing main project
-- `SdCharacterSheet.Tests/Services/ShadowdarklingsImportServiceTests.cs` - 7 Wave 0 skip stubs (FILE-01)
-- `SdCharacterSheet.Tests/Services/CharacterFileServiceTests.cs` - 2 Wave 0 skip stubs (FILE-02/03)
-- `SdCharacterSheet.Tests/TestData/Brim.json` - Fixture copy from examples/
-- `SdCharacterSheet.sln` - Solution file including both projects
+- `TorchKeeper/Models/Character.cs` - Domain entity, all character state
+- `TorchKeeper/Models/BonusSource.cs` - Stat bonus / AC contributor record
+- `TorchKeeper/Models/GearItem.cs` - Mundane gear item with slots/type/note
+- `TorchKeeper/Models/MagicItem.cs` - Magic item with slots and free-text note
+- `TorchKeeper/DTOs/CharacterSaveData.cs` - Versioned save DTO with nested BonusSourceData, GearItemData, MagicItemData
+- `TorchKeeper/DTOs/ShadowdarklingsJson.cs` - Import DTO: RolledStats, nullable currency, LedgerEntry fallback, SdBonus/SdGearItem/SdMagicItem
+- `TorchKeeper/ViewModels/CharacterViewModel.cs` - ObservableObject singleton with LoadCharacter method
+- `TorchKeeper/Services/ShadowdarklingsImportService.cs` - Stub for Plan 02
+- `TorchKeeper/Services/CharacterFileService.cs` - Stub for Plan 03
+- `TorchKeeper/TorchKeeper.csproj` - LangVersion=preview, WindowsPackageType=None, #3337 workaround, all 4 platform TFMs
+- `TorchKeeper/MauiProgram.cs` - UseMauiCommunityToolkit() with service comments
+- `TorchKeeper/Platforms/iOS/Info.plist` - UTImportedTypeDeclarations + CFBundleDocumentTypes for .sdchar
+- `TorchKeeper/Platforms/MacCatalyst/Entitlements.plist` - user-selected.read-write entitlement
+- `TorchKeeper.Tests/TorchKeeper.Tests.csproj` - net10.0 xUnit project referencing main project
+- `TorchKeeper.Tests/Services/ShadowdarklingsImportServiceTests.cs` - 7 Wave 0 skip stubs (FILE-01)
+- `TorchKeeper.Tests/Services/CharacterFileServiceTests.cs` - 2 Wave 0 skip stubs (FILE-02/03)
+- `TorchKeeper.Tests/TestData/Brim.json` - Fixture copy from examples/
+- `TorchKeeper.sln` - Solution file including both projects
 
 ## Decisions Made
 
@@ -138,7 +138,7 @@ Each task was committed atomically:
 - **Found during:** Task 1 (scaffold MAUI solution)
 - **Issue:** `dotnet new maui` requires .NET 10 SDK + MAUI workload; only .NET 8.0.100 SDK was installed with no workloads
 - **Fix:** Created all project files manually to exactly match what the CLI + plan specifications would produce. File contents are functionally identical to what `dotnet new maui` generates, with plan-specified customizations applied.
-- **Files modified:** All files in SdCharacterSheet/ and SdCharacterSheet.Tests/
+- **Files modified:** All files in TorchKeeper/ and TorchKeeper.Tests/
 - **Build verification:** Cannot be completed in this environment. Requires `dotnet 10` + `maui` workload. Install .NET 10 SDK from https://aka.ms/dotnet/download and run `dotnet workload install maui` before verifying build.
 
 ---
@@ -156,8 +156,8 @@ To verify the build after cloning:
 
 1. Install .NET 10 SDK: https://aka.ms/dotnet/download
 2. Install MAUI workload: `dotnet workload install maui`
-3. Build main project: `dotnet build SdCharacterSheet/ --framework net10.0-maccatalyst` (macOS) or `--framework net10.0-windows10.0.19041.0` (Windows)
-4. Run tests: `dotnet test SdCharacterSheet.Tests/` (all 9 tests should show as Skipped, exit code 0)
+3. Build main project: `dotnet build TorchKeeper/ --framework net10.0-maccatalyst` (macOS) or `--framework net10.0-windows10.0.19041.0` (Windows)
+4. Run tests: `dotnet test TorchKeeper.Tests/` (all 9 tests should show as Skipped, exit code 0)
 
 ## Next Phase Readiness
 

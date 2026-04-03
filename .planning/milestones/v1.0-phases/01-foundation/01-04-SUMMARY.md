@@ -30,10 +30,10 @@ tech-stack:
 key-files:
   created: []
   modified:
-    - SdCharacterSheet/Platforms/Android/AndroidManifest.xml
-    - SdCharacterSheet/Platforms/Windows/App.xaml.cs
-    - SdCharacterSheet/Services/CharacterFileService.cs
-    - SdCharacterSheet/MauiProgram.cs
+    - TorchKeeper/Platforms/Android/AndroidManifest.xml
+    - TorchKeeper/Platforms/Windows/App.xaml.cs
+    - TorchKeeper/Services/CharacterFileService.cs
+    - TorchKeeper/MauiProgram.cs
 
 key-decisions:
   - "Android uses application/octet-stream MIME (not a custom MIME) for .sdchar file association — no OS-level MIME registration possible for unknown extensions on Android"
@@ -80,10 +80,10 @@ Each task was committed atomically:
 **Plan metadata:** (docs commit below)
 
 ## Files Created/Modified
-- `SdCharacterSheet/Platforms/Android/AndroidManifest.xml` - Added intent-filter with application/octet-stream MIME and .sdchar pathPattern inside `<application>` element
-- `SdCharacterSheet/Platforms/Windows/App.xaml.cs` - Added comment in App() constructor documenting Windows file type filter strategy (no manifest changes needed for unpackaged apps)
-- `SdCharacterSheet/Services/CharacterFileService.cs` - Added IFileSaver constructor injection, static SdCharFileType and SdCharPickOptions, OpenAsync and SaveAsync dialog layer methods
-- `SdCharacterSheet/MauiProgram.cs` - Replaced placeholder service registrations with all four: IFileSaver (FileSaver.Default), CharacterViewModel, CharacterFileService, ShadowdarklingsImportService
+- `TorchKeeper/Platforms/Android/AndroidManifest.xml` - Added intent-filter with application/octet-stream MIME and .sdchar pathPattern inside `<application>` element
+- `TorchKeeper/Platforms/Windows/App.xaml.cs` - Added comment in App() constructor documenting Windows file type filter strategy (no manifest changes needed for unpackaged apps)
+- `TorchKeeper/Services/CharacterFileService.cs` - Added IFileSaver constructor injection, static SdCharFileType and SdCharPickOptions, OpenAsync and SaveAsync dialog layer methods
+- `TorchKeeper/MauiProgram.cs` - Replaced placeholder service registrations with all four: IFileSaver (FileSaver.Default), CharacterViewModel, CharacterFileService, ShadowdarklingsImportService
 
 ## Decisions Made
 - Android uses application/octet-stream MIME type (not a custom MIME) — Android cannot register custom MIME types for unknown extensions without OS-level support; this is the documented limitation from RESEARCH.md Pitfall 6

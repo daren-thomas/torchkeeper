@@ -17,18 +17,18 @@ created: 2026-03-21
 
 | Property | Value |
 |----------|-------|
-| **Framework** | xunit (SdCharacterSheet.Tests) |
-| **Config file** | `SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj` |
-| **Quick run command** | `dotnet test SdCharacterSheet.Tests` |
-| **Full suite command** | `dotnet test SdCharacterSheet.Tests` |
+| **Framework** | xunit (TorchKeeper.Tests) |
+| **Config file** | `TorchKeeper.Tests/TorchKeeper.Tests.csproj` |
+| **Quick run command** | `dotnet test TorchKeeper.Tests` |
+| **Full suite command** | `dotnet test TorchKeeper.Tests` |
 | **Estimated runtime** | ~10 seconds |
 
 ---
 
 ## Sampling Rate
 
-- **After every task commit:** Run `dotnet test SdCharacterSheet.Tests`
-- **After every plan wave:** Run `dotnet test SdCharacterSheet.Tests`
+- **After every task commit:** Run `dotnet test TorchKeeper.Tests`
+- **After every plan wave:** Run `dotnet test TorchKeeper.Tests`
 - **Before `/gsd:verify-work`:** Full suite must be green
 - **Max feedback latency:** 15 seconds
 
@@ -38,8 +38,8 @@ created: 2026-03-21
 
 | Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 3-01-01 | 01 | 1 | MRKD-01 | unit | `dotnet test SdCharacterSheet.Tests --filter MarkdownExport` | ❌ W0 | ⬜ pending |
-| 3-01-02 | 01 | 1 | MRKD-01 | unit | `dotnet test SdCharacterSheet.Tests --filter MarkdownExport` | ❌ W0 | ⬜ pending |
+| 3-01-01 | 01 | 1 | MRKD-01 | unit | `dotnet test TorchKeeper.Tests --filter MarkdownExport` | ❌ W0 | ⬜ pending |
+| 3-01-02 | 01 | 1 | MRKD-01 | unit | `dotnet test TorchKeeper.Tests --filter MarkdownExport` | ❌ W0 | ⬜ pending |
 | 3-02-01 | 02 | 2 | MRKD-01 | manual | share sheet / save dialog on device | N/A | ⬜ pending |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
@@ -48,7 +48,7 @@ created: 2026-03-21
 
 ## Wave 0 Requirements
 
-- [ ] `SdCharacterSheet.Tests/MarkdownExportServiceTests.cs` — stubs for MRKD-01 (BuildMarkdown output tests)
+- [ ] `TorchKeeper.Tests/MarkdownExportServiceTests.cs` — stubs for MRKD-01 (BuildMarkdown output tests)
 
 *Existing xunit infrastructure detected — only test stubs need adding.*
 

@@ -135,7 +135,7 @@ The `CharacterViewModel.LoadCharacter()` stub in Phase 1 has a comment explicitl
 ### Recommended Project Structure
 
 ```
-SdCharacterSheet/
+TorchKeeper/
 ├── ViewModels/
 │   ├── CharacterViewModel.cs      # Expanded with all observable properties (Phase 2)
 │   ├── StatRowViewModel.cs        # Per-stat: IsExpanded, TotalScore, Modifier, BonusSources
@@ -159,8 +159,8 @@ SdCharacterSheet/
 <!-- Source: https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/shell/tabs?view=net-maui-10.0 -->
 <Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:views="clr-namespace:SdCharacterSheet.Views"
-       x:Class="SdCharacterSheet.AppShell"
+       xmlns:views="clr-namespace:TorchKeeper.Views"
+       x:Class="TorchKeeper.AppShell"
        Shell.FlyoutBehavior="Disabled">
     <TabBar>
         <Tab Title="Sheet">
@@ -423,8 +423,8 @@ Both `CoinSlots` and `GearSlotsUsed` need `[NotifyPropertyChangedFor]` or manual
 <!-- Source: https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/shell/tabs?view=net-maui-10.0 -->
 <Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:views="clr-namespace:SdCharacterSheet.Views"
-       x:Class="SdCharacterSheet.AppShell"
+       xmlns:views="clr-namespace:TorchKeeper.Views"
+       x:Class="TorchKeeper.AppShell"
        Shell.FlyoutBehavior="Disabled">
     <TabBar>
         <Tab Title="Sheet">
@@ -515,7 +515,7 @@ public void LoadCharacter(Character character)
 
 1. **Gear model unification strategy**
    - What we know: `GearItem` and `MagicItem` have near-identical shape (name, slots, note); MagicItem lacks `ItemType`.
-   - What's unclear: Should the planner unify them in `SdCharacterSheet.Core` (add `ItemType` to `MagicItem` and treat as one type), or keep them separate and merge only in the ViewModel layer?
+   - What's unclear: Should the planner unify them in `TorchKeeper.Core` (add `ItemType` to `MagicItem` and treat as one type), or keep them separate and merge only in the ViewModel layer?
    - Recommendation: Merge at the ViewModel layer only using a `GearItemViewModel(GearItem | MagicItem, source)` constructor overload. Keep Core models unchanged to avoid breaking Phase 1 save/load logic. When saving back, split by the `source` enum field.
 
 2. **Identity field editing: inline vs. always-editable**
@@ -538,37 +538,37 @@ public void LoadCharacter(Character character)
 
 | Property | Value |
 |----------|-------|
-| Framework | xUnit 2.9.3 (already installed in SdCharacterSheet.Tests) |
-| Config file | SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj |
-| Quick run command | `dotnet test SdCharacterSheet.Tests/ --filter "Category=Unit" -x` |
-| Full suite command | `dotnet test SdCharacterSheet.Tests/` |
+| Framework | xUnit 2.9.3 (already installed in TorchKeeper.Tests) |
+| Config file | TorchKeeper.Tests/TorchKeeper.Tests.csproj |
+| Quick run command | `dotnet test TorchKeeper.Tests/ --filter "Category=Unit" -x` |
+| Full suite command | `dotnet test TorchKeeper.Tests/` |
 
 ### Phase Requirements → Test Map
 
 | Req ID | Behavior | Test Type | Automated Command | File Exists? |
 |--------|----------|-----------|-------------------|-------------|
-| STAT-01 | Modifier computed correctly from base stat (incl. floor for odd values below 10) | unit | `dotnet test SdCharacterSheet.Tests/ --filter "FullyQualifiedName~StatModifier" -x` | ❌ Wave 0 |
-| STAT-02 | Bonus sources filtered by stat prefix (STR: vs AC:) | unit | `dotnet test SdCharacterSheet.Tests/ --filter "FullyQualifiedName~BonusFilter" -x` | ❌ Wave 0 |
-| GEAR-03 | Slot total = max(STR score, 10) at various STR values | unit | `dotnet test SdCharacterSheet.Tests/ --filter "FullyQualifiedName~GearSlotTotal" -x` | ❌ Wave 0 |
-| GEAR-04 | Coin slots = correct formula for GP/SP/CP at boundaries (0, 100, 101, 200, 201) | unit | `dotnet test SdCharacterSheet.Tests/ --filter "FullyQualifiedName~CoinSlots" -x` | ❌ Wave 0 |
-| HITP-01 | CurrentHP can go below 0 (no floor) | unit | `dotnet test SdCharacterSheet.Tests/ --filter "FullyQualifiedName~NegativeHP" -x` | ❌ Wave 0 |
-| IDNT-01 | LoadCharacter populates all identity fields | unit | `dotnet test SdCharacterSheet.Tests/ --filter "FullyQualifiedName~LoadCharacter" -x` | ❌ Wave 0 |
-| GEAR-01 | GearItemViewModel correctly unifies GearItem and MagicItem | unit | `dotnet test SdCharacterSheet.Tests/ --filter "FullyQualifiedName~GearItemViewModel" -x` | ❌ Wave 0 |
+| STAT-01 | Modifier computed correctly from base stat (incl. floor for odd values below 10) | unit | `dotnet test TorchKeeper.Tests/ --filter "FullyQualifiedName~StatModifier" -x` | ❌ Wave 0 |
+| STAT-02 | Bonus sources filtered by stat prefix (STR: vs AC:) | unit | `dotnet test TorchKeeper.Tests/ --filter "FullyQualifiedName~BonusFilter" -x` | ❌ Wave 0 |
+| GEAR-03 | Slot total = max(STR score, 10) at various STR values | unit | `dotnet test TorchKeeper.Tests/ --filter "FullyQualifiedName~GearSlotTotal" -x` | ❌ Wave 0 |
+| GEAR-04 | Coin slots = correct formula for GP/SP/CP at boundaries (0, 100, 101, 200, 201) | unit | `dotnet test TorchKeeper.Tests/ --filter "FullyQualifiedName~CoinSlots" -x` | ❌ Wave 0 |
+| HITP-01 | CurrentHP can go below 0 (no floor) | unit | `dotnet test TorchKeeper.Tests/ --filter "FullyQualifiedName~NegativeHP" -x` | ❌ Wave 0 |
+| IDNT-01 | LoadCharacter populates all identity fields | unit | `dotnet test TorchKeeper.Tests/ --filter "FullyQualifiedName~LoadCharacter" -x` | ❌ Wave 0 |
+| GEAR-01 | GearItemViewModel correctly unifies GearItem and MagicItem | unit | `dotnet test TorchKeeper.Tests/ --filter "FullyQualifiedName~GearItemViewModel" -x` | ❌ Wave 0 |
 | NOTE-01, ATCK-01, IDNT-02, HITP-02, CURR-01, GEAR-02 | UI-only binding — no pure logic to isolate | manual-only | N/A — verified by inspection in the app | N/A |
 
 **Manual-only justification:** The UI binding tests (Entry shows correct value, Popup opens on tap, Editor saves on blur) require the MAUI runtime and cannot run in the headless xUnit test project which targets `net10.0`, not `net10.0-android` etc.
 
 ### Sampling Rate
-- **Per task commit:** `dotnet test SdCharacterSheet.Tests/ --filter "Category=Unit" -x`
-- **Per wave merge:** `dotnet test SdCharacterSheet.Tests/`
+- **Per task commit:** `dotnet test TorchKeeper.Tests/ --filter "Category=Unit" -x`
+- **Per wave merge:** `dotnet test TorchKeeper.Tests/`
 - **Phase gate:** Full suite green before `/gsd:verify-work`
 
 ### Wave 0 Gaps
 
-- [ ] `SdCharacterSheet.Tests/ViewModels/CharacterViewModelTests.cs` — covers STAT-01 (modifier math), STAT-02 (bonus filter), GEAR-03 (slot total), GEAR-04 (coin slots), HITP-01 (negative HP), IDNT-01 (LoadCharacter population)
-- [ ] `SdCharacterSheet.Tests/ViewModels/GearItemViewModelTests.cs` — covers GEAR-01 (unified GearItem/MagicItem wrapper)
+- [ ] `TorchKeeper.Tests/ViewModels/CharacterViewModelTests.cs` — covers STAT-01 (modifier math), STAT-02 (bonus filter), GEAR-03 (slot total), GEAR-04 (coin slots), HITP-01 (negative HP), IDNT-01 (LoadCharacter population)
+- [ ] `TorchKeeper.Tests/ViewModels/GearItemViewModelTests.cs` — covers GEAR-01 (unified GearItem/MagicItem wrapper)
 
-Note: Both test files target `SdCharacterSheet.Core` and `SdCharacterSheet` assemblies. The test project already has `ProjectReference` to `SdCharacterSheet.Core`. The planner must also add a `ProjectReference` to `SdCharacterSheet` (the MAUI app project) for the ViewModel tests — or extract ViewModel logic into Core. Given MAUI-specific DI (`ObservableObject` from CommunityToolkit.Mvvm), the test project will need `CommunityToolkit.Mvvm` added as a package reference, or ViewModels should be extracted to a separate class library. **Simplest path:** Add `CommunityToolkit.Mvvm` NuGet ref to the test project and reference the main project directly. Test MAUI-free ViewModel logic (pure C# computed properties) only; skip UI event tests.
+Note: Both test files target `TorchKeeper.Core` and `TorchKeeper` assemblies. The test project already has `ProjectReference` to `TorchKeeper.Core`. The planner must also add a `ProjectReference` to `TorchKeeper` (the MAUI app project) for the ViewModel tests — or extract ViewModel logic into Core. Given MAUI-specific DI (`ObservableObject` from CommunityToolkit.Mvvm), the test project will need `CommunityToolkit.Mvvm` added as a package reference, or ViewModels should be extracted to a separate class library. **Simplest path:** Add `CommunityToolkit.Mvvm` NuGet ref to the test project and reference the main project directly. Test MAUI-free ViewModel logic (pure C# computed properties) only; skip UI event tests.
 
 ---
 

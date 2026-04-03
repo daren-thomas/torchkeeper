@@ -18,17 +18,17 @@ created: 2026-03-21
 | Property | Value |
 |----------|-------|
 | **Framework** | xUnit (.NET) |
-| **Config file** | SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj |
-| **Quick run command** | `dotnet test SdCharacterSheet.Tests --filter "FullyQualifiedName~FileCommand"` |
-| **Full suite command** | `dotnet test SdCharacterSheet.Tests` |
+| **Config file** | TorchKeeper.Tests/TorchKeeper.Tests.csproj |
+| **Quick run command** | `dotnet test TorchKeeper.Tests --filter "FullyQualifiedName~FileCommand"` |
+| **Full suite command** | `dotnet test TorchKeeper.Tests` |
 | **Estimated runtime** | ~10 seconds |
 
 ---
 
 ## Sampling Rate
 
-- **After every task commit:** Run `dotnet test SdCharacterSheet.Tests --filter "FullyQualifiedName~FileCommand"`
-- **After every plan wave:** Run `dotnet test SdCharacterSheet.Tests`
+- **After every task commit:** Run `dotnet test TorchKeeper.Tests --filter "FullyQualifiedName~FileCommand"`
+- **After every plan wave:** Run `dotnet test TorchKeeper.Tests`
 - **Before `/gsd:verify-work`:** Full suite must be green
 - **Max feedback latency:** 30 seconds
 
@@ -38,9 +38,9 @@ created: 2026-03-21
 
 | Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 4-01-00 | 01 | 0 | FILE-01,02,03 | unit | `dotnet test SdCharacterSheet.Tests --filter "FullyQualifiedName~FileCommand"` | Wave 0 creates it | ⬜ pending |
-| 4-01-01 | 01 | 1 | FILE-01 | unit+build | `dotnet build SdCharacterSheet/SdCharacterSheet.csproj --no-restore -v q` | N/A (build only) | ⬜ pending |
-| 4-01-02 | 01 | 1 | FILE-01,02,03 | unit+build | `dotnet build SdCharacterSheet/SdCharacterSheet.csproj --no-restore -v q && dotnet test SdCharacterSheet.Tests --filter "FullyQualifiedName~FileCommand"` | Created in 4-01-00 | ⬜ pending |
+| 4-01-00 | 01 | 0 | FILE-01,02,03 | unit | `dotnet test TorchKeeper.Tests --filter "FullyQualifiedName~FileCommand"` | Wave 0 creates it | ⬜ pending |
+| 4-01-01 | 01 | 1 | FILE-01 | unit+build | `dotnet build TorchKeeper/TorchKeeper.csproj --no-restore -v q` | N/A (build only) | ⬜ pending |
+| 4-01-02 | 01 | 1 | FILE-01,02,03 | unit+build | `dotnet build TorchKeeper/TorchKeeper.csproj --no-restore -v q && dotnet test TorchKeeper.Tests --filter "FullyQualifiedName~FileCommand"` | Created in 4-01-00 | ⬜ pending |
 | 4-02-01 | 02 | 2 | FILE-01,02,03 | manual | See Manual-Only Verifications | N/A | ⬜ pending |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
@@ -51,9 +51,9 @@ created: 2026-03-21
 
 Task 0 in Plan 04-01 creates the test file before implementation begins:
 
-- [ ] `SdCharacterSheet.Tests/ViewModels/CharacterViewModelFileCommandTests.cs` — test-local fakes (FakeFileSaver, TestFileCommandVM) + 6 tests covering SaveCommand, LoadCommand, ImportCommand behavior
+- [ ] `TorchKeeper.Tests/ViewModels/CharacterViewModelFileCommandTests.cs` — test-local fakes (FakeFileSaver, TestFileCommandVM) + 6 tests covering SaveCommand, LoadCommand, ImportCommand behavior
 
-**Note:** The test project references only `SdCharacterSheet.Core`, not the MAUI head project. Tests use test-local stubs mirroring the command logic (same pattern as existing `TestCharacterVM` in `CharacterViewModelTests.cs`). This validates the core command behavior (BuildCharacterFromViewModel, gear splitting by Source, LoadCharacter delegation) without requiring MAUI runtime dependencies.
+**Note:** The test project references only `TorchKeeper.Core`, not the MAUI head project. Tests use test-local stubs mirroring the command logic (same pattern as existing `TestCharacterVM` in `CharacterViewModelTests.cs`). This validates the core command behavior (BuildCharacterFromViewModel, gear splitting by Source, LoadCharacter delegation) without requiring MAUI runtime dependencies.
 
 ---
 

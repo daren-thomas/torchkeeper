@@ -44,7 +44,7 @@ All required services are already registered as singletons in `MauiProgram.cs`:
 
 The three new commands follow the same file pattern as `ExportCommand`:
 ```
-SdCharacterSheet/
+TorchKeeper/
 ├── ViewModels/
 │   └── CharacterViewModel.cs      ← add SaveCommand, LoadCommand, ImportCommand
 └── AppShell.xaml                  ← add three MenuFlyoutItem + ToolbarItem entries
@@ -304,7 +304,7 @@ Verified patterns from the existing codebase:
 
 ### ExportCommand (exact pattern to replicate)
 ```csharp
-// Source: SdCharacterSheet/ViewModels/CharacterViewModel.cs
+// Source: TorchKeeper/ViewModels/CharacterViewModel.cs
 private readonly MarkdownExportService? _exportService;
 
 [RelayCommand]
@@ -322,7 +322,7 @@ public CharacterViewModel(MarkdownExportService exportService) : this()
 
 ### AppShell MenuBarItem (existing pattern)
 ```xml
-<!-- Source: SdCharacterSheet/AppShell.xaml -->
+<!-- Source: TorchKeeper/AppShell.xaml -->
 <Shell.MenuBarItems>
     <MenuBarItem Text="File">
         <MenuFlyoutItem Text="Export As..."
@@ -333,7 +333,7 @@ public CharacterViewModel(MarkdownExportService exportService) : this()
 
 ### MauiCharacterFileService.OpenAsync (already complete)
 ```csharp
-// Source: SdCharacterSheet/Services/MauiCharacterFileService.cs
+// Source: TorchKeeper/Services/MauiCharacterFileService.cs
 public async Task<Character?> OpenAsync(CancellationToken ct = default)
 {
     var fileResult = await FilePicker.Default.PickAsync(SdCharPickOptions);
@@ -346,7 +346,7 @@ public async Task<Character?> OpenAsync(CancellationToken ct = default)
 
 ### CharacterViewModel.LoadCharacter (already complete)
 ```csharp
-// Source: SdCharacterSheet/ViewModels/CharacterViewModel.cs
+// Source: TorchKeeper/ViewModels/CharacterViewModel.cs
 // Notify everything — full character replacement
 OnPropertyChanged(string.Empty);
 ```
@@ -380,26 +380,26 @@ OnPropertyChanged(string.Empty);
 |----------|-------|
 | Framework | xUnit 2.9.3 |
 | Config file | none (convention-based) |
-| Quick run command | `dotnet test SdCharacterSheet.Tests/ --filter "Category=Unit" -x` |
-| Full suite command | `dotnet test SdCharacterSheet.Tests/ -x` |
+| Quick run command | `dotnet test TorchKeeper.Tests/ --filter "Category=Unit" -x` |
+| Full suite command | `dotnet test TorchKeeper.Tests/ -x` |
 
 ### Phase Requirements → Test Map
 | Req ID | Behavior | Test Type | Automated Command | File Exists? |
 |--------|----------|-----------|-------------------|-------------|
-| FILE-01 | `SaveCommand` calls `_fileService.SaveAsync` with current VM state | unit | `dotnet test SdCharacterSheet.Tests/ --filter "FullyQualifiedName~SaveCommand" -x` | Wave 0 |
-| FILE-02 | `LoadCommand` calls `_fileService.OpenAsync` and passes result to `LoadCharacter` | unit | `dotnet test SdCharacterSheet.Tests/ --filter "FullyQualifiedName~LoadCommand" -x` | Wave 0 |
-| FILE-03 | `ImportCommand` opens a JSON file, calls `_importService.ImportAsync`, calls `LoadCharacter` | unit | `dotnet test SdCharacterSheet.Tests/ --filter "FullyQualifiedName~ImportCommand" -x` | Wave 0 |
+| FILE-01 | `SaveCommand` calls `_fileService.SaveAsync` with current VM state | unit | `dotnet test TorchKeeper.Tests/ --filter "FullyQualifiedName~SaveCommand" -x` | Wave 0 |
+| FILE-02 | `LoadCommand` calls `_fileService.OpenAsync` and passes result to `LoadCharacter` | unit | `dotnet test TorchKeeper.Tests/ --filter "FullyQualifiedName~LoadCommand" -x` | Wave 0 |
+| FILE-03 | `ImportCommand` opens a JSON file, calls `_importService.ImportAsync`, calls `LoadCharacter` | unit | `dotnet test TorchKeeper.Tests/ --filter "FullyQualifiedName~ImportCommand" -x` | Wave 0 |
 | FILE-01-02-03 | AppShell menu items visible — all platforms | manual | N/A | manual-only |
 
 **Note on E2E:** File dialog tests (actual native dialog opening, file appearing on disk) require device/simulator and are manual-only. Unit tests use null/stub services.
 
 ### Sampling Rate
-- **Per task commit:** `dotnet test SdCharacterSheet.Tests/ --filter "Category=Unit" -x`
-- **Per wave merge:** `dotnet test SdCharacterSheet.Tests/ -x`
+- **Per task commit:** `dotnet test TorchKeeper.Tests/ --filter "Category=Unit" -x`
+- **Per wave merge:** `dotnet test TorchKeeper.Tests/ -x`
 - **Phase gate:** Full suite green before `/gsd:verify-work`
 
 ### Wave 0 Gaps
-- [ ] `SdCharacterSheet.Tests/ViewModels/CharacterViewModelFileCommandTests.cs` — covers FILE-01, FILE-02, FILE-03 unit tests
+- [ ] `TorchKeeper.Tests/ViewModels/CharacterViewModelFileCommandTests.cs` — covers FILE-01, FILE-02, FILE-03 unit tests
 - [ ] Stub implementations of `MauiCharacterFileService` and `ShadowdarklingsImportService` for unit testing (or test-local fakes)
 
 **Note:** `MauiCharacterFileService` calls `FilePicker.Default.PickAsync` which requires the MAUI runtime. Unit tests must use a test-local fake or extract an `ICharacterFileService` interface. The existing `NullFileSaver` pattern in `CharacterFileServiceTests` shows the project's preferred approach — test-local stubs.
@@ -407,8 +407,8 @@ OnPropertyChanged(string.Empty);
 ## Sources
 
 ### Primary (HIGH confidence)
-- Codebase direct read — `SdCharacterSheet/Services/MauiCharacterFileService.cs`, `CharacterFileService.cs`, `ShadowdarklingsImportService.cs`, `CharacterViewModel.cs`, `AppShell.xaml`, `MauiProgram.cs` — all verified directly
-- `SdCharacterSheet.Tests/` — xUnit test structure, existing test patterns, NullFileSaver stub pattern
+- Codebase direct read — `TorchKeeper/Services/MauiCharacterFileService.cs`, `CharacterFileService.cs`, `ShadowdarklingsImportService.cs`, `CharacterViewModel.cs`, `AppShell.xaml`, `MauiProgram.cs` — all verified directly
+- `TorchKeeper.Tests/` — xUnit test structure, existing test patterns, NullFileSaver stub pattern
 
 ### Secondary (MEDIUM confidence)
 - MAUI `Shell.MenuBarItems` desktop-only behavior — confirmed by codebase evidence (existing Export works on macOS/Windows via this path) and MAUI documentation patterns

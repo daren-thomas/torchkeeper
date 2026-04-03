@@ -32,7 +32,7 @@
 
 ### Patterns Established
 
-- Pure service layer in `SdCharacterSheet.Core` — no MAUI dependencies, fully unit-testable
+- Pure service layer in `TorchKeeper.Core` — no MAUI dependencies, fully unit-testable
 - `NullFileSaver` test double pattern — lightweight interface stub for platform services in unit tests
 - `StatRowViewModel` with `BonusSources` collection — each stat row owns its own expansion state
 - `GearItemViewModel` wrapping both `GearItem` and `MagicItem` — unified gear list with type discrimination
@@ -120,14 +120,14 @@
 
 ### What Was Inefficient
 
-- **Phase 6 scope missed MAUI-local types** — the plan executor applied IsFreeCarry to Core correctly but didn't check whether MAUI-local shadow files also needed updates. The CS0436 architectural pattern was not visible in the plan context. The audit caught it, but a better plan would have included a `grep -r IsFreeCarry SdCharacterSheet/` check step.
+- **Phase 6 scope missed MAUI-local types** — the plan executor applied IsFreeCarry to Core correctly but didn't check whether MAUI-local shadow files also needed updates. The CS0436 architectural pattern was not visible in the plan context. The audit caught it, but a better plan would have included a `grep -r IsFreeCarry TorchKeeper/` check step.
 - **Xcode toolchain noise** — MAUI `dotnet build` fails on this machine due to unrelated Xcode plugin/actool errors. This masked whether C# compilation succeeded or failed during Phase 6 plan execution. The workaround (check for `error CS` lines separately) is effective but adds friction to every build verification.
 - **06-02 and 06-03 SUMMARY.md frontmatter missing `requirements-completed`** — GEAR-02 and STAT-01 weren't declared in plan frontmatter, only GEAR-01 was. The `gsd-tools summary-extract` then couldn't find one-liners for those plans. Minor paperwork gap, but it broke the automated MILESTONES.md generation.
 
 ### Patterns Established
 
 - **Audit-then-gap-phase pattern** — run `gsd:audit-milestone`, let it find gaps, add a targeted gap-closure phase, ship. Fast and clean.
-- **MAUI-local shadow propagation checklist** — whenever a Core model/DTO changes, check `SdCharacterSheet/Models/`, `SdCharacterSheet/DTOs/`, `SdCharacterSheet/Services/` for shadow copies that need the same change.
+- **MAUI-local shadow propagation checklist** — whenever a Core model/DTO changes, check `TorchKeeper/Models/`, `TorchKeeper/DTOs/`, `TorchKeeper/Services/` for shadow copies that need the same change.
 - **Free Carry frame always visible** — empty `BindableLayout` renders nothing; no need for a visibility converter on sections that may be empty.
 
 ### Key Lessons

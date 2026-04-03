@@ -32,7 +32,7 @@ Key context carried forward:
 - MacFilePickerHelper (commit b2d9977): workaround for MAUI FilePicker null on macOS 15 Sequoia — needs re-test for iOS native
 - BuildCharacterFromViewModel() is the canonical save snapshot builder — backing field is stale after edits
 - Gear slots = STR score total; coin encumbrance = ceiling(coins/100) with first 100 free per type
-- MAUI-local shadow types (CS0436 pattern): Core changes must be manually propagated to SdCharacterSheet/Models/ and SdCharacterSheet/DTOs/
+- MAUI-local shadow types (CS0436 pattern): Core changes must be manually propagated to TorchKeeper/Models/ and TorchKeeper/DTOs/
 - Free Carry frame always visible — no converter needed, empty BindableLayout renders nothing
 
 ### Blockers/Concerns

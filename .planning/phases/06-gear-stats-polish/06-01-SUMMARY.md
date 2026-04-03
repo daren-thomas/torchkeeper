@@ -27,15 +27,15 @@ tech-stack:
 key-files:
   created: []
   modified:
-    - SdCharacterSheet.Core/Models/GearItem.cs
-    - SdCharacterSheet.Core/Models/MagicItem.cs
-    - SdCharacterSheet.Core/DTOs/CharacterSaveData.cs
-    - SdCharacterSheet.Core/Services/CharacterFileService.cs
-    - SdCharacterSheet/ViewModels/GearItemViewModel.cs
-    - SdCharacterSheet/ViewModels/CharacterViewModel.cs
-    - SdCharacterSheet/Views/Popups/GearItemPopup.xaml
-    - SdCharacterSheet/Views/Popups/GearItemPopup.xaml.cs
-    - SdCharacterSheet/Views/GearPage.xaml
+    - TorchKeeper.Core/Models/GearItem.cs
+    - TorchKeeper.Core/Models/MagicItem.cs
+    - TorchKeeper.Core/DTOs/CharacterSaveData.cs
+    - TorchKeeper.Core/Services/CharacterFileService.cs
+    - TorchKeeper/ViewModels/GearItemViewModel.cs
+    - TorchKeeper/ViewModels/CharacterViewModel.cs
+    - TorchKeeper/Views/Popups/GearItemPopup.xaml
+    - TorchKeeper/Views/Popups/GearItemPopup.xaml.cs
+    - TorchKeeper/Views/GearPage.xaml
 
 key-decisions:
   - "Used Close() not CloseAsync() in GearItemPopup to match existing project popup pattern (AttackPopup uses Close())"
@@ -86,15 +86,15 @@ Each task was committed atomically:
 
 ## Files Created/Modified
 
-- `SdCharacterSheet.Core/Models/GearItem.cs` - Added `IsFreeCarry bool` property
-- `SdCharacterSheet.Core/Models/MagicItem.cs` - Added `IsFreeCarry bool` property
-- `SdCharacterSheet.Core/DTOs/CharacterSaveData.cs` - Added `IsFreeCarry` to `GearItemData` and `MagicItemData`
-- `SdCharacterSheet.Core/Services/CharacterFileService.cs` - Wired `IsFreeCarry` in `MapToDto` and `MapFromDto`
-- `SdCharacterSheet/ViewModels/GearItemViewModel.cs` - Added `IsFreeCarry` observable property, `KnownFreeCarryNames`, `IsKnownFreeCarry`, updated all 3 constructors
-- `SdCharacterSheet/ViewModels/CharacterViewModel.cs` - `GearSlotsUsed` excludes free-carry, `OnGearItemChanged` reacts to `IsFreeCarry`, `BuildCharacterFromViewModel` persists it, added `RegularGearItems`/`FreeCarryItems` + `RebuildGearSubCollections`
-- `SdCharacterSheet/Views/Popups/GearItemPopup.xaml` - Added `FreeCarryCheckBox` between Note and Save
-- `SdCharacterSheet/Views/Popups/GearItemPopup.xaml.cs` - Pre-fill checkbox, write back on save, `Math.Max(0, slots)`
-- `SdCharacterSheet/Views/GearPage.xaml` - Section 2 bound to `RegularGearItems`, Section 2b (Free Carry) bound to `FreeCarryItems`
+- `TorchKeeper.Core/Models/GearItem.cs` - Added `IsFreeCarry bool` property
+- `TorchKeeper.Core/Models/MagicItem.cs` - Added `IsFreeCarry bool` property
+- `TorchKeeper.Core/DTOs/CharacterSaveData.cs` - Added `IsFreeCarry` to `GearItemData` and `MagicItemData`
+- `TorchKeeper.Core/Services/CharacterFileService.cs` - Wired `IsFreeCarry` in `MapToDto` and `MapFromDto`
+- `TorchKeeper/ViewModels/GearItemViewModel.cs` - Added `IsFreeCarry` observable property, `KnownFreeCarryNames`, `IsKnownFreeCarry`, updated all 3 constructors
+- `TorchKeeper/ViewModels/CharacterViewModel.cs` - `GearSlotsUsed` excludes free-carry, `OnGearItemChanged` reacts to `IsFreeCarry`, `BuildCharacterFromViewModel` persists it, added `RegularGearItems`/`FreeCarryItems` + `RebuildGearSubCollections`
+- `TorchKeeper/Views/Popups/GearItemPopup.xaml` - Added `FreeCarryCheckBox` between Note and Save
+- `TorchKeeper/Views/Popups/GearItemPopup.xaml.cs` - Pre-fill checkbox, write back on save, `Math.Max(0, slots)`
+- `TorchKeeper/Views/GearPage.xaml` - Section 2 bound to `RegularGearItems`, Section 2b (Free Carry) bound to `FreeCarryItems`
 
 ## Decisions Made
 
@@ -110,7 +110,7 @@ Each task was committed atomically:
 - **Found during:** Task 5 (GearItemPopup code-behind)
 - **Issue:** Plan specified `async void` methods with `CloseAsync()`, but existing project code (AttackPopup) uses synchronous `Close()`
 - **Fix:** Used `Close()` to match existing pattern
-- **Files modified:** SdCharacterSheet/Views/Popups/GearItemPopup.xaml.cs
+- **Files modified:** TorchKeeper/Views/Popups/GearItemPopup.xaml.cs
 - **Verification:** No C# compiler errors
 - **Committed in:** `8f68479` (Task 5 commit)
 
@@ -122,7 +122,7 @@ Each task was committed atomically:
 ## Issues Encountered
 
 - **Test runner socket failure**: `dotnet test` fails with `SocketException: Permission denied` in sandbox environment due to parallel agent execution contention on TCP ports. Verification confirmed via 0 C# compiler errors on `dotnet build` — the Core project builds cleanly.
-- **Xcode toolchain failure**: `dotnet build SdCharacterSheet/SdCharacterSheet.csproj` fails on `actool/xcrun` (pre-existing: `xcodebuild -runFirstLaunch` required). 0 `error CS` lines confirmed — all C# code compiles correctly.
+- **Xcode toolchain failure**: `dotnet build TorchKeeper/TorchKeeper.csproj` fails on `actool/xcrun` (pre-existing: `xcodebuild -runFirstLaunch` required). 0 `error CS` lines confirmed — all C# code compiles correctly.
 
 ## Known Stubs
 

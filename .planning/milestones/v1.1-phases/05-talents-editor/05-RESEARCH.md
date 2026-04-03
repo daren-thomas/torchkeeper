@@ -57,10 +57,10 @@ None — the implementation is complete. Stack decisions are locked.
 The inline implementation followed the established full-stack pattern:
 
 ```
-Domain model layer:   SdCharacterSheet.Core/Models/Character.cs
+Domain model layer:   TorchKeeper.Core/Models/Character.cs
                       → public string Talents { get; set; } = "";
 
-Save DTO:             SdCharacterSheet.Core/DTOs/CharacterSaveData.cs
+Save DTO:             TorchKeeper.Core/DTOs/CharacterSaveData.cs
                       → public string Talents { get; init; } = "";
 
 File service (save):  CharacterFileService.MapToDto()
@@ -69,7 +69,7 @@ File service (save):  CharacterFileService.MapToDto()
 File service (load):  CharacterFileService.LoadFromStreamAsync()
                       → Talents = dto.Talents,
 
-Export data:          SdCharacterSheet.Core/Export/CharacterExportData.cs
+Export data:          TorchKeeper.Core/Export/CharacterExportData.cs
                       → public string Talents { get; init; } = "";
 
 Markdown builder:     MarkdownBuilder.BuildMarkdown()
@@ -80,7 +80,7 @@ ViewModel:            CharacterViewModel.BuildCharacterFromViewModel()
                       CharacterViewModel.LoadCharacter()
                       → talents = character.Talents;
 
-UI:                   SdCharacterSheet/Views/NotesPage.xaml
+UI:                   TorchKeeper/Views/NotesPage.xaml
                       → ScrollView > VerticalStackLayout:
                          Label "Talents" + Frame > Editor (Talents binding)
                          Label "Spells"  + Frame > Editor (SpellsKnown binding)
@@ -161,7 +161,7 @@ grow instead of scroll. Do not change this to a fixed-height editor.
 
 ### Verified: NotesPage.xaml (current state, commit 4239483)
 ```xml
-<!-- Source: SdCharacterSheet/Views/NotesPage.xaml -->
+<!-- Source: TorchKeeper/Views/NotesPage.xaml -->
 <ScrollView>
     <VerticalStackLayout Padding="16" Spacing="16">
         <Label Text="Talents" FontAttributes="Bold" FontSize="16" />
@@ -191,7 +191,7 @@ grow instead of scroll. Do not change this to a fixed-height editor.
 
 ### Pattern to Replicate: SpellsKnown Tests (existing, verified)
 ```csharp
-// Source: SdCharacterSheet.Tests/Export/MarkdownBuilderTests.cs lines 279-304
+// Source: TorchKeeper.Tests/Export/MarkdownBuilderTests.cs lines 279-304
 // Tests 12 and 13 — mirror these exactly for Talents:
 
 [Fact]
@@ -241,40 +241,40 @@ public void BuildMarkdown_TalentsSection_OmittedWhenTalentsEmpty()
 ### Test Framework
 | Property | Value |
 |----------|-------|
-| Framework | xUnit (version as in SdCharacterSheet.Tests.csproj) |
-| Config file | SdCharacterSheet.Tests/SdCharacterSheet.Tests.csproj |
-| Quick run command | `dotnet test SdCharacterSheet.Tests/ --filter "Category=Unit" -q` |
-| Full suite command | `dotnet test SdCharacterSheet.Tests/ -q` |
+| Framework | xUnit (version as in TorchKeeper.Tests.csproj) |
+| Config file | TorchKeeper.Tests/TorchKeeper.Tests.csproj |
+| Quick run command | `dotnet test TorchKeeper.Tests/ --filter "Category=Unit" -q` |
+| Full suite command | `dotnet test TorchKeeper.Tests/ -q` |
 
 ### Phase Requirements to Test Map
 | Req ID | Behavior | Test Type | Automated Command | File Exists? |
 |--------|----------|-----------|-------------------|--------------|
-| TLNT-01 | Talents text survives save/load round-trip | unit | `dotnet test SdCharacterSheet.Tests/ --filter "DisplayName~RoundTrip" -q` | Exists but needs update |
-| TLNT-01 | Talents section appears in Markdown when non-empty | unit | `dotnet test SdCharacterSheet.Tests/ --filter "DisplayName~Talents" -q` | ❌ Wave 0 |
-| TLNT-01 | Talents section omitted from Markdown when empty | unit | `dotnet test SdCharacterSheet.Tests/ --filter "DisplayName~Talents" -q` | ❌ Wave 0 |
+| TLNT-01 | Talents text survives save/load round-trip | unit | `dotnet test TorchKeeper.Tests/ --filter "DisplayName~RoundTrip" -q` | Exists but needs update |
+| TLNT-01 | Talents section appears in Markdown when non-empty | unit | `dotnet test TorchKeeper.Tests/ --filter "DisplayName~Talents" -q` | ❌ Wave 0 |
+| TLNT-01 | Talents section omitted from Markdown when empty | unit | `dotnet test TorchKeeper.Tests/ --filter "DisplayName~Talents" -q` | ❌ Wave 0 |
 | TLNT-01 | UI shows Talents above Spells above Notes (visual) | manual | Run app, navigate to Notes tab | N/A — manual only |
 
 ### Sampling Rate
-- **Per task commit:** `dotnet test SdCharacterSheet.Tests/ -q`
-- **Per wave merge:** `dotnet test SdCharacterSheet.Tests/ -q`
+- **Per task commit:** `dotnet test TorchKeeper.Tests/ -q`
+- **Per wave merge:** `dotnet test TorchKeeper.Tests/ -q`
 - **Phase gate:** Full suite green before marking phase complete
 
 ### Wave 0 Gaps
-- [ ] `SdCharacterSheet.Tests/Export/MarkdownBuilderTests.cs` — add `talents` parameter to `MinimalData()` + two Talents section tests (mirrors existing Tests 12 and 13 for SpellsKnown)
-- [ ] `SdCharacterSheet.Tests/Services/CharacterFileServiceTests.cs` — add `Talents = "Backstab +1"` to fixture + `Assert.Equal("Backstab +1", loaded.Talents)` assertion
+- [ ] `TorchKeeper.Tests/Export/MarkdownBuilderTests.cs` — add `talents` parameter to `MinimalData()` + two Talents section tests (mirrors existing Tests 12 and 13 for SpellsKnown)
+- [ ] `TorchKeeper.Tests/Services/CharacterFileServiceTests.cs` — add `Talents = "Backstab +1"` to fixture + `Assert.Equal("Backstab +1", loaded.Talents)` assertion
 
 ## Sources
 
 ### Primary (HIGH confidence)
 - Direct code inspection of commit 4239483 — verified all 8 changed files
-- `SdCharacterSheet/Views/NotesPage.xaml` — current UI state confirmed
-- `SdCharacterSheet.Core/Models/Character.cs` — Talents and SpellsKnown properties confirmed
-- `SdCharacterSheet.Core/DTOs/CharacterSaveData.cs` — DTO fields confirmed
-- `SdCharacterSheet.Core/Services/CharacterFileService.cs` — save/load wiring confirmed
-- `SdCharacterSheet.Core/Export/MarkdownBuilder.cs` — Talents section rendering confirmed
-- `SdCharacterSheet/ViewModels/CharacterViewModel.cs` — ViewModel property and build/load confirmed
-- `SdCharacterSheet.Tests/Services/CharacterFileServiceTests.cs` — gap confirmed (no Talents assertion)
-- `SdCharacterSheet.Tests/Export/MarkdownBuilderTests.cs` — gap confirmed (no Talents parameter or tests)
+- `TorchKeeper/Views/NotesPage.xaml` — current UI state confirmed
+- `TorchKeeper.Core/Models/Character.cs` — Talents and SpellsKnown properties confirmed
+- `TorchKeeper.Core/DTOs/CharacterSaveData.cs` — DTO fields confirmed
+- `TorchKeeper.Core/Services/CharacterFileService.cs` — save/load wiring confirmed
+- `TorchKeeper.Core/Export/MarkdownBuilder.cs` — Talents section rendering confirmed
+- `TorchKeeper/ViewModels/CharacterViewModel.cs` — ViewModel property and build/load confirmed
+- `TorchKeeper.Tests/Services/CharacterFileServiceTests.cs` — gap confirmed (no Talents assertion)
+- `TorchKeeper.Tests/Export/MarkdownBuilderTests.cs` — gap confirmed (no Talents parameter or tests)
 - `.planning/STATE.md` — inline implementation and pending todo documented
 
 ### Secondary (MEDIUM confidence)

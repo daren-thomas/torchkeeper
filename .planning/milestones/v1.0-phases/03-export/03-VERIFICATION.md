@@ -53,17 +53,17 @@ human_verification:
 
 | Artifact | Expected | Status | Details |
 |----------|----------|--------|---------|
-| `SdCharacterSheet.Core/Export/CharacterExportData.cs` | Plain CLR record holding all data needed for Markdown export | VERIFIED | File exists, 55 lines; contains `public record CharacterExportData`, `public record StatExportData`, `public record BonusExportData`, `public record GearExportItem` |
-| `SdCharacterSheet.Core/Export/MarkdownBuilder.cs` | Pure static BuildMarkdown and BuildFileName methods | VERIFIED | File exists, 164 lines; `public static string BuildMarkdown(CharacterExportData data)` at line 13; `public static string BuildFileName(CharacterExportData data)` at line 134; no MAUI using directives |
-| `SdCharacterSheet.Tests/Export/MarkdownBuilderTests.cs` | Unit tests covering all Markdown formatting rules | VERIFIED | File exists, 363 lines; 18 `[Fact]` methods (exceeds min_lines: 100 and 14-test minimum); all 18 pass (`dotnet test` exit 0) |
+| `TorchKeeper.Core/Export/CharacterExportData.cs` | Plain CLR record holding all data needed for Markdown export | VERIFIED | File exists, 55 lines; contains `public record CharacterExportData`, `public record StatExportData`, `public record BonusExportData`, `public record GearExportItem` |
+| `TorchKeeper.Core/Export/MarkdownBuilder.cs` | Pure static BuildMarkdown and BuildFileName methods | VERIFIED | File exists, 164 lines; `public static string BuildMarkdown(CharacterExportData data)` at line 13; `public static string BuildFileName(CharacterExportData data)` at line 134; no MAUI using directives |
+| `TorchKeeper.Tests/Export/MarkdownBuilderTests.cs` | Unit tests covering all Markdown formatting rules | VERIFIED | File exists, 363 lines; 18 `[Fact]` methods (exceeds min_lines: 100 and 14-test minimum); all 18 pass (`dotnet test` exit 0) |
 
 #### Plan 02 Artifacts
 
 | Artifact | Expected | Status | Details |
 |----------|----------|--------|---------|
-| `SdCharacterSheet/Services/MarkdownExportService.cs` | Platform-routing export service | VERIFIED | File exists, 122 lines; `class MarkdownExportService`; contains `DeviceInfo.Platform == DevicePlatform.iOS`, `Share.Default.RequestAsync`, `_fileSaver.SaveAsync`, `MarkdownBuilder.BuildMarkdown`, `FileSystem.CacheDirectory` |
-| `SdCharacterSheet/ViewModels/CharacterViewModel.cs` | ExportCommand and SpellsKnown property | VERIFIED | Contains `[ObservableProperty] private string spellsKnown = ""` (line 120), `spellsKnown = character.SpellsKnown` (line 192), `[RelayCommand] private async Task ExportAsync()` (line 125-130), `MarkdownExportService` field and constructor |
-| `SdCharacterSheet/AppShell.xaml` | Export ToolbarItem visible on all tabs | VERIFIED (code) | Contains `<Shell.ToolbarItems>` with `<ToolbarItem Text="Export" Command="{Binding ExportCommand}" />`; also has `<MenuBarItem>` for desktop menu bar |
+| `TorchKeeper/Services/MarkdownExportService.cs` | Platform-routing export service | VERIFIED | File exists, 122 lines; `class MarkdownExportService`; contains `DeviceInfo.Platform == DevicePlatform.iOS`, `Share.Default.RequestAsync`, `_fileSaver.SaveAsync`, `MarkdownBuilder.BuildMarkdown`, `FileSystem.CacheDirectory` |
+| `TorchKeeper/ViewModels/CharacterViewModel.cs` | ExportCommand and SpellsKnown property | VERIFIED | Contains `[ObservableProperty] private string spellsKnown = ""` (line 120), `spellsKnown = character.SpellsKnown` (line 192), `[RelayCommand] private async Task ExportAsync()` (line 125-130), `MarkdownExportService` field and constructor |
+| `TorchKeeper/AppShell.xaml` | Export ToolbarItem visible on all tabs | VERIFIED (code) | Contains `<Shell.ToolbarItems>` with `<ToolbarItem Text="Export" Command="{Binding ExportCommand}" />`; also has `<MenuBarItem>` for desktop menu bar |
 
 ### Key Link Verification
 
@@ -91,7 +91,7 @@ human_verification:
 
 No TODOs, FIXMEs, placeholder returns, or `NotImplementedException` stubs found in any phase 03 files.
 
-**MAUI build note (from SUMMARY):** `dotnet build SdCharacterSheet` exits with `MSB4216` ILLink error — a pre-existing environment issue unrelated to these changes. C# compilation succeeds (DLL produced). `SdCharacterSheet.Core` builds clean (`0 Warning(s), 0 Error(s)`).
+**MAUI build note (from SUMMARY):** `dotnet build TorchKeeper` exits with `MSB4216` ILLink error — a pre-existing environment issue unrelated to these changes. C# compilation succeeds (DLL produced). `TorchKeeper.Core` builds clean (`0 Warning(s), 0 Error(s)`).
 
 ### Human Verification Required
 
@@ -114,7 +114,7 @@ No TODOs, FIXMEs, placeholder returns, or `NotImplementedException` stubs found 
 No gaps found. All automated checks pass:
 
 - 18/18 `MarkdownBuilderTests` pass (`dotnet test` exit 0)
-- `SdCharacterSheet.Core` builds with 0 errors and 0 warnings
+- `TorchKeeper.Core` builds with 0 errors and 0 warnings
 - All 5 declared artifacts exist and are substantive (no stubs)
 - All 4 key links are wired end-to-end
 - MRKD-01 is fully satisfied by the implementation

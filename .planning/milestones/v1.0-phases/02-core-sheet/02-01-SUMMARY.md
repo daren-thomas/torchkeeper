@@ -9,7 +9,7 @@ requires:
   - phase: 02-core-sheet
     provides: Wave 0 test stubs (CharacterViewModelTests, GearItemViewModelTests) documenting computed property contracts; CommunityToolkit.Mvvm reference in test project
   - phase: 01-foundation
-    provides: SdCharacterSheet.Core models (Character, BonusSource, GearItem, MagicItem)
+    provides: TorchKeeper.Core models (Character, BonusSource, GearItem, MagicItem)
 provides:
   - Full CharacterViewModel with all 6 stats, computed totals/modifiers, gear/coin slots, LoadCharacter with per-stat write-back lambdas
   - StatRowViewModel with editable BaseStat, TotalScore, ModifierDisplay, BonusSources, ToggleExpandCommand
@@ -27,10 +27,10 @@ tech-stack:
 
 key-files:
   created:
-    - SdCharacterSheet/ViewModels/StatRowViewModel.cs
-    - SdCharacterSheet/ViewModels/GearItemViewModel.cs
+    - TorchKeeper/ViewModels/StatRowViewModel.cs
+    - TorchKeeper/ViewModels/GearItemViewModel.cs
   modified:
-    - SdCharacterSheet/ViewModels/CharacterViewModel.cs
+    - TorchKeeper/ViewModels/CharacterViewModel.cs
 
 key-decisions:
   - "StatRowViewModel receives per-stat write-back Action<int> in constructor — edits to BaseStat propagate to CharacterViewModel.BaseSTR via delegate, not direct reference"
@@ -76,9 +76,9 @@ Each task was committed atomically:
 2. **Task 2: Expand CharacterViewModel with all observable properties and computed properties** - `5f77017` (feat)
 
 ## Files Created/Modified
-- `SdCharacterSheet/ViewModels/StatRowViewModel.cs` - Per-stat row VM with editable BaseStat, TotalScore, ModifierDisplay, BonusSources, ToggleExpandCommand, and Action<int> write-back callback
-- `SdCharacterSheet/ViewModels/GearItemViewModel.cs` - Unified GearItem/MagicItem wrapper with four observable fields and GearItemSource enum
-- `SdCharacterSheet/ViewModels/CharacterViewModel.cs` - Full observable ViewModel: all identity/stat/HP/currency [ObservableProperty] fields, computed properties with [NotifyPropertyChangedFor] chains, LoadCharacter, per-item PropertyChanged propagation for GearSlotsUsed
+- `TorchKeeper/ViewModels/StatRowViewModel.cs` - Per-stat row VM with editable BaseStat, TotalScore, ModifierDisplay, BonusSources, ToggleExpandCommand, and Action<int> write-back callback
+- `TorchKeeper/ViewModels/GearItemViewModel.cs` - Unified GearItem/MagicItem wrapper with four observable fields and GearItemSource enum
+- `TorchKeeper/ViewModels/CharacterViewModel.cs` - Full observable ViewModel: all identity/stat/HP/currency [ObservableProperty] fields, computed properties with [NotifyPropertyChangedFor] chains, LoadCharacter, per-item PropertyChanged propagation for GearSlotsUsed
 
 ## Decisions Made
 - `StatRowViewModel` uses `Action<int>` callback constructor parameter rather than a direct reference to `CharacterViewModel` — keeps the row VM decoupled and testable
@@ -90,7 +90,7 @@ Each task was committed atomically:
 None - plan executed exactly as written.
 
 ## Issues Encountered
-- MAUI project build (`dotnet build SdCharacterSheet/`) cannot be run in this environment — MAUI NuGet packages not cached locally and network access is restricted (same constraint as Phase 1). The test project (net10.0 class library) builds and runs correctly, confirming all logic is sound.
+- MAUI project build (`dotnet build TorchKeeper/`) cannot be run in this environment — MAUI NuGet packages not cached locally and network access is restricted (same constraint as Phase 1). The test project (net10.0 class library) builds and runs correctly, confirming all logic is sound.
 
 ## User Setup Required
 None - no external service configuration required.
