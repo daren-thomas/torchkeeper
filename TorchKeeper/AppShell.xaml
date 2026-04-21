@@ -6,9 +6,9 @@
     xmlns:views="clr-namespace:TorchKeeper.Views"
     Shell.FlyoutBehavior="Disabled">
     <Shell.ToolbarItems>
-        <ToolbarItem Text="Save" Order="Secondary" Command="{Binding SaveCommand}" />
-        <ToolbarItem Text="Open" Order="Secondary" Command="{Binding LoadCommand}" />
-        <ToolbarItem Text="Import" Order="Secondary" Command="{Binding ImportCommand}" />
+        <ToolbarItem Text="Save" Order="Primary" Command="{Binding SaveCommand}" />
+        <ToolbarItem Text="Open" Order="Primary" Command="{Binding LoadCommand}" />
+        <ToolbarItem Text="Import" Order="Primary" Command="{Binding ImportCommand}" />
         <ToolbarItem Text="Export"
                      Order="Primary"
                      Command="{Binding ExportCommand}" />

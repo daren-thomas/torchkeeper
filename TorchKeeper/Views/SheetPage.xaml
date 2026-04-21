@@ -19,7 +19,7 @@
                 <VerticalStackLayout Spacing="8">
                     <Label Text="Character" FontAttributes="Bold" FontSize="16" />
 
-                    <Grid ColumnDefinitions="80,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="6" ColumnSpacing="8">
+                    <Grid ColumnDefinitions="120,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="6" ColumnSpacing="8">
                         <Label Grid.Row="0" Grid.Column="0" Text="Name" VerticalOptions="Center" />
                         <Entry Grid.Row="0" Grid.Column="1" Text="{Binding Name, Mode=TwoWay}" Placeholder="Character name" />
 
